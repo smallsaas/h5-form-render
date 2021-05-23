@@ -236,6 +236,28 @@ export default {
           </van-field>
           break
         case 'el-upload':
+          // eslint-disable-next-line no-case-declarations
+          let uploadJsx = <van-uploader
+            readonly={item.readonly}
+            disabled={item.disabled}
+            value={this.form[item.__vModel__] || __config__.defaultValue}
+            beforeRead={(e) => this.handleUploader(e, item)}
+          />
+
+          if (item['list-type'] === 'attachment') {
+            uploadJsx = <div style="width: 100%;">
+              <van-uploader>
+                <van-button type="primary" class="upload-btn">上传文件</van-button>
+              </van-uploader>
+              <div class="file-list">
+                <div class="flex-space-between">
+                  <div>第三方客户端.pdf</div>
+                  <van-icon name="close" />
+                </div>
+              </div>
+            </div>
+          }
+
           jsx = <van-field
             name="uploader"
             label={__config__.label}
@@ -245,12 +267,7 @@ export default {
             style={item.style}
           >
             <template slot="input">
-              <van-uploader
-                readonly={item.readonly}
-                disabled={item.disabled}
-                value={this.form[item.__vModel__] || __config__.defaultValue}
-                beforeRead={(e) => this.handleUploader(e, item)}
-              />
+              {uploadJsx}
             </template>
           </van-field>
           break

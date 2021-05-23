@@ -17,7 +17,8 @@ import {
   DatetimePicker,
   Rate,
   Uploader,
-  Button
+  Button,
+  Icon
 } from 'vant'
 import './style/global.less'
 remInit()
@@ -37,6 +38,7 @@ Vue.use(DatetimePicker)
 Vue.use(Rate)
 Vue.use(Uploader)
 Vue.use(Button)
+Vue.use(Icon)
 
 Vue.config.productionTip = false
 Vue.prototype.$f = {
