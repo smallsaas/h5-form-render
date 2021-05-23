@@ -1,6 +1,6 @@
 const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = {
-  publicPath: '/dist/',
+  publicPath: '/',
   /* 输出文件目录：在npm run build时，生成文件的目录名称 */
   outputDir: 'dist',
   /* 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录 */
@@ -25,14 +25,19 @@ module.exports = {
   },
   parallel: true,
   devServer: {
-    https: false,
-    hotOnly: false,
-    /* 设置为0.0.0.0则所有的地址均能访问 */
-    host: '0.0.0.0',
-    // 为每个静态文件开启 gzip
-    compress: true,
-    // contentBase: path.join(__dirname, 'dist'),
-    // proxy,
+    overlay: false,
+    proxy: {
+      '/sport/api/form/manage/define/loadFormInfo.do': {
+        target: 'http://192.168.99.28',
+        ws: true,
+        changeOrigin: true
+      },
+      '/sport/api/form/manage/define/submitForm.do': {
+        target: 'http://192.168.99.28',
+        ws: true,
+        changeOrigin: true
+      }
+    }
   },
   css: {
     loaderOptions: {

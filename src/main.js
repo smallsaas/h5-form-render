@@ -18,7 +18,8 @@ import {
   Rate,
   Uploader,
   Button,
-  Icon
+  Icon,
+  Toast
 } from 'vant'
 import './style/global.less'
 remInit()
@@ -39,8 +40,11 @@ Vue.use(Rate)
 Vue.use(Uploader)
 Vue.use(Button)
 Vue.use(Icon)
+Vue.use(Toast)
 
 Vue.config.productionTip = false
+Vue.prototype.BASE_API = ''
+Vue.prototype.$toast = Toast
 Vue.prototype.$f = {
   safeData,
   setTitle,

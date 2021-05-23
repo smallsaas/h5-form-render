@@ -1,8 +1,22 @@
 import cloneDeep from 'lodash.clonedeep'
 import { formatTime } from '@/utils'
+import axios from 'axios'
+const SUNMIT_API = '/sport/api/form/manage/define/submitForm.do'
 export default {
   props: {
     config: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    formInfo: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    srvFormData: {
       type: Object,
       default() {
         return {}
@@ -14,23 +28,13 @@ export default {
       form: {},
       showPicker: {},
       select: {},
+      fields: []
     }
   },
   render() {
-    // this.initFormData()
     return this.getRenderDom()
   },
   methods: {
-    // todo
-    initFormData() {
-      const fields = this.config.fields
-      for (let i = 0; i < fields.length; i++) {
-        const item = fields[i]
-        const __config__ = item.__config__
-        // this.form[item.__vModel__] = __config__.defaultValue
-        this.$set(this.form, item.__vModel__, __config__.defaultValue)
-      }
-    },
     getEleItem(item) {
       let jsx
       if (item.__config__.layout === 'colFormItem') {
@@ -44,6 +48,13 @@ export default {
       let jsx
       const __config__ = item.__config__
       const __slot__ = item.__slot__
+      const rules = []
+      if (__config__.required) {
+        rules.push({
+          required: true,
+          message: item.placeholder
+        })
+      }
       switch (__config__.tag) {
         case 'el-input':
           jsx = <van-field
@@ -63,6 +74,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           />
           break
         case 'el-input-number':
@@ -73,6 +85,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               <van-stepper
@@ -102,6 +115,7 @@ export default {
               label={__config__.label}
               value={this.select[item.__vModel__] || optionLabelMap[__config__.defaultValue]}
               onClick={() => this.handleOpenPicker(item)}
+              rules={rules}
             />
             <van-popup v-model={this.showPicker[item.__vModel__]} position="bottom">
               <van-picker
@@ -121,6 +135,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               <van-radio-group
@@ -149,6 +164,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               <van-checkbox-group
@@ -178,6 +194,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               <van-switch
@@ -198,6 +215,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               <van-slider
@@ -211,10 +229,10 @@ export default {
           </van-field>
           break
         case 'el-time-picker':
-          jsx = this.getDateJsx(item, __config__)
+          jsx = this.getDateJsx(item, __config__, rules)
           break
         case 'el-date-picker':
-          jsx = this.getDateJsx(item, __config__)
+          jsx = this.getDateJsx(item, __config__, rules)
           break
         case 'el-rate':
           jsx = <van-field
@@ -224,6 +242,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               <van-rate
@@ -265,6 +284,7 @@ export default {
             readonly={item.readonly}
             disabled={item.disabled}
             style={item.style}
+            rules={rules}
           >
             <template slot="input">
               {uploadJsx}
@@ -287,7 +307,7 @@ export default {
         }
       </div>
     },
-    getDateJsx(item, __config__) {
+    getDateJsx(item, __config__, rules) {
       const jsx = <div>
         <van-field
           readonly
@@ -300,6 +320,7 @@ export default {
           label={__config__.label}
           value={this.form[item.__vModel__] || __config__.defaultValue}
           onClick={() => this.handleOpenPicker(item)}
+          rules={rules}
         />
         <van-popup v-model={this.showPicker[item.__vModel__]} position="bottom">
           <van-datetime-picker
@@ -312,7 +333,8 @@ export default {
       return jsx
     },
     getRenderDom() {
-      const fields = this.config.fields || []
+      const fields = this.initFormData(this.config.fields || [])
+      this.fields = fields
       return <van-form onSubmit={this.onSubmit} label-width="5.2em">
         {
           fields.map((item) => {
@@ -329,7 +351,6 @@ export default {
       this.$nextTick(() => {
         this.$forceUpdate()
       })
-      console.log('debug form ', this.form)
     },
     handleOpenPicker(item) {
       this.showPicker[item.__vModel__] = true
@@ -392,8 +413,43 @@ export default {
     handleUploader(e, item) {
 
     },
+    initFormData(fields = []) {
+      const list = fields.map(item => {
+        const value = this.srvFormData[item.__vModel__] || item.__config__.defaultValue
+        item.__config__.defaultValue = value
+        // this.form[item.__vModel__] = value
+        return item
+      })
+      return list
+    },
+    getSubmitData() {
+      const form = {}
+      for (let i = 0; i < this.fields.length; i++) {
+        const item = this.fields[i]
+        form[item.__vModel__] = this.form[item.__vModel__] || item.__config__.defaultValue
+      }
+      return form
+    },
     onSubmit() {
-      console.log('form data: ', this.form)
+      // console.log('form data: ', this.getSubmitData())
+      const url = this.BASE_API + SUNMIT_API
+      const params = {
+        code: this.formInfo.code,
+        version: this.formInfo.version,
+        data: this.getSubmitData(),
+        dataId: this.srvFormData.id
+      }
+      axios.post(url, params)
+        .then((res) => {
+          if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code === '000000') {
+            this.$toast('提交成功')
+          } else {
+            this.$toast('提交失败')
+          }
+        })
+        .catch(() => {
+          this.$toast('提交失败')
+        })
     }
   }
 }
