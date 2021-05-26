@@ -432,17 +432,36 @@ export default {
     },
     onSubmit() {
       // console.log('form data: ', this.getSubmitData())
-      const url = this.BASE_API + SUNMIT_API
+      if (!this.config.saveApi) {
+        this.defaultSubmitFn()
+        return
+      }
+      this.customSubmitFn()
+    },
+    // 默认的提交行为
+    defaultSubmitFn() {
       const params = {
         code: this.formInfo.code,
         version: this.formInfo.version,
         data: this.getSubmitData(),
         dataId: this.srvFormData.id
       }
+      this.submitFn(SUNMIT_API, params)
+    },
+    // 自定义接口的提交行为
+    customSubmitFn() {
+      const params = {
+        id: this.srvFormData.id,
+        ...this.getSubmitData()
+      }
+      this.submitFn(this.config.saveApi, params)
+    },
+    submitFn(url, params) {
       axios.post(url, params)
         .then((res) => {
           if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code === '000000') {
             this.$toast('提交成功')
+            this.$f.toPage()
           } else {
             this.$toast('提交失败')
           }

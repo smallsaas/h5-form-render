@@ -43,7 +43,6 @@ Vue.use(Icon)
 Vue.use(Toast)
 
 Vue.config.productionTip = false
-Vue.prototype.BASE_API = ''
 Vue.prototype.$toast = Toast
 Vue.prototype.$f = {
   safeData,

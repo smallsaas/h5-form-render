@@ -33,20 +33,20 @@ export default {
         this.getDebugData()
         return
       }
-      const url = `${this.BASE_API}/sport/api/form/manage/define/loadFormInfo.do?id=${this.formId}&dataId=${this.dataId}`
+      const url = `/sport/api/form/manage/define/loadFormInfo.do?id=${this.formId}&dataId=${this.dataId}`
       axios.get(url)
         .then((res) => {
           if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code === '000000') {
             const data = res.data.data || {}
             this.formInfo = data.form || {}
-            const formData = {}
-            Object.keys((data.formData || {})).forEach(key => {
-              const _key = key.toLowerCase()
-              formData[_key] = data.formData[key]
-            })
-            this.formData = formData
             const jsonDefine = this.formInfo.jsonDefine
-            this.config = JSON.parse(Base64.decode(jsonDefine))
+            const config = JSON.parse(Base64.decode(jsonDefine))
+            this.config = config
+            if (!config.loadApi) {
+              this.defaultApiHandler(data)
+              return
+            }
+            this.customApiHandler(config)
           }
         })
         .catch((err) => {
@@ -61,6 +61,23 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    defaultApiHandler (data) {
+      const formData = {}
+      Object.keys((data.formData || {})).forEach(key => {
+        const _key = key.toLowerCase()
+        formData[_key] = data.formData[key]
+      })
+      this.formData = formData
+    },
+    customApiHandler (config) {
+      axios.get(config.loadApi).then(rs => {
+        if (Object.prototype.toString.call(rs.data) === '[object Object]' && rs.data.code === '000000') {
+          this.formData = rs.data.data || {}
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }
