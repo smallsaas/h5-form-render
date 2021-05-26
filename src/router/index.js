@@ -12,6 +12,15 @@ const routes = [
       title: 'form-render',
       keepAlive: false
     }
+  },
+  {
+    path: '/example',
+    name: 'Example',
+    component: () => import('@/views/example'),
+    meta: {
+      title: 'example',
+      keepAlive: false
+    }
   }
 ]
 

@@ -21,7 +21,8 @@ export default {
       default() {
         return {}
       }
-    }
+    },
+    ifManualSubmit: Boolean
   },
   data() {
     return {
@@ -432,6 +433,10 @@ export default {
     },
     onSubmit() {
       // console.log('form data: ', this.getSubmitData())
+      if (this.ifManualSubmit) {
+        this.$emit('submit', this.getSubmitData())
+        return
+      }
       if (!this.config.saveApi) {
         this.defaultSubmitFn()
         return

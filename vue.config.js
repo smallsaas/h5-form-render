@@ -1,6 +1,6 @@
 const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = {
-  publicPath: '/',
+  publicPath: '/h5-form-render/',
   /* 输出文件目录：在npm run build时，生成文件的目录名称 */
   outputDir: 'dist',
   /* 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录 */
@@ -28,12 +28,12 @@ module.exports = {
     overlay: false,
     proxy: {
       '/sport/api/form/manage/define/loadFormInfo.do': {
-        target: 'http://192.168.99.28',
+        target: 'http://106.53.93.81',
         ws: true,
         changeOrigin: true
       },
       '/sport/api/form/manage/define/submitForm.do': {
-        target: 'http://192.168.99.28',
+        target: 'http://106.53.93.81',
         ws: true,
         changeOrigin: true
       }
