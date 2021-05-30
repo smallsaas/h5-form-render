@@ -28,9 +28,10 @@ export default {
     }
   },
   methods: {
-    submit (form) {
+    submit (form, cb) {
       console.log('xx ', form)
       console.log('xx2 ', this.$refs.xxx.getFormData())
+      cb()
     }
   }
 }

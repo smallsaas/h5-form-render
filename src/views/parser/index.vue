@@ -110,8 +110,9 @@ export default {
     getFormData () {
       return this.$refs.h5FormParserCompRef.getSubmitData()
     },
-    submit (form) {
+    submit (form, cb) {
       this.$emit('submit', form)
+      cb()
     }
   }
 }

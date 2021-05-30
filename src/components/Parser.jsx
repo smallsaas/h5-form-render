@@ -29,7 +29,8 @@ export default {
       form: {},
       showPicker: {},
       select: {},
-      fields: []
+      fields: [],
+      loading: false
     }
   },
   render() {
@@ -50,10 +51,10 @@ export default {
       const __config__ = item.__config__
       const __slot__ = item.__slot__
       const rules = []
-      if (__config__.required) {
+      if (__config__.required && __config__.tag !== 'el-switch') {
         rules.push({
           required: true,
-          message: item.placeholder
+          message: item.placeholder || '不能为空'
         })
       }
       switch (__config__.tag) {
@@ -70,6 +71,8 @@ export default {
             right-icon={item['suffix-icon']}
             rows={(item.autosize || {}).maxRows}
             autosize
+            autocomplete="off"
+            onClear={(e) => this.clearField(e, item)}
             maxlength={item.maxlength}
             show-word-limit={item['show-word-limit']}
             readonly={item.readonly}
@@ -149,6 +152,7 @@ export default {
                   __slot__.options.map(v => {
                     return <van-radio
                       name={v.value}
+                      class={__slot__.options.length ? 'mg-b5' : ''}
                       onClick={() => this.handleSimpleSetValue(v.value, item)}
                     >{v.label}</van-radio>
                   })
@@ -180,6 +184,7 @@ export default {
                       shape="square"
                       name={v.value}
                       onClick={() => this.handleCheckbox(v, item)}
+                      class={__slot__.options.length ? 'mg-b5' : ''}
                     >{v.label}</van-checkbox>
                   })
                 }
@@ -343,11 +348,12 @@ export default {
           })
         }
         <div class="mg-t15 pd-x20">
-          <van-button round block type="info" native-type="submit">提交</van-button>
+          <van-button round block type="info" loading={this.loading} native-type="submit">提交</van-button>
         </div>
       </van-form>
     },
     handleSimpleSetValue(e, item) {
+      this.delDefaultValue(item)
       this.form[item.__vModel__] = e
       this.$nextTick(() => {
         this.$forceUpdate()
@@ -366,6 +372,7 @@ export default {
       })
     },
     handlePickerConfirm(e, item) {
+      this.delDefaultValue(item)
       this.showPicker[item.__vModel__] = false
       this.form[item.__vModel__] = e.value
       this.select[item.__vModel__] = e.label
@@ -386,11 +393,13 @@ export default {
         list.splice(index, 1)
       }
       this.form[item.__vModel__] = list
+      this.delDefaultValue(item, [])
       this.$nextTick(() => {
         this.$forceUpdate()
       })
     },
     handleSwitch(item) {
+      this.delDefaultValue(item, false)
       this.form[item.__vModel__] = !this.form[item.__vModel__]
       this.$nextTick(() => {
         this.$forceUpdate()
@@ -402,10 +411,8 @@ export default {
       } else {
         this.form[item.__vModel__] = formatTime(new Date(e).getTime(), 'YYYY-MM-DD')
       }
-      console.log('debug e ', new Date(e).getTime())
-
+      this.delDefaultValue(item)
       this.showPicker[item.__vModel__] = false
-
       this.$nextTick(() => {
         this.$forceUpdate()
       })
@@ -418,10 +425,17 @@ export default {
       const list = fields.map(item => {
         const value = this.srvFormData[item.__vModel__] || item.__config__.defaultValue
         item.__config__.defaultValue = value
-        // this.form[item.__vModel__] = value
+        // this.$set(this.form, item.__vModel__, value)
         return item
       })
       return list
+    },
+    clearField(e, item) {
+      this.delDefaultValue(item)
+      this.form[item.__vModel__] = ''
+    },
+    delDefaultValue(item, arg) {
+      item.__config__.defaultValue = arg || ''
     },
     getSubmitData() {
       const form = {}
@@ -431,10 +445,14 @@ export default {
       }
       return form
     },
+    closeLoading() {
+      this.loading = false
+    },
     onSubmit() {
       // console.log('form data: ', this.getSubmitData())
       if (this.ifManualSubmit) {
-        this.$emit('submit', this.getSubmitData())
+        this.loading = true
+        this.$emit('submit', this.getSubmitData(), this.closeLoading)
         return
       }
       if (!this.config.saveApi) {
@@ -462,8 +480,10 @@ export default {
       this.submitFn(this.config.saveApi, params)
     },
     submitFn(url, params) {
+      this.loading = true
       axios.post(url, params)
         .then((res) => {
+          this.loading = false
           if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code === '000000') {
             this.$toast('提交成功')
             this.$f.toPage()
@@ -473,6 +493,7 @@ export default {
         })
         .catch(() => {
           this.$toast('提交失败')
+          this.loading = false
         })
     }
   }
