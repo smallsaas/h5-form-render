@@ -1,7 +1,7 @@
 {
   "name": "h5-form-render",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.2",
+  "private": false,
   "main": "./src/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",

@@ -2,7 +2,7 @@
   <div>
     <div>标题一</div>
     <H5FormRender
-      arg-form-id="fd16da5eaf634d869861f6144f8f3c4f"
+      arg-form-id="2"
       :arg-form-data="argFormData"
       :if-manual-submit="true"
       @submit="submit"

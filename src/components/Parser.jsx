@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash.clonedeep'
 import { formatTime } from '@/utils'
 import axios from 'axios'
-const SUNMIT_API = '/sport/api/form/manage/define/submitForm.do'
+const SUNMIT_API = '/api.page.design.form/submitFormData'
 export default {
   props: {
     config: {
@@ -484,7 +484,7 @@ export default {
       axios.post(url, params)
         .then((res) => {
           this.loading = false
-          if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code === '000000') {
+          if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code.indexOf('00000') >= 0) {
             this.$toast('提交成功')
             this.$f.toPage()
           } else {

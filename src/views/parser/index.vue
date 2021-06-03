@@ -54,10 +54,10 @@ export default {
         this.getDebugData()
         return
       }
-      const url = `/sport/api/form/manage/define/loadFormInfo.do?id=${formId}&dataId=${dataId}`
-      axios.get(url)
+      const url = '/api.page.design.form/loadFormInfo'
+      axios.post(url, { formId, dataId })
         .then((res) => {
-          if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code === '000000') {
+          if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code.indexOf('00000') >= 0) {
             const data = res.data.data || {}
             this.formInfo = data.form || {}
             const jsonDefine = this.formInfo.jsonDefine
