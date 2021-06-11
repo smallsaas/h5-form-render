@@ -15,7 +15,9 @@
       }
     },
     // 是否手动提交
-    ifManualSubmit: Boolean
+    ifManualSubmit: Boolean,
+    // 模式 默认编辑 
+    argMod: String, // edit: 编辑  preview: 预览
   }
   // event
   submit(form) form: 表单数据
@@ -33,7 +35,7 @@
   - 表单提供提交按钮
     - ifManualSubmit 为真，则监听组件 submit 方法，参数是表单数据
     - ifManualSubmit 为假，则优先提交到表单设置的 saveApi 接口，如果未设置 saveApi 则提交至默认接口
-
+    - 可监听 OnSubmitFormSuc 事件，来自定义处理表单成功提交的业务逻辑
 ### 例子
 ```js
   // main.js 全局引入
