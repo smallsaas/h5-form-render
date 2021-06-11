@@ -2,10 +2,11 @@
   <div>
     <div>标题一</div>
     <H5FormRender
-      arg-form-id="2"
+      arg-form-id="4"
       :arg-form-data="argFormData"
-      :if-manual-submit="true"
+      :if-manual-submit="false"
       @submit="submit"
+      @OnSubmitFormSuc="OnSubmitFormSuc"
       ref="xxx"
     />
   </div>
@@ -32,6 +33,9 @@ export default {
       console.log('xx ', form)
       console.log('xx2 ', this.$refs.xxx.getFormData())
       cb()
+    },
+    OnSubmitFormSuc () {
+      console.log('OnSubmitFormSuc ')
     }
   }
 }

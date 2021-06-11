@@ -6,12 +6,20 @@
       :srv-form-data="formData"
       :if-manual-submit="ifManualSubmit"
       @submit="submit"
+      @OnSubmitFormSuc="OnSubmitFormSuc"
       ref="h5FormParserCompRef"
+      v-if="mod !== 'preview'"
+    />
+    <Preview
+      v-if="mod === 'preview'"
+      :config="config"
+      :srv-form-data="formData"
     />
   </div>
 </template>
 <script>
 import Parser from '@/components/Parser'
+import Preview from '@/components/Preview'
 import { urlParam, Base64 } from '@/utils'
 // import { config } from '@/config'
 import axios from 'axios'
@@ -31,16 +39,19 @@ export default {
       }
     },
     // 是否手动提交
-    ifManualSubmit: Boolean
+    ifManualSubmit: Boolean,
+    argMod: String, // 默认编辑 edit: 编辑  preview: 预览
   },
   components: {
-    Parser
+    Parser,
+    Preview
   },
   data () {
     return {
       config: {},
       formInfo: {},
-      formData: {}
+      formData: {},
+      mod: 'edit'
     }
   },
   created () {
@@ -50,6 +61,7 @@ export default {
     initData () {
       const formId = this.argFormId || urlParam('id')
       const dataId = this.argDataId || urlParam('dataId')
+      this.mod = this.argMod || urlParam('mod')
       if (!formId) {
         this.getDebugData()
         return
@@ -111,8 +123,10 @@ export default {
       return this.$refs.h5FormParserCompRef.getSubmitData()
     },
     submit (form, cb) {
-      this.$emit('submit', form)
-      cb()
+      this.$emit('submit', form, cb)
+    },
+    OnSubmitFormSuc () {
+      this.$emit('OnSubmitFormSuc')
     }
   }
 }

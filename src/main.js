@@ -19,7 +19,8 @@ import {
   Uploader,
   Button,
   Icon,
-  Toast
+  Toast,
+  Cell
 } from 'vant'
 import './style/global.less'
 remInit()
@@ -40,7 +41,7 @@ Vue.use(Rate)
 Vue.use(Uploader)
 Vue.use(Button)
 Vue.use(Icon)
-Vue.use(Toast)
+Vue.use(Cell)
 
 Vue.config.productionTip = false
 Vue.prototype.$toast = Toast

@@ -28,7 +28,7 @@ module.exports = {
     overlay: false,
     proxy: {
       '/api': {
-        target: 'http://47.119.113.172:8380',
+        target: 'http://106.53.93.81',
         ws: true,
         changeOrigin: true
       }
