@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep'
-import { formatTime } from '@/utils'
+import { formatTime } from '../utils'
 import axios from 'axios'
 const SUNMIT_API = '/api.page.design.form/submitFormData'
 export default {

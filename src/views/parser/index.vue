@@ -18,8 +18,8 @@
   </div>
 </template>
 <script>
-import Parser from '@/components/Parser'
-import Preview from '@/components/Preview'
+import Parser from '../../components/Parser'
+import Preview from '../../components/Preview'
 import { urlParam, Base64 } from '@/utils'
 // import { config } from '@/config'
 import axios from 'axios'
