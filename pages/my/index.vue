@@ -1,27 +1,38 @@
 <template>
-	<van-row>
-	  <van-col span='6'>
-		  <img v-bind:src="avatar" class='img' >
-	  </van-col>
-	  <van-col span='18' class='titleContent'>
-		  <van-row type="flex">
-		    <van-col> <view  class='text' >{{userName}}</view></van-col>
-		    <van-col><van-button plain type='info' size='small'>信息按钮</van-button></van-col>
-		  </van-row>
-		  <van-row type="flex">
-			<van-col> <view  class='text'>企业编号: </view></van-col>
-			<van-col><view  class='text'>{{enterpriseNumber}} </view></van-col>
-		  </van-row>
-		 <van-row type="flex">
-			<van-col> <view  class='text'>企业域名: </view></van-col>
-			<van-col><view  class='text'>{{domainName}} </view></van-col>
-		 </van-row>
-		 <van-row type="flex">
-			<van-col> <view  class='text'>职位: </view></van-col>
-			<van-col><view  class='text'>{{job}} </view></van-col>
-		 </van-row>
-	  </van-col>
-	</van-row>
+	<view class="my_container">
+		
+		<van-row>
+		  <van-col span='6'>
+			  <img v-bind:src="avatar" class='img' >
+		  </van-col>
+		  <van-col span='18' class='titleContent'>
+			  <van-row type="flex">
+			    <van-col> <view  class='text' >{{userName}}</view></van-col>
+			    <van-col><van-button plain type='info' size='small'>信息按钮</van-button></van-col>
+			  </van-row>
+			  <van-row type="flex">
+				<van-col> <view  class='text'>企业编号: </view></van-col>
+				<van-col><view  class='text'>{{enterpriseNumber}} </view></van-col>
+			  </van-row>
+			 <van-row type="flex">
+				<van-col> <view  class='text'>企业域名: </view></van-col>
+				<van-col><view  class='text'>{{domainName}} </view></van-col>
+			 </van-row>
+			 <van-row type="flex">
+				<van-col> <view  class='text'>职位: </view></van-col>
+				<van-col><view  class='text'>{{job}} </view></van-col>
+			 </van-row>
+		  </van-col>
+		</van-row>
+			
+		<view>
+			<van-cell title="自查记录" icon="orders-o" is-link />
+			<van-cell title="复工记录" icon="label-o" is-link />
+			<van-cell title="执法记录" icon="label-o" is-link />
+		</view>
+		
+	</view>
+
 </template>
 
 <script>
@@ -39,6 +50,12 @@
 </script>
 
 <style lang="less">
+	.my_container{
+		width: 100%;
+		height: 100%;
+		// background-color: #E5E5E5;
+	}
+	
 	.img{
 		width: 55px;
 		height: 55px;
@@ -57,4 +74,5 @@
 			margin-right: 7px;
 		}
 	}
+	
 </style>

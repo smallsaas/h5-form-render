@@ -189,10 +189,12 @@ var _tools = __webpack_require__(/*! ./tools.js */ 108);function _interopRequire
       return this.typeList.length > 0 ? 88 : 0;
     } },
 
-  mounted: function mounted() {
-    if (_lodash.default.get(this.config, 'loadApi')) {
-      this.updateData();
-    }
+  mounted: function mounted() {var _this = this;
+    this.$nextTick(function () {
+      if (_lodash.default.get(_this.config, 'loadApi')) {
+        _this.updateData();
+      }
+    });
   },
   methods: {
     _get: function _get(item, str) {var defauleValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -242,7 +244,7 @@ var _tools = __webpack_require__(/*! ./tools.js */ 108);function _interopRequire
     },
 
     // 获取列表信息
-    fetchList: function fetchList() {var _this = this;var searchData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    fetchList: function fetchList() {var _this2 = this;var searchData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       uni.showLoading({
         title: "loading...",
         mask: true });
@@ -255,15 +257,15 @@ var _tools = __webpack_require__(/*! ./tools.js */ 108);function _interopRequire
           uni.hideLoading();
           if (['000000', 200].includes(_lodash.default.get(res, 'data.code'))) {
             var data = _lodash.default.get(res, 'data.data', {});
-            var listField = _lodash.default.get(_this.config, 'response.list', '');
-            var totolField = _lodash.default.get(_this.config, 'response.total', 0);
+            var listField = _lodash.default.get(_this2.config, 'response.list', '');
+            var totolField = _lodash.default.get(_this2.config, 'response.total', 0);
 
-            var prevList = _lodash.default.get(searchData, 'refresh') ? [] : _this.list;
-            _this.list = prevList.concat(listField ? _lodash.default.get(data, listField, []) : _lodash.default.get(res, 'list', []));
+            var prevList = _lodash.default.get(searchData, 'refresh') ? [] : _this2.list;
+            _this2.list = prevList.concat(listField ? _lodash.default.get(data, listField, []) : _lodash.default.get(res, 'list', []));
             var total = _lodash.default.get(data, totolField, 0);
-            _this.listCurrentPage = _this.list.length < 10 ? 1 : Math.floor(total / 10);
-            _this.listTotalPages = total < 10 ? 1 : Math.floor(total / 10);
-            _this.$refs.loadRefresh.completed();
+            _this2.listCurrentPage = _this2.list.length < 10 ? 1 : Math.floor(total / 10);
+            _this2.listTotalPages = total < 10 ? 1 : Math.floor(total / 10);
+            _this2.$refs.loadRefresh.completed();
           }
         } });
 

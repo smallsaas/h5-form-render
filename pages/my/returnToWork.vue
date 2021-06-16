@@ -1,11 +1,14 @@
 <template>
 	<view class="company_check_container">
 		<view class="top_content">
-		  <view class='item'>
-			<view>距离复工上报结束还有 </view>
-			<view> 3 </view>
-			<view> 天 </view>
+		  <view class='item' style="font-size: 16px;">
+			<view style="font-size: 16px;">距离复工上报结束还有 </view>
+			<view style="font-size: 30px; color: #D43030; margin: 0 6px;"> 3 </view>
+			<view style="font-size: 16px;"> 天 </view>
 		  </view>
+			<view class='item' style="margin-top: 7px; color: #07C160;">
+				<view>继续保持</view>
+			</view>
 		</view>
 		<view class="center_content">
 			<dynamic-form :config="config" :ifManualSubmit="true" @submit="handleSubmit" />
@@ -105,17 +108,23 @@
 			height: 120px;
 			color: #000000;
 			display: flex;
+			flex-direction: column;
 			justify-content: center;
 			justify-items: center;
 
 			.item {
 				display: flex;
 				flex-direction: row;
+				justify-content: center;
 
 				// >view:last-child {
 				// 	font-weight: 700;
 				// 	flex: 1;
 				// }
+				>view{
+					display: flex;
+					align-items: center;
+				}
 			}
 		}
 

@@ -49,7 +49,7 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     @import "./common.less";
     .base_input_number_container {
       .stepper_input {

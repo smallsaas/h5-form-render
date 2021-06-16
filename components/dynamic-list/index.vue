@@ -90,9 +90,11 @@
           }  
         },
 		mounted() {
-			if (_.get(this.config, 'loadApi')) {
-				this.updateData()
-			}
+         this.$nextTick(() => {
+           if (_.get(this.config, 'loadApi')) {
+              this.updateData()
+           }  
+         })
 		},
 		methods: {
             _get (item, str, defauleValue = '') {
