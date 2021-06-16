@@ -224,6 +224,8 @@ var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));func
             var data = _lodash.default.cloneDeep(_lodash.default.get(res, 'data.data', {}));
             _this.config = _objectSpread({}, data);
 
+            // this.config.container = { width: '50px', height: '50px', backgroundColor: 'red', borderRadius: '10px' }
+
             if (_lodash.default.has(_this.config, 'title')) {
               uni.setNavigationBarTitle({
                 title: _lodash.default.get(_this.config, 'title', '动态页面') });

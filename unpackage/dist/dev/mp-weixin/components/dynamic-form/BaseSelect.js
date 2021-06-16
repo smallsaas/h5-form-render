@@ -153,7 +153,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
 var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -183,8 +182,7 @@ var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));func
 //
 //
 //
-//
-var _default2 = { props: { param: { type: Object, default: function _default() {return { inputBlock: false, required: false, disabled: false, readonly: false, error: false, "error-message": "", style: "" };} } }, data: function data() {return { showPick: false };}, mounted: function mounted() {this.handleInitData();}, methods: { handleParseValue: function handleParseValue(value) {if (value) {var list = _lodash.default.get(this.param, 'columns', []);return _lodash.default.get(list.find(function (x) {return x.value === value;}), 'label', '');
+var _default2 = { props: { param: { type: Object, default: function _default() {return { inputBlock: false, required: false, disabled: false, error: false, "error-message": "", style: "" };} } }, data: function data() {return { showPick: false };}, mounted: function mounted() {this.handleInitData();}, methods: { handleParseValue: function handleParseValue(value) {if (value) {var list = _lodash.default.get(this.param, 'columns', []);return _lodash.default.get(list.find(function (x) {return x.value === value;}), 'label', '');
       }
       return '';
     },

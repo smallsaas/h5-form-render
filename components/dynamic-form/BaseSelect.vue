@@ -4,7 +4,6 @@
           readonly
           :required="param.required"
           :disabled="param.disabled"
-          :readonly="param.readonly"
           :style="param.style"
           :placeholder="param.placeholder"
           clickable
@@ -16,7 +15,7 @@
           label-class="van_field_label"
           @click-input="handleClick"
         />
-        <van-popup :show="showPick" position="bottom" @click-overlay="handlePickerCancel">
+        <van-popup :show="showPick" position="bottom" @click-overlay="handlePickerCancel" custom-style="background-color: red;z-index: 999">
           <van-picker
             show-toolbar
             :columns="param.columns"
@@ -39,7 +38,6 @@
                         inputBlock: false,
                         required: false,
                         disabled: false,
-                        readonly: false,
                         error: false,
                         "error-message": "",
                         style: ""

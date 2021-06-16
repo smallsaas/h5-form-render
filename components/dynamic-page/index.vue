@@ -58,6 +58,8 @@
 							const data = _.cloneDeep(_.get(res, 'data.data', {}))       
 							this.config = { ... data }
                             
+                            // this.config.container = { width: '50px', height: '50px', backgroundColor: 'red', borderRadius: '10px' }
+                            
 							if (_.has(this.config, 'title')) {
 								uni.setNavigationBarTitle({
 									title: _.get(this.config, 'title', '动态页面')
