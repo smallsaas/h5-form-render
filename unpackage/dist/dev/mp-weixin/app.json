@@ -7,7 +7,9 @@
     "pages/test/page",
     "pages/articleDetail/index",
     "pages/company/check",
-    "pages/company/checkComfirm"
+    "pages/company/checkComfirm",
+    "pages/my/index",
+    "pages/my/returnToWork"
   ],
   "subPackages": [],
   "window": {

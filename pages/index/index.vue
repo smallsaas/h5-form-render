@@ -6,6 +6,14 @@
         <view class="venue_tag" @click="handleToTest">
         	<text>测试</text>
         </view>
+		
+		<view class="venue_tag" @click="handleToMy">
+			<text>我的</text>
+		</view>
+		
+		<view class="venue_tag" @click="handleToReturnToWorlk">
+			<text>复工</text>
+		</view>
 	</view>
 </template>
 
@@ -20,6 +28,16 @@
 			handleToCompany () {
 				uni.navigateTo({
 					url: '../company/check'
+				})
+			},
+			handleToMy () {
+				uni.navigateTo({
+					url: '../my/index'
+				})
+			},
+			handleToReturnToWorlk () {
+				uni.navigateTo({
+					url: '../my/returnToWork'
 				})
 			}
 		}

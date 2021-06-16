@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "复工",
+  "usingComponents": {
+    "dynamic-form": "/components/dynamic-form/index"
+  }
+}

@@ -1,0 +1,1 @@
+<view class="company_check_container"><view class="top_content"><view class="item"><view>距离复工上报结束还有</view><view>3</view><view>天</view></view></view><view class="center_content"><dynamic-form vue-id="0765ddb0-1" config="{{config}}" ifManualSubmit="{{true}}" data-event-opts="{{[['^submit',[['handleSubmit']]]]}}" bind:submit="__e" bind:__l="__l"></dynamic-form></view></view>
