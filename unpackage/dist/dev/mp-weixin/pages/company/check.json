@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "企业自查",
+  "usingComponents": {
+    "dynamic-form": "/components/dynamic-form/index"
+  }
+}

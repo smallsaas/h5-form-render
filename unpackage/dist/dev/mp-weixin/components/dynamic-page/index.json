@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "dynamic-list": "/components/dynamic-list/index",
+    "dynamic-form": "/components/dynamic-form/index"
+  }
+}

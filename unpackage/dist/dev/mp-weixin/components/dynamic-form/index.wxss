@@ -1,0 +1,24 @@
+.base_vants_container .form_row_title {
+  color: #505050;
+  font-size: 30rpx;
+  line-height: 150%;
+  text-align: left;
+  font-weight: bold;
+  padding: 10rpx 14rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.base_vants_container .form_row_title .line {
+  width: 6rpx;
+  height: 30rpx;
+  background-color: #999999;
+  margin-right: 10rpx;
+}
+.base_vants_container .submit_but {
+  width: 80%;
+}
+

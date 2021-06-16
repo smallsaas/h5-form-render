@@ -1,0 +1,24 @@
+.van_field_label.data-v-ce1ba880 {
+  color: #505050;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+.van_field_input_block > van-field > van-cell > view.data-v-ce1ba880:first-child {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.van_field_input_block > van-field > van-cell > view:first-child > view.data-v-ce1ba880:first-child {
+  max-width: unset!important;
+}
+.base_input_number_container .stepper_input.data-v-ce1ba880 {
+  color: red;
+  -webkit-transform: translateX(-110%);
+          transform: translateX(-110%);
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+

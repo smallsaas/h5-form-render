@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "base-vants": "/components/dynamic-form/BaseVants"
+  }
+}

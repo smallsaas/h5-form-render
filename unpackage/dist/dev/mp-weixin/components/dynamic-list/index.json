@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "ms-tabs": "/components/ms-tabs/ms-tabs",
+    "load-refresh": "/components/load-refresh/load-refresh",
+    "ms-tab": "/components/ms-tabs/ms-tabs",
+    "article-item": "/components/dynamic-list/listItem/ArticleItem"
+  }
+}

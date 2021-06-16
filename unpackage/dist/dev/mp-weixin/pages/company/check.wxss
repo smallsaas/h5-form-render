@@ -1,0 +1,30 @@
+.company_check_container {
+  position: relative;
+  font-size: 28rpx;
+}
+.company_check_container .top_content {
+  background-color: #1a5eb5;
+  padding: 30rpx;
+  color: #fff;
+}
+.company_check_container .top_content .item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-bottom: 16rpx;
+}
+.company_check_container .top_content .item > view:last-child {
+  font-weight: 700;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.company_check_container .center_content {
+  position: relative;
+  top: -16rpx;
+  border-top-left-radius: 24rpx;
+  border-top-right-radius: 24rpx;
+  background-color: #fff;
+  padding: 20rpx 0;
+}
+
