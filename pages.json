@@ -61,16 +61,23 @@
 			"style": {
 				"navigationBarTitleText": "复工"
 			}
+		},
+		{
+			"path" : "pages/test/cardtest",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/test/banner",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+			}
 		}
-        ,{
-            "path" : "pages/test/cardtest",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

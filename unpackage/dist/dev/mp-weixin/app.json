@@ -10,7 +10,8 @@
     "pages/company/checkComfirm",
     "pages/my/index",
     "pages/my/returnToWork",
-    "pages/test/cardtest"
+    "pages/test/cardtest",
+    "pages/test/banner"
   ],
   "subPackages": [],
   "window": {

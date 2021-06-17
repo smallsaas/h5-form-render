@@ -7998,15 +7998,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-<<<<<<< HEAD
 /*!**************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/pages.json ***!
   \**************************************************************/
-=======
-/*!******************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/pages.json ***!
-  \******************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -26104,15 +26098,9 @@ module.exports = function(module) {
 
 /***/ }),
 /* 38 */
-<<<<<<< HEAD
 /*!*****************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/common/api.js ***!
   \*****************************************************************/
-=======
-/*!*********************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/common/api.js ***!
-  \*********************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26125,6 +26113,7 @@ var getNavList = function getNavList(params) {
   var url = "".concat(_config.config.host, "/api/product");
   return (0, _request.request)('GET', url, params);
 };
+
 
 // 获取执法对象类型数据
 exports.getNavList = getNavList;var getNavTypeList = function getNavTypeList(params) {
@@ -26152,15 +26141,9 @@ exports.getDynamicListField = getDynamicListField;var getDynamicPageField = func
 
 /***/ }),
 /* 39 */
-<<<<<<< HEAD
 /*!*********************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/common/request.js ***!
   \*********************************************************************/
-=======
-/*!*************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/common/request.js ***!
-  \*************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26216,7 +26199,6 @@ exports.request = request;var upLoad = function upLoad(url, filePath, params, na
 module.export = {
   request: request,
   upLoad: upLoad };
-<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! (webpack)/buildin/module.js */ 37)(module)))
 
 /***/ }),
@@ -26224,15 +26206,6 @@ module.export = {
 /*!***********************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/common/toPromise.js ***!
   \***********************************************************************/
-=======
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../../HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/module.js */ 37)(module)))
-
-/***/ }),
-/* 40 */
-/*!***************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/common/toPromise.js ***!
-  \***************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26256,7 +26229,6 @@ var toPromise = function toPromise(fn) {
 
 module.export = {
   toPromise: toPromise };
-<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/module.js */ 37)(module)))
 
 /***/ }),
@@ -26264,15 +26236,6 @@ module.export = {
 /*!*************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/config.js ***!
   \*************************************************************/
-=======
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/module.js */ 37)(module)))
-
-/***/ }),
-/* 41 */
-/*!*****************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/config.js ***!
-  \*****************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26282,11 +26245,7 @@ module.export = {
   formHost: 'https://api.mock.smallsaas.cn' };exports.config = config;
 
 module.export = config;
-<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/module.js */ 37)(module)))
-=======
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/module.js */ 37)(module)))
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 
 /***/ }),
 /* 42 */,
@@ -26322,15 +26281,9 @@ module.export = config;
 /* 72 */,
 /* 73 */,
 /* 74 */
-<<<<<<< HEAD
 /*!***************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/static/images/empty.png ***!
   \***************************************************************************/
-=======
-/*!*******************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/static/images/empty.png ***!
-  \*******************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27052,17 +27005,10 @@ module.exports = function (str, opts) {
 
 
 /***/ }),
-<<<<<<< HEAD
 /* 114 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/components/dynamic-list/tools.js ***!
   \************************************************************************************/
-=======
-/* 108 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/components/dynamic-list/tools.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27280,23 +27226,23 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.Base64 = v
 /* 193 */,
 /* 194 */,
 /* 195 */,
-<<<<<<< HEAD
 /* 196 */,
 /* 197 */,
 /* 198 */,
 /* 199 */,
 /* 200 */,
 /* 201 */,
-/* 202 */
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */
 /*!*********************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/moment.js ***!
   \*********************************************************************************/
-=======
-/* 196 */
-/*!*************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/moment.js ***!
-  \*************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29390,7 +29336,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.Base64 = v
       try {
         oldLocale = globalLocale._abbr;
         aliasedRequire = require;
-        __webpack_require__(203)("./" + name);
+        __webpack_require__(210)("./" + name);
         getSetGlobalLocale(oldLocale);
       } catch (e) {
         // mark as not found to avoid repeating expensive file require call causing high CPU
@@ -32969,297 +32915,287 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.Base64 = v
   return hooks;
 
 });
-<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/module.js */ 37)(module)))
 
 /***/ }),
-/* 203 */
+/* 210 */
 /*!********************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale sync ^\.\/.*$ ***!
   \********************************************************************************************/
-=======
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/module.js */ 37)(module)))
-
-/***/ }),
-/* 197 */
-/*!************************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale sync ^\.\/.*$ ***!
-  \************************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 204,
-	"./af.js": 204,
-	"./ar": 205,
-	"./ar-dz": 206,
-	"./ar-dz.js": 206,
-	"./ar-kw": 207,
-	"./ar-kw.js": 207,
-	"./ar-ly": 208,
-	"./ar-ly.js": 208,
-	"./ar-ma": 209,
-	"./ar-ma.js": 209,
-	"./ar-sa": 210,
-	"./ar-sa.js": 210,
-	"./ar-tn": 211,
-	"./ar-tn.js": 211,
-	"./ar.js": 205,
-	"./az": 212,
-	"./az.js": 212,
-	"./be": 213,
-	"./be.js": 213,
-	"./bg": 214,
-	"./bg.js": 214,
-	"./bm": 215,
-	"./bm.js": 215,
-	"./bn": 216,
-	"./bn-bd": 217,
-	"./bn-bd.js": 217,
-	"./bn.js": 216,
-	"./bo": 218,
-	"./bo.js": 218,
-	"./br": 219,
-	"./br.js": 219,
-	"./bs": 220,
-	"./bs.js": 220,
-	"./ca": 221,
-	"./ca.js": 221,
-	"./cs": 222,
-	"./cs.js": 222,
-	"./cv": 223,
-	"./cv.js": 223,
-	"./cy": 224,
-	"./cy.js": 224,
-	"./da": 225,
-	"./da.js": 225,
-	"./de": 226,
-	"./de-at": 227,
-	"./de-at.js": 227,
-	"./de-ch": 228,
-	"./de-ch.js": 228,
-	"./de.js": 226,
-	"./dv": 229,
-	"./dv.js": 229,
-	"./el": 230,
-	"./el.js": 230,
-	"./en-au": 231,
-	"./en-au.js": 231,
-	"./en-ca": 232,
-	"./en-ca.js": 232,
-	"./en-gb": 233,
-	"./en-gb.js": 233,
-	"./en-ie": 234,
-	"./en-ie.js": 234,
-	"./en-il": 235,
-	"./en-il.js": 235,
-	"./en-in": 236,
-	"./en-in.js": 236,
-	"./en-nz": 237,
-	"./en-nz.js": 237,
-	"./en-sg": 238,
-	"./en-sg.js": 238,
-	"./eo": 239,
-	"./eo.js": 239,
-	"./es": 240,
-	"./es-do": 241,
-	"./es-do.js": 241,
-	"./es-mx": 242,
-	"./es-mx.js": 242,
-	"./es-us": 243,
-	"./es-us.js": 243,
-	"./es.js": 240,
-	"./et": 244,
-	"./et.js": 244,
-	"./eu": 245,
-	"./eu.js": 245,
-	"./fa": 246,
-	"./fa.js": 246,
-	"./fi": 247,
-	"./fi.js": 247,
-	"./fil": 248,
-	"./fil.js": 248,
-	"./fo": 249,
-	"./fo.js": 249,
-	"./fr": 250,
-	"./fr-ca": 251,
-	"./fr-ca.js": 251,
-	"./fr-ch": 252,
-	"./fr-ch.js": 252,
-	"./fr.js": 250,
-	"./fy": 253,
-	"./fy.js": 253,
-	"./ga": 254,
-	"./ga.js": 254,
-	"./gd": 255,
-	"./gd.js": 255,
-	"./gl": 256,
-	"./gl.js": 256,
-	"./gom-deva": 257,
-	"./gom-deva.js": 257,
-	"./gom-latn": 258,
-	"./gom-latn.js": 258,
-	"./gu": 259,
-	"./gu.js": 259,
-	"./he": 260,
-	"./he.js": 260,
-	"./hi": 261,
-	"./hi.js": 261,
-	"./hr": 262,
-	"./hr.js": 262,
-	"./hu": 263,
-	"./hu.js": 263,
-	"./hy-am": 264,
-	"./hy-am.js": 264,
-	"./id": 265,
-	"./id.js": 265,
-	"./is": 266,
-	"./is.js": 266,
-	"./it": 267,
-	"./it-ch": 268,
-	"./it-ch.js": 268,
-	"./it.js": 267,
-	"./ja": 269,
-	"./ja.js": 269,
-	"./jv": 270,
-	"./jv.js": 270,
-	"./ka": 271,
-	"./ka.js": 271,
-	"./kk": 272,
-	"./kk.js": 272,
-	"./km": 273,
-	"./km.js": 273,
-	"./kn": 274,
-	"./kn.js": 274,
-	"./ko": 275,
-	"./ko.js": 275,
-	"./ku": 276,
-	"./ku.js": 276,
-	"./ky": 277,
-	"./ky.js": 277,
-	"./lb": 278,
-	"./lb.js": 278,
-	"./lo": 279,
-	"./lo.js": 279,
-	"./lt": 280,
-	"./lt.js": 280,
-	"./lv": 281,
-	"./lv.js": 281,
-	"./me": 282,
-	"./me.js": 282,
-	"./mi": 283,
-	"./mi.js": 283,
-	"./mk": 284,
-	"./mk.js": 284,
-	"./ml": 285,
-	"./ml.js": 285,
-	"./mn": 286,
-	"./mn.js": 286,
-	"./mr": 287,
-	"./mr.js": 287,
-	"./ms": 288,
-	"./ms-my": 289,
-	"./ms-my.js": 289,
-	"./ms.js": 288,
-	"./mt": 290,
-	"./mt.js": 290,
-	"./my": 291,
-	"./my.js": 291,
-	"./nb": 292,
-	"./nb.js": 292,
-	"./ne": 293,
-	"./ne.js": 293,
-	"./nl": 294,
-	"./nl-be": 295,
-	"./nl-be.js": 295,
-	"./nl.js": 294,
-	"./nn": 296,
-	"./nn.js": 296,
-	"./oc-lnc": 297,
-	"./oc-lnc.js": 297,
-	"./pa-in": 298,
-	"./pa-in.js": 298,
-	"./pl": 299,
-	"./pl.js": 299,
-	"./pt": 300,
-	"./pt-br": 301,
-	"./pt-br.js": 301,
-	"./pt.js": 300,
-	"./ro": 302,
-	"./ro.js": 302,
-	"./ru": 303,
-	"./ru.js": 303,
-	"./sd": 304,
-	"./sd.js": 304,
-	"./se": 305,
-	"./se.js": 305,
-	"./si": 306,
-	"./si.js": 306,
-	"./sk": 307,
-	"./sk.js": 307,
-	"./sl": 308,
-	"./sl.js": 308,
-	"./sq": 309,
-	"./sq.js": 309,
-	"./sr": 310,
-	"./sr-cyrl": 311,
-	"./sr-cyrl.js": 311,
-	"./sr.js": 310,
-	"./ss": 312,
-	"./ss.js": 312,
-	"./sv": 313,
-	"./sv.js": 313,
-	"./sw": 314,
-	"./sw.js": 314,
-	"./ta": 315,
-	"./ta.js": 315,
-	"./te": 316,
-	"./te.js": 316,
-	"./tet": 317,
-	"./tet.js": 317,
-	"./tg": 318,
-	"./tg.js": 318,
-	"./th": 319,
-	"./th.js": 319,
-	"./tk": 320,
-	"./tk.js": 320,
-	"./tl-ph": 321,
-	"./tl-ph.js": 321,
-	"./tlh": 322,
-	"./tlh.js": 322,
-	"./tr": 323,
-	"./tr.js": 323,
-	"./tzl": 324,
-	"./tzl.js": 324,
-	"./tzm": 325,
-	"./tzm-latn": 326,
-	"./tzm-latn.js": 326,
-	"./tzm.js": 325,
-	"./ug-cn": 327,
-	"./ug-cn.js": 327,
-	"./uk": 328,
-	"./uk.js": 328,
-	"./ur": 329,
-	"./ur.js": 329,
-	"./uz": 330,
-	"./uz-latn": 331,
-	"./uz-latn.js": 331,
-	"./uz.js": 330,
-	"./vi": 332,
-	"./vi.js": 332,
-	"./x-pseudo": 333,
-	"./x-pseudo.js": 333,
-	"./yo": 334,
-	"./yo.js": 334,
-	"./zh-cn": 335,
-	"./zh-cn.js": 335,
-	"./zh-hk": 336,
-	"./zh-hk.js": 336,
-	"./zh-mo": 337,
-	"./zh-mo.js": 337,
-	"./zh-tw": 338,
-	"./zh-tw.js": 338
+	"./af": 211,
+	"./af.js": 211,
+	"./ar": 212,
+	"./ar-dz": 213,
+	"./ar-dz.js": 213,
+	"./ar-kw": 214,
+	"./ar-kw.js": 214,
+	"./ar-ly": 215,
+	"./ar-ly.js": 215,
+	"./ar-ma": 216,
+	"./ar-ma.js": 216,
+	"./ar-sa": 217,
+	"./ar-sa.js": 217,
+	"./ar-tn": 218,
+	"./ar-tn.js": 218,
+	"./ar.js": 212,
+	"./az": 219,
+	"./az.js": 219,
+	"./be": 220,
+	"./be.js": 220,
+	"./bg": 221,
+	"./bg.js": 221,
+	"./bm": 222,
+	"./bm.js": 222,
+	"./bn": 223,
+	"./bn-bd": 224,
+	"./bn-bd.js": 224,
+	"./bn.js": 223,
+	"./bo": 225,
+	"./bo.js": 225,
+	"./br": 226,
+	"./br.js": 226,
+	"./bs": 227,
+	"./bs.js": 227,
+	"./ca": 228,
+	"./ca.js": 228,
+	"./cs": 229,
+	"./cs.js": 229,
+	"./cv": 230,
+	"./cv.js": 230,
+	"./cy": 231,
+	"./cy.js": 231,
+	"./da": 232,
+	"./da.js": 232,
+	"./de": 233,
+	"./de-at": 234,
+	"./de-at.js": 234,
+	"./de-ch": 235,
+	"./de-ch.js": 235,
+	"./de.js": 233,
+	"./dv": 236,
+	"./dv.js": 236,
+	"./el": 237,
+	"./el.js": 237,
+	"./en-au": 238,
+	"./en-au.js": 238,
+	"./en-ca": 239,
+	"./en-ca.js": 239,
+	"./en-gb": 240,
+	"./en-gb.js": 240,
+	"./en-ie": 241,
+	"./en-ie.js": 241,
+	"./en-il": 242,
+	"./en-il.js": 242,
+	"./en-in": 243,
+	"./en-in.js": 243,
+	"./en-nz": 244,
+	"./en-nz.js": 244,
+	"./en-sg": 245,
+	"./en-sg.js": 245,
+	"./eo": 246,
+	"./eo.js": 246,
+	"./es": 247,
+	"./es-do": 248,
+	"./es-do.js": 248,
+	"./es-mx": 249,
+	"./es-mx.js": 249,
+	"./es-us": 250,
+	"./es-us.js": 250,
+	"./es.js": 247,
+	"./et": 251,
+	"./et.js": 251,
+	"./eu": 252,
+	"./eu.js": 252,
+	"./fa": 253,
+	"./fa.js": 253,
+	"./fi": 254,
+	"./fi.js": 254,
+	"./fil": 255,
+	"./fil.js": 255,
+	"./fo": 256,
+	"./fo.js": 256,
+	"./fr": 257,
+	"./fr-ca": 258,
+	"./fr-ca.js": 258,
+	"./fr-ch": 259,
+	"./fr-ch.js": 259,
+	"./fr.js": 257,
+	"./fy": 260,
+	"./fy.js": 260,
+	"./ga": 261,
+	"./ga.js": 261,
+	"./gd": 262,
+	"./gd.js": 262,
+	"./gl": 263,
+	"./gl.js": 263,
+	"./gom-deva": 264,
+	"./gom-deva.js": 264,
+	"./gom-latn": 265,
+	"./gom-latn.js": 265,
+	"./gu": 266,
+	"./gu.js": 266,
+	"./he": 267,
+	"./he.js": 267,
+	"./hi": 268,
+	"./hi.js": 268,
+	"./hr": 269,
+	"./hr.js": 269,
+	"./hu": 270,
+	"./hu.js": 270,
+	"./hy-am": 271,
+	"./hy-am.js": 271,
+	"./id": 272,
+	"./id.js": 272,
+	"./is": 273,
+	"./is.js": 273,
+	"./it": 274,
+	"./it-ch": 275,
+	"./it-ch.js": 275,
+	"./it.js": 274,
+	"./ja": 276,
+	"./ja.js": 276,
+	"./jv": 277,
+	"./jv.js": 277,
+	"./ka": 278,
+	"./ka.js": 278,
+	"./kk": 279,
+	"./kk.js": 279,
+	"./km": 280,
+	"./km.js": 280,
+	"./kn": 281,
+	"./kn.js": 281,
+	"./ko": 282,
+	"./ko.js": 282,
+	"./ku": 283,
+	"./ku.js": 283,
+	"./ky": 284,
+	"./ky.js": 284,
+	"./lb": 285,
+	"./lb.js": 285,
+	"./lo": 286,
+	"./lo.js": 286,
+	"./lt": 287,
+	"./lt.js": 287,
+	"./lv": 288,
+	"./lv.js": 288,
+	"./me": 289,
+	"./me.js": 289,
+	"./mi": 290,
+	"./mi.js": 290,
+	"./mk": 291,
+	"./mk.js": 291,
+	"./ml": 292,
+	"./ml.js": 292,
+	"./mn": 293,
+	"./mn.js": 293,
+	"./mr": 294,
+	"./mr.js": 294,
+	"./ms": 295,
+	"./ms-my": 296,
+	"./ms-my.js": 296,
+	"./ms.js": 295,
+	"./mt": 297,
+	"./mt.js": 297,
+	"./my": 298,
+	"./my.js": 298,
+	"./nb": 299,
+	"./nb.js": 299,
+	"./ne": 300,
+	"./ne.js": 300,
+	"./nl": 301,
+	"./nl-be": 302,
+	"./nl-be.js": 302,
+	"./nl.js": 301,
+	"./nn": 303,
+	"./nn.js": 303,
+	"./oc-lnc": 304,
+	"./oc-lnc.js": 304,
+	"./pa-in": 305,
+	"./pa-in.js": 305,
+	"./pl": 306,
+	"./pl.js": 306,
+	"./pt": 307,
+	"./pt-br": 308,
+	"./pt-br.js": 308,
+	"./pt.js": 307,
+	"./ro": 309,
+	"./ro.js": 309,
+	"./ru": 310,
+	"./ru.js": 310,
+	"./sd": 311,
+	"./sd.js": 311,
+	"./se": 312,
+	"./se.js": 312,
+	"./si": 313,
+	"./si.js": 313,
+	"./sk": 314,
+	"./sk.js": 314,
+	"./sl": 315,
+	"./sl.js": 315,
+	"./sq": 316,
+	"./sq.js": 316,
+	"./sr": 317,
+	"./sr-cyrl": 318,
+	"./sr-cyrl.js": 318,
+	"./sr.js": 317,
+	"./ss": 319,
+	"./ss.js": 319,
+	"./sv": 320,
+	"./sv.js": 320,
+	"./sw": 321,
+	"./sw.js": 321,
+	"./ta": 322,
+	"./ta.js": 322,
+	"./te": 323,
+	"./te.js": 323,
+	"./tet": 324,
+	"./tet.js": 324,
+	"./tg": 325,
+	"./tg.js": 325,
+	"./th": 326,
+	"./th.js": 326,
+	"./tk": 327,
+	"./tk.js": 327,
+	"./tl-ph": 328,
+	"./tl-ph.js": 328,
+	"./tlh": 329,
+	"./tlh.js": 329,
+	"./tr": 330,
+	"./tr.js": 330,
+	"./tzl": 331,
+	"./tzl.js": 331,
+	"./tzm": 332,
+	"./tzm-latn": 333,
+	"./tzm-latn.js": 333,
+	"./tzm.js": 332,
+	"./ug-cn": 334,
+	"./ug-cn.js": 334,
+	"./uk": 335,
+	"./uk.js": 335,
+	"./ur": 336,
+	"./ur.js": 336,
+	"./uz": 337,
+	"./uz-latn": 338,
+	"./uz-latn.js": 338,
+	"./uz.js": 337,
+	"./vi": 339,
+	"./vi.js": 339,
+	"./x-pseudo": 340,
+	"./x-pseudo.js": 340,
+	"./yo": 341,
+	"./yo.js": 341,
+	"./zh-cn": 342,
+	"./zh-cn.js": 342,
+	"./zh-hk": 343,
+	"./zh-hk.js": 343,
+	"./zh-mo": 344,
+	"./zh-mo.js": 344,
+	"./zh-tw": 345,
+	"./zh-tw.js": 345
 };
 
 
@@ -33280,20 +33216,13 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 203;
+webpackContext.id = 210;
 
 /***/ }),
-<<<<<<< HEAD
-/* 204 */
+/* 211 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/af.js ***!
   \************************************************************************************/
-=======
-/* 198 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/af.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33302,7 +33231,7 @@ webpackContext.id = 203;
 //! author : Werner Mollentze : https://github.com/wernerm
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -33379,17 +33308,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 205 */
+/* 212 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar.js ***!
   \************************************************************************************/
-=======
-/* 199 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33400,7 +33322,7 @@ webpackContext.id = 203;
 //! author : forabi https://github.com/forabi
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -33593,17 +33515,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 206 */
+/* 213 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar-dz.js ***!
   \***************************************************************************************/
-=======
-/* 200 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar-dz.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33616,7 +33531,7 @@ webpackContext.id = 203;
 //! author : Noureddine LOUAHEDJ : https://github.com/noureddinem
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -33774,17 +33689,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 207 */
+/* 214 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar-kw.js ***!
   \***************************************************************************************/
-=======
-/* 201 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar-kw.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33793,7 +33701,7 @@ webpackContext.id = 203;
 //! author : Nusret Parlak: https://github.com/nusretparlak
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -33853,17 +33761,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 208 */
+/* 215 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar-ly.js ***!
   \***************************************************************************************/
-=======
-/* 202 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar-ly.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33872,7 +33773,7 @@ webpackContext.id = 203;
 //! author : Ali Hmer: https://github.com/kikoanis
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34049,17 +33950,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 209 */
+/* 216 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar-ma.js ***!
   \***************************************************************************************/
-=======
-/* 203 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar-ma.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34069,7 +33963,7 @@ webpackContext.id = 203;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34129,17 +34023,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 210 */
+/* 217 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar-sa.js ***!
   \***************************************************************************************/
-=======
-/* 204 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar-sa.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34148,7 +34035,7 @@ webpackContext.id = 203;
 //! author : Suhail Alkowaileet : https://github.com/xsoh
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34258,17 +34145,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 211 */
+/* 218 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ar-tn.js ***!
   \***************************************************************************************/
-=======
-/* 205 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ar-tn.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34277,7 +34157,7 @@ webpackContext.id = 203;
 //! author : Nader Toukabri : https://github.com/naderio
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34337,17 +34217,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 212 */
+/* 219 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/az.js ***!
   \************************************************************************************/
-=======
-/* 206 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/az.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34356,7 +34229,7 @@ webpackContext.id = 203;
 //! author : topchiyev : https://github.com/topchiyev
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34463,17 +34336,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 213 */
+/* 220 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/be.js ***!
   \************************************************************************************/
-=======
-/* 207 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/be.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34484,7 +34350,7 @@ webpackContext.id = 203;
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34629,17 +34495,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 214 */
+/* 221 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/bg.js ***!
   \************************************************************************************/
-=======
-/* 208 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/bg.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34648,7 +34507,7 @@ webpackContext.id = 203;
 //! author : Krasen Borisov : https://github.com/kraz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34741,17 +34600,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 215 */
+/* 222 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/bm.js ***!
   \************************************************************************************/
-=======
-/* 209 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/bm.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34760,7 +34612,7 @@ webpackContext.id = 203;
 //! author : Estelle Comment : https://github.com/estellecomment
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34817,17 +34669,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 216 */
+/* 223 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/bn.js ***!
   \************************************************************************************/
-=======
-/* 210 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/bn.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34836,7 +34681,7 @@ webpackContext.id = 203;
 //! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -34960,17 +34805,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 217 */
+/* 224 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/bn-bd.js ***!
   \***************************************************************************************/
-=======
-/* 211 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/bn-bd.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34979,7 +34817,7 @@ webpackContext.id = 203;
 //! author : Asraf Hossain Patoary : https://github.com/ashwoolford
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -35113,17 +34951,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 218 */
+/* 225 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/bo.js ***!
   \************************************************************************************/
-=======
-/* 212 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/bo.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35132,7 +34963,7 @@ webpackContext.id = 203;
 //! author : Thupten N. Chakrishar : https://github.com/vajradog
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -35260,17 +35091,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 219 */
+/* 226 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/br.js ***!
   \************************************************************************************/
-=======
-/* 213 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/br.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35279,7 +35103,7 @@ webpackContext.id = 203;
 //! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -35450,17 +35274,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 220 */
+/* 227 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/bs.js ***!
   \************************************************************************************/
-=======
-/* 214 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/bs.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35470,7 +35287,7 @@ webpackContext.id = 203;
 //! based on (hr) translation by Bojan Marković
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -35624,17 +35441,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 221 */
+/* 228 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ca.js ***!
   \************************************************************************************/
-=======
-/* 215 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ca.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35643,7 +35453,7 @@ webpackContext.id = 203;
 //! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -35746,17 +35556,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 222 */
+/* 229 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/cs.js ***!
   \************************************************************************************/
-=======
-/* 216 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/cs.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35765,7 +35568,7 @@ webpackContext.id = 203;
 //! author : petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -35942,17 +35745,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 223 */
+/* 230 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/cv.js ***!
   \************************************************************************************/
-=======
-/* 217 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/cv.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35961,7 +35757,7 @@ webpackContext.id = 203;
 //! author : Anatoly Mironov : https://github.com/mirontoli
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36029,17 +35825,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 224 */
+/* 231 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/cy.js ***!
   \************************************************************************************/
-=======
-/* 218 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/cy.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36049,7 +35838,7 @@ webpackContext.id = 203;
 //! author : https://github.com/ryangreaves
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36151,17 +35940,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 225 */
+/* 232 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/da.js ***!
   \************************************************************************************/
-=======
-/* 219 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/da.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36170,7 +35952,7 @@ webpackContext.id = 203;
 //! author : Ulrik Nielsen : https://github.com/mrbase
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36229,17 +36011,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 226 */
+/* 233 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/de.js ***!
   \************************************************************************************/
-=======
-/* 220 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/de.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36250,7 +36025,7 @@ webpackContext.id = 203;
 //! author : Mikolaj Dadela : https://github.com/mik01aj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36332,17 +36107,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 227 */
+/* 234 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/de-at.js ***!
   \***************************************************************************************/
-=======
-/* 221 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/de-at.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36354,7 +36122,7 @@ webpackContext.id = 203;
 //! author : Mikolaj Dadela : https://github.com/mik01aj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36436,17 +36204,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 228 */
+/* 235 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/de-ch.js ***!
   \***************************************************************************************/
-=======
-/* 222 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/de-ch.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36455,7 +36216,7 @@ webpackContext.id = 203;
 //! author : sschueller : https://github.com/sschueller
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36537,17 +36298,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 229 */
+/* 236 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/dv.js ***!
   \************************************************************************************/
-=======
-/* 223 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/dv.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36556,7 +36310,7 @@ webpackContext.id = 203;
 //! author : Jawish Hameed : https://github.com/jawish
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36652,17 +36406,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 230 */
+/* 237 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/el.js ***!
   \************************************************************************************/
-=======
-/* 224 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/el.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36671,7 +36418,7 @@ webpackContext.id = 203;
 //! author : Aggelos Karalias : https://github.com/mehiel
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36781,17 +36528,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 231 */
+/* 238 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-au.js ***!
   \***************************************************************************************/
-=======
-/* 225 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-au.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36800,7 +36540,7 @@ webpackContext.id = 203;
 //! author : Jared Morse : https://github.com/jarcoal
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36874,17 +36614,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 232 */
+/* 239 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-ca.js ***!
   \***************************************************************************************/
-=======
-/* 226 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-ca.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36893,7 +36626,7 @@ webpackContext.id = 203;
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -36963,17 +36696,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 233 */
+/* 240 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-gb.js ***!
   \***************************************************************************************/
-=======
-/* 227 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-gb.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36982,7 +36708,7 @@ webpackContext.id = 203;
 //! author : Chris Gedrim : https://github.com/chrisgedrim
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37056,17 +36782,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 234 */
+/* 241 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-ie.js ***!
   \***************************************************************************************/
-=======
-/* 228 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-ie.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37075,7 +36794,7 @@ webpackContext.id = 203;
 //! author : Chris Cartlidge : https://github.com/chriscartlidge
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37149,17 +36868,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 235 */
+/* 242 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-il.js ***!
   \***************************************************************************************/
-=======
-/* 229 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-il.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37168,7 +36880,7 @@ webpackContext.id = 203;
 //! author : Chris Gedrim : https://github.com/chrisgedrim
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37238,17 +36950,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 236 */
+/* 243 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-in.js ***!
   \***************************************************************************************/
-=======
-/* 230 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-in.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37257,7 +36962,7 @@ webpackContext.id = 203;
 //! author : Jatin Agrawal : https://github.com/jatinag22
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37331,17 +37036,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 237 */
+/* 244 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-nz.js ***!
   \***************************************************************************************/
-=======
-/* 231 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-nz.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37350,7 +37048,7 @@ webpackContext.id = 203;
 //! author : Luke McGregor : https://github.com/lukemcgregor
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37424,17 +37122,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 238 */
+/* 245 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/en-sg.js ***!
   \***************************************************************************************/
-=======
-/* 232 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/en-sg.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37443,7 +37134,7 @@ webpackContext.id = 203;
 //! author : Matthew Castrillon-Madrigal : https://github.com/techdimension
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37517,17 +37208,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 239 */
+/* 246 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/eo.js ***!
   \************************************************************************************/
-=======
-/* 233 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/eo.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37539,7 +37223,7 @@ webpackContext.id = 203;
 //! comment : Vivakvo corrected the translation by colindean and miestasmia
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37610,17 +37294,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 240 */
+/* 247 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/es.js ***!
   \************************************************************************************/
-=======
-/* 234 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/es.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37629,7 +37306,7 @@ webpackContext.id = 203;
 //! author : Julio Napurí : https://github.com/julionc
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37741,17 +37418,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 241 */
+/* 248 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/es-do.js ***!
   \***************************************************************************************/
-=======
-/* 235 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/es-do.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37759,7 +37429,7 @@ webpackContext.id = 203;
 //! locale : Spanish (Dominican Republic) [es-do]
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -37870,17 +37540,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 242 */
+/* 249 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/es-mx.js ***!
   \***************************************************************************************/
-=======
-/* 236 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/es-mx.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37889,7 +37552,7 @@ webpackContext.id = 203;
 //! author : JC Franco : https://github.com/jcfranco
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38001,17 +37664,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 243 */
+/* 250 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/es-us.js ***!
   \***************************************************************************************/
-=======
-/* 237 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/es-us.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38021,7 +37677,7 @@ webpackContext.id = 203;
 //! author : chrisrodz : https://github.com/chrisrodz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38132,17 +37788,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 244 */
+/* 251 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/et.js ***!
   \************************************************************************************/
-=======
-/* 238 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/et.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38152,7 +37801,7 @@ webpackContext.id = 203;
 //! improvements : Illimar Tambek : https://github.com/ragulka
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38235,17 +37884,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 245 */
+/* 252 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/eu.js ***!
   \************************************************************************************/
-=======
-/* 239 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/eu.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38254,7 +37896,7 @@ webpackContext.id = 203;
 //! author : Eneko Illarramendi : https://github.com/eillarra
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38323,17 +37965,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 246 */
+/* 253 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fa.js ***!
   \************************************************************************************/
-=======
-/* 240 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fa.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38342,7 +37977,7 @@ webpackContext.id = 203;
 //! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38458,17 +38093,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 247 */
+/* 254 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fi.js ***!
   \************************************************************************************/
-=======
-/* 241 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fi.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38477,7 +38105,7 @@ webpackContext.id = 203;
 //! author : Tarmo Aidantausta : https://github.com/bleadof
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38604,17 +38232,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 248 */
+/* 255 */
 /*!*************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fil.js ***!
   \*************************************************************************************/
-=======
-/* 242 */
-/*!*****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fil.js ***!
-  \*****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38624,7 +38245,7 @@ webpackContext.id = 203;
 //! author : Matthew Co : https://github.com/matthewdeeco
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38687,17 +38308,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 249 */
+/* 256 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fo.js ***!
   \************************************************************************************/
-=======
-/* 243 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fo.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38707,7 +38321,7 @@ webpackContext.id = 203;
 //! author : Kristian Sakarisson : https://github.com/sakarisson
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38768,17 +38382,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 250 */
+/* 257 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fr.js ***!
   \************************************************************************************/
-=======
-/* 244 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fr.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38787,7 +38394,7 @@ webpackContext.id = 203;
 //! author : John Fischer : https://github.com/jfroffice
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38897,17 +38504,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 251 */
+/* 258 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fr-ca.js ***!
   \***************************************************************************************/
-=======
-/* 245 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fr-ca.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38916,7 +38516,7 @@ webpackContext.id = 203;
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -38991,17 +38591,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 252 */
+/* 259 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fr-ch.js ***!
   \***************************************************************************************/
-=======
-/* 246 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fr-ch.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39010,7 +38603,7 @@ webpackContext.id = 203;
 //! author : Gaspard Bucher : https://github.com/gaspard
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39089,17 +38682,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 253 */
+/* 260 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/fy.js ***!
   \************************************************************************************/
-=======
-/* 247 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/fy.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39108,7 +38694,7 @@ webpackContext.id = 203;
 //! author : Robin van der Vliet : https://github.com/robin0van0der0v
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39191,17 +38777,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 254 */
+/* 261 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ga.js ***!
   \************************************************************************************/
-=======
-/* 248 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ga.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39210,7 +38789,7 @@ webpackContext.id = 203;
 //! author : André Silva : https://github.com/askpt
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39311,17 +38890,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 255 */
+/* 262 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/gd.js ***!
   \************************************************************************************/
-=======
-/* 249 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/gd.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39330,7 +38902,7 @@ webpackContext.id = 203;
 //! author : Jon Ashdown : https://github.com/jonashdown
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39431,17 +39003,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 256 */
+/* 263 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/gl.js ***!
   \************************************************************************************/
-=======
-/* 250 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/gl.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39450,7 +39015,7 @@ webpackContext.id = 203;
 //! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39530,17 +39095,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 257 */
+/* 264 */
 /*!******************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/gom-deva.js ***!
   \******************************************************************************************/
-=======
-/* 251 */
-/*!**********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/gom-deva.js ***!
-  \**********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39549,7 +39107,7 @@ webpackContext.id = 203;
 //! author : The Discoverer : https://github.com/WikiDiscoverer
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39679,17 +39237,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 258 */
+/* 265 */
 /*!******************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/gom-latn.js ***!
   \******************************************************************************************/
-=======
-/* 252 */
-/*!**********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/gom-latn.js ***!
-  \**********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39698,7 +39249,7 @@ webpackContext.id = 203;
 //! author : The Discoverer : https://github.com/WikiDiscoverer
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39828,17 +39379,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 259 */
+/* 266 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/gu.js ***!
   \************************************************************************************/
-=======
-/* 253 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/gu.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39847,7 +39391,7 @@ webpackContext.id = 203;
 //! author : Kaushik Thanki : https://github.com/Kaushik1987
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -39974,17 +39518,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 260 */
+/* 267 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/he.js ***!
   \************************************************************************************/
-=======
-/* 254 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/he.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39995,7 +39532,7 @@ webpackContext.id = 203;
 //! author : Tal Ater : https://github.com/TalAter
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40093,17 +39630,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 261 */
+/* 268 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/hi.js ***!
   \************************************************************************************/
-=======
-/* 255 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/hi.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40112,7 +39642,7 @@ webpackContext.id = 203;
 //! author : Mayank Singhal : https://github.com/mayanksinghal
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40282,17 +39812,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 262 */
+/* 269 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/hr.js ***!
   \************************************************************************************/
-=======
-/* 256 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/hr.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40301,7 +39824,7 @@ webpackContext.id = 203;
 //! author : Bojan Marković : https://github.com/bmarkovic
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40461,17 +39984,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 263 */
+/* 270 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/hu.js ***!
   \************************************************************************************/
-=======
-/* 257 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/hu.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40481,7 +39997,7 @@ webpackContext.id = 203;
 //! author : Peter Viszt  : https://github.com/passatgt
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40604,17 +40120,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 264 */
+/* 271 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/hy-am.js ***!
   \***************************************************************************************/
-=======
-/* 258 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/hy-am.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40623,7 +40132,7 @@ webpackContext.id = 203;
 //! author : Armendarabyan : https://github.com/armendarabyan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40721,17 +40230,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 265 */
+/* 272 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/id.js ***!
   \************************************************************************************/
-=======
-/* 259 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/id.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40741,7 +40243,7 @@ webpackContext.id = 203;
 //! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40822,17 +40324,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 266 */
+/* 273 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/is.js ***!
   \************************************************************************************/
-=======
-/* 260 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/is.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40841,7 +40336,7 @@ webpackContext.id = 203;
 //! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -40986,17 +40481,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 267 */
+/* 274 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/it.js ***!
   \************************************************************************************/
-=======
-/* 261 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/it.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41007,7 +40495,7 @@ webpackContext.id = 203;
 //! author: Marco : https://github.com/Manfre98
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41117,17 +40605,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 268 */
+/* 275 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/it-ch.js ***!
   \***************************************************************************************/
-=======
-/* 262 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/it-ch.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41136,7 +40617,7 @@ webpackContext.id = 203;
 //! author : xfh : https://github.com/xfh
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41206,17 +40687,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 269 */
+/* 276 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ja.js ***!
   \************************************************************************************/
-=======
-/* 263 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ja.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41225,7 +40699,7 @@ webpackContext.id = 203;
 //! author : LI Long : https://github.com/baryon
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41379,17 +40853,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 270 */
+/* 277 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/jv.js ***!
   \************************************************************************************/
-=======
-/* 264 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/jv.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41399,7 +40866,7 @@ webpackContext.id = 203;
 //! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41480,17 +40947,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 271 */
+/* 278 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ka.js ***!
   \************************************************************************************/
-=======
-/* 265 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ka.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41499,7 +40959,7 @@ webpackContext.id = 203;
 //! author : Irakli Janiashvili : https://github.com/IrakliJani
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41597,17 +41057,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 272 */
+/* 279 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/kk.js ***!
   \************************************************************************************/
-=======
-/* 266 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/kk.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41616,7 +41069,7 @@ webpackContext.id = 203;
 //! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41704,17 +41157,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 273 */
+/* 280 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/km.js ***!
   \************************************************************************************/
-=======
-/* 267 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/km.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41723,7 +41169,7 @@ webpackContext.id = 203;
 //! author : Kruy Vanna : https://github.com/kruyvanna
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41831,17 +41277,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 274 */
+/* 281 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/kn.js ***!
   \************************************************************************************/
-=======
-/* 268 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/kn.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41850,7 +41289,7 @@ webpackContext.id = 203;
 //! author : Rajeev Naik : https://github.com/rajeevnaikte
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -41979,17 +41418,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 275 */
+/* 282 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ko.js ***!
   \************************************************************************************/
-=======
-/* 269 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ko.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41999,7 +41431,7 @@ webpackContext.id = 203;
 //! author : Jeeeyul Lee <jeeeyul@gmail.com>
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42079,17 +41511,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 276 */
+/* 283 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ku.js ***!
   \************************************************************************************/
-=======
-/* 270 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ku.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42098,7 +41523,7 @@ webpackContext.id = 203;
 //! author : Shahram Mebashar : https://github.com/ShahramMebashar
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42222,17 +41647,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 277 */
+/* 284 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ky.js ***!
   \************************************************************************************/
-=======
-/* 271 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ky.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42241,7 +41659,7 @@ webpackContext.id = 203;
 //! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42331,17 +41749,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 278 */
+/* 285 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/lb.js ***!
   \************************************************************************************/
-=======
-/* 272 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/lb.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42351,7 +41762,7 @@ webpackContext.id = 203;
 //! author : David Raison : https://github.com/kwisatz
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42491,17 +41902,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 279 */
+/* 286 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/lo.js ***!
   \************************************************************************************/
-=======
-/* 273 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/lo.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42510,7 +41914,7 @@ webpackContext.id = 203;
 //! author : Ryan Hart : https://github.com/ryanhart2
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42581,17 +41985,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 280 */
+/* 287 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/lt.js ***!
   \************************************************************************************/
-=======
-/* 274 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/lt.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42600,7 +41997,7 @@ webpackContext.id = 203;
 //! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42729,17 +42126,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 281 */
+/* 288 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/lv.js ***!
   \************************************************************************************/
-=======
-/* 275 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/lv.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42749,7 +42139,7 @@ webpackContext.id = 203;
 //! author : Jānis Elmeris : https://github.com/JanisE
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42847,17 +42237,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 282 */
+/* 289 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/me.js ***!
   \************************************************************************************/
-=======
-/* 276 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/me.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42866,7 +42249,7 @@ webpackContext.id = 203;
 //! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -42990,17 +42373,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 283 */
+/* 290 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/mi.js ***!
   \************************************************************************************/
-=======
-/* 277 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/mi.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43009,7 +42385,7 @@ webpackContext.id = 203;
 //! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43074,17 +42450,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 284 */
+/* 291 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/mk.js ***!
   \************************************************************************************/
-=======
-/* 278 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/mk.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43094,7 +42463,7 @@ webpackContext.id = 203;
 //! author : Sashko Todorov : https://github.com/bkyceh
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43185,17 +42554,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 285 */
+/* 292 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ml.js ***!
   \************************************************************************************/
-=======
-/* 279 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ml.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43204,7 +42566,7 @@ webpackContext.id = 203;
 //! author : Floyd Pink : https://github.com/floydpink
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43290,17 +42652,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 286 */
+/* 293 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/mn.js ***!
   \************************************************************************************/
-=======
-/* 280 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/mn.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43309,7 +42664,7 @@ webpackContext.id = 203;
 //! author : Javkhlantugs Nyamdorj : https://github.com/javkhaanj7
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43414,17 +42769,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 287 */
+/* 294 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/mr.js ***!
   \************************************************************************************/
-=======
-/* 281 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/mr.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43434,7 +42782,7 @@ webpackContext.id = 203;
 //! author : Vivek Athalye : https://github.com/vnathalye
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43641,17 +42989,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 288 */
+/* 295 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ms.js ***!
   \************************************************************************************/
-=======
-/* 282 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ms.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43660,7 +43001,7 @@ webpackContext.id = 203;
 //! author : Weldan Jamili : https://github.com/weldan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43741,17 +43082,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 289 */
+/* 296 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ms-my.js ***!
   \***************************************************************************************/
-=======
-/* 283 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ms-my.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43761,7 +43095,7 @@ webpackContext.id = 203;
 //! author : Weldan Jamili : https://github.com/weldan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43842,17 +43176,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 290 */
+/* 297 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/mt.js ***!
   \************************************************************************************/
-=======
-/* 284 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/mt.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43861,7 +43188,7 @@ webpackContext.id = 203;
 //! author : Alessandro Maruccia : https://github.com/alesma
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -43922,17 +43249,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 291 */
+/* 298 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/my.js ***!
   \************************************************************************************/
-=======
-/* 285 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/my.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43943,7 +43263,7 @@ webpackContext.id = 203;
 //! author : Tin Aung Lin : https://github.com/thanyawzinmin
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44038,17 +43358,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 292 */
+/* 299 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/nb.js ***!
   \************************************************************************************/
-=======
-/* 286 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/nb.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44059,7 +43372,7 @@ webpackContext.id = 203;
 //!           Stephen Ramthun : https://github.com/stephenramthun
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44124,17 +43437,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 293 */
+/* 300 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ne.js ***!
   \************************************************************************************/
-=======
-/* 287 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ne.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44143,7 +43449,7 @@ webpackContext.id = 203;
 //! author : suvash : https://github.com/suvash
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44269,17 +43575,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 294 */
+/* 301 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/nl.js ***!
   \************************************************************************************/
-=======
-/* 288 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/nl.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44289,7 +43588,7 @@ webpackContext.id = 203;
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44398,17 +43697,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 295 */
+/* 302 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/nl-be.js ***!
   \***************************************************************************************/
-=======
-/* 289 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/nl-be.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44418,7 +43710,7 @@ webpackContext.id = 203;
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44525,17 +43817,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 296 */
+/* 303 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/nn.js ***!
   \************************************************************************************/
-=======
-/* 290 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/nn.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44545,7 +43830,7 @@ webpackContext.id = 203;
 //!           Stephen Ramthun : https://github.com/stephenramthun
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44610,17 +43895,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 297 */
+/* 304 */
 /*!****************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/oc-lnc.js ***!
   \****************************************************************************************/
-=======
-/* 291 */
-/*!********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/oc-lnc.js ***!
-  \********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44629,7 +43907,7 @@ webpackContext.id = 203;
 //! author : Quentin PAGÈS : https://github.com/Quenty31
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44718,17 +43996,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 298 */
+/* 305 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/pa-in.js ***!
   \***************************************************************************************/
-=======
-/* 292 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/pa-in.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44737,7 +44008,7 @@ webpackContext.id = 203;
 //! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -44864,17 +44135,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 299 */
+/* 306 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/pl.js ***!
   \************************************************************************************/
-=======
-/* 293 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/pl.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44883,7 +44147,7 @@ webpackContext.id = 203;
 //! author : Rafal Hirsz : https://github.com/evoL
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45028,17 +44292,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 300 */
+/* 307 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/pt.js ***!
   \************************************************************************************/
-=======
-/* 294 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/pt.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45047,7 +44304,7 @@ webpackContext.id = 203;
 //! author : Jefferson : https://github.com/jalex79
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45115,17 +44372,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 301 */
+/* 308 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/pt-br.js ***!
   \***************************************************************************************/
-=======
-/* 295 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/pt-br.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45134,7 +44384,7 @@ webpackContext.id = 203;
 //! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45197,17 +44447,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 302 */
+/* 309 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ro.js ***!
   \************************************************************************************/
-=======
-/* 296 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ro.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45218,7 +44461,7 @@ webpackContext.id = 203;
 //! author : Emanuel Cepoi : https://github.com/cepem
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45297,17 +44540,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 303 */
+/* 310 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ru.js ***!
   \************************************************************************************/
-=======
-/* 297 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ru.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45318,7 +44554,7 @@ webpackContext.id = 203;
 //! author : Коренберг Марк : https://github.com/socketpair
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45528,17 +44764,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 304 */
+/* 311 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sd.js ***!
   \************************************************************************************/
-=======
-/* 298 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sd.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45547,7 +44776,7 @@ webpackContext.id = 203;
 //! author : Narain Sagar : https://github.com/narainsagar
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45634,17 +44863,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 305 */
+/* 312 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/se.js ***!
   \************************************************************************************/
-=======
-/* 299 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/se.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45653,7 +44875,7 @@ webpackContext.id = 203;
 //! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45716,17 +44938,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 306 */
+/* 313 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/si.js ***!
   \************************************************************************************/
-=======
-/* 300 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/si.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45735,7 +44950,7 @@ webpackContext.id = 203;
 //! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45809,17 +45024,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 307 */
+/* 314 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sk.js ***!
   \************************************************************************************/
-=======
-/* 301 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sk.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45829,7 +45037,7 @@ webpackContext.id = 203;
 //! based on work of petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -45978,17 +45186,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 308 */
+/* 315 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sl.js ***!
   \************************************************************************************/
-=======
-/* 302 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sl.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45997,7 +45198,7 @@ webpackContext.id = 203;
 //! author : Robert Sedovšek : https://github.com/sedovsek
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46173,17 +45374,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 309 */
+/* 316 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sq.js ***!
   \************************************************************************************/
-=======
-/* 303 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sq.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46194,7 +45388,7 @@ webpackContext.id = 203;
 //! author : Oerd Cukalla : https://github.com/oerd
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46263,17 +45457,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 310 */
+/* 317 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sr.js ***!
   \************************************************************************************/
-=======
-/* 304 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sr.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46283,7 +45470,7 @@ webpackContext.id = 203;
 //! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46406,17 +45593,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 311 */
+/* 318 */
 /*!*****************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sr-cyrl.js ***!
   \*****************************************************************************************/
-=======
-/* 305 */
-/*!*********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sr-cyrl.js ***!
-  \*********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46426,7 +45606,7 @@ webpackContext.id = 203;
 //! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46547,17 +45727,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 312 */
+/* 319 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ss.js ***!
   \************************************************************************************/
-=======
-/* 306 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ss.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46566,7 +45739,7 @@ webpackContext.id = 203;
 //! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46655,17 +45828,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 313 */
+/* 320 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sv.js ***!
   \************************************************************************************/
-=======
-/* 307 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sv.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46674,7 +45840,7 @@ webpackContext.id = 203;
 //! author : Jens Alm : https://github.com/ulmus
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46748,17 +45914,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 314 */
+/* 321 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/sw.js ***!
   \************************************************************************************/
-=======
-/* 308 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/sw.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46767,7 +45926,7 @@ webpackContext.id = 203;
 //! author : Fahad Kassim : https://github.com/fadsel
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46827,17 +45986,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 315 */
+/* 322 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ta.js ***!
   \************************************************************************************/
-=======
-/* 309 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ta.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46846,7 +45998,7 @@ webpackContext.id = 203;
 //! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -46981,17 +46133,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 316 */
+/* 323 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/te.js ***!
   \************************************************************************************/
-=======
-/* 310 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/te.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47000,7 +46145,7 @@ webpackContext.id = 203;
 //! author : Krishna Chaitanya Thota : https://github.com/kcthota
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47092,17 +46237,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 317 */
+/* 324 */
 /*!*************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tet.js ***!
   \*************************************************************************************/
-=======
-/* 311 */
-/*!*****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tet.js ***!
-  \*****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47113,7 +46251,7 @@ webpackContext.id = 203;
 //! author : Sonia Simoes : https://github.com/soniasimoes
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47185,17 +46323,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 318 */
+/* 325 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tg.js ***!
   \************************************************************************************/
-=======
-/* 312 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tg.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47204,7 +46335,7 @@ webpackContext.id = 203;
 //! author : Orif N. Jr. : https://github.com/orif-jr
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47326,17 +46457,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 319 */
+/* 326 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/th.js ***!
   \************************************************************************************/
-=======
-/* 313 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/th.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47345,7 +46469,7 @@ webpackContext.id = 203;
 //! author : Kridsada Thanabulpong : https://github.com/sirn
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47415,17 +46539,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 320 */
+/* 327 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tk.js ***!
   \************************************************************************************/
-=======
-/* 314 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tk.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47434,7 +46551,7 @@ webpackContext.id = 203;
 //! author : Atamyrat Abdyrahmanov : https://github.com/atamyratabdy
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47531,17 +46648,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 321 */
+/* 328 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tl-ph.js ***!
   \***************************************************************************************/
-=======
-/* 315 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tl-ph.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47550,7 +46660,7 @@ webpackContext.id = 203;
 //! author : Dan Hagman : https://github.com/hagmandan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47613,17 +46723,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 322 */
+/* 329 */
 /*!*************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tlh.js ***!
   \*************************************************************************************/
-=======
-/* 316 */
-/*!*****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tlh.js ***!
-  \*****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47632,7 +46735,7 @@ webpackContext.id = 203;
 //! author : Dominika Kruk : https://github.com/amaranthrose
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47763,17 +46866,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 323 */
+/* 330 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tr.js ***!
   \************************************************************************************/
-=======
-/* 317 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tr.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47783,7 +46879,7 @@ webpackContext.id = 203;
 //!           Burak Yiğit Kaya: https://github.com/BYK
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -47894,17 +46990,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 324 */
+/* 331 */
 /*!*************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tzl.js ***!
   \*************************************************************************************/
-=======
-/* 318 */
-/*!*****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tzl.js ***!
-  \*****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47914,7 +47003,7 @@ webpackContext.id = 203;
 //! author : Iustì Canun
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48008,17 +47097,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 325 */
+/* 332 */
 /*!*************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tzm.js ***!
   \*************************************************************************************/
-=======
-/* 319 */
-/*!*****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tzm.js ***!
-  \*****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48027,7 +47109,7 @@ webpackContext.id = 203;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48086,17 +47168,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 326 */
+/* 333 */
 /*!******************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/tzm-latn.js ***!
   \******************************************************************************************/
-=======
-/* 320 */
-/*!**********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/tzm-latn.js ***!
-  \**********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48105,7 +47180,7 @@ webpackContext.id = 203;
 //! author : Abdel Said : https://github.com/abdelsaid
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48164,17 +47239,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 327 */
+/* 334 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ug-cn.js ***!
   \***************************************************************************************/
-=======
-/* 321 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ug-cn.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48183,7 +47251,7 @@ webpackContext.id = 203;
 //! author: boyaq : https://github.com/boyaq
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48299,17 +47367,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 328 */
+/* 335 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/uk.js ***!
   \************************************************************************************/
-=======
-/* 322 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/uk.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48319,7 +47380,7 @@ webpackContext.id = 203;
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48487,17 +47548,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 329 */
+/* 336 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/ur.js ***!
   \************************************************************************************/
-=======
-/* 323 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/ur.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48507,7 +47561,7 @@ webpackContext.id = 203;
 //! author : Zack : https://github.com/ZackVision
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48594,17 +47648,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 330 */
+/* 337 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/uz.js ***!
   \************************************************************************************/
-=======
-/* 324 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/uz.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48613,7 +47660,7 @@ webpackContext.id = 203;
 //! author : Sardor Muminov : https://github.com/muminoff
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48670,17 +47717,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 331 */
+/* 338 */
 /*!*****************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/uz-latn.js ***!
   \*****************************************************************************************/
-=======
-/* 325 */
-/*!*********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/uz-latn.js ***!
-  \*********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48689,7 +47729,7 @@ webpackContext.id = 203;
 //! author : Rasulbek Mirzayev : github.com/Rasulbeeek
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48748,17 +47788,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 332 */
+/* 339 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/vi.js ***!
   \************************************************************************************/
-=======
-/* 326 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/vi.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48768,7 +47801,7 @@ webpackContext.id = 203;
 //! author : Chien Kira : https://github.com/chienkira
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48852,17 +47885,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 333 */
+/* 340 */
 /*!******************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/x-pseudo.js ***!
   \******************************************************************************************/
-=======
-/* 327 */
-/*!**********************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/x-pseudo.js ***!
-  \**********************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48871,7 +47897,7 @@ webpackContext.id = 203;
 //! author : Andrew Hood : https://github.com/andrewhood125
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -48948,17 +47974,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 334 */
+/* 341 */
 /*!************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/yo.js ***!
   \************************************************************************************/
-=======
-/* 328 */
-/*!****************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/yo.js ***!
-  \****************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48967,7 +47986,7 @@ webpackContext.id = 203;
 //! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -49026,17 +48045,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 335 */
+/* 342 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/zh-cn.js ***!
   \***************************************************************************************/
-=======
-/* 329 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/zh-cn.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49047,7 +48059,7 @@ webpackContext.id = 203;
 //! author : uu109 : https://github.com/uu109
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -49171,17 +48183,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 336 */
+/* 343 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/zh-hk.js ***!
   \***************************************************************************************/
-=======
-/* 330 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/zh-hk.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49193,7 +48198,7 @@ webpackContext.id = 203;
 //! author : Anthony : https://github.com/anthonylau
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -49297,17 +48302,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 337 */
+/* 344 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/zh-mo.js ***!
   \***************************************************************************************/
-=======
-/* 331 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/zh-mo.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49318,7 +48316,7 @@ webpackContext.id = 203;
 //! author : Tan Yuanhong : https://github.com/le0tan
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
@@ -49422,17 +48420,10 @@ webpackContext.id = 203;
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 338 */
+/* 345 */
 /*!***************************************************************************************!*\
   !*** F:/work/sport-it-ai-test/nownew/form-wechat/node_modules/moment/locale/zh-tw.js ***!
   \***************************************************************************************/
-=======
-/* 332 */
-/*!*******************************************************************!*\
-  !*** E:/test/uni-mp/kqd-mini/node_modules/moment/locale/zh-tw.js ***!
-  \*******************************************************************/
->>>>>>> 26f837f2fad69b57cd6b451ff7d1b03f3d0964d4
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49442,7 +48433,7 @@ webpackContext.id = 203;
 //! author : Chris Lam : https://github.com/hehachris
 
 ;(function (global, factory) {
-   true ? factory(__webpack_require__(/*! ../moment */ 202)) :
+   true ? factory(__webpack_require__(/*! ../moment */ 209)) :
   undefined;
 })(this, function (moment) {'use strict';
 
