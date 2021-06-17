@@ -105,7 +105,7 @@
 		.top_content {
 			background-color: rgba(255, 255, 255, 1.0);
 			width: 100%;
-			height: 120px;
+			height: 280rpx;
 			color: #000000;
 			display: flex;
 			flex-direction: column;
