@@ -17,6 +17,10 @@
                       outStyle: _get(item, 'container', {})
                   }"
                 />
+                <swiper-images 
+                   v-if="_get(item, 'type') === 'banner'"
+                   :list="_get(config.moduleData, `${item.key}.banners`, [])"
+                />
             </view>
           </block>
         </van-skeleton>
@@ -27,8 +31,14 @@
 	import _ from 'lodash'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
+    import swiperImages from '../swiper-images/index.vue'
+    
 	export default {
-		components: { dynamicList, dynamicForm },
+		components: { 
+            dynamicList, 
+            dynamicForm,
+            swiperImages
+        },
         props: {
 			API: String,  // 请求接口
 		},
@@ -57,8 +67,6 @@
 						if (_.get(res, 'data.code') === 200) {
 							const data = _.cloneDeep(_.get(res, 'data.data', {}))       
 							this.config = { ... data }
-                            
-                            // this.config.container = { width: '50px', height: '50px', backgroundColor: 'red', borderRadius: '10px' }
                             
 							if (_.has(this.config, 'title')) {
 								uni.setNavigationBarTitle({
