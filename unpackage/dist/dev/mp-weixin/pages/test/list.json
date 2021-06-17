@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "动态列表",
-  "usingComponents": {
-    "dynamic-list": "/components/dynamic-list/index"
-  }
-}

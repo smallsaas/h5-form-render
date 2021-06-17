@@ -1,15 +1,16 @@
 <template>
 	<view class="company_check_container">
 		<view class="top_content">
-		  <view class='item' style="font-size: 16px;">
+		  <view class="item" style="font-size: 16px;">
 			<view style="font-size: 16px;">距离复工上报结束还有 </view>
 			<view style="font-size: 30px; color: #D43030; margin: 0 6px;"> 3 </view>
 			<view style="font-size: 16px;"> 天 </view>
 		  </view>
-			<view class='item' style="margin-top: 7px; color: #07C160;">
+			<view class="item" style="margin-top: 7px; color: #07C160;">
 				<view>继续保持</view>
 			</view>
 		</view>
+		<divider />
 		<view class="center_content">
 			<dynamic-form :config="config" :ifManualSubmit="true" @submit="handleSubmit" />
 		</view>
@@ -17,10 +18,12 @@
 </template>
 
 <script>
-	import dynamicForm from '@/components/dynamic-form/index.vue'
+	import dynamicForm from "@/components/dynamic-form/index.vue";
+	import divider from "@/components/dynamic-c/divider.vue";
 	export default {
 		components: {
-			dynamicForm
+			dynamicForm,
+			divider
 		},
 		data() {
 			return {
@@ -36,7 +39,7 @@
 							},
 							"readonly": false,
 							inputBlock: true,
-							placeholder: '请输入企业名称',
+							placeholder: "请输入企业名称",
 							"__vModel__": "field1"
 						},
 
@@ -51,7 +54,7 @@
 							},
 							"readonly": false,
 							inputBlock: true,
-							placeholder: '请输入企业地址',
+							placeholder: "请输入企业地址",
 							"__vModel__": "field2"
 						},
 						{
@@ -65,7 +68,7 @@
 							},
 							"readonly": false,
 							inputBlock: true,
-							placeholder: '请输入法定代表人',
+							placeholder: "请输入法定代表人",
 							"__vModel__": "field2"
 						},
 						{
@@ -78,7 +81,7 @@
 								"required": false,
 								"layout": "colFormItem"
 							},
-							placeholder: '请输入进馆人数',
+							placeholder: "请输入进馆人数",
 							"readonly": false,
 							inputBlock: true,
 							"__vModel__": "field3"
@@ -90,7 +93,7 @@
 		methods: {
 			handleSubmit() {
 				// uni.navigateTo({
-				//     url: ''
+				//     url: ""
 				// })
 			}
 		}

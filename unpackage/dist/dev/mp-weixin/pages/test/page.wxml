@@ -1,1 +1,0 @@
-<view><dynamic-page vue-id="00ea81a3-1" API="{{api}}" bind:__l="__l"></dynamic-page></view>

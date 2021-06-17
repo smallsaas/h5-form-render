@@ -2,6 +2,7 @@
     <view :class="[`base_field_containe ${param.inputBlock ? 'van_field_input_block' : ''}`]">
         <van-field
            autosize
+		  :focus="focus"
           :label="param.label"
           :size="param.size"
           :type="param.type"
@@ -22,6 +23,8 @@
           label-class="van_field_label"
           @input="handleInput"
           @clear="handleClear"
+		  @blur="handleBlur"
+		  @focus="handleFocus"
         />
     </view>
 </template>
@@ -52,20 +55,29 @@
                 }
             }
         },
+		data() {
+			return {
+				focus: false
+			}
+		},
         methods: {
             handleInput (e) {
                this.$emit("input", e.detail)
             },
             handleClear (e) {
                 this.$emit("clear", e)
-            }
+            },
+			handleBlur () {
+				this.focus = false
+			},
+			handleFocus () {
+				this.focus = true
+			}
         }
     }
 </script>
 
 <style lang="less">
     @import "./common.less";
-    .base_field_container {
-        
-    }
+    .base_field_container {}
 </style>

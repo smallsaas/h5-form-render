@@ -130,7 +130,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var dynamicForm = function dynamicForm() {Promise.all(/*! require.ensure | components/dynamic-form/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-form/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/dynamic-form/index.vue */ 91));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var dynamicForm = function dynamicForm() {Promise.all(/*! require.ensure | components/dynamic-form/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-form/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/dynamic-form/index.vue */ 91));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var divider = function divider() {__webpack_require__.e(/*! require.ensure | components/dynamic-c/divider */ "components/dynamic-c/divider").then((function () {return resolve(__webpack_require__(/*! @/components/dynamic-c/divider.vue */ 116));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -152,7 +154,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 {
   components: {
-    dynamicForm: dynamicForm },
+    dynamicForm: dynamicForm,
+    divider: divider },
 
   data: function data() {
     return {
@@ -168,7 +171,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
           "readonly": false,
           inputBlock: true,
-          placeholder: '请输入企业名称',
+          placeholder: "请输入企业名称",
           "__vModel__": "field1" },
 
 
@@ -183,7 +186,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
           "readonly": false,
           inputBlock: true,
-          placeholder: '请输入企业地址',
+          placeholder: "请输入企业地址",
           "__vModel__": "field2" },
 
         {
@@ -197,7 +200,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
           "readonly": false,
           inputBlock: true,
-          placeholder: '请输入法定代表人',
+          placeholder: "请输入法定代表人",
           "__vModel__": "field2" },
 
         {
@@ -210,7 +213,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
             "required": false,
             "layout": "colFormItem" },
 
-          placeholder: '请输入进馆人数',
+          placeholder: "请输入进馆人数",
           "readonly": false,
           inputBlock: true,
           "__vModel__": "field3" }] } };
@@ -222,7 +225,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   methods: {
     handleSubmit: function handleSubmit() {
       // uni.navigateTo({
-      //     url: ''
+      //     url: ""
       // })
     } } };exports.default = _default;
 

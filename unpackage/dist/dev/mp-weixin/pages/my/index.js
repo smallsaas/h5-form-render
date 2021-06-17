@@ -97,6 +97,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.cellList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var a0 = {
+      title: item.title,
+      icon: item.icon
+    }
+    return {
+      $orig: $orig,
+      a0: a0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -130,75 +151,86 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var dynamicCell = function dynamicCell() {__webpack_require__.e(/*! require.ensure | components/dynamic-list/dynamic-cell */ "components/dynamic-list/dynamic-cell").then((function () {return resolve(__webpack_require__(/*! @/components/dynamic-list/dynamic-cell.vue */ 378));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+    dynamicCell: dynamicCell },
+
   data: function data() {
     return {
       avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
       userName: '张三',
       enterpriseNumber: 'Ab263549898',
       domainName: 'hajdshdjAb263549898',
-      job: '员工' };
+      job: '员工',
+      cellList: [
+      { title: "自查记录", icon: "orders-o" },
+      { title: "复工记录", icon: "label-o" },
+      { title: "执法记录", icon: "label-o" }] };
+
 
   } };exports.default = _default;
 

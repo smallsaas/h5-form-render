@@ -48,10 +48,11 @@
 		</view>
 
 
-		<view>
-			<van-cell title="自查记录" icon="orders-o" is-link />
-			<van-cell title="复工记录" icon="label-o" is-link />
-			<van-cell title="执法记录" icon="label-o" is-link />
+		<view v-for="(item,index) in cellList" :key="index">
+			<dynamic-cell :perem="{
+				title: item.title,
+				icon: item.icon
+			}" />
 		</view>
 
 	</view>
@@ -59,14 +60,24 @@
 </template>
 
 <script>
+	import dynamicCell from "@/components/dynamic-list/dynamic-cell.vue";
+	
 	export default {
+		components:{
+			dynamicCell
+		},
 		data() {
 			return {
 				avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
 				userName: '张三',
 				enterpriseNumber: 'Ab263549898',
 				domainName: 'hajdshdjAb263549898',
-				job: '员工'
+				job: '员工',
+				cellList:[
+					{title: "自查记录", icon: "orders-o"},
+					{title: "复工记录", icon: "label-o"},
+					{title: "执法记录", icon: "label-o"}
+				]
 			}
 		}
 	}
