@@ -1,0 +1,23 @@
+.my_container {
+  width: 100%;
+  height: 100%;
+}
+.img {
+  width: 55px;
+  height: 55px;
+  margin-left: 20px;
+  margin-top: 35px;
+}
+.titleContent {
+  font-size: 14px;
+  margin-left: 1px;
+  margin-top: 35px;
+}
+.titleContent .text {
+  width: 65px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  margin-right: 7px;
+}
+
