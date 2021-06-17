@@ -75,7 +75,6 @@
 					}
 					value = moment(value).format(timeFomat[this.param.tagIcon])
 				}
-				console.log('SSS', value)
 	           this.$emit('confirm', value)
 			   this.handleShowPicker(false)
 	        }
@@ -85,7 +84,5 @@
 
 <style lang="less">
 	@import "./common.less";
-	.base_date_picker_containe {
-	   
-	}
+	.base_date_picker_containe {}
 </style>

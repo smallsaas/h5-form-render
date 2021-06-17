@@ -79,7 +79,5 @@
 
 <style lang="less">
     @import "./common.less";
-    .base_field_container {
-        
-    }
+    .base_field_container {}
 </style>

@@ -321,7 +321,6 @@
             padding: 10rpx 14rpx;
 			display: flex;
 			align-items: center;
-            // background-color: #f2f2f2;
 			& .line {
 				width: 6rpx;
 				height: 30rpx;

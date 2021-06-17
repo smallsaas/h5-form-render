@@ -87,7 +87,5 @@
 
 <style lang="less">
     @import "./common.less";
-    .base_select_container {
-        
-    }
+    .base_select_container {}
 </style>
