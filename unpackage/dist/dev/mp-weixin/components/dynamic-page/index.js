@@ -112,12 +112,21 @@ var render = function() {
                   { outStyle: _vm._get(item, "container", {}) }
                 )
               : null
+
+          var m3 = _vm._get(item, "type")
+
+          var m4 =
+            m3 === "banner"
+              ? _vm._get(_vm.config.moduleData, item.key + ".banners", [])
+              : null
           return {
             $orig: $orig,
             m1: m1,
             a0: a0,
             m2: m2,
-            a1: a1
+            a1: a1,
+            m3: m3,
+            m4: m4
           }
         })
       : null
@@ -190,11 +199,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+<<<<<<< HEAD
 var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var dynamicList = function dynamicList() {Promise.all(/*! require.ensure | components/dynamic-list/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-list/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-list/index.vue */ 104));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var dynamicForm = function dynamicForm() {Promise.all(/*! require.ensure | components/dynamic-form/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-form/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-form/index.vue */ 97));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+=======
+
+
+
+
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var dynamicList = function dynamicList() {Promise.all(/*! require.ensure | components/dynamic-list/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-list/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-list/index.vue */ 98));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var dynamicForm = function dynamicForm() {Promise.all(/*! require.ensure | components/dynamic-form/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-form/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-form/index.vue */ 91));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var swiperImages = function swiperImages() {Promise.all(/*! require.ensure | components/swiper-images/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/swiper-images/index")]).then((function () {return resolve(__webpack_require__(/*! ../swiper-images/index.vue */ 142));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+>>>>>>> 1df313d913aec3817bc190f848b48d95c784d893
 
 
 {
-  components: { dynamicList: dynamicList, dynamicForm: dynamicForm },
+  components: {
+    dynamicList: dynamicList,
+    dynamicForm: dynamicForm,
+    swiperImages: swiperImages },
+
   props: {
     API: String // 请求接口
   },
@@ -223,8 +246,6 @@ var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));func
           if (_lodash.default.get(res, 'data.code') === 200) {
             var data = _lodash.default.cloneDeep(_lodash.default.get(res, 'data.data', {}));
             _this.config = _objectSpread({}, data);
-
-            // this.config.container = { width: '50px', height: '50px', backgroundColor: 'red', borderRadius: '10px' }
 
             if (_lodash.default.has(_this.config, 'title')) {
               uni.setNavigationBarTitle({
