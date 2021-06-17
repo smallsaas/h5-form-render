@@ -101,10 +101,13 @@
               return _.get(item, str, defauleValue)
             },
             getListItemKey() {
-              const moduleKey = _.get(this.config, 'config.modules[0].key', '')
-              const moduleData = _.get(this.config, 'config.moduleData', {})
-              const keyData = _.get(moduleData, moduleKey, {})
-              return _.get(keyData, 'name', 'ArticleItem')
+              // const moduleKey = _.get(this.config, 'config.modules[0].key', '')
+              // const moduleData = _.get(this.config, 'config.moduleData', {})
+              // const keyData = _.get(moduleData, moduleKey, {})
+							const keyData = _.get(this.config,'itemModule',{})
+							console.log(this.config)
+							console.log(keyData)
+              return _.get(keyData, 'name', '')
             },
             
             // 切换tab
