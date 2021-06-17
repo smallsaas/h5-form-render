@@ -154,6 +154,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   methods: {
@@ -172,9 +176,14 @@ var _default =
         url: '../my/index' });
 
     },
-    handleToReturnToWorlk: function handleToReturnToWorlk() {
+    handleToReturnToWork: function handleToReturnToWork() {
       uni.navigateTo({
-        url: '../my/returnToWork' });
+        url: '../my/returnToWork?id=11' });
+
+    },
+    handleToSelfInspectionRecord: function handleToSelfInspectionRecord() {
+      uni.navigateTo({
+        url: '../my/selfInspectionRecord?id=12' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

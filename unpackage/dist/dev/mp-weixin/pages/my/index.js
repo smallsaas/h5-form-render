@@ -97,6 +97,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.cellList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var a0 = {
+      title: item.title,
+      icon: item.icon
+    }
+    return {
+      $orig: $orig,
+      a0: a0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -130,54 +151,109 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 33));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));
+var _api = __webpack_require__(/*! @/common/api.js */ 38);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var dynamicCell = function dynamicCell() {__webpack_require__.e(/*! require.ensure | components/custom-c/cell */ "components/custom-c/cell").then((function () {return resolve(__webpack_require__(/*! @/components/custom-c/cell.vue */ 136));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 {
+  components: {
+    dynamicCell: dynamicCell },
+
+  onLoad: function onLoad(e) {
+    this.initData("100");
+  },
   data: function data() {
     return {
-      avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
-      userName: '张三',
-      enterpriseNumber: 'Ab263549898',
-      domainName: 'hajdshdjAb263549898',
-      job: '员工' };
+      defaultAvatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
+      userInfo: {
+        // avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
+        // userName: '张三',
+        // enterpriseNumber: 'Ab263549898',
+        // domainName: 'hajdshdjAb263549898',
+        // job: '员工',
+      },
+      cellList: [
+      { title: "自查记录", icon: "orders-o", path: "/a" },
+      { title: "复工记录", icon: "label-o", path: "/b" },
+      { title: "执法记录", icon: "label-o", path: "/c" }] };
 
-  } };exports.default = _default;
+
+  },
+  methods: {
+    initData: function initData(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  (0, _api.getUserInfo)({ id: id }));case 2:res = _context.sent;
+                if (_lodash.default.get(res, 'code') === 200) {
+                  _this.userInfo = _objectSpread({}, _lodash.default.get(res, 'data', {}));
+                }case 4:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    onItemClick: function onItemClick(path) {
+      console.log('点击 path = ', path);
+    } } };exports.default = _default;
 
 /***/ }),
 

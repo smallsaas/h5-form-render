@@ -62,6 +62,7 @@
 				"navigationBarTitleText": "复工"
 			}
 		},
+
 		{
 			"path" : "pages/test/cardtest",
 			"style" :                                                                                    
@@ -76,6 +77,12 @@
 			{
 					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false
+			}
+		},
+		{	
+			"path": "pages/my/selfInspectionRecord",
+			"style": {
+				"navigationBarTitleText": "自查记录"
 			}
 		}
     ],

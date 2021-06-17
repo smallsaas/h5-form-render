@@ -21,6 +21,10 @@
                    v-if="_get(item, 'type') === 'banner'"
                    :list="_get(config.moduleData, `${item.key}.banners`, [])"
                 />
+                <nav-list 
+                    v-if="_get(item, 'type') === 'magic_nav'"
+                    :list="_get(config.moduleData, `${item.key}.navList`, [])"
+                 />
             </view>
           </block>
         </van-skeleton>
@@ -32,12 +36,14 @@
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
     import swiperImages from '../swiper-images/index.vue'
+    import navList from '../nav-list/index.vue'
     
 	export default {
 		components: { 
             dynamicList, 
             dynamicForm,
-            swiperImages
+            swiperImages,
+            navList
         },
         props: {
 			API: String,  // 请求接口
