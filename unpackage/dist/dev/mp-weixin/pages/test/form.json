@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "动态表单",
-  "usingComponents": {
-    "dynamic-form": "/components/dynamic-form/index"
-  }
-}
