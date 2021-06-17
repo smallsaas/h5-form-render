@@ -1,5 +1,7 @@
 <template>
-	<van-cell v-bind:title="title" v-bind:icon="icon" is-link />
+	<van-cell :title="perem.title" :icon="perem.icon" 
+	@click="clickFunc"
+	is-link />
 </template>
 
 <script>
@@ -13,6 +15,11 @@
 						icon: "setting-o"
 					}
 				}
+			},
+		},
+		methods:{
+			clickFunc(e){
+				this.$emit('handleClick', e.detail);
 			}
 		}
 	}

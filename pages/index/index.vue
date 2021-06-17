@@ -11,8 +11,12 @@
 			<text>我的</text>
 		</view>
 		
-		<view class="venue_tag" @click="handleToReturnToWorlk">
+		<view class="venue_tag" @click="handleToReturnToWork">
 			<text>复工</text>
+		</view>
+		
+		<view class="venue_tag" @click="handleToSelfInspectionRecord">
+			<text>自查记录</text>
 		</view>
 	</view>
 </template>
@@ -35,9 +39,14 @@
 					url: '../my/index'
 				})
 			},
-			handleToReturnToWorlk () {
+			handleToReturnToWork () {
 				uni.navigateTo({
-					url: '../my/returnToWork'
+					url: '../my/returnToWork?id=11'
+				})
+			},
+			handleToSelfInspectionRecord () {
+				uni.navigateTo({
+					url: '../my/selfInspectionRecord?id=12'
 				})
 			}
 		}
@@ -52,8 +61,9 @@
 	.home_container {
 		padding: 16rpx;
         .baseFlex();
-		justify-content: center;
-		height: 100vh;
+		// justify-content: center;
+		// height: 100vh;
+		flex-wrap: wrap;
 		.venue_tag {
 			.baseFlex();
 			padding: 32rpx;
@@ -63,7 +73,7 @@
 			font-size: 14px;
 			line-height: 150%;
 			text-align: center;
-			margin: 0 20rpx;
+			margin: 20rpx 20rpx;
 			.sport_image {
 				width: 48rpx;
 				height: 48rpx;

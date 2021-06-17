@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "我的",
   "usingComponents": {
-    "dynamic-cell": "/components/dynamic-list/dynamic-cell"
+    "dynamic-cell": "/components/custom-c/cell"
   }
 }

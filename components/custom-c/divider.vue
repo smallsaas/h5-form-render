@@ -1,5 +1,5 @@
 <template>
-	<view class='divider' v-bind:style='{ height: size+"rpx"}'></view>
+	<view class='divider' :style='{ height: size+"rpx"}'></view>
 </template>
 
 <script>

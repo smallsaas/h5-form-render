@@ -3,7 +3,7 @@
 		<view class="top_content">
 		  <view class="item" style="font-size: 16px;">
 			<view style="font-size: 16px;">距离复工上报结束还有 </view>
-			<view style="font-size: 30px; color: #D43030; margin: 0 6px;"> 3 </view>
+			<view style="font-size: 30px; color: #D43030; margin: 0 6px;"> {{formData.days}} </view>
 			<view style="font-size: 16px;"> 天 </view>
 		  </view>
 			<view class="item" style="margin-top: 7px; color: #07C160;">
@@ -12,90 +12,57 @@
 		</view>
 		<divider />
 		<view class="center_content">
-			<dynamic-form :config="config" :ifManualSubmit="true" @submit="handleSubmit" />
+			<dynamic-form :config="config" :ifManualSubmit="true" @submit="handleSubmit"
+			 />
 		</view>
 	</view>
 </template>
 
 <script>
 	import dynamicForm from "@/components/dynamic-form/index.vue";
-	import divider from "@/components/dynamic-c/divider.vue";
+    import _ from 'lodash';
+	import divider from "@/components/custom-c/divider.vue";
+	import { getDynamicFormField, getReturnToWork } from '@/common/api.js'
 	export default {
 		components: {
 			dynamicForm,
 			divider
 		},
+		onLoad (e){
+			this.initData(e.id);
+			this.initField(e.id);
+		},
 		data() {
 			return {
-				config: {
-					fields: [{
-							"__config__": {
-								"label": "企业名称",
-								"showLabel": true,
-								"tag": "el-input",
-								"tagIcon": "input",
-								"required": false,
-								"layout": "colFormItem"
-							},
-							"readonly": false,
-							inputBlock: true,
-							placeholder: "请输入企业名称",
-							"__vModel__": "field1"
-						},
-
-						{
-							"__config__": {
-								"label": "企业地址",
-								"showLabel": true,
-								"tag": "el-input",
-								"tagIcon": "input",
-								"required": false,
-								"layout": "colFormItem"
-							},
-							"readonly": false,
-							inputBlock: true,
-							placeholder: "请输入企业地址",
-							"__vModel__": "field2"
-						},
-						{
-							"__config__": {
-								"label": "法定代表人",
-								"showLabel": true,
-								"tag": "el-input",
-								"tagIcon": "input",
-								"required": false,
-								"layout": "colFormItem"
-							},
-							"readonly": false,
-							inputBlock: true,
-							placeholder: "请输入法定代表人",
-							"__vModel__": "field2"
-						},
-						{
-							"__config__": {
-								"label": "进馆人数",
-								"labelWidth": null,
-								"showLabel": true,
-								"tag": "el-input",
-								"tagIcon": "number",
-								"required": false,
-								"layout": "colFormItem"
-							},
-							placeholder: "请输入进馆人数",
-							"readonly": false,
-							inputBlock: true,
-							"__vModel__": "field3"
-						}
-					]
-				}
+				config: {},
+				formData: {}
 			}
 		},
 		methods: {
+			async initField(id){
+				const res = await getDynamicFormField({id: id})
+				if (_.get(res, 'code') === 200) {
+				    this.config = { ..._.get(res, 'data', {}) }
+				}
+			},
+			async initData(id){
+				const res = await getReturnToWork({id: id})
+				if (_.get(res, 'code') === 200) {
+				    this.formData = { ..._.get(res, 'data', {}) };
+				}
+			},
 			handleSubmit() {
 				// uni.navigateTo({
 				//     url: ""
 				// })
-			}
+			},
+			// formatLoadDataa (data) {
+   //              let obj = {}
+   //              data.map(x => {
+   //                  obj = {...obj, ...x }
+   //              })
+   //              return obj
+   //          }
 		}
 	}
 </script>
