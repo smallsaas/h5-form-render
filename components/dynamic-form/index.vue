@@ -124,7 +124,11 @@
             } else {
                // 从默认配置中获取表单
                this.fetchDefaultFormConfig()
-            } 
+            }
+			// 外部传入的数据源
+			if (Object.keys(this.srvFormData).length > 0) {
+				return
+			}
             this.fetchFormData()
 		},
 		methods: {

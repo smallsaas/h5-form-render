@@ -9,17 +9,19 @@
                       ..._get(config.moduleData, item.key, {}),
                       outStyle: _get(item, 'container', {})
                    }"
+				   :srvFormData="getComponentsData(item)"
                 />
                 <dynamic-list
                   v-if="_get(item, 'type') === 'autolist'"
                   :config="{
                       ..._get(config.moduleData, item.key, {}),
-                      outStyle: _get(item, 'container', {})
+                      outStyle: _get(item, 'container', {}),
+					  ...getComponentsData(item) ? { list: getComponentsData(item) } : {}
                   }"
                 />
                 <swiper-images 
                    v-if="_get(item, 'type') === 'banner'"
-                   :list="_get(config.moduleData, `${item.key}.banners`, [])"
+                   :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
                 />
                 <nav-list 
                     v-if="_get(item, 'type') === 'magic_nav'"
@@ -55,7 +57,7 @@
                 skeletonLoading: true
 			}
 		},
-		mounted() {
+		created() {
 		  if (!this.API) {
 			  return
 		  }
@@ -71,9 +73,8 @@
 					method: 'GET',
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-							const data = _.cloneDeep(_.get(res, 'data.data', {}))       
+							const data = _.cloneDeep(_.get(res, 'data.data', {}))
 							this.config = { ... data }
-                            
 							if (_.has(this.config, 'title')) {
 								uni.setNavigationBarTitle({
 									title: _.get(this.config, 'title', '动态页面')
@@ -95,16 +96,39 @@
                     data: _.get(this.config, 'dataSource.request', {}),
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-                            const resData = _.get(res, 'data', {})
-                            const responseConfig = _.get(this.config, 'dataSource.response', {})
-                            let dataField = 'data'
-                            if (_.has(responseConfig, 'data') && responseConfig.data) {
-                                dataField = responseConfig.data
-                            }
-							this.pageData = _.cloneDeep(_.get(resData, dataField, {}))
+                            // const resData = _.get(res, 'data', {})
+                            // const responseConfig = _.get(this.config, 'dataSource.response', {})
+                            // let dataField = 'data'
+                            // if (_.has(responseConfig, 'data') && responseConfig.data) {
+                            //     dataField = responseConfig.data
+                            // }
+							// this.pageData = _.cloneDeep(_.get(resData, dataField, {}))
+							this.pageData = _.cloneDeep(_.get(res, 'data.data', {}))
 						}
 					}
 				})
+			},
+			// 获取组件数据
+			getComponentsData (item) {
+				if (!_.has(item, 'binding') || JSON.stringify(item.binding) === '{}') {
+					return {}
+				}
+				let comonentScouce = {}
+				for (const i in item.binding) {
+					comonentScouce[item.binding[i]] = _.get(this.pageData, i, '')
+				}
+				if (item.type === 'autoform') {					
+					return comonentScouce
+				}
+				if (item.type === 'autolist') {
+					return _.has(comonentScouce, 'list') ? comonentScouce.list : false
+				}
+				if (item.type === 'banner') {
+					return _.has(comonentScouce, 'banners') ? comonentScouce.banners : false
+				}
+				if (item.type === 'magic_nav') {
+					return _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
+				}
 			}
 		}
 	}

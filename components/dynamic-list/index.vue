@@ -11,7 +11,7 @@
             </view>
             <load-refresh
                 ref="loadRefresh"
-                :isRefresh="list.length !== 0"
+                :isRefresh="!isIntroductionData && list.length !== 0"
                 refreshType="hollowDots"
                 color="#04C4C4"
                 :heightReduce="heightReduce"
@@ -76,6 +76,9 @@
           config: {
               handler(val, oldVal) {
                 if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
+				  if (_.has(this.config, 'list') && _.isArray(this.config.list)) {
+					  return
+				  }
                   if (_.get(val, 'loadApi') && !_.has(oldVal, 'loadApi')) {
                   	this.updateData()
                   }
@@ -86,15 +89,24 @@
         },
         computed: {
           heightReduce () {
-              return this.typeList.length > 0 ? 88 : 0
-          }  
+            return this.typeList.length > 0 ? 88 : 0
+          },
+		  //是否外部传入数据
+		  isIntroductionData () {
+			return _.has(this.config, 'list') && _.isArray(this.config.list)
+		  }
         },
 		mounted() {
-         this.$nextTick(() => {
-           if (_.get(this.config, 'loadApi')) {
-              this.updateData()
-           }  
-         })
+		 // 外部传入数据源
+		 if (this.isIntroductionData) {
+		 	this.list = _.cloneDeep(this.config.list)
+		 } else {
+			this.$nextTick(() => {
+			  if (_.get(this.config, 'loadApi')) {
+			     this.updateData()
+			  }  
+			}) 
+		 }
 		},
 		methods: {
             _get (item, str, defauleValue = '') {
@@ -104,9 +116,7 @@
               // const moduleKey = _.get(this.config, 'config.modules[0].key', '')
               // const moduleData = _.get(this.config, 'config.moduleData', {})
               // const keyData = _.get(moduleData, moduleKey, {})
-							const keyData = _.get(this.config,'itemModule',{})
-							console.log(this.config)
-							console.log(keyData)
+				const keyData = _.get(this.config,'itemModule',{})
               return _.get(keyData, 'name', '')
             },
             
