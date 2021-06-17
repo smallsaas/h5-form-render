@@ -1,16 +1,16 @@
 <template>
 	<view>
 		<view class="banners">
-			<!-- <banner :item="item" :moduleData="moduleData"></banner> -->
+			<banner :list="item"></banner>
 		</view>
-		<view>
+		<card :title="cardTitle" :Style="cardStyle" v-if>
 			<magic-nav :item="NavItem" :moduleData="NavData"></magic-nav>
-		</view>
+		</card>
 	</view>
 </template>
 
 <script>
-	import banner from '../../components/other/Banner.vue'
+	import banner from '../../components/swiper-images/index.vue'
 	import card from '../../components/other/Card.vue'
 	import MagicNav from '../../components/other/MagicNav.vue'
 	import { getDynamicFormField } from '../../common/api.js'
@@ -25,7 +25,10 @@
 				moduleData:{},
 				// MagicNav
 				NavItem:{},
-				NavData:{}
+				NavData:{},
+				// card
+				cardStyle:{},
+				cardTitle:'',
 			}
 		},
 		onLoad() {
@@ -59,14 +62,24 @@
 					let modules;
 					let moduleData;
 					let NavList;
+					let container;
+					let style;
+					let title;
 					this.config = _.cloneDeep(_.get(res, 'data', {}))
 					// console.log(this.config)
 					modules = _.get(this.config,'modules',{})
 					key = _.get(modules[1],'key','')
 					moduleData = _.get(_.get(this.config,'moduleData',{}),key,{})
 					NavList = _.get(moduleData,'navList',{})
+					container = _.get(modules[1],'container',{})
+					style = _.get(container,'Style',{})
+					title = _.get(container,'title','')
 					this.NavItem = NavList
 					this.NavData = moduleData
+					this.cardStyle = style
+					this.cardTitle = title
+					console.log(this.cardStyle)
+					console.log(this.cardTitle)
 					// console.log(this.NavItem)
 					// console.log(this.NavData)
 			}

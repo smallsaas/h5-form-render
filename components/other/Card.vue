@@ -1,6 +1,14 @@
 
 <template>
   <view class="Card-Layout">
+		<view class="Card-Layout-Title" :style="{
+		'color':Style===undefined?'':Style.title.color,
+		'background':Style===undefined?'':Style.title.fill,
+		'padding':Style===undefined?'':Style.title.padding===undefined?'':Style.title.padding,
+		'margin':Style===undefined?'':Style.title.margin===undefined?'':Style.title.margin,
+		'textAlign':Style===undefined?'':Style.title.align,
+		'font':Style===undefined?'':Style.title.font,
+		}">{{title}}</view>
     <view class="Card-Layout-Content" @click="con()" :style="{'background':Style===undefined?'':Style.fill,
 			'padding':Style===undefined?'':Style.padding,
 			'margin':Style===undefined?'':Style.margin,
@@ -10,7 +18,6 @@
 			'color':Style===undefined?'':Style.color,
 			'font':Style===undefined?'':Style.font,
 			'textAlign':Style===undefined?'':Style.justify}">
-      <view class="Card-Layout-Title">{{title}}</view>
       <slot></slot>
     </view>
   </view>
@@ -31,6 +38,26 @@ export default {
         type:String
       },
       Style:{
+				title:{
+					color:{
+						type:String
+					},
+					fill:{
+						type:String
+					},
+					padding:{
+						type:String
+					},
+					margin:{
+						type:String
+					},
+					align:{
+						type:String
+					},
+					font:{
+						type:String
+					}
+				},
         fill:{
           type:String
         },
@@ -83,17 +110,18 @@ export default {
 .Card-Layout{
     width: 100%;
     overflow: hidden;
+		margin: 20px auto;
 }
 .Card-Layout-Content{
-    width: 85%;
-    margin: 20px auto;
+    width: 100%;
+    margin: 0px auto;
     background: white;
     border-radius: 5px;
-    padding:20px
+    padding: 0;
 }
 .Card-Layout-Title{
     width: 100%;
-    margin: 0 auto;
+    padding:10px;
     font-size: 12px;
     font-weight: bolder;
 }
