@@ -1,12 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/npm-debug.log*
-/yarn-error.log
+node_modules
+npm-debug.log*
+yarn-error.log
 
 # production
-/dist
+dist
 
 # misc
 .DS_Store
@@ -16,4 +16,4 @@
 .vscode
 .history
 
-/unpackage
+unpackage
