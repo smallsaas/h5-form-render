@@ -143,6 +143,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
 var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -171,9 +174,20 @@ var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));func
 //
 //
 //
-var _default2 = { props: { param: { type: Object, default: function _default() {return { inputBlock: false, type: 'text', value: '', placeholder: '请填写', required: false, clearable: false, maxlength: -1, "show-word-limit": false, readonly: false, disabled: false, password: false, error: false, "error-message": "", style: "" };} } }, methods: { handleInput: function handleInput(e) {this.$emit("input", e.detail);},
+//
+//
+//
+var _default2 = { props: { param: { type: Object, default: function _default() {return { inputBlock: false, type: 'text', value: '', placeholder: '请填写', required: false, clearable: false, maxlength: -1, "show-word-limit": false, readonly: false, disabled: false, password: false, error: false, "error-message": "", style: "" };} } }, data: function data() {return { focus: false };}, methods: { handleInput: function handleInput(e) {
+      this.$emit("input", e.detail);
+    },
     handleClear: function handleClear(e) {
       this.$emit("clear", e);
+    },
+    handleBlur: function handleBlur() {
+      this.focus = false;
+    },
+    handleFocus: function handleFocus() {
+      this.focus = true;
     } } };exports.default = _default2;
 
 /***/ }),

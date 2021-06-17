@@ -1,1 +1,0 @@
-<view><dynamic-form vue-id="3819f08e-1" config="{{config}}" data-event-opts="{{[['^formatSubmitData',[['formatSubmitData']]],['^formatLoadData',[['formatLoadData']]]]}}" bind:formatSubmitData="__e" bind:formatLoadData="__e" bind:__l="__l"></dynamic-form></view>

@@ -200,7 +200,6 @@ var _default2 = { props: { param: { type: Object, default: function _default() {
 
         value = (0, _moment.default)(value).format(timeFomat[this.param.tagIcon]);
       }
-      console.log('SSS', value);
       this.$emit('confirm', value);
       this.handleShowPicker(false);
     } } };exports.default = _default2;

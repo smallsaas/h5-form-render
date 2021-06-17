@@ -487,8 +487,7 @@ var render = function() {
     }
   })
 
-  var m6 = _vm._get(_vm.config, "formBtns", true)
-
+  var m6 = _vm._get(_vm.config, "formBtns", true) && _vm.fields.length > 0
   _vm.$mp.data = Object.assign(
     {},
     {
