@@ -15,7 +15,7 @@
           label-class="van_field_label"
           @click-input="handleClick"
         />
-        <van-popup :show="showPick" position="bottom" @click-overlay="handlePickerCancel" custom-style="background-color: red;z-index: 999">
+        <van-popup :show="showPick" position="bottom" @click-overlay="handlePickerCancel" custom-style="background-color: #fff;z-index: 999">
           <van-picker
             show-toolbar
             :columns="param.columns"

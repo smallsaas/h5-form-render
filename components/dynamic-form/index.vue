@@ -39,7 +39,7 @@
             </block>
             
             <van-button 
-              v-if="_get(config, 'formBtns', true)"
+              v-if="_get(config, 'formBtns', true) && fields.length > 0"
               round type="info" 
               custom-style="width: 90%;margin: 40rpx auto 20rpx auto;display: flex"
               @click='handleSubmit'
