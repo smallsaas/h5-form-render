@@ -3,6 +3,8 @@
         <view class="venue_tag" @click="handleClick('form')">动态表单</view>
         <view class="venue_tag" @click="handleClick('list')">动态列表</view>
         <view class="venue_tag" @click="handleClick('page')">动态页面</view>
+        <view class="venue_tag" @click="handleClick('card')">测试Card</view>
+        <view class="venue_tag" @click="handleClick('banner')">测试Nav</view>
     </view>
 </template>
 
@@ -13,7 +15,9 @@
                 const obj = {
                     form: './form?id=10',
                     list: './list',
-                    page: './page'
+                    page: './page',
+										card: './cardtest',
+										banner: './banner'
                 }
                 uni.navigateTo({
                     url: obj[text]

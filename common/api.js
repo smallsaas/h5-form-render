@@ -7,6 +7,7 @@ export const getNavList = (params) => {
 	return request('GET', url, params)
 }
 
+
 // 获取执法对象类型数据
 export const getNavTypeList = (params) => {
 	const url = `${config.host}/api/product`

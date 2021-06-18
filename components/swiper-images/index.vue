@@ -1,25 +1,27 @@
 <template>
-    <swiper
-        class="swiper" 
-        :indicator-dots="indicatorDots"
-        :indicator-color="param['indicator-color'] || 'rgba(0, 0, 0, .3)'"
-        :indicator-active-color="param['indicator-active-color'] || '#000000'"
-        :autoplay="param.autoplay === false ? false : true" 
-        :interval="param.interval || 5000" 
-        :duration="param.duration || 500"
-        :circular="param.circular === true"
-        :vertical="param.vertical === true"
-        v-if="Array.isArray(list) && list.length > 0"
-        :style="{
-            height: `${swiperHeight * 2}rpx`
-        }"
-    >
-        <swiper-item v-for="(item, index) in list" :key="index">
-            <navigator :url="getNavigationUrl(item.itemNavigation)" hover-class="navigator-hover">
-                <image :src="item.img" mode="widthFix" class="swiper_image" />
-            </navigator>
-        </swiper-item>
-    </swiper>
+    <view :style="[_get(config, 'outStyle', {})]">
+        <swiper
+            class="swiper" 
+            :indicator-dots="indicatorDots"
+            :indicator-color="param['indicator-color'] || 'rgba(0, 0, 0, .3)'"
+            :indicator-active-color="param['indicator-active-color'] || '#000000'"
+            :autoplay="param.autoplay === false ? false : true" 
+            :interval="param.interval || 5000" 
+            :duration="param.duration || 500"
+            :circular="param.circular === true"
+            :vertical="param.vertical === true"
+            v-if="Array.isArray(list) && list.length > 0"
+            :style="{
+                height: `${swiperHeight * 2}rpx`
+            }"
+        >
+            <swiper-item v-for="(item, index) in list" :key="index">
+                <navigator :url="getNavigationUrl(item.itemNavigation)" hover-class="navigator-hover">
+                    <image :src="item.img" mode="widthFix" class="swiper_image" />
+                </navigator>
+            </swiper-item>
+        </swiper>
+   </view>
 </template>
 
 <script>
@@ -60,7 +62,6 @@
             }
         },
         mounted() {
-            console.log('JJJ', this.list)
           // if (Array.isArray(this.list) && this.list.length > 0) {
           //     this.handleGetSwiperHeight()
           // }
@@ -81,7 +82,6 @@
                        text += '?query=' + encodeURIComponent(JSON.stringify(query))
                    }
                 }
-                console.log('kkkk', text)
                 return text
             },
             handleGetSwiperHeight () {

@@ -1,24 +1,40 @@
 <template>
-	<view class="home_container">
-		<view class="venue_tag" @click="handleToCompany">
-			<text>企业自查</text>
-		</view>
-        <view class="venue_tag" @click="handleToTest">
-        	<text>测试</text>
-        </view>
-		
-		<view class="venue_tag" @click="handleToMy">
-			<text>我的</text>
-		</view>
-		
-		<view class="venue_tag" @click="handleToReturnToWork">
-			<text>复工</text>
+	<view>
+		<view class="home_container">
+			<view class="venue_tag" @click="handleToCompany">
+				<text>企业自查</text>
+			</view>
+		    <view class="venue_tag" @click="handleToTest">
+		    	<text>测试</text>
+		    </view>
+			
 		</view>
 		
-		<view class="venue_tag" @click="handleToSelfInspectionRecord">
-			<text>自查记录</text>
+		<view class="home_container">
+			
+			<view class="venue_tag" @click="handleToMy">
+				<text>我的</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleToReturnToWork">
+				<text>复工</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleToSelfInspectionRecord">
+				<text>自查记录</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleToSelfInspectionDetail">
+				<text>自查详情</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleToAutograph">
+				<text>签名</text>
+			</view>
+			
 		</view>
 	</view>
+
 </template>
 
 <script>
@@ -48,6 +64,14 @@
 				uni.navigateTo({
 					url: '../my/selfInspectionRecord?id=12'
 				})
+			},
+			handleToSelfInspectionDetail () {
+				uni.navigateTo({
+					url: '../my/selfInspectionDetail'
+				})
+			},
+			handleToAutograph (){
+				
 			}
 		}
 	}

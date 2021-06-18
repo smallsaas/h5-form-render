@@ -62,10 +62,33 @@
 				"navigationBarTitleText": "复工"
 			}
 		},
+
+		{
+			"path" : "pages/test/cardtest",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/test/banner",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+			}
+		},
 		{	
 			"path": "pages/my/selfInspectionRecord",
 			"style": {
 				"navigationBarTitleText": "自查记录"
+			}
+		},
+		{	
+			"path": "pages/my/selfInspectionDetail",
+			"style": {
+				"navigationBarTitleText": "自查详情"
 			}
 		}
     ],
