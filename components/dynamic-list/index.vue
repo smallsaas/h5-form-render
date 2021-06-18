@@ -43,12 +43,14 @@
 	import loadRefresh from '../load-refresh/load-refresh.vue'
     import msTab from '../ms-tabs/ms-tabs.vue'
     import ArticleItem from './listItem/ArticleItem.vue'
+	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
     
 	export default {
 		components: {
 		  loadRefresh,
           msTab,
-          ArticleItem
+          ArticleItem,
+		  SelfInspectionRecordItem
 		},
 		props: {
 			config: {
