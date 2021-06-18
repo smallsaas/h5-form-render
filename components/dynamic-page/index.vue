@@ -7,7 +7,7 @@
                    v-if="_get(item, 'type') === 'autoform'"
                    :config="{
                       ..._get(config.moduleData, item.key, {}),
-                      outStyle: _get(item, 'container', {})
+                      outStyle: getComponentStyle(item)
                    }"
 				   :srvFormData="getComponentsData(item)"
                 />
@@ -15,17 +15,19 @@
                   v-if="_get(item, 'type') === 'autolist'"
                   :config="{
                       ..._get(config.moduleData, item.key, {}),
-                      outStyle: _get(item, 'container', {}),
-					  ...getComponentsData(item) ? { list: getComponentsData(item) } : {}
+					  ...getComponentsData(item) ? { list: getComponentsData(item) } : {},
+                      outStyle: getComponentStyle(item)
                   }"
                 />
                 <swiper-images 
                    v-if="_get(item, 'type') === 'banner'"
                    :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
+                    :outStyle="getComponentStyle(item)"
                 />
                 <nav-list 
                     v-if="_get(item, 'type') === 'magic_nav'"
                     :list="_get(config.moduleData, `${item.key}.navList`, [])"
+                    :outStyle="getComponentStyle(item)"
                  />
             </view>
           </block>
@@ -75,6 +77,7 @@
 						if (_.get(res, 'data.code') === 200) {
 							const data = _.cloneDeep(_.get(res, 'data.data', {}))
 							this.config = { ... data }
+                            console.log('a1', this.config)
 							if (_.has(this.config, 'title')) {
 								uni.setNavigationBarTitle({
 									title: _.get(this.config, 'title', '动态页面')
@@ -129,7 +132,14 @@
 				if (item.type === 'magic_nav') {
 					return _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
 				}
-			}
+			},
+            // 获取组件容器外层布局
+            getComponentStyle (item) {
+                if (_.has(item, 'container') && JSON.stringify(item.container) !== '{}') {
+                    return _.get(item, 'container', {})
+                }
+                return _.get(this.config, 'moduleContainer', {})
+            }
 		}
 	}
 </script>

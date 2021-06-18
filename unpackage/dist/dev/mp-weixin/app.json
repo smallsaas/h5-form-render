@@ -86,6 +86,5 @@
     "van-calendar": "/wxcomponents/vant/calendar/index",
     "van-share-sheet": "/wxcomponents/vant/share-sheet/index",
     "van-empty": "/wxcomponents/vant/empty/index"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }
