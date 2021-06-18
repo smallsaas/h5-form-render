@@ -5,6 +5,7 @@
       <view class="van-step__title" :style="index === active ? 'color: ' + activeColor : ''">
         <view>{{ item.text }}</view>
         <view class="desc-class">{{ item.desc }}</view>
+        <view class="desc-class">{{ item.opinion }}</view>
       </view>
       <view class="van-step__circle-container">
         <block v-if="index !== active">

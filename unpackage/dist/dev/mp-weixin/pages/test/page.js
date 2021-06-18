@@ -138,7 +138,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _config = __webpack_require__(/*! @/config.js */ 41);var dynamicPage = function dynamicPage() {Promise.all(/*! require.ensure | components/dynamic-page/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-page/index")]).then((function () {return resolve(__webpack_require__(/*! ../../components/dynamic-page/index.vue */ 137));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _config = __webpack_require__(/*! @/config.js */ 41);var dynamicPage = function dynamicPage() {Promise.all(/*! require.ensure | components/dynamic-page/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-page/index")]).then((function () {return resolve(__webpack_require__(/*! ../../components/dynamic-page/index.vue */ 145));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     dynamicPage: dynamicPage },

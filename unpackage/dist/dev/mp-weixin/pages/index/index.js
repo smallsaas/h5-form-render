@@ -162,6 +162,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   methods: {
@@ -194,6 +212,13 @@ var _default =
       uni.navigateTo({
         url: '../Market-index/Market-index' });
 
+    },
+    handleToSelfInspectionDetail: function handleToSelfInspectionDetail() {
+      uni.navigateTo({
+        url: '../my/selfInspectionDetail' });
+
+    },
+    handleToAutograph: function handleToAutograph() {
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

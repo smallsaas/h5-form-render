@@ -13,7 +13,8 @@
     "pages/test/cardtest",
     "pages/test/banner",
     "pages/my/selfInspectionRecord",
-    "pages/Market-index/Market-index"
+    "pages/Market-index/Market-index",
+    "pages/my/selfInspectionDetail"
   ],
   "subPackages": [],
   "window": {

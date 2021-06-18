@@ -137,7 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Card = function Card() {__webpack_require__.e(/*! require.ensure | components/other/Card */ "components/other/Card").then((function () {return resolve(__webpack_require__(/*! @/components/other/Card.vue */ 154));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Card = function Card() {__webpack_require__.e(/*! require.ensure | components/other/Card */ "components/other/Card").then((function () {return resolve(__webpack_require__(/*! @/components/other/Card.vue */ 162));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 

@@ -45,16 +45,19 @@
     import _ from 'lodash'
     import qs from 'qs'
     import { Base64 } from './tools.js'
-	import loadRefresh from '../load-refresh/load-refresh.vue'
+		import loadRefresh from '../load-refresh/load-refresh.vue'
     import msTab from '../ms-tabs/ms-tabs.vue'
     import ArticleItem from './listItem/ArticleItem.vue'
     import StateItem from './listItem/state-list/state-list.vue'
+		import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
+    
 	export default {
 		components: {
 		  loadRefresh,
           msTab,
           ArticleItem,
-					StateItem
+					StateItem,
+		  SelfInspectionRecordItem
 		},
 		props: {
 			config: {
