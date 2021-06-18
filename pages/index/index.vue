@@ -18,6 +18,10 @@
 		<view class="venue_tag" @click="handleToSelfInspectionRecord">
 			<text>自查记录</text>
 		</view>
+		
+		<view class="venue_tag" @click="handleMarket">
+			<text>市场监督</text>
+		</view>
 	</view>
 </template>
 
@@ -47,6 +51,11 @@
 			handleToSelfInspectionRecord () {
 				uni.navigateTo({
 					url: '../my/selfInspectionRecord?id=12'
+				})
+			},
+			handleMarket(){
+				uni.navigateTo({
+					url:'../Market-index/Market-index'
 				})
 			}
 		}

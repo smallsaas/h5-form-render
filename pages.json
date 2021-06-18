@@ -84,6 +84,12 @@
 			"style": {
 				"navigationBarTitleText": "自查记录"
 			}
+		},
+		{
+			"path":"pages/Market-index/Market-index",
+			"style":{
+				"navigationBarTitleText":"市场监督"
+			}
 		}
     ],
 	"globalStyle": {

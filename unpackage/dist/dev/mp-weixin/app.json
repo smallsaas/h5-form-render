@@ -12,7 +12,8 @@
     "pages/my/returnToWork",
     "pages/test/cardtest",
     "pages/test/banner",
-    "pages/my/selfInspectionRecord"
+    "pages/my/selfInspectionRecord",
+    "pages/Market-index/Market-index"
   ],
   "subPackages": [],
   "window": {

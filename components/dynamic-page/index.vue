@@ -29,6 +29,14 @@
                     :list="_get(config.moduleData, `${item.key}.navList`, [])"
                     :outStyle="getComponentStyle(item)"
                  />
+								 <box-list
+										v-if="_get(item,'type') === 'boxList'"
+										:list="_get(config.moduleData,`${item.key}.navList`,[])"
+								 ></box-list>
+								 <card-list
+									 v-if="_get(item,'type') === 'cardList'"
+									 :list="_get(config.moduleData,`${item.key}.navList`,[])"
+								 ></card-list>
             </view>
           </block>
         </van-skeleton>
@@ -41,15 +49,18 @@
     import dynamicForm from '../dynamic-form/index.vue'
     import swiperImages from '../swiper-images/index.vue'
     import navList from '../nav-list/index.vue'
-    
+    import boxList from '../box-list/box-list.vue'
+		import cardList from '../cardList/cardList.vue'
 	export default {
 		components: { 
             dynamicList, 
             dynamicForm,
             swiperImages,
-            navList
+            navList,
+						boxList,
+						cardList
         },
-        props: {
+		props: {
 			API: String,  // 请求接口
 		},
 		data () {
@@ -130,6 +141,9 @@
 					return _.has(comonentScouce, 'banners') ? comonentScouce.banners : false
 				}
 				if (item.type === 'magic_nav') {
+					return _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
+				}
+				if (item.type === 'boxList') {
 					return _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
 				}
 			},

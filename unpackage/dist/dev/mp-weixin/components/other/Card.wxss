@@ -41,5 +41,10 @@
   padding: 10px;
   font-size: 12px;
   font-weight: bolder;
+  border-bottom: 2px solid #EEEEEE;
+}
+.Card-Layout-Child {
+  font-size: 12px;
+  font-weight: bolder;
 }
 

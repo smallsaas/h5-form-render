@@ -29,6 +29,11 @@
                          :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
                          v-if="getListItemKey() === 'ArticleItem'"
                      />
+										 <state-item
+                      :item="item"
+											:itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
+											v-if="getListItemKey() === 'StateItem'"
+										 ></state-item>
                   </view>
               </view>
             </load-refresh>
@@ -43,12 +48,13 @@
 	import loadRefresh from '../load-refresh/load-refresh.vue'
     import msTab from '../ms-tabs/ms-tabs.vue'
     import ArticleItem from './listItem/ArticleItem.vue'
-    
+    import StateItem from './listItem/state-list/state-list.vue'
 	export default {
 		components: {
 		  loadRefresh,
           msTab,
-          ArticleItem
+          ArticleItem,
+					StateItem
 		},
 		props: {
 			config: {
