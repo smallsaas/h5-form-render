@@ -20,7 +20,8 @@ import {
   Button,
   Icon,
   Toast,
-  Cell
+  Cell,
+  CellGroup
 } from 'vant'
 import './style/global.less'
 remInit()
@@ -42,6 +43,7 @@ Vue.use(Uploader)
 Vue.use(Button)
 Vue.use(Icon)
 Vue.use(Cell)
+Vue.use(CellGroup)
 
 Vue.config.productionTip = false
 Vue.prototype.$toast = Toast

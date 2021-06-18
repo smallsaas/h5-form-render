@@ -2,6 +2,7 @@
 node_modules
 .idea
 /dist
+/h5-form-render
 
 # local env files
 .env.local

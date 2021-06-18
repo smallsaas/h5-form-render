@@ -347,7 +347,7 @@ export default {
             return this.getEleItem(item)
           })
         }
-        <div class="mg-t15 pd-x20">
+        <div class="mg-t15 pd-l20 pd-r20 pd-b20">
           <van-button round block type="info" loading={this.loading} native-type="submit">提交</van-button>
         </div>
       </van-form>

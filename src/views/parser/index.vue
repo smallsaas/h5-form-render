@@ -1,25 +1,46 @@
 <template>
   <div class="form-container">
-    <Parser
-      :config="config"
-      :form-info="formInfo"
-      :srv-form-data="formData"
-      :if-manual-submit="ifManualSubmit"
-      @submit="submit"
-      @OnSubmitFormSuc="OnSubmitFormSuc"
-      ref="h5FormParserCompRef"
-      v-if="mod !== 'preview'"
-    />
-    <Preview
-      v-if="mod === 'preview'"
-      :config="config"
-      :srv-form-data="formData"
-    />
+    <div v-if="mod !== 'preview'">
+      <Parser
+        v-if="!config.isLawForm"
+        :config="config"
+        :form-info="formInfo"
+        :srv-form-data="formData"
+        :if-manual-submit="ifManualSubmit"
+        @submit="submit"
+        @OnSubmitFormSuc="OnSubmitFormSuc"
+        ref="h5FormParserCompRef"
+      />
+      <LawForm
+        v-if="config.isLawForm"
+        :config="config"
+        :form-info="formInfo"
+        :srv-form-data="formData"
+        :if-manual-submit="ifManualSubmit"
+        @submit="submit"
+        @OnSubmitFormSuc="OnSubmitFormSuc"
+        ref="h5FormParserCompRef"
+      />
+    </div>
+    <div v-if="mod === 'preview'">
+      <Preview
+        :config="config"
+        :srv-form-data="formData"
+        v-if="!config.isLawForm"
+      />
+      <LawFormPreview
+        :config="config"
+        :srv-form-data="formData"
+        v-if="config.isLawForm"
+      />
+    </div>
   </div>
 </template>
 <script>
 import Parser from '../../components/Parser'
 import Preview from '../../components/Preview'
+import LawForm from '../../components/LawForm.vue'
+import LawFormPreview from '../../components/LawFormPreview.vue'
 import { urlParam, Base64 } from '@/utils'
 // import { config } from '@/config'
 import axios from 'axios'
@@ -44,7 +65,9 @@ export default {
   },
   components: {
     Parser,
-    Preview
+    Preview,
+    LawForm,
+    LawFormPreview
   },
   data () {
     return {
@@ -75,7 +98,6 @@ export default {
             const jsonDefine = this.formInfo.jsonDefine
             const config = JSON.parse(Base64.decode(jsonDefine))
             this.config = config
-
             // 指定表单数据
             if (this.argFormData && JSON.stringify(this.argFormData) !== '{}') {
               this.formData = cloneDeep(this.argFormData)
@@ -105,8 +127,8 @@ export default {
     defaultApiHandler (data) {
       const formData = {}
       Object.keys((data.formData || {})).forEach(key => {
-        const _key = key.toLowerCase()
-        formData[_key] = data.formData[key]
+        // const _key = key.toLowerCase()
+        formData[key] = JSON.parse(data.formData[key])
       })
       this.formData = formData
     },
