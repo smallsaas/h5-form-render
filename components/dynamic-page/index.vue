@@ -1,6 +1,6 @@
 <template>
-	<view :style="[_get(config, 'pageStyle', {}), _get(config, 'container', {})]">
-        <van-skeleton row="20" :loading="skeletonLoading">
+	<view :style="[_get(config, 'pageStyle', {}), _get(config, 'moduleContainer', {})]">
+        <van-skeleton row="10" :loading="skeletonLoading">
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
                 <dynamic-form
@@ -75,29 +75,31 @@
 					method: 'GET',
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-							const data = _.cloneDeep(_.get(res, 'data.data', {}))
-							this.config = { ... data }
-                            console.log('a1', this.config)
-							if (_.has(this.config, 'title')) {
+							const resData = _.cloneDeep(_.get(res, 'data.data', {}))
+							// 加载页面数据
+							if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
+								this.fetchPageData(resData)
+							} else {
+								this.config = resData
+								this.skeletonLoading = false
+							}
+							if (_.has(resData, 'title')) {
 								uni.setNavigationBarTitle({
-									title: _.get(this.config, 'title', '动态页面')
+									title: _.get(resData, 'title', '动态页面')
 								})
 							}
-							// 加载页面数据
-							if (_.has(this.config, 'dataSource.api') && this.config.dataSource.api) {
-								this.fetchPageData()
-							}
 						}
-                        this.skeletonLoading = false
 					}
 				})
 			},
-			fetchPageData () {
+			fetchPageData (resData = {}) {
 				uni.request({
-					url: this.config.dataSource.api,
+					url: resData.dataSource.api,
 					method: 'GET',
                     data: _.get(this.config, 'dataSource.request', {}),
 					complete: (res) => {
+						this.config = { ...resData }
+						this.skeletonLoading = false
 						if (_.get(res, 'data.code') === 200) {
                             // const resData = _.get(res, 'data', {})
                             // const responseConfig = _.get(this.config, 'dataSource.response', {})
@@ -116,22 +118,28 @@
 				if (!_.has(item, 'binding') || JSON.stringify(item.binding) === '{}') {
 					return {}
 				}
-				let comonentScouce = {}
+				const comonentScouce = {}
 				for (const i in item.binding) {
 					comonentScouce[item.binding[i]] = _.get(this.pageData, i, '')
 				}
-				if (item.type === 'autoform') {					
-					return comonentScouce
+				let value
+				switch (item.type) {
+					case 'autoform':
+					    value = comonentScouce
+						break;
+					case 'autolist':
+					    value = _.has(comonentScouce, 'list') ? comonentScouce.list : false
+						break;
+					case 'banner':
+					    value = _.has(comonentScouce, 'banners') ? comonentScouce.banners : false
+						break;
+					case 'magic_nav':
+					    value = _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
+					    break;
+					default:
+					    value = comonentScouce
 				}
-				if (item.type === 'autolist') {
-					return _.has(comonentScouce, 'list') ? comonentScouce.list : false
-				}
-				if (item.type === 'banner') {
-					return _.has(comonentScouce, 'banners') ? comonentScouce.banners : false
-				}
-				if (item.type === 'magic_nav') {
-					return _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
-				}
+				return value
 			},
             // 获取组件容器外层布局
             getComponentStyle (item) {

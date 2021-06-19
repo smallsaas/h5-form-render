@@ -1,8 +1,11 @@
 <template>
-	<view class="venue_dynamic_list_container" :style="[_get(config, 'outStyle', {})]">
+	<view 
+	   class="venue_dynamic_list_container"
+	   :style="[_get(config, 'outStyle', {})]"
+	>
         <view>
             <view class="tab_list" v-if="typeList.length > 0">
-                <ms-tabs 
+                <ms-tabs
                     :list="typeList"
                     field="name"
                     v-model="tabActive"
@@ -11,11 +14,10 @@
             </view>
             <load-refresh
                 ref="loadRefresh"
-                :isRefresh="!isIntroductionData && list.length !== 0"
+                :isRefresh="!isPropsList && list.length !== 0"
                 refreshType="hollowDots"
                 color="#04C4C4"
                 :heightReduce="heightReduce"
-                :fixedHeight="fixedHeight"
                 backgroundCover="#F3F5F5"
                 :currentPage="listCurrentPage"
                 :totalPages="listTotalPages" 
@@ -25,10 +27,15 @@
               <view slot="content-list" class="list_content">
                   <view v-for="(item, index) in list">
                      <article-item
+						 v-if="getListItemKey() === 'ArticleItem'"
                          :item="item"
-                         :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
-                         v-if="getListItemKey() === 'ArticleItem'"
+                         :itemNavigation="_get(config, 'itemNavigation', '')"
                      />
+					 <SelfInspectionRecordItem 
+						v-if="getListItemKey() === 'SelfInspectionRecordItem'"
+						:item="item"
+						:itemNavigation="_get(config, 'itemNavigation', '')"
+					 />
                   </view>
               </view>
             </load-refresh>
@@ -70,47 +77,35 @@
                 
                 listSearch: {}, // 列表查询参数
                 pageNoField: '',  // 页数配置的字段名
-                pageSizeField: '', // size配置的字段名
-                fixedHeight: 0
+                pageSizeField: '' // size配置的字段名
 			}
 		},
-        watch: {
-          config: {
-              handler(val, oldVal) {
-                if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
-				  if (_.has(this.config, 'list') && _.isArray(this.config.list)) {
-					  return
-				  }
-                  if (_.get(val, 'loadApi') && !_.has(oldVal, 'loadApi')) {
-                  	this.updateData()
-                  }
-                }
-              },
-              deep: true
-           },  
-        },
         computed: {
           heightReduce () {
             return this.typeList.length > 0 ? 88 : 0
           },
 		  //是否外部传入数据
-		  isIntroductionData () {
+		  isPropsList () {
 			return _.has(this.config, 'list') && _.isArray(this.config.list)
 		  }
         },
 		mounted() {
 		 // 外部传入数据源
-		 if (this.isIntroductionData) {
+		 if (this.isPropsList) {
 		 	this.list = _.cloneDeep(this.config.list)
 		 } else {
-			this.$nextTick(() => {
-			  if (_.get(this.config, 'loadApi')) {
-			     this.updateData()
-			  }  
-			}) 
+			if (_.get(this.config, 'loadApi')) {
+			   this.updateData()
+			}
 		 }
 		},
 		methods: {
+			_has (item = {}, str) {
+				if (Object.keys(item).length === 0) {
+					return false
+				}  
+				return _.get(item, str)
+			},
             _get (item, str, defauleValue = '') {
               return _.get(item, str, defauleValue)
             },
@@ -118,7 +113,7 @@
               // const moduleKey = _.get(this.config, 'config.modules[0].key', '')
               // const moduleData = _.get(this.config, 'config.moduleData', {})
               // const keyData = _.get(moduleData, moduleKey, {})
-				const keyData = _.get(this.config,'itemModule',{})
+			  const keyData = _.get(this.config,'itemModule',{})
               return _.get(keyData, 'name', '')
             },
             
@@ -188,6 +183,9 @@
             
             // 加载更多
             loadMore () {
+				if (this.isPropsList) {
+					return
+				}
                 this.listSearch = {
                     ...this.listSearch,
                     [this.pageNoField]: this.listSearch[this.pageNoField] + 1
@@ -197,12 +195,15 @@
             
             // 上拉加载刷新
             refresh () {
+				if (this.isPropsList) {
+					return
+				}
             	this.listSearch = {
             	    ...this.listSearch,
             	    [this.pageNoField]: 1
             	}
             	this.fetchList({ refresh: true })
-            }
+            },
 		}
 	}
 </script>
