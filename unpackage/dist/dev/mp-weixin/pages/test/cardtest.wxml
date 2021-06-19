@@ -1,1 +1,0 @@
-<view><card vue-id="30c00e70-1" title="已定义样式" Style="{{$root.m0}}" bind:__l="__l"></card><card vue-id="30c00e70-2" title="默认样式" bind:__l="__l" vue-slots="{{['default']}}">11111</card></view>
