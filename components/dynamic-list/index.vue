@@ -28,16 +28,25 @@
                   <view v-for="(item, index) in list">
                      <article-item
 						 v-if="getListItemKey() === 'ArticleItem'"
-                         :item="item"
+                         :item="{
+							 ...item,
+							 ...getComponentBindData(item)
+						 }"
                          :itemNavigation="_get(config, 'itemNavigation', '')"
                      />
 					 <SelfInspectionRecordItem
 					 	v-if="getListItemKey() === 'SelfInspectionRecordItem'"
-					 	:item="item"
+					 	:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
 					 	:itemNavigation="_get(config, 'itemNavigation', '')"
 					 />
 					<state-item
-                      :item="item"
+                      :item="{
+						  ...item,
+						  ...getComponentBindData(item)
+					  }"
 					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
 					  v-if="getListItemKey() === 'StateItem'"
 					/>
@@ -211,6 +220,18 @@
             	}
             	this.fetchList({ refresh: true })
             },
+			
+			// 列表项组件与列表数据绑定
+			getComponentBindData (item) {
+				if (!_.has(this.config, 'binding') || JSON.stringify(this.config.binding) === '{}') {
+					return {}
+				}
+				const comonentScouce = {}
+				for (const i in this.config.binding) {
+					comonentScouce[this.config.binding[i]] = _.get(item, i, '')
+				}
+				return comonentScouce
+			}
 		}
 	}
 </script>

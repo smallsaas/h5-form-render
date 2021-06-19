@@ -126,6 +126,30 @@ var render = function() {
           "/articleDetail/index?id=&title=&type="
         )
       : null
+
+  var l0 = _vm.__map(_vm.list, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var a0 =
+      m0 === "ArticleItem"
+        ? Object.assign({}, item, _vm.getComponentBindData(item))
+        : null
+    var a1 =
+      m2 === "SelfInspectionRecordItem"
+        ? Object.assign({}, item, _vm.getComponentBindData(item))
+        : null
+    var a2 =
+      m4 === "StateItem"
+        ? Object.assign({}, item, _vm.getComponentBindData(item))
+        : null
+    return {
+      $orig: $orig,
+      a0: a0,
+      a1: a1,
+      a2: a2
+    }
+  })
+
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -136,7 +160,8 @@ var render = function() {
         m2: m2,
         m3: m3,
         m4: m4,
-        m5: m5
+        m5: m5,
+        l0: l0
       }
     }
   )
@@ -174,6 +199,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -385,6 +419,18 @@ var _tools = __webpack_require__(/*! ./tools.js */ 119);function _interopRequire
       this.pageNoField, 1));
 
       this.fetchList({ refresh: true });
+    },
+
+    // 列表项组件与列表数据绑定
+    getComponentBindData: function getComponentBindData(item) {
+      if (!_lodash.default.has(this.config, 'binding') || JSON.stringify(this.config.binding) === '{}') {
+        return {};
+      }
+      var comonentScouce = {};
+      for (var i in this.config.binding) {
+        comonentScouce[this.config.binding[i]] = _lodash.default.get(item, i, '');
+      }
+      return comonentScouce;
     } } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
