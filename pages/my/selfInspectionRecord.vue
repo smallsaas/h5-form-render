@@ -1,5 +1,5 @@
 <template>
-	<view>
+<!-- 	<view>
 		<block v-for="(item,index) in listData" :key="index">
 			<view class="self-item">
 			  <view class="flex">
@@ -21,13 +21,12 @@
 			  </view>
 			</view>
 		</block>
-	</view>
-
-	
-<!-- 	<view>
-		<dynamic-list :config="config" />
 	</view> -->
 
+	
+	<view>
+		<dynamic-list :config="config" />
+	</view>
 
 </template>
 
@@ -39,8 +38,9 @@
     import { getDynamicListField } from '@/common/api.js';
 	
 	export default {
+		components:{ dynamicList },
 		onLoad (e){
-			// this.initPage("110")
+			this.initPage("110")
 			this.initData("110");
 		},
 		data() {
@@ -58,13 +58,13 @@
 					this.listData = data.record;
 				}
 			},
-			// async initPage (id) {
-			// 	const res = await getDynamicListField({ id: id })
-			// 	if (_.get(res, 'code') === 200) {
-			// 		this.config = _.cloneDeep(_.get(res, 'data', {}))
-			// 		console.log('this.config = ', this.config)
-			// 	}
-			// }
+			async initPage (id) {
+				const res = await getDynamicListField({ id: id })
+				if (_.get(res, 'code') === 200) {
+					this.config = _.cloneDeep(_.get(res, 'data', {}))
+					// console.log('this.config = ', this.config)
+				}
+			}
 		}
 	}
 </script>

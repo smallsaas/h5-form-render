@@ -132,7 +132,7 @@
 			finish() {
 				uni.showModal({
 					title: '提示',
-					content: '确定保存到相册吗',
+					content: '确定保存签名吗',
 					success: (response) => {
 						uni.canvasToTempFilePath({
 							// x: response.windowWidth / 2 - 150,
@@ -141,39 +141,11 @@
 							height: response.windowWidth,
 							width: response.windowHeight,
 							canvasId: 'canvasid',
-							success: (response) => {
-								uni.saveImageToPhotosAlbum({
-									filePath: response.tempFilePath,
-									success: (response) => {
-										console.log('签名保存成功 = ', response);
-										uni.showModal({
-											title: '提示',
-											content: '保存成功',
-											showCancel: false
-										})
-									},
-									fail: (response) => {
-										uni.openSetting({
-											success: (response) => {
-												if (!response.authSetting[
-														'scope.writePhotosAlbum'
-														]) {
-													uni.showModal({
-														title: '提示',
-														content: '获取权限成功，再次点击图片即可保存',
-														showCancel: false
-													})
-												} else {
-													uni.showModal({
-														title: '提示',
-														content: '获取权限失败，无法保存',
-														showCancel: false
-													})
-												}
-											}
-										})
-									}
-								})
+							success: (resp) => {
+								//图片转base64
+								this.urlTobase64(resp.tempFilePath);
+								//保存图片到本地
+								// this.saveImgToLocal(resp.tempFilePath);
 							},
 							fail: (response) => {
 								console.log('签名失败 = ', response);
@@ -182,18 +154,60 @@
 					}
 				})
 			},
-
-			// down() {
-			// 	uni.canvasToTempFilePath({
-			// 		canvasId: 'mycanvas',
-			// 		success: function(res) {
-
-			// 		}
-			// 	})
-			// }
+			//图片转base64
+			urlTobase64(url) {
+				var toBase64Url;
+				uni.request({
+					url: url,
+					method: 'GET',
+					responseType: 'arraybuffer',
+					success: async res => {
+						let base64 = wx.arrayBufferToBase64(res.data); //把arraybuffer转成base64
+						toBase64Url = 'data:image/jpeg;base64,' + base64; //不加上这串字符，在页面无法显示
+						console.log(toBase64Url);
+					}
+				});
+			},
+			
+			//保存图片到本地
+			saveImgToLocal(url){
+				uni.saveImageToPhotosAlbum({
+					filePath: url,
+					success: (response) => {
+						console.log('签名保存成功 = ', response);
+						uni.showModal({
+							title: '提示',
+							content: '保存成功',
+							showCancel: false
+						})
+					},
+					fail: (response) => {
+						uni.openSetting({
+							success: (response) => {
+								if (!response.authSetting[
+										'scope.writePhotosAlbum'
+									]) {
+									uni.showModal({
+										title: '提示',
+										content: '获取权限成功，再次点击图片即可保存',
+										showCancel: false
+									})
+								} else {
+									uni.showModal({
+										title: '提示',
+										content: '获取权限失败，无法保存',
+										showCancel: false
+									})
+								}
+							}
+						})
+					}
+				})
+			}
 		},
 
-		created() {}
+		created() {},
+
 	};
 </script>
 
