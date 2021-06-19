@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
-    "signature_pad": "^3.0.0-beta.4"
+    "moment": "^2.29.1"
   }
 }

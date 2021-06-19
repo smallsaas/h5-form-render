@@ -1,14 +1,6 @@
 
 <template>
   <view class="Card-Layout">
-		<view class="Card-Layout-Title" :style="{
-		'color':Style===undefined?'':Style.title.color,
-		'background':Style===undefined?'':Style.title.fill,
-		'padding':Style===undefined?'':Style.title.padding===undefined?'':Style.title.padding,
-		'margin':Style===undefined?'':Style.title.margin===undefined?'':Style.title.margin,
-		'textAlign':Style===undefined?'':Style.title.align,
-		'font':Style===undefined?'':Style.title.font,
-		}">{{title}}</view>
     <view class="Card-Layout-Content" @click="con()" :style="{'background':Style===undefined?'':Style.fill,
 			'padding':Style===undefined?'':Style.padding,
 			'margin':Style===undefined?'':Style.margin,
@@ -18,7 +10,17 @@
 			'color':Style===undefined?'':Style.color,
 			'font':Style===undefined?'':Style.font,
 			'textAlign':Style===undefined?'':Style.justify}">
-      <slot></slot>
+			<view class="Card-Layout-Title" :style="{
+			'color':Style===undefined?'':Style.title.color,
+			'background':Style===undefined?'':Style.title.fill,
+			'padding':Style===undefined?'':Style.title.padding===undefined?'':Style.title.padding,
+			'margin':Style===undefined?'':Style.title.margin===undefined?'':Style.title.margin,
+			'textAlign':Style===undefined?'':Style.title.align,
+			'font':Style===undefined?'':Style.title.font,
+			}">{{title}}</view>
+      <view class="Card-Layout-Child">
+				<slot></slot>
+			</view>
     </view>
   </view>
 </template>
@@ -124,5 +126,10 @@ export default {
     padding:10px;
     font-size: 12px;
     font-weight: bolder;
+		border-bottom: 2px solid #EEEEEE;
+}
+.Card-Layout-Child{
+	font-size: 12px;
+	font-weight: bolder;
 }
 </style>

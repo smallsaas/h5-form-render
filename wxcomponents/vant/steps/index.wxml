@@ -11,9 +11,39 @@
       style="{{ status(index, active) === 'inactive' ? 'color: ' + inactiveColor: '' }}"
     >
       <view class="van-step__title" style="{{ index === active ? 'color: ' + activeColor : '' }}">
-        <view style="color: #505050; margin-bottom: 5rpx;">{{ item.text }}</view>
-        <view class="desc-class" style="color: #505050; margin-bottom: 5rpx;">{{ item.desc }}</view>
-        <view class="desc-class" style="color: #505050; margin-bottom: 5rpx;">{{ item.opinion }}</view>
+        <view style="color: #505050; margin-bottom: 5rpx; {{item.isLink ? 'padding-right: 50rpx;' : ''}}">
+			<van-row type="flex">
+				<van-col wx:if="{{item.textLabel}}">
+					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.textLabel}}</view>
+				</van-col>
+				<van-col>
+					<view>{{ item.text }}</view>
+				</van-col>
+			</van-row>
+		</view>
+        <view class="desc-class" style="color: #505050; margin-bottom: 8rpx; {{item.isLink ? 'padding-right: 50rpx;' : ''}}">
+			<van-row type="flex">
+				<van-col wx:if="{{item.descLabel}}">
+					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.descLabel}}</view>
+				</van-col>
+				<van-col>
+					<view>{{ item.desc }}</view>
+				</van-col>
+			</van-row>
+		</view>
+        <view class="desc-class" style="color: #505050; margin-bottom: 8rpx; {{item.isLink ? 'padding-right: 50rpx;' : ''}}">
+			<van-row type="flex">
+				<van-col wx:if="{{item.opinionLabel}}">
+					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.opinionLabel}}</view>
+				</van-col>
+				<van-col>
+					<view>{{ item.opinion }}</view>
+				</van-col>
+			</van-row>
+		</view>
+		<view wx:if="{{item.isLink}}" style="position: absolute; right: 20rpx; top: 48rpx;">
+			<van-icon name="arrow" />
+		</view>
       </view>
       <view class="van-step__circle-container">
         <block wx:if="{{ index !== active }}">
