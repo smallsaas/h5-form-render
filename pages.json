@@ -90,6 +90,12 @@
 			"style": {
 				"navigationBarTitleText": "自查详情"
 			}
+		},
+		{	
+			"path": "pages/test/signature",
+			"style": {
+				"navigationBarTitleText": "签名"
+			}
 		}
     ],
 	"globalStyle": {

@@ -28,7 +28,7 @@
 				<text>自查详情</text>
 			</view>
 			
-			<view class="venue_tag" @click="handleToAutograph">
+			<view class="venue_tag" @click="handleToSignature">
 				<text>签名</text>
 			</view>
 			
@@ -70,8 +70,10 @@
 					url: '../my/selfInspectionDetail'
 				})
 			},
-			handleToAutograph (){
-				
+			handleToSignature (){
+				uni.navigateTo({
+					url: '../test/signature'
+				})
 			}
 		}
 	}
