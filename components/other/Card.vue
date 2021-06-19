@@ -112,7 +112,7 @@ export default {
 .Card-Layout{
     width: 100%;
     overflow: hidden;
-		margin: 20px auto;
+		// margin: 20px auto;
 }
 .Card-Layout-Content{
     width: 100%;

@@ -2,12 +2,12 @@
 	<view>
 		<dynamic-page :API="api">
 		</dynamic-page>
-		<box-list :list="boxListData"></box-list>
-		<card-list :list="cardListData"></card-list>
+<!-- 		<box-list :list="boxListData"></box-list>
+		<card-list :list="cardListData"></card-list> -->
 		<!-- <card title="待办" :Style="cardStyle"> -->
-			<view :style="{'background': 'white'}">
+<!-- 			<view :style="{'background': 'white'}">
 				<state-list></state-list>
-			</view>
+			</view> -->
 		<!-- </card> -->
 	</view>
 </template>
@@ -15,17 +15,17 @@
 <script>
 	import _ from 'lodash'
 	import { getDynamicListField } from '@/common/api.js'
-	import boxList from '../../components/box-list/box-list.vue'
-	import cardList from '../../components/cardList/cardList.vue'
+	// import boxList from '../../components/box-list/box-list.vue'
+	// import cardList from '../../components/cardList/cardList.vue'
 	import card from '../../components/other/Card.vue'
-	import stateList from '../../components/dynamic-list/listItem/state-list/state-list.vue'
+	// import stateList from '../../components/state-list/state-list.vue'
 	import DynamicPage from '../../components/dynamic-page/index.vue'
 	import { config } from '@/config.js'
 	export default {
 		data() {
 			return {
-				api: config.formHost + '/form?id=108',
-				boxListData:[
+		api: config.formHost + '/form?id=108',
+/*			boxListData:[
 				],
 				cardListData:[
 				],
@@ -35,15 +35,15 @@
 					},
 					fill:"#E1E1E1",
 					padding:"8px 0"
-				}
+				} */
 			}
 		},
 		onLoad(){
-			this.getboxList()
-			this.getcardList()
+/* 			this.getboxList()
+			this.getcardList() */
 		},
 		methods: {
-			async getboxList(){
+/* 			async getboxList(){
 				const res = await getDynamicListField({id:108});
 				let data;
 				let modules;
@@ -78,10 +78,10 @@
 					console.log(thelist)
 					this.cardListData = thelist
 				}
-			}
+			} */
 		},
 		components:{
-			boxList,cardList,card,stateList,DynamicPage
+			/* boxList,cardList,card,stateList, */DynamicPage
 		}
 	}
 </script>
