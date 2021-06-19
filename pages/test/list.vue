@@ -1,17 +1,18 @@
 <template>
     <view>
-        <dynamic-list :config="config" />
+        <dynamic-list :config="config" v-if="config.loadApi" />
     </view>
 </template>
 
 <script>
     import dynamicList from '@/components/dynamic-list/index.vue'
     import { getDynamicListField } from '@/common/api.js'
+	import _ from 'lodash'
     export default {
         components: { dynamicList },
         data() {
             return {
-                config: {}
+				config: {}
             }
         },
         onLoad() {
@@ -22,7 +23,6 @@
             	const res = await getDynamicListField({ id: 101 })
             	if (_.get(res, 'code') === 200) {
             		this.config = _.cloneDeep(_.get(res, 'data', {}))
-					console.log('this.config = ', this.config)
             	}
             }
         }
