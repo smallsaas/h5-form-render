@@ -25,7 +25,7 @@
                 @refresh="refresh"
              >
               <view slot="content-list" class="list_content">
-                  <view v-for="(item, index) in list">
+                  <view v-for="(item, index) in list" :key="index">
                      <article-item
 						 v-if="getListItemKey() === 'ArticleItem'"
                          :item="{

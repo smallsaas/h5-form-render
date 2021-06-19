@@ -1,5 +1,5 @@
 <template>
-    <view :style="[_get(config, 'outStyle', {})]">
+    <view :style="[outStyle || {}]">
         <swiper
             class="swiper" 
             :indicator-dots="indicatorDots"
@@ -43,7 +43,8 @@
                default: function () {
                    return []
                }
-           }
+           },
+		   outStyle: Object
         },
         computed: {
           indicatorDots () {
@@ -67,6 +68,9 @@
           // }
         },
         methods: {
+			_get (data, field, value) {
+				return _.get(data, field, value)
+			},
             getNavigationUrl (str) {
                 let text = ''
                 if (str) {

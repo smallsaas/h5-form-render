@@ -22,21 +22,24 @@
                 <swiper-images 
                    v-if="_get(item, 'type') === 'banner'"
                    :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
-                    :outStyle="getComponentStyle(item)"
+                   :outStyle="getComponentStyle(item)"
                 />
                 <nav-list 
-                    v-if="_get(item, 'type') === 'magic_nav'"
-                    :list="_get(config.moduleData, `${item.key}.navList`, [])"
-                    :outStyle="getComponentStyle(item)"
+                    v-if="_get(item, 'type') === 'navlist'"
+					:config="{
+						list: _get(config.moduleData, `${item.key}.navList`, []),
+						itemModule: _get(config.moduleData, `${item.key}.itemModule`, []),
+						outStyle: getComponentStyle(item)
+					}"
                  />
-								 <box-list
-										v-if="_get(item,'type') === 'boxList'"
-										:list="_get(config.moduleData,`${item.key}.navList`,[])"
-								 ></box-list>
-								 <card-list
-									 v-if="_get(item,'type') === 'cardList'"
-									 :list="_get(config.moduleData,`${item.key}.navList`,[])"
-								 ></card-list>
+				 <box-list
+						v-if="_get(item,'type') === 'boxList'"
+						:list="_get(config.moduleData,`${item.key}.navList`,[])"
+				 ></box-list>
+				 <card-list
+					 v-if="_get(item,'type') === 'cardList'"
+					 :list="_get(config.moduleData,`${item.key}.navList`,[])"
+				 ></card-list>
             </view>
           </block>
         </van-skeleton>
@@ -50,15 +53,15 @@
     import swiperImages from '../swiper-images/index.vue'
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
-		import cardList from '../cardList/cardList.vue'
+	import cardList from '../cardList/cardList.vue'
 	export default {
 		components: { 
             dynamicList, 
             dynamicForm,
             swiperImages,
             navList,
-						boxList,
-						cardList
+			boxList,
+			cardList
         },
 		props: {
 			API: String,  // 请求接口
@@ -77,7 +80,7 @@
 		  this.fetchConfigData()
 		},
 		methods: {
-			_get(data, field, value) {
+			_get (data, field, value) {
 				return _.get(data, field, value)
 			},
 			fetchConfigData () {
@@ -86,7 +89,7 @@
 					method: 'GET',
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-							const resData = _.cloneDeep(_.get(res, 'data.data', {}))
+							const resData = _.cloneDeep(_.get(res, 'data.data', {}))							
 							// 加载页面数据
 							if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
 								this.fetchPageData(resData)
@@ -144,7 +147,7 @@
 					case 'banner':
 					    value = _.has(comonentScouce, 'banners') ? comonentScouce.banners : false
 						break;
-					case 'magic_nav':
+					case 'navlist':
 					    value = _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
 					    break;
 					case 'boxList':
