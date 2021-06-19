@@ -96,6 +96,30 @@
 			"style": {
 				"navigationBarTitleText": "自查详情"
 			}
+		},
+		{	
+			"path": "pages/test/signature",
+			"style": {
+				"navigationBarTitleText": "签名"
+			}
+		},
+		{	
+			"path": "pages/my/returnToWorkRecord",
+			"style": {
+				"navigationBarTitleText": "复工记录"
+			}
+		},
+		{	
+			"path": "pages/my/returnToWorkDetail",
+			"style": {
+				"navigationBarTitleText": "复工详情"
+			}
+		},
+		{	
+			"path": "pages/my/lawEnforcementRecord",
+			"style": {
+				"navigationBarTitleText": "执法记录"
+			}
 		}
    ],
 	"globalStyle": {

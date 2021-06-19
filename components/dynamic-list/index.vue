@@ -78,12 +78,12 @@
 		props: {
 			config: {
 				type: Object,
-				default: function () {
+				default: function() {
 					return {}
 				}
 			}
 		},
-		data () {
+		data() {
 			return {
 				listCurrentPage: 1,
 				listTotalPages: 1,
@@ -237,15 +237,16 @@
 </script>
 
 <style lang="less" scoped>
-    .venue_dynamic_list_container {
-        width: 100%;
-        display: block;
-        .tab_list {
-            border-bottom: 1px solid #f2f2f2;
-            position: relative;
-            z-index: 100;
-        }
-        .list_content { }
-    }
+	.venue_dynamic_list_container {
+		width: 100%;
+		display: block;
 
+		.tab_list {
+			border-bottom: 1px solid #f2f2f2;
+			position: relative;
+			z-index: 100;
+		}
+
+		.list_content {}
+	}
 </style>

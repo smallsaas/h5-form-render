@@ -8,7 +8,7 @@
 			      <view class="times text-line-1">
 			        期间: {{ item.startTime }} - {{ item.endTime }}
 			      </view>
-			      <view class="submit-time">{{ item.submitTime }}</view>
+			      <view class="submit-time">提交时间: {{ item.submitTime }}</view>
 			    </view>
 			    <view class="right">
 					<view v-if="item.status === 'pass'" class="status">

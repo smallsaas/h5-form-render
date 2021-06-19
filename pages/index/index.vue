@@ -28,12 +28,24 @@
 				<text>自查详情</text>
 			</view>
 			
-			<view class="venue_tag" @click="handleToAutograph">
+			<view class="venue_tag" @click="handleToSignature">
 				<text>签名</text>
 			</view>
 			
 			<view class="venue_tag" @click="handleMarket">
 				<text>市场监督</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleReturnToWorkRecord">
+				<text>复工记录</text>
+			</view>		
+				
+			<view class="venue_tag" @click="handleReturnToWorkDetail">
+				<text>复工详情</text>
+			</view>	
+				
+			<view class="venue_tag" @click="handleLawEnforcementRecord">
+				<text>执法记录</text>
 			</view>
 			
 		</view>
@@ -81,7 +93,25 @@
 					url: '../my/selfInspectionDetail'
 				})
 			},
-			handleToAutograph (){
+			handleToSignature (){
+				uni.navigateTo({
+					url: '../test/signature'
+				})
+			},
+			handleReturnToWorkRecord () {
+				uni.navigateTo({
+					url: '../my/returnToWorkRecord'
+				})
+			},
+			handleReturnToWorkDetail () {
+				uni.navigateTo({
+					url: '../my/returnToWorkDetail'
+				})
+			},
+			handleLawEnforcementRecord () {
+				uni.navigateTo({
+					url: '../my/lawEnforcementRecord'
+				})
 			}
 		}
 	}
