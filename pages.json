@@ -85,13 +85,19 @@
 				"navigationBarTitleText": "自查记录"
 			}
 		},
+		{
+			"path":"pages/Market-index/Market-index",
+			"style":{
+				"navigationBarTitleText":"市场监督"
+				}
+		},
 		{	
 			"path": "pages/my/selfInspectionDetail",
 			"style": {
 				"navigationBarTitleText": "自查详情"
 			}
 		}
-    ],
+   ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "综合执法",

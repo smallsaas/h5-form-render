@@ -31,11 +31,16 @@
                          :item="item"
                          :itemNavigation="_get(config, 'itemNavigation', '')"
                      />
-					 <SelfInspectionRecordItem 
-						v-if="getListItemKey() === 'SelfInspectionRecordItem'"
-						:item="item"
-						:itemNavigation="_get(config, 'itemNavigation', '')"
+					 <SelfInspectionRecordItem
+					 	v-if="getListItemKey() === 'SelfInspectionRecordItem'"
+					 	:item="item"
+					 	:itemNavigation="_get(config, 'itemNavigation', '')"
 					 />
+					<state-item
+                      :item="item"
+					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
+					  v-if="getListItemKey() === 'StateItem'"
+					/>
                   </view>
               </view>
             </load-refresh>
@@ -50,6 +55,7 @@
 	import loadRefresh from '../load-refresh/load-refresh.vue'
     import msTab from '../ms-tabs/ms-tabs.vue'
     import ArticleItem from './listItem/ArticleItem.vue'
+    import StateItem from './listItem/state-list/state-list.vue'
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
     
 	export default {
@@ -57,6 +63,7 @@
 		  loadRefresh,
           msTab,
           ArticleItem,
+		  StateItem,
 		  SelfInspectionRecordItem
 		},
 		props: {

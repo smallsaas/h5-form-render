@@ -1,0 +1,16 @@
+{
+  "id": "2619385",
+  "name": "stateIcon",
+  "font_family": "stateIcon",
+  "css_prefix_text": "stateIcon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8312361",
+      "name": "进入",
+      "font_class": "go",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "cardlist"; /* Project id 2618527 */
+  src: url('iconfont.woff2?t=1623990665510') format('woff2'),
+       url('iconfont.woff?t=1623990665510') format('woff'),
+       url('iconfont.ttf?t=1623990665510') format('truetype');
+}
+
+.cardlist {
+  font-family: "cardlist" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cardlist-record:before {
+  content: "\e667";
+}
+
+.cardlist-map:before {
+  content: "\e643";
+}
+
+.cardlist-search:before {
+  content: "\e60f";
+}
+
+.cardlist-data:before {
+  content: "\e603";
+}
+
+.cardlist-transform:before {
+  content: "\e61b";
+}
+
+.cardlist-book:before {
+  content: "\e655";
+}
+

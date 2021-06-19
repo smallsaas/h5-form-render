@@ -32,7 +32,13 @@
 				<text>签名</text>
 			</view>
 			
+			<view class="venue_tag" @click="handleMarket">
+				<text>市场监督</text>
+			</view>
+			
 		</view>
+		
+
 	</view>
 
 </template>
@@ -65,13 +71,17 @@
 					url: '../my/selfInspectionRecord?id=12'
 				})
 			},
+			handleMarket(){
+				uni.navigateTo({
+					url:'../Market-index/Market-index'
+				})
+			},
 			handleToSelfInspectionDetail () {
 				uni.navigateTo({
 					url: '../my/selfInspectionDetail'
 				})
 			},
 			handleToAutograph (){
-				
 			}
 		}
 	}
