@@ -7,9 +7,7 @@
                   ...getBaseParam(item),
                    type: _get(item, '__config__.tagIcon') === 'input' ? 'text' : _get(item, '__config__.tagIcon'),
                    ..._get(item, 'error') 
-                      ? { 
-                          'error-message': item['error-message'] || `请填写${_get(item, '__config__.label')}`
-                        } 
+                      ? { 'error-message': item['error-message'] || `请填写${_get(item, '__config__.label')}`} 
                       : {}
                  }"
                  @input="(e) => handleSetValue(e, fields[index])"

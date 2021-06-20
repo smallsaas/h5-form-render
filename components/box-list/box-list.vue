@@ -1,11 +1,11 @@
 <template>
 	<view>
 		<view class="box-list">
-			<view class="box-list-item" v-for="(item,i) in list" :style="{'width':100/list.length+'%'}">
+			<view class="box-list-item" v-for="(item,i) in list" :key="i" :style="{'width':100/list.length+'%'}">
 				<view class="box-list-body">
 					<view class="box-list-children">
-						<view class="box-list-number" key="i+'number'">{{item.number}}</view>
-						<view class="box-list-title" key="i+'title'">{{item.title}}</view>
+						<view class="box-list-number">{{item.number}}</view>
+						<view class="box-list-title">{{item.title}}</view>
 					</view>
 				</view>
 			</view>
