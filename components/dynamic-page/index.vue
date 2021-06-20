@@ -26,11 +26,12 @@
                 />
                 <nav-list 
                     v-if="_get(item, 'type') === 'navlist'"
-										:title="_get(item,'name','111')"
+										:title="_get(item,'name','')"
 					:config="{
 						list: _get(config.moduleData, `${item.key}.navList`, []),
 						itemModule: _get(config.moduleData, `${item.key}.itemModule`, []),
-						outStyle: getComponentStyle(item)
+						outStyle: getComponentStyle(item),
+						title: _get(item,'name','')
 					}"
                  />
 				 <box-list
@@ -170,6 +171,7 @@
             // 获取组件容器外层布局
             getComponentStyle (item) {
                 if (_.has(item, 'container') && JSON.stringify(item.container) !== '{}') {
+									console.log(_.get(item,'container',{}))
                     return _.get(item, 'container', {})
                 }
                 return _.get(this.config, 'moduleContainer', {})

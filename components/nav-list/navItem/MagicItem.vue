@@ -16,7 +16,7 @@
 					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='publicity'" :style="{'color':item.svg.color}">&#xe621;</i>
 					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='lifeguard'" :style="{'color':item.svg.color}">&#xe68c;</i>
 					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='employees'" :style="{'color':item.svg.color}">&#xe6b0;</i>
-					<image :src="item.img" v-if="item.img!==undefined" mode="aspectFit" class="image" />
+					<image :src="item.img" v-if="item.img!==undefined&&item.svg===undefined" mode="aspectFit" class="image" />
 					<view class="title"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
 	      </view>
 	  </navigator>
@@ -80,6 +80,7 @@
 	
 	.magic_item_container {
 		transition: all .2s;
+		// background-color: white;
 		.magic_item {
 			display: flex;
 			flex-direction: column;
@@ -94,9 +95,13 @@
 					margin: 0 auto;
 			    border-radius: 50%;
 			    padding: 20rpx;
+					text-align: center;
 			}
 			>.title {
-			    white-space: nowrap;
+			    white-space: wrap;
+					width: 5em;
+					height: 3em;
+					text-align: center;
 			    text-overflow: ellipsis;
 			    overflow: hidden;
 			}

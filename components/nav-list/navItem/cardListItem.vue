@@ -1,6 +1,6 @@
 <template>
 	<view class="cardList">
-		<view v-for="(item,i) in list" class="cardListBody" :style="{'width':100/list.length+'%'}">
+		<view class="cardListBody">
 			<view class="cardList-card">
 				<view class="cardList-carditem" :style="{'background':item.container.background}">
 					<navigator :url="item.nav" class="cardList-allitem">
@@ -9,6 +9,7 @@
 						<image class="cardlist" :url="item.img" v-if="item.svg===undefined&&item.img!=undefined"></image>
 						<view class="cardList-title">
 							{{item.title}}
+							<!-- <button @click="test()">测试</button> -->
 						</view>
 					</navigator>
 				</view>
@@ -19,19 +20,18 @@
 
 <script>
 	export default {
-		name:"cardList",
+		name:"card-List-Item",
 		data() {
 			return {
 				
 			};
 		},
 		props:{
-			list:{
-			}
+			item:Object
 		},
 		methods:{
 			test(){
-				console.log(this.list)
+				console.log(this.item)
 			}
 		}
 	}
