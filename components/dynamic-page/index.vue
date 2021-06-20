@@ -26,6 +26,7 @@
                 />
                 <nav-list 
                     v-if="_get(item, 'type') === 'navlist'"
+										:title="_get(item,'name','111')"
 					:config="{
 						list: _get(config.moduleData, `${item.key}.navList`, []),
 						itemModule: _get(config.moduleData, `${item.key}.itemModule`, []),
@@ -40,6 +41,12 @@
 					 v-if="_get(item,'type') === 'cardList'"
 					 :list="_get(config.moduleData,`${item.key}.navList`,[])"
 				 ></card-list>
+					 <state-list
+						v-if="_get(item,'type') === 'stateList'"
+						:list="_get(config.moduleData,`${item.key}.navList`,[])"
+						:Style="_get(item,'container',{})"
+						:name="_get(item,'name','')"
+					 ></state-list>
             </view>
           </block>
         </van-skeleton>
@@ -53,15 +60,18 @@
     import swiperImages from '../swiper-images/index.vue'
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
-	import cardList from '../cardList/cardList.vue'
+		import cardList from '../cardList/cardList.vue'
+		import stateList from '../state-list/index.vue'
+
 	export default {
 		components: { 
-            dynamicList, 
-            dynamicForm,
-            swiperImages,
-            navList,
-			boxList,
-			cardList
+					dynamicList, 
+					dynamicForm,
+					swiperImages,
+					navList,
+					boxList,
+					cardList,
+					stateList
         },
 		props: {
 			API: String,  // 请求接口
