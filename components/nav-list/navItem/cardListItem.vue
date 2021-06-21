@@ -97,9 +97,12 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
+		width: 100%;
 	}
 	.cardListBody{
 		min-width: 33%;
+		margin: 0 auto;
+		width: 100%;
 	}
 	.cardList-card{
 		flex: 1;

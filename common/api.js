@@ -49,3 +49,9 @@ export const getSelfInspectionRecord = (params) => {
     const url = `${config.formHost}/data`
     return request('GET', url, params)
 }
+
+//获取自查详情页面配置
+// export const getSelfInspectionDetailField = (params) => {
+//     const url = `${config.formHost}/form`
+//     return request('GET', url, params)
+// }
