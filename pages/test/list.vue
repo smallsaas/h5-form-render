@@ -23,6 +23,9 @@
             	const res = await getDynamicListField({ id: 100 })
             	if (_.get(res, 'code') === 200) {
             		this.config = _.cloneDeep(_.get(res, 'data', {}))
+                    this.config.outStyle = {
+                        // height: '240px'
+                    }
             	}
             }
         }

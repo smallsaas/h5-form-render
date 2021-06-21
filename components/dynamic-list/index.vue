@@ -18,7 +18,7 @@
                 refreshType="hollowDots"
                 color="#04C4C4"
                 :heightReduce="heightReduce"
-                backgroundCover="#F3F5F5"
+                :fixedHeight="fixedHeight"
                 :currentPage="listCurrentPage"
                 :totalPages="listTotalPages" 
                 @loadMore="loadMore" 
@@ -34,7 +34,7 @@
 						 }"
                          :itemNavigation="_get(config, 'itemNavigation', '')"
                      />
-					 <SelfInspectionRecordItem
+					 <self-inspection-record-item
 					 	v-if="getListItemKey() === 'SelfInspectionRecordItem'"
 					 	:item="{
 							...item,
@@ -49,6 +49,14 @@
 					  }"
 					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
 					  v-if="getListItemKey() === 'StateItem'"
+					/>
+					<record-steps-item 
+					  v-if="getListItemKey() === 'RecordStepsItem'"
+					  :item="{
+						  ...item,
+						  ...getComponentBindData(item)
+					  }"
+					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
 					/>
                   </view>
               </view>
@@ -66,6 +74,7 @@
     import ArticleItem from './listItem/ArticleItem.vue'
     import StateItem from './listItem/state-list/state-list.vue'
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
+	import RecordStepsItem from './listItem/RecordStepsItem.vue'
     
 	export default {
 		components: {
@@ -73,7 +82,8 @@
           msTab,
           ArticleItem,
 		  StateItem,
-		  SelfInspectionRecordItem
+		  SelfInspectionRecordItem,
+		  RecordStepsItem
 		},
 		props: {
 			config: {
@@ -103,7 +113,19 @@
 		  //是否外部传入数据
 		  isPropsList () {
 			return _.has(this.config, 'list') && _.isArray(this.config.list)
-		  }
+		  },
+          // 列表高度
+          fixedHeight () {
+             let height = 0
+             if (_.get(this.config, 'outStyle.height')) {
+                height = parseInt(_.get(this.config, 'outStyle.height', 0)) - (this.typeList.length > 0 ? 44 : 0)
+             }
+             if (height < 0) {
+                height = 0
+             }
+             console.log('height=', height)
+             return height
+          }
         },
 		mounted() {
 		 // 外部传入数据源

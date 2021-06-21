@@ -55,7 +55,7 @@
 				default: 'hollowDots'
 			},
 			fixedHeight: {
-				type: String,
+				type: Number,
 				default: '0'
 			},
 			heightReduce: {
@@ -96,8 +96,8 @@
 			// 计算组件所占屏幕高度
 			getHeight() {
 				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
-				if (Number(this.fixedHeight)) {
-					return `height: ${this.fixedHeight}rpx;`
+				if (this.fixedHeight) {
+					return `height: ${this.fixedHeight * 2}rpx;`
 				} else {
 					let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
 					return `height: ${height}px;`

@@ -32,21 +32,21 @@
 		},
 		computed: {
 			navigationUrl() {
-				// let text = ''
-				// if (this.itemNavigation) {
-				//    const route = this.itemNavigation.split('?')[0]
-				//    const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				//    text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-				//    if (Object.keys(query).length > 0) {
-				//        for (const i in query) {
-				//            if (query[i] === '') {
-				//                query[i] = this.item[i] || ''
-				//            }
-				//        }
-				//        text += '?query=' + encodeURIComponent(JSON.stringify(query))
-				//    }
-				// }
-				// return text
+				let text = ''
+				if (this.itemNavigation) {
+				   const route = this.itemNavigation.split('?')[0]
+				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
+				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
+				   if (Object.keys(query).length > 0) {
+				       for (const i in query) {
+				           if (query[i] === '') {
+				               query[i] = this.item[i] || ''
+				           }
+				       }
+				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
+				   }
+				}
+				return text
 			}
 		},
 		methods: {
