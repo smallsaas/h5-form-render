@@ -11,14 +11,26 @@
                    }"
 				   :srvFormData="getComponentsData(item)"
                 />
+								<card
+								:Style="{
+									'padding':'10px 0 0 0',
+									'fill':'#EFEFEF',
+									'title':{
+										'fill':'#FFFFFF'
+									}
+									}"
+								:title="_get(item,'name','')"
+								v-if="_get(item, 'type') === 'autolist'"
+
+								>
                 <dynamic-list
-                  v-if="_get(item, 'type') === 'autolist'"
                   :config="{
                       ..._get(config.moduleData, item.key, {}),
 					  ...getComponentsData(item) ? { list: getComponentsData(item) } : {},
                       outStyle: getComponentStyle(item)
                   }"
                 />
+								</card>
                 <swiper-images 
                    v-if="_get(item, 'type') === 'banner'"
                    :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
@@ -42,12 +54,6 @@
 					 v-if="_get(item,'type') === 'cardList'"
 					 :list="_get(config.moduleData,`${item.key}.navList`,[])"
 				 ></card-list>
-					 <state-list
-						v-if="_get(item,'type') === 'stateList'"
-						:list="_get(config.moduleData,`${item.key}.navList`,[])"
-						:Style="_get(item,'container',{})"
-						:name="_get(item,'name','')"
-					 ></state-list>
             </view>
           </block>
         </van-skeleton>
@@ -62,8 +68,7 @@
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
 		import cardList from '../cardList/cardList.vue'
-		import stateList from '../state-list/index.vue'
-
+		import card from '../other/Card.vue'
 	export default {
 		components: { 
 					dynamicList, 
@@ -72,7 +77,7 @@
 					navList,
 					boxList,
 					cardList,
-					stateList
+					card
         },
 		props: {
 			API: String,  // 请求接口

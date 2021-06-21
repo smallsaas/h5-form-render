@@ -34,7 +34,7 @@
 						 }"
                          :itemNavigation="_get(config, 'itemNavigation', '')"
                      />
-					 <SelfInspectionRecordItem
+					 <self-inspection-record-item
 					 	v-if="getListItemKey() === 'SelfInspectionRecordItem'"
 					 	:item="{
 							...item,
@@ -49,6 +49,14 @@
 					  }"
 					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
 					  v-if="getListItemKey() === 'StateItem'"
+					/>
+					<record-steps-item 
+					  v-if="getListItemKey() === 'RecordStepsItem'"
+					  :item="{
+						  ...item,
+						  ...getComponentBindData(item)
+					  }"
+					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
 					/>
                   </view>
               </view>
@@ -66,6 +74,7 @@
     import ArticleItem from './listItem/ArticleItem.vue'
     import StateItem from './listItem/state-list/state-list.vue'
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
+	import RecordStepsItem from './listItem/RecordStepsItem.vue'
     
 	export default {
 		components: {
@@ -73,7 +82,8 @@
           msTab,
           ArticleItem,
 		  StateItem,
-		  SelfInspectionRecordItem
+		  SelfInspectionRecordItem,
+		  RecordStepsItem
 		},
 		props: {
 			config: {
