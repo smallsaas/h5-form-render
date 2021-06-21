@@ -10,7 +10,7 @@
 		<!-- 	<view
 				class="nav_list_container" 
 			> -->
-		      <block v-for="(item, index) in _get(config, 'list', [])" :key="index">
+		      <block class="block" v-for="(item, index) in _get(config, 'list', [])" :key="index">
 					 <magic-item
 					 			v-if="_get(config, 'itemModule.name') === 'MagicItem'"
 					 			:item="item"
@@ -68,12 +68,14 @@
 		display: grid;
 		font-weight: bolder;
 		font-size: 14px;
-		// grid-template-columns: repeat(4, 25%);
-		
+		grid-template-columns: repeat(4, 25%);
+			&>.block{
+				margin: 0 auto;
+			}
     }
 		.nav_list_header{
 			padding-top: 10px;
-			border-bottom: 1px solid #aaa;
+			border-bottom: 1px solid #EEEEEE;
 			background-color:	#EFEFEF;
 		}
 		.nav_list_title{
@@ -82,6 +84,6 @@
 			width: 100%;
 			padding: 10px;
 			font-weight: bolder;
-			font-size: 14px;
+			font-size: 12px;
 		}
 </style>

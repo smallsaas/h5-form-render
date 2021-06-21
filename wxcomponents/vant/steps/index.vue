@@ -3,9 +3,39 @@
   <view class="van-step__wrapper">
     <view v-for="(item,index) in (steps)" :key="item.index" @click="onClick" :data-index="index" :class="(utils.bem('step', [direction, status(index, active)]))+' van-hairline'" :style="status(index, active) === 'inactive' ? 'color: ' + inactiveColor: ''">
       <view class="van-step__title" :style="index === active ? 'color: ' + activeColor : ''">
-        <view>{{ item.text }}</view>
-        <view class="desc-class">{{ item.desc }}</view>
-        <view class="desc-class">{{ item.opinion }}</view>
+        <view :style="'color: #505050; margin-bottom: 5rpx; '+(item.isLink ? 'padding-right: 50rpx;' : '')">
+			<van-row type="flex">
+				<van-col v-if="item.textLabel">
+					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.textLabel}}</view>
+				</van-col>
+				<van-col>
+					<view>{{ item.text }}</view>
+				</van-col>
+			</van-row>
+		</view>
+        <view class="desc-class" :style="'color: #505050; margin-bottom: 8rpx; '+(item.isLink ? 'padding-right: 50rpx;' : '')">
+			<van-row type="flex">
+				<van-col v-if="item.descLabel">
+					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.descLabel}}</view>
+				</van-col>
+				<van-col>
+					<view>{{ item.desc }}</view>
+				</van-col>
+			</van-row>
+		</view>
+        <view class="desc-class" :style="'color: #505050; margin-bottom: 8rpx; '+(item.isLink ? 'padding-right: 50rpx;' : '')">
+			<van-row type="flex">
+				<van-col v-if="item.opinionLabel">
+					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.opinionLabel}}</view>
+				</van-col>
+				<van-col>
+					<view>{{ item.opinion }}</view>
+				</van-col>
+			</van-row>
+		</view>
+		<view v-if="item.isLink" style="position: absolute; right: 20rpx; top: 48rpx;">
+			<van-icon name="arrow"></van-icon>
+		</view>
       </view>
       <view class="van-step__circle-container">
         <block v-if="index !== active">
