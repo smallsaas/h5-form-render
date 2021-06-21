@@ -15,10 +15,6 @@
 					 			v-if="_get(config, 'itemModule.name') === 'MagicItem'"
 					 			:item="item"
 					 />
-					<state-list-item
-						v-if="_get(config, 'itemModule.name') === 'stateListItem'"
-						:item="item"
-					></state-list-item>
 					<card-list-item
 					v-if="_get(config, 'itemModule.name') === 'cardListItem'"
 					:item="item"
@@ -31,13 +27,11 @@
 
 <script>
 	import magicItem from './navItem/MagicItem.vue'
-	import stateListItem from './navItem/stateListItem.vue'
 	import cardListItem from './navItem/cardListItem.vue'
 	// import card from '../other/Card.vue'
     export default {
 		components: {
 			magicItem,
-			stateListItem,
 			cardListItem
 		},
         props: {

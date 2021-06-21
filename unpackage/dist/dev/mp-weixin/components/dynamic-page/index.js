@@ -128,8 +128,18 @@ var render = function() {
 
           var m3 = _vm._get(item, "type")
 
-          var m4 = m3 === "autolist" ? _vm._get(item, "name", "") : null
           var a1 =
+            m3 === "autolist"
+              ? {
+                  padding: "10px 0 0 0",
+                  fill: "#EFEFEF",
+                  title: {
+                    fill: "#FFFFFF"
+                  }
+                }
+              : null
+          var m4 = m3 === "autolist" ? _vm._get(item, "name", "") : null
+          var a2 =
             m3 === "autolist"
               ? Object.assign(
                   {},
@@ -154,7 +164,7 @@ var render = function() {
 
           var m8 = _vm._get(item, "type")
 
-          var a2 =
+          var a3 =
             m8 === "navlist"
               ? {
                   list: _vm._get(
@@ -192,13 +202,14 @@ var render = function() {
             a0: a0,
             m2: m2,
             m3: m3,
-            m4: m4,
             a1: a1,
+            m4: m4,
+            a2: a2,
             m5: m5,
             m6: m6,
             m7: m7,
             m8: m8,
-            a2: a2,
+            a3: a3,
             m9: m9,
             m10: m10,
             m11: m11,
@@ -251,6 +262,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
 
 
 

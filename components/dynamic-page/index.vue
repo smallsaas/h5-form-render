@@ -12,8 +12,16 @@
 				   :srvFormData="getComponentsData(item)"
                 />
 								<card
+								:Style="{
+									'padding':'10px 0 0 0',
+									'fill':'#EFEFEF',
+									'title':{
+										'fill':'#FFFFFF'
+									}
+									}"
 								:title="_get(item,'name','')"
 								v-if="_get(item, 'type') === 'autolist'"
+
 								>
                 <dynamic-list
                   :config="{
