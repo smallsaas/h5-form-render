@@ -20,7 +20,7 @@
         },
         methods: {
             async fetchData () {
-            	const res = await getDynamicListField({ id: 100 })
+            	const res = await getDynamicListField({ id: 1004 })
             	if (_.get(res, 'code') === 200) {
             		this.config = _.cloneDeep(_.get(res, 'data', {}))
             	}

@@ -121,7 +121,70 @@
 				"navigationBarTitleText": "执法记录"
 			}
 		}
-   ],
+		 ,{
+					"path" : "pages/test/list/articleItem",
+					"style" :                                                                                    
+					{
+							"navigationBarTitleText": "",
+							"enablePullDownRefresh": false
+					}
+					
+			},
+			{
+					"path" : "pages/test/list/stateItem",
+					"style" :                                                                                    
+					{
+							"navigationBarTitleText": "",
+							"enablePullDownRefresh": false
+					}
+					
+			},
+			{
+					"path" : "pages/test/list/selfInspectionRecordItem",
+					"style" :                                                                                    
+					{
+							"navigationBarTitleText": "",
+							"enablePullDownRefresh": false
+					}
+					
+			},
+			{
+					"path" : "pages/test/list/page",
+					"style" :                                                                                    
+					{
+							"navigationBarTitleText": "列表子项展示",
+							"enablePullDownRefresh": false
+					}
+					
+			}
+        ,{
+            "path" : "pages/test/pages/pages",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+				{
+				    "path" : "pages/test/pages/autoform",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				}
+        ,{
+            "path" : "pages/test/pages/autolist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "综合执法",

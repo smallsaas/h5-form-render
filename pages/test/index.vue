@@ -13,8 +13,8 @@
             handleClick (text) {
                 const obj = {
                     form: './form?id=10',
-                    list: './list',
-                    page: './page',
+                    list: './list/page',
+                    page: './pages/pages',
 									
 										banner: './banner'
                 }

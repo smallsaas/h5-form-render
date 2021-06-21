@@ -17,7 +17,8 @@
 			'margin':Style===undefined?'':Style.title.margin===undefined?'':Style.title.margin,
 			'textAlign':Style===undefined?'':Style.title.align,
 			'font':Style===undefined?'':Style.title.font,
-			}">{{title}}</view>
+			}"
+			>{{title}}</view>
       <view class="Card-Layout-Child">
 				<slot></slot>
 			</view>

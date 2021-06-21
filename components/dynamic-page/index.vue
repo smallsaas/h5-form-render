@@ -11,26 +11,39 @@
                    }"
 				   :srvFormData="getComponentsData(item)"
                 />
-								<card
-								:Style="{
-									'padding':'10px 0 0 0',
-									'fill':'#EFEFEF',
-									'title':{
-										'fill':'#FFFFFF'
-									}
-									}"
-								:title="_get(item,'name','')"
+								<view
 								v-if="_get(item, 'type') === 'autolist'"
-
 								>
-                <dynamic-list
-                  :config="{
-                      ..._get(config.moduleData, item.key, {}),
-					  ...getComponentsData(item) ? { list: getComponentsData(item) } : {},
-                      outStyle: getComponentStyle(item)
-                  }"
-                />
-								</card>
+									<card
+											:Style="{
+												'padding':'10px 0 0 0',
+												'fill':'#EFEFEF',
+												'title':{
+													'fill':'#FFFFFF'
+												}
+											}"
+											:title="_get(item,'name','')"
+											v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
+											>
+									    <dynamic-list
+									      :config="{
+									          ..._get(config.moduleData, item.key, {}),
+									...getComponentsData(item) ? { list: getComponentsData(item) } : {},
+									          outStyle: getComponentStyle(item)
+									      }"
+									    />
+											</card>
+											<dynamic-list
+												:config="{
+																	..._get(config.moduleData, item.key, {}),
+												...getComponentsData(item) ? { list: getComponentsData(item) } : {},
+																	outStyle: getComponentStyle(item)
+												}"
+												v-if="_get(item,'name')===undefined||_get(item,'name')===''"
+											></dynamic-list>
+											
+								</view>
+			
                 <swiper-images 
                    v-if="_get(item, 'type') === 'banner'"
                    :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
