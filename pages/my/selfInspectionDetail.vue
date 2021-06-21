@@ -2,71 +2,9 @@
 	<view>
 
 		<view class='card'>
-			<view class='title'>
-				<view class="line"></view>
-				<view>企业信息</view>
-			</view>
-			<view class='enterprise-info'>
-				<view class="item">
-					<van-row type="flex">
-						<van-col>
-							<view class='label'>名称: </view>
-						</van-col>
-						<van-col>
-							<view class='text'>北京天翔文化产业有限公司</view>
-						</van-col>
-					</van-row>
-				</view>
-				<view class="item">
-					<van-row type="flex">
-						<van-col>
-							<view class='label'>法定代表人: </view>
-						</van-col>
-						<van-col>
-							<view class='text'>王伟伟</view>
-						</van-col>
-					</van-row>
-				</view>
-
-				<view class="item">
-					<van-row type="flex">
-						<van-col>
-							<view class='label'>场所地址: </view>
-						</van-col>
-						<van-col>
-							<view class='text'>北京市海淀区文化产业园A8901</view>
-						</van-col>
-					</van-row>
-				</view>
-
-				<view class="item">
-					<van-row type="flex">
-						<van-col>
-							<view class='label'>成立日期: </view>
-						</van-col>
-						<van-col>
-							<view class='text'>2020年3月1日</view>
-						</van-col>
-					</van-row>
-				</view>
-
-				<view class="item">
-					<van-row type="flex">
-						<van-col>
-							<view class='label'>联系电话: </view>
-						</van-col>
-						<van-col>
-							<view class='text'>13666000111</view>
-						</van-col>
-					</van-row>
-				</view>
-
-			</view>
-		</view>
-
-
-		<view class='card'>
-			<dynamic-form :config="config" :srvFormData="srvFormData" />
+			<dynamic-page
+			   :API="getformAapi"
+			/>
 		</view>
 
 		<view class='card'>
@@ -86,189 +24,28 @@
 
 <script>
 	import _ from 'lodash';
-	import {
-		getSelfInspectionRecord
-	} from '@/common/api.js'
-
-	import dynamicForm from '@/components/dynamic-form/index.vue'
+	// import {
+	// 	getSelfInspectionRecord
+	// } from '@/common/api.js'
+	
+	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import { config } from '@/config.js'
 
 	export default {
 		components: {
-			dynamicForm
+			dynamicPage
 		},
 		onLoad(e) {
+			this.initField(310)
 			// this.initData("110");
 		},
 		data() {
 			return {
-				srvFormData: {
-					companyName: '北京天翔文化产业有限公司',
-					peple: '王伟伟',
-					address: '北京市海淀区文化产业园A8901',
-					date: '2020年3年1日',
-					phone: '13666000111',
-					licenseImage: [{
-						url: require('../../static/images/empty.png'),
-						isImage: true
-					}],
-					businessImage: [{
-						url: require('../../static/images/empty.png'),
-						isImage: true
-					}],
-					sceneImage: [{
-							url: require('../../static/images/empty.png'),
-							isImage: true
-						},
-						{
-							url: require('../../static/images/empty.png'),
-							isImage: true
-						},
-						{
-							url: require('../../static/images/empty.png'),
-							isImage: true
-						}
-					],
-					check1: '选项内容',
-					check2: '选项#1',
-					check3: '技术咨询'
-				},
+				getformAapi: config.formHost + '/form?id=300',
+				srvFormData: {},
 				config: {
 					formBtns: false,
-					fields: [{
-							"__config__": {
-								"layout": "rowFormItem",
-								"tagIcon": "row",
-								"layoutTree": true,
-								"formId": 112,
-								"renderKey": 1621415404383,
-								"componentName": "证件",
-								"children": [{
-										"__config__": {
-											"label": "营业执照",
-											"labelWidth": null,
-											"showLabel": true,
-											"tag": "el-upload",
-											"tagIcon": "input",
-											"required": false,
-											"layout": "colFormItem",
-											"formId": 113,
-											"renderKey": 1621415432107
-										},
-										"readonly": true,
-										"max-count": 1,
-										"deletable": false,
-										"__vModel__": "businessImage"
-									},
-									{
-										"__config__": {
-											"label": "许可证",
-											"labelWidth": null,
-											"showLabel": true,
-											"tag": "el-upload",
-											"tagIcon": "input",
-											"required": false,
-											"layout": "colFormItem",
-											"formId": 113,
-											"renderKey": 1621415432107
-										},
-										"readonly": true,
-										"max-count": 1,
-										"deletable": false,
-										"__vModel__": "licenseImage"
-									}
-								]
-							}
-						},
-						{
-							"__config__": {
-								"layout": "rowFormItem",
-								"tagIcon": "row",
-								"layoutTree": true,
-								"formId": 112,
-								"renderKey": 1621415404383,
-								"componentName": "现场照片",
-								"children": [{
-									"__config__": {
-										"label": "",
-										"labelWidth": null,
-										"showLabel": true,
-										"tag": "el-upload",
-										"tagIcon": "input",
-										"required": false,
-										"layout": "colFormItem",
-										"formId": 113,
-										"renderKey": 1621415432107
-									},
-									"readonly": true,
-									"max-count": 1,
-									"deletable": false,
-									"__vModel__": "sceneImage"
-								}]
-							}
-						},
-						{
-							"__config__": {
-								"layout": "rowFormItem",
-								"tagIcon": "row",
-								"layoutTree": true,
-								"formId": 112,
-								"renderKey": 1621415404383,
-								"componentName": "自查选项",
-								"children": [{
-										"__config__": {
-											"label": "自查项 #1",
-											"labelWidth": null,
-											"showLabel": true,
-											"tag": "el-input",
-											"tagIcon": "input",
-											"required": false,
-											"layout": "colFormItem",
-											"formId": 113,
-											"renderKey": 1621415432107
-										},
-										"readonly": true,
-										"max-count": 1,
-										"deletable": false,
-										"__vModel__": "check1"
-									},
-									{
-										"__config__": {
-											"label": "自查项 #2",
-											"labelWidth": null,
-											"showLabel": true,
-											"tag": "el-input",
-											"tagIcon": "input",
-											"required": false,
-											"layout": "colFormItem",
-											"formId": 113,
-											"renderKey": 1621415432107
-										},
-										"readonly": true,
-										"max-count": 1,
-										"deletable": false,
-										"__vModel__": "check2"
-									},
-									{
-										"__config__": {
-											"label": "自查项 #3",
-											"labelWidth": null,
-											"showLabel": true,
-											"tag": "el-input",
-											"tagIcon": "input",
-											"required": false,
-											"layout": "colFormItem",
-											"formId": 113,
-											"renderKey": 1621415432107
-										},
-										"readonly": true,
-										"max-count": 1,
-										"deletable": false,
-										"__vModel__": "check3"
-									}
-								]
-							}
-						}
-					]
+					fields: [],
 				},
 				active: -1,
 				steps: [{
@@ -291,16 +68,16 @@
 			}
 		},
 		methods: {
-			async initData(id) {
-				const res = await getSelfInspectionRecord({
-					id: id
-				})
+			async initField(id){
+				const res = await getSelfInspectionDetailField({id: id})
 				if (_.get(res, 'code') === 200) {
-					var data = {
-						..._.get(res, 'data', {})
-					};
-					console.log('data = ', data.record)
-					// this.listData = data.record;
+				    this.config = { ..._.get(res, 'data', {}) }
+				}
+			},
+			async initData(id){
+				const res = await getReturnToWork({id: id})
+				if (_.get(res, 'code') === 200) {
+				    this.formData = { ..._.get(res, 'data', {}) };
 				}
 			},
 		}
