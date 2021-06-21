@@ -107,6 +107,7 @@
 				..._has(item, 'deletable') ? { deletable: item.deletable } : {},
                 ..._has(item, 'accept') ? { accept: item.accept } : {},
 			}"
+            @change="(e) => handleSetValue(e, fields[index])"
 		   />
        </block>
     </view>

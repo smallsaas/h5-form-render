@@ -26,6 +26,10 @@
 		components: { dynamicForm },
 		data() {
 			return {
+                srvFormData: {
+                   sceneImage: [{ url: 'https://api.mock.smallsaas.cn/attachments/0kZy8RNsdUWn62c41e2cd41b8c42bba2200989b8dc53.jpg' }],
+                   foodSafeImage: [{ url: 'https://api.mock.smallsaas.cn/attachments/DlEAg5LTzXhW296bf5698d82bbbec618211ce122498b.txt', name: '技术栈.txt'}] 
+                },
 				config: {
 					fields: [
 						{
@@ -123,7 +127,7 @@
 							          "showLabel": true,
 							          "tag": "el-upload",
 							          "tagIcon": "input",
-							          "required": false,
+							          "required": true,
 							          "layout": "colFormItem",
 							        },
 							        "readonly": false,
@@ -147,7 +151,7 @@
                         	          "showLabel": true,
                         	          "tag": "el-upload",
                         	          "tagIcon": "input",
-                        	          "required": false,
+                        	          "required": true,
                         	          "layout": "colFormItem"
                         	        },
                         	        "readonly": false,

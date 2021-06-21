@@ -115,6 +115,7 @@
               },  
         },
 		mounted() {
+            
             // 有具体配置信息时
             if (Object.keys(this.config).length > 0) {
                 this.formConfig = _.cloneDeep(this.config)
@@ -125,8 +126,10 @@
                // 从默认配置中获取表单
                this.fetchDefaultFormConfig()
             }
+            console.log('进来了===', this.srvFormData, this.formConfig)
 			// 外部传入的数据源
 			if (Object.keys(this.srvFormData).length > 0) {
+                this.form = { ...this.srvFormData }
 				return
 			}
             this.fetchFormData()
@@ -198,7 +201,7 @@
                       if (x['__vModel__'] === item['__vModel__']) {
 						  const formType = _.get(x, '__config__.tag') 
                           x.error = _.get(x, '__config__.required') ? !e : false
-                          if (formType === 'el-checkbox-group') {
+                          if (['el-upload', 'el-checkbox-group'].includes(formType)) {
                              x.error = _.get(x, '__config__.required') ? (!e || e.length === 0) : false
                           }
                       }
