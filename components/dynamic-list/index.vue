@@ -18,7 +18,7 @@
                 refreshType="hollowDots"
                 color="#04C4C4"
                 :heightReduce="heightReduce"
-                backgroundCover="#F3F5F5"
+                :fixedHeight="fixedHeight"
                 :currentPage="listCurrentPage"
                 :totalPages="listTotalPages" 
                 @loadMore="loadMore" 
@@ -113,7 +113,19 @@
 		  //是否外部传入数据
 		  isPropsList () {
 			return _.has(this.config, 'list') && _.isArray(this.config.list)
-		  }
+		  },
+          // 列表高度
+          fixedHeight () {
+             let height = 0
+             if (_.get(this.config, 'outStyle.height')) {
+                height = parseInt(_.get(this.config, 'outStyle.height', 0)) - (this.typeList.length > 0 ? 44 : 0)
+             }
+             if (height < 0) {
+                height = 0
+             }
+             console.log('height=', height)
+             return height
+          }
         },
 		mounted() {
 		 // 外部传入数据源
