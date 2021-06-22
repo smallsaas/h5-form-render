@@ -114,21 +114,22 @@
 	import _ from 'lodash'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
-		import swiperImages from '../swiper-images/index.vue'
+	import swiperImages from '../swiper-images/index.vue'
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
-		import card from '../other/Card.vue'
+	import card from '../other/Card.vue'
 	export default {
 		components: { 
-					dynamicList, 
-					dynamicForm,
-					swiperImages,
-					navList,
-					boxList,
-					card
+			dynamicList, 
+			dynamicForm,
+			swiperImages,
+			navList,
+			boxList,
+			card
         },
 		props: {
 			API: String,  // 请求接口
+            dynamicLoadUrl: String
 		},
 		data () {
 			return {
@@ -153,10 +154,18 @@
 					method: 'GET',
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-							const resData = _.cloneDeep(_.get(res, 'data.data', {}))							
+							const resData = _.cloneDeep(_.get(res, 'data.data', {}))
+                            // 获取页面请求接口
+                             let pageUrl
+                             if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
+                                pageUrl =  resData.dataSource.api
+                             }
+                             if (this.dynamicLoadUrl) {
+                                pageUrl = this.dynamicLoadUrl
+                             }
 							// 加载页面数据
-							if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
-								this.fetchPageData(resData)
+							if (pageUrl) {
+								this.fetchPageData(resData, pageUrl)
 							} else {
 								this.config = resData
 								this.skeletonLoading = false                               
@@ -170,9 +179,9 @@
 					}
 				})
 			},
-			fetchPageData (resData = {}) {
+			fetchPageData (resData = {}, pageUrl) {
 				uni.request({
-					url: resData.dataSource.api,
+					url: pageUrl,
 					method: 'GET',
                     data: _.get(this.config, 'dataSource.request', {}),
 					complete: (res) => {
