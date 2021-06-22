@@ -3,7 +3,7 @@
         <view class="venue_tag" @click="handleClick('form')">动态表单</view>
         <view class="venue_tag" @click="handleClick('list')">动态列表</view>
         <view class="venue_tag" @click="handleClick('page')">动态页面</view>
-        <view class="venue_tag" @click="handleClick('banner')">测试Nav</view>
+        <!-- <view class="venue_tag" @click="handleClick('banner')">测试Nav</view> -->
     </view>
 </template>
 
@@ -12,7 +12,7 @@
         methods: {
             handleClick (text) {
                 const obj = {
-                    form: './form?id=10',
+                    form: './form?id=1019',
                     list: './list',
                     page: './page',
 					banner: './banner'
