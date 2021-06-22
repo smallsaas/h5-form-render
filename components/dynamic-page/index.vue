@@ -9,7 +9,7 @@
                       ..._get(config.moduleData, item.key, {}),
                       outStyle: getComponentStyle(item)
                    }"
-				   :srvFormData="getComponentsData(item)"
+				   :srvFormData="getComponentsData(item) || {}"
                 />
 								<view
 								v-if="_get(item, 'type') === 'autolist'"
@@ -124,7 +124,7 @@
 								this.fetchPageData(resData)
 							} else {
 								this.config = resData
-								this.skeletonLoading = false
+								this.skeletonLoading = false                               
 							}
 							if (_.has(resData, 'title')) {
 								uni.setNavigationBarTitle({
@@ -159,7 +159,7 @@
 			// 获取组件数据
 			getComponentsData (item) {
 				if (!_.has(item, 'binding') || JSON.stringify(item.binding) === '{}') {
-					return {}
+					return false
 				}
 				const comonentScouce = {}
 				for (const i in item.binding) {
