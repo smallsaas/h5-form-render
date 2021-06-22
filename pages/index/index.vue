@@ -24,9 +24,9 @@
 				<text>自查记录</text>
 			</view>
 			
-			<view class="venue_tag" @click="handleToSelfInspectionDetail">
+<!-- 			<view class="venue_tag" @click="handleToSelfInspectionDetail">
 				<text>自查详情</text>
-			</view>
+			</view> -->
 			
 			<view class="venue_tag" @click="handleToSignature">
 				<text>签名</text>
@@ -46,6 +46,14 @@
 				
 			<view class="venue_tag" @click="handleLawEnforcementRecord">
 				<text>执法记录</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleLawEnforcementRecord">
+				<text>执法记录</text>
+			</view>
+			
+			<view class="venue_tag" @click="handleLawProcessPage">
+				<text>流程测试</text>
 			</view>
 			
 		</view>
@@ -111,6 +119,11 @@
 			handleLawEnforcementRecord () {
 				uni.navigateTo({
 					url: '../my/lawEnforcementRecord'
+				})
+			},
+			handleLawProcessPage () {
+				uni.navigateTo({
+					url: '../test/processPage'
 				})
 			}
 		}

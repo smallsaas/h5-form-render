@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<dynamic-page
-		   :API="getPageAapi"
+		   :API="getPageApi"
+		   :dataId="dataId"
 		/>
 	</view>
 </template>
@@ -18,15 +19,15 @@
 			var query = {};
 			if (e.query) {
 				query = { ...JSON.parse(decodeURIComponent(e.query)) }
-				this.getPageAapi =  config.formHost + '/form?id=' + query.id
-				console.log('this.getPageAapi = ', this.getPageAapi)
+				this.dataId =  query.id
 			}else {
-				console.error('获取id数据异常')
+				console.error('获取id异常')
 			}
 		},
 		data() {
 			return {
-				getPageAapi: config.formHost + '/form?id=300',
+				dataId: '',
+				getPageApi: config.formHost + '/form?id=300',
 			}
 		},
 		methods: {

@@ -120,6 +120,12 @@
 			"style": {
 				"navigationBarTitleText": "执法记录"
 			}
+		},
+		{	
+			"path": "pages/test/processPage",
+			"style": {
+				"navigationBarTitleText": "流程测试页"
+			}
 		}
 		 ,{
 					"path" : "pages/test/list/articleItem",

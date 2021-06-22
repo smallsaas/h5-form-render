@@ -118,7 +118,8 @@
 					method: 'GET',
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-							const resData = _.cloneDeep(_.get(res, 'data.data', {}))							
+							const resData = _.cloneDeep(_.get(res, 'data.data', {}))				
+						console.log('resData = ', resData)				
 							// 加载页面数据
 							if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
 								this.fetchPageData(resData)
