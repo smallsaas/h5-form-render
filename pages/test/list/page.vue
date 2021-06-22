@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<dynamic-page
-           :API="api"
-        />
+			<dynamic-page
+			       :API="api"
+			    />
 	</view>
 </template>
 
