@@ -64,7 +64,7 @@
 						  ...item,
 						  ...getComponentBindData(item)
 					  }"
-					  :itemNavigation="_get(config, 'config.itemNavigation', '/my/returnToWorkDetail?id=')"
+					  :itemNavigation="_get(config, 'config.itemNavigation', '')"
 					/>
                   </view>
               </view>

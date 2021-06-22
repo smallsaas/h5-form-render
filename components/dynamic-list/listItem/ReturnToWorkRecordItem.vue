@@ -25,8 +25,10 @@
 </template>
 <script>
 	import qs from 'qs'
+	import dynamicCell from "@/components/custom-c/cell.vue";
 	export default {
 		name: 'ReturnToWorkRecordItem',
+		components: { dynamicCell },
 		props: {
 			item: Object,
 			ext: Object,
@@ -34,6 +36,8 @@
 		},
 		computed: {
 			navigationUrl() {
+				console.log('item = ', this.item);
+				console.log('itemNavigation = ', this.itemNavigation);
 				let text = ''
 				if (this.itemNavigation) {
 				   const route = this.itemNavigation.split('?')[0]
@@ -45,6 +49,7 @@
 				               query[i] = this.item[i] || ''
 				           }
 				       }
+				console.log('query1111 = ', query);
 				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
 				   }
 				}
@@ -52,10 +57,12 @@
 			}
 		},
 		methods: {
-
+			onItemClick(path){
+				console.log('path = ', path);
+			}
 		},
 		mounted(){
-			console.log('this.item = ', this.item)
+			// console.log('this.item = ', this.item)
 		}
 	}
 </script>
