@@ -3,7 +3,7 @@
         <view class="venue_tag" @click="handleClick('form')">动态表单</view>
         <view class="venue_tag" @click="handleClick('list')">动态列表</view>
         <view class="venue_tag" @click="handleClick('page')">动态页面</view>
-        <view class="venue_tag" @click="handleClick('banner')">测试Nav</view>
+        <!-- <view class="venue_tag" @click="handleClick('banner')">测试Nav</view> -->
     </view>
 </template>
 
@@ -16,7 +16,7 @@
                     list: './list/page',
                     page: './pages/pages',
 									
-										banner: './banner'
+										// banner: './banner'
                 }
                 uni.navigateTo({
                     url: obj[text]

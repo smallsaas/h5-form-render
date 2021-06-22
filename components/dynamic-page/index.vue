@@ -9,7 +9,7 @@
                       ..._get(config.moduleData, item.key, {}),
                       outStyle: getComponentStyle(item)
                    }"
-				   :srvFormData="getComponentsData(item)"
+				   :srvFormData="getComponentsData(item) || {}"
                 />
 										<view
 										v-if="_get(item, 'type') === 'autolist'"
@@ -56,13 +56,13 @@
 											v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
 											>
 										<swiper-images 
-											 :list="getComponentsData(item) &&  _get(config.moduleData, `${item.key}.banners`, [])"
+											 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
 											 :outStyle="getComponentStyle(item)"
 										/>
 									</card>
 									<swiper-images
 											v-if="_get(item,'name')===undefined&&_get(item,'name')===''"
-										 :list="getComponentsData(item) &&  _get(config.moduleData, `${item.key}.banners`, [])"
+										 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
 										 :outStyle="getComponentStyle(item)"
 									/>
 								</view>
@@ -159,7 +159,7 @@
 								this.fetchPageData(resData)
 							} else {
 								this.config = resData
-								this.skeletonLoading = false
+								this.skeletonLoading = false                               
 							}
 							if (_.has(resData, 'title')) {
 								uni.setNavigationBarTitle({
@@ -194,7 +194,7 @@
 			// 获取组件数据
 			getComponentsData (item) {
 				if (!_.has(item, 'binding') || JSON.stringify(item.binding) === '{}') {
-					return {}
+					return false
 				}
 				const comonentScouce = {}
 				for (const i in item.binding) {

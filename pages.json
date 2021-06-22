@@ -200,6 +200,15 @@
 						"enablePullDownRefresh": false
 					}
 				}
+        ,{
+            "path" : "pages/test/pages/boxlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

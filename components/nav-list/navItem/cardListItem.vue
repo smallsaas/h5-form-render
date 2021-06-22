@@ -4,9 +4,9 @@
 			<view class="cardList-card">
 				<view class="cardList-carditem" :style="{'background':item.container.background}">
 					<navigator :url="item.nav" class="cardList-allitem">
-						<view :class="'cardlist cardlist-'+item.svg" v-if="item.svg!==undefined">
+						<view :class="'cardlist cardlist-'+item.svg" v-if="item.svg!==undefined&&item.img===undefined">
 						</view>
-						<image class="cardlist" :src="item.img" mode="widthFix" v-if="item.svg===undefined&&item.img!=undefined"></image>
+						<image class="cardlist" :src="item.img" mode="widthFix" v-if="item.svg===undefined&&item.img!==undefined"></image>
 						<view class="cardList-title">
 							{{item.title}}
 							<!-- <button @click="test()">测试</button> -->
@@ -52,6 +52,7 @@
 	  font-family: "cardlist" !important;
 		width: 16px;
 		height: auto;
+		float: left;
 	  font-size: 16px;
 	  font-style: normal;
 	  -webkit-font-smoothing: antialiased;
@@ -117,6 +118,6 @@
 		font-size: 12px;
 		color: #505050;
 		text-align: center;
-		margin-left: 20px;
+		margin-left: 0px;
 	}
 </style>
