@@ -1,8 +1,8 @@
 <template>
 	<view :style="{'background':_get(config,'outStyle.background','')}">
-		<view class="nav_list_header" v-if="_get(config,'title')!==''">
+<!-- 		<view class="nav_list_header" v-if="_get(config,'title')!==''">
 			<view class="nav_list_title">{{_get(config,'title',"")}}</view>
-		</view>
+		</view> -->
 		 <view 
 				class="nav_list_container" 
 				:style="[_get(config, 'outStyle', {})]"
@@ -57,7 +57,7 @@
 <style lang="less">
     .nav_list_container {
 				width: 100%;
-				// background-color: white;
+				background-color: white;
 				padding-bottom: 10px;
 		display: grid;
 		font-weight: bolder;

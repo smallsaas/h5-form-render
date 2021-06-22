@@ -2,7 +2,7 @@
 
 /***/ 226:
 /*!***************************************************************************************!*\
-  !*** F:/work/sport-it-ai-test/nownew/form-wechat-4/components/dynamic-page/index.vue ***!
+  !*** F:/work/sport-it-ai-test/nownew/form-wechat-5/components/dynamic-page/index.vue ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -41,7 +41,7 @@ component.options.__file = "components/dynamic-page/index.vue"
 
 /***/ 227:
 /*!**********************************************************************************************************************!*\
-  !*** F:/work/sport-it-ai-test/nownew/form-wechat-4/components/dynamic-page/index.vue?vue&type=template&id=9c9947ca& ***!
+  !*** F:/work/sport-it-ai-test/nownew/form-wechat-5/components/dynamic-page/index.vue?vue&type=template&id=9c9947ca& ***!
   \**********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -63,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 228:
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/work/sport-it-ai-test/nownew/form-wechat-4/components/dynamic-page/index.vue?vue&type=template&id=9c9947ca& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/work/sport-it-ai-test/nownew/form-wechat-5/components/dynamic-page/index.vue?vue&type=template&id=9c9947ca& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -180,15 +180,58 @@ var render = function() {
 
           var m8 =
             m7 === "banner"
-              ? _vm.getComponentsData(item) ||
+              ? _vm._get(item, "name") !== undefined &&
+                _vm._get(item, "name") !== ""
+              : null
+          var a4 =
+            m7 === "banner" && m8
+              ? {
+                  padding: "10px 0 0 0",
+                  fill: "#EFEFEF",
+                  title: {
+                    fill: "#FFFFFF"
+                  }
+                }
+              : null
+          var m9 = m7 === "banner" && m8 ? _vm._get(item, "name", "") : null
+          var m10 =
+            m7 === "banner" && m8
+              ? _vm.getComponentsData(item) &&
                 _vm._get(_vm.config.moduleData, item.key + ".banners", [])
               : null
-          var m9 = m7 === "banner" ? _vm.getComponentStyle(item) : null
+          var m11 = m7 === "banner" && m8 ? _vm.getComponentStyle(item) : null
+          var m12 =
+            m7 === "banner"
+              ? _vm._get(item, "name") === undefined &&
+                _vm._get(item, "name") === ""
+              : null
+          var m13 =
+            m7 === "banner" && m12
+              ? _vm.getComponentsData(item) &&
+                _vm._get(_vm.config.moduleData, item.key + ".banners", [])
+              : null
+          var m14 = m7 === "banner" && m12 ? _vm.getComponentStyle(item) : null
 
-          var m10 = _vm._get(item, "type")
+          var m15 = _vm._get(item, "type")
 
-          var a4 =
-            m10 === "navlist"
+          var m16 =
+            m15 === "navlist"
+              ? _vm._get(item, "name") !== undefined &&
+                _vm._get(item, "name") !== ""
+              : null
+          var a5 =
+            m15 === "navlist" && m16
+              ? {
+                  padding: "10px 0 0 0",
+                  fill: "#EFEFEF",
+                  title: {
+                    fill: "#FFFFFF"
+                  }
+                }
+              : null
+          var m17 = m15 === "navlist" && m16 ? _vm._get(item, "name", "") : null
+          var a6 =
+            m15 === "navlist" && m16
               ? {
                   list: _vm._get(
                     _vm.config.moduleData,
@@ -200,23 +243,37 @@ var render = function() {
                     item.key + ".itemModule",
                     []
                   ),
-                  outStyle: _vm.getComponentStyle(item),
-                  title: _vm._get(item, "name", "")
+                  outStyle: _vm.getComponentStyle(item)
                 }
               : null
-          var m11 = m10 === "navlist" ? _vm._get(item, "name", "") : null
-
-          var m12 = _vm._get(item, "type")
-
-          var m13 =
-            m12 === "boxList"
-              ? _vm._get(_vm.config.moduleData, item.key + ".navList", [])
+          var m18 = m15 === "navlist" && m16 ? _vm._get(item, "name", "") : null
+          var m19 =
+            m15 === "navlist"
+              ? _vm._get(item, "name") === undefined &&
+                _vm._get(item, "name") === ""
               : null
+          var a7 =
+            m15 === "navlist" && m19
+              ? {
+                  list: _vm._get(
+                    _vm.config.moduleData,
+                    item.key + ".navList",
+                    []
+                  ),
+                  itemModule: _vm._get(
+                    _vm.config.moduleData,
+                    item.key + ".itemModule",
+                    []
+                  ),
+                  outStyle: _vm.getComponentStyle(item)
+                }
+              : null
+          var m20 = m15 === "navlist" && m19 ? _vm._get(item, "name", "") : null
 
-          var m14 = _vm._get(item, "type")
+          var m21 = _vm._get(item, "type")
 
-          var m15 =
-            m14 === "cardList"
+          var m22 =
+            m21 === "boxList"
               ? _vm._get(_vm.config.moduleData, item.key + ".navList", [])
               : null
           return {
@@ -233,14 +290,24 @@ var render = function() {
             a3: a3,
             m7: m7,
             m8: m8,
+            a4: a4,
             m9: m9,
             m10: m10,
-            a4: a4,
             m11: m11,
             m12: m12,
             m13: m13,
             m14: m14,
-            m15: m15
+            m15: m15,
+            m16: m16,
+            a5: a5,
+            m17: m17,
+            a6: a6,
+            m18: m18,
+            m19: m19,
+            a7: a7,
+            m20: m20,
+            m21: m21,
+            m22: m22
           }
         })
       : null
@@ -265,7 +332,7 @@ render._withStripped = true
 
 /***/ 229:
 /*!****************************************************************************************************************!*\
-  !*** F:/work/sport-it-ai-test/nownew/form-wechat-4/components/dynamic-page/index.vue?vue&type=script&lang=js& ***!
+  !*** F:/work/sport-it-ai-test/nownew/form-wechat-5/components/dynamic-page/index.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -281,7 +348,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 230:
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/work/sport-it-ai-test/nownew/form-wechat-4/components/dynamic-page/index.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/work/sport-it-ai-test/nownew/form-wechat-5/components/dynamic-page/index.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -363,8 +430,44 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var dynamicList = function dynamicList() {Promise.all(/*! require.ensure | components/dynamic-list/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-list/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-list/index.vue */ 213));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var dynamicForm = function dynamicForm() {Promise.all(/*! require.ensure | components/dynamic-form/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-form/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-form/index.vue */ 206));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var swiperImages = function swiperImages() {Promise.all(/*! require.ensure | components/swiper-images/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/swiper-images/index")]).then((function () {return resolve(__webpack_require__(/*! ../swiper-images/index.vue */ 243));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var navList = function navList() {__webpack_require__.e(/*! require.ensure | components/nav-list/index */ "components/nav-list/index").then((function () {return resolve(__webpack_require__(/*! ../nav-list/index.vue */ 310));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var boxList = function boxList() {__webpack_require__.e(/*! require.ensure | components/box-list/box-list */ "components/box-list/box-list").then((function () {return resolve(__webpack_require__(/*! ../box-list/box-list.vue */ 303));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cardList = function cardList() {__webpack_require__.e(/*! require.ensure | components/cardList/cardList */ "components/cardList/cardList").then((function () {return resolve(__webpack_require__(/*! ../cardList/cardList.vue */ 317));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var card = function card() {__webpack_require__.e(/*! require.ensure | components/other/Card */ "components/other/Card").then((function () {return resolve(__webpack_require__(/*! ../other/Card.vue */ 117));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var dynamicList = function dynamicList() {Promise.all(/*! require.ensure | components/dynamic-list/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-list/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-list/index.vue */ 213));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var dynamicForm = function dynamicForm() {Promise.all(/*! require.ensure | components/dynamic-form/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/dynamic-form/index")]).then((function () {return resolve(__webpack_require__(/*! ../dynamic-form/index.vue */ 206));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var swiperImages = function swiperImages() {Promise.all(/*! require.ensure | components/swiper-images/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/swiper-images/index")]).then((function () {return resolve(__webpack_require__(/*! ../swiper-images/index.vue */ 243));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var navList = function navList() {__webpack_require__.e(/*! require.ensure | components/nav-list/index */ "components/nav-list/index").then((function () {return resolve(__webpack_require__(/*! ../nav-list/index.vue */ 310));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var boxList = function boxList() {__webpack_require__.e(/*! require.ensure | components/box-list/box-list */ "components/box-list/box-list").then((function () {return resolve(__webpack_require__(/*! ../box-list/box-list.vue */ 303));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var card = function card() {__webpack_require__.e(/*! require.ensure | components/other/Card */ "components/other/Card").then((function () {return resolve(__webpack_require__(/*! ../other/Card.vue */ 117));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -378,7 +481,6 @@ var _lodash = _interopRequireDefault(__webpack_require__(/*! lodash */ 36));func
     swiperImages: swiperImages,
     navList: navList,
     boxList: boxList,
-    cardList: cardList,
     card: card },
 
   props: {

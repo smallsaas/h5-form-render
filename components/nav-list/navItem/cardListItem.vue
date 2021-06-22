@@ -6,7 +6,7 @@
 					<navigator :url="item.nav" class="cardList-allitem">
 						<view :class="'cardlist cardlist-'+item.svg" v-if="item.svg!==undefined">
 						</view>
-						<image class="cardlist" :url="item.img" v-if="item.svg===undefined&&item.img!=undefined"></image>
+						<image class="cardlist" :src="item.img" mode="widthFix" v-if="item.svg===undefined&&item.img!=undefined"></image>
 						<view class="cardList-title">
 							{{item.title}}
 							<!-- <button @click="test()">测试</button> -->
@@ -51,6 +51,7 @@
 	.cardlist {
 	  font-family: "cardlist" !important;
 		width: 16px;
+		height: auto;
 	  font-size: 16px;
 	  font-style: normal;
 	  -webkit-font-smoothing: antialiased;
