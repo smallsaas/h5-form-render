@@ -9,22 +9,22 @@
                       ..._get(config.moduleData, item.key, {}),
                       outStyle: getComponentStyle(item)
                    }"
-				   :srvFormData="getComponentsData(item)"
+				   :srvFormData="getComponentsData(item) || {}"
                 />
-								<view
-								v-if="_get(item, 'type') === 'autolist'"
-								>
-									<card
-											:Style="{
-												'padding':'10px 0 0 0',
-												'fill':'#EFEFEF',
-												'title':{
-													'fill':'#FFFFFF'
-												}
-											}"
-											:title="_get(item,'name','')"
-											v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
-											>
+										<view
+										v-if="_get(item, 'type') === 'autolist'"
+										>
+											<card
+													:Style="{
+														'padding':'10px 0 0 0',
+														'fill':'#EFEFEF',
+														'title':{
+															'fill':'#FFFFFF'
+														}
+													}"
+													:title="_get(item,'name','')"
+													v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
+													>
 									    <dynamic-list
 									      :config="{
 									          ..._get(config.moduleData, item.key, {}),
@@ -41,32 +41,69 @@
 												}"
 												v-if="_get(item,'name')===undefined||_get(item,'name')===''"
 											></dynamic-list>
-											
+										</view>
+										
+									<view v-if="_get(item, 'type') === 'banner'">
+										<card
+											:Style="{
+												'padding':'10px 0 0 0',
+												'fill':'#EFEFEF',
+												'title':{
+													'fill':'#FFFFFF'
+												}
+											}"
+											:title="_get(item,'name','')"
+											v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
+											>
+										<swiper-images 
+											 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
+											 :outStyle="getComponentStyle(item)"
+										/>
+									</card>
+									<swiper-images
+											v-if="_get(item,'name')===undefined||_get(item,'name')===''"
+										 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
+										 :outStyle="getComponentStyle(item)"
+									/>
 								</view>
-			
-                <swiper-images 
-                   v-if="_get(item, 'type') === 'banner'"
-                   :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
-                   :outStyle="getComponentStyle(item)"
-                />
+								
+					<view v-if="_get(item, 'type') === 'navlist'">
+						<card
+							:Style="{
+								'padding':'10px 0 0 0',
+								'fill':'#EFEFEF',
+								'title':{
+									'fill':'#FFFFFF'
+								}
+							}"
+							:title="_get(item,'name','')"
+							v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
+							>
                 <nav-list 
-                    v-if="_get(item, 'type') === 'navlist'"
 										:title="_get(item,'name','')"
-					:config="{
-						list: _get(config.moduleData, `${item.key}.navList`, []),
-						itemModule: _get(config.moduleData, `${item.key}.itemModule`, []),
-						outStyle: getComponentStyle(item),
-						title: _get(item,'name','')
-					}"
+										:config="{
+											list: _get(config.moduleData, `${item.key}.navList`, []),
+											itemModule: _get(config.moduleData, `${item.key}.itemModule`, []),
+											outStyle: getComponentStyle(item),
+
+										}"
                  />
+							</card>
+							<nav-list
+								v-if="_get(item,'name')===undefined||_get(item,'name')===''"
+									:title="_get(item,'name','')"
+									:config="{
+										list: _get(config.moduleData, `${item.key}.navList`, []),
+										itemModule: _get(config.moduleData, `${item.key}.itemModule`, []),
+										outStyle: getComponentStyle(item),
+
+									}"
+							 />
+						</view>
 				 <box-list
 						v-if="_get(item,'type') === 'boxList'"
 						:list="_get(config.moduleData,`${item.key}.navList`,[])"
 				 ></box-list>
-				 <card-list
-					 v-if="_get(item,'type') === 'cardList'"
-					 :list="_get(config.moduleData,`${item.key}.navList`,[])"
-				 ></card-list>
             </view>
           </block>
         </van-skeleton>
@@ -77,10 +114,9 @@
 	import _ from 'lodash'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
-    import swiperImages from '../swiper-images/index.vue'
+		import swiperImages from '../swiper-images/index.vue'
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
-		import cardList from '../cardList/cardList.vue'
 		import card from '../other/Card.vue'
 	export default {
 		components: { 
@@ -89,7 +125,6 @@
 					swiperImages,
 					navList,
 					boxList,
-					cardList,
 					card
         },
 		props: {
@@ -125,7 +160,7 @@
 								this.fetchPageData(resData)
 							} else {
 								this.config = resData
-								this.skeletonLoading = false
+								this.skeletonLoading = false                               
 							}
 							if (_.has(resData, 'title')) {
 								uni.setNavigationBarTitle({
@@ -160,7 +195,7 @@
 			// 获取组件数据
 			getComponentsData (item) {
 				if (!_.has(item, 'binding') || JSON.stringify(item.binding) === '{}') {
-					return {}
+					return false
 				}
 				const comonentScouce = {}
 				for (const i in item.binding) {
@@ -175,7 +210,7 @@
 					    value = _.has(comonentScouce, 'list') ? comonentScouce.list : false
 						break;
 					case 'banner':
-					    value = _.has(comonentScouce, 'banners') ? comonentScouce.banners : false
+					    value = _.has(comonentScouce, 'banners') ? comonentScouce.banners : false;
 						break;
 					case 'navlist':
 					    value = _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
@@ -186,6 +221,7 @@
 					default:
 					    value = comonentScouce
 				}
+                return value
 			},
             // 获取组件容器外层布局
             getComponentStyle (item) {

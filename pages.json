@@ -189,6 +189,48 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+				{
+					"path":"pages/test/pages/banner",
+					"style":
+					{
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path":"pages/test/pages/navlist",
+					"style":
+					{
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
+				}
+        ,{
+            "path" : "pages/test/pages/boxlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+				{
+					"path":"pages/test/pages/autopage",
+					"style":
+					{
+						"navigationBarTitleText":"",
+						"enablePullDownRefresh":false
+					}
+				}
+        ,{
+            "path" : "pages/test/form/form",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {
