@@ -20,9 +20,9 @@
 				<text>复工</text>
 			</view>
 			
-			<view class="venue_tag" @click="handleToSelfInspectionRecord">
+<!-- 			<view class="venue_tag" @click="handleToSelfInspectionRecord">
 				<text>自查记录</text>
-			</view>
+			</view> -->
 			
 <!-- 			<view class="venue_tag" @click="handleToSelfInspectionDetail">
 				<text>自查详情</text>

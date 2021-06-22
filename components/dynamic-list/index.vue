@@ -56,7 +56,15 @@
 						  ...item,
 						  ...getComponentBindData(item)
 					  }"
-					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
+					  :itemNavigation="_get(config, 'config.itemNavigation', '')"
+					/>
+					<return-to-work-record-item 
+					  v-if="getListItemKey() === 'ReturnToWorkRecordItem'"
+					  :item="{
+						  ...item,
+						  ...getComponentBindData(item)
+					  }"
+					  :itemNavigation="_get(config, 'config.itemNavigation', '/my/returnToWorkDetail?id=')"
 					/>
                   </view>
               </view>
@@ -75,6 +83,7 @@
     import StateItem from './listItem/state-list/state-list.vue'
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
+	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
     
 	export default {
 		components: {
@@ -83,7 +92,8 @@
           ArticleItem,
 		  StateItem,
 		  SelfInspectionRecordItem,
-		  RecordStepsItem
+		  RecordStepsItem,
+		  ReturnToWorkRecordItem
 		},
 		props: {
 			config: {
@@ -123,7 +133,7 @@
              if (height < 0) {
                 height = 0
              }
-             console.log('height=', height)
+             //console.log('height=', height)
              return height
           }
         },

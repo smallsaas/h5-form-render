@@ -2,7 +2,7 @@
 	<view>
 		<dynamic-page
 		   :API="getPageApi"
-		   :dataId="dataId"
+		   :detailId="detailId"
 		/>
 	</view>
 </template>
@@ -19,14 +19,14 @@
 			var query = {};
 			if (e.query) {
 				query = { ...JSON.parse(decodeURIComponent(e.query)) }
-				this.dataId =  query.id
+				this.detailId =  query.id
 			}else {
 				console.error('获取id异常')
 			}
 		},
 		data() {
 			return {
-				dataId: '',
+				detailId: '',
 				getPageApi: config.formHost + '/form?id=300',
 			}
 		},

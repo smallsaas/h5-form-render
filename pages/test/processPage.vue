@@ -18,8 +18,7 @@
 		},
 		data() {
 			return {
-				configHost: 'http://192.168.3.239:8090',
-				getPageAapi: 'http://192.168.3.239:8090' + '/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
+				getPageAapi: config.formHost + '/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
 			}
 		},
 		methods:{

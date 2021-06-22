@@ -151,6 +151,9 @@
 				uni.request({
 					url: this.API,
 					method: 'GET',
+					header: {
+						Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJvcmdJZCI6IjEwMDAwMDAwMDAwMDAwMDAwMSIsInVzZXJJZCI6Ijg3NjcwODA4MjQzNzE5NzgyNyIsInVzZXJUeXBlIjoxMDEsImJVc2VyVHlwZSI6IlNZU1RFTSIsInRlbmFudE9yZ0lkIjoxMDAwMDAwMDAwMDAwMDAwMDEsImFjY291bnQiOiJhZG1pbiIsImV4dHJhVXNlclR5cGUiOjAsImlhdCI6MTYyNDM0NDE0MSwianRpIjoiODc2NzA4MDgyNDM3MTk3ODI3Iiwic3ViIjoiYWRtaW4iLCJleHAiOjE2MjQ2MDMzNDF9.eeUv5bZ7-hkXxVHEJ1v9JQtYtUkbiwNPBK3YxSyQSPm6nlogI9ApXQQFG5qjzUGLyoqsFQu-HszLUDCPk2lNTg"
+					},
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
 							const resData = _.cloneDeep(_.get(res, 'data.data', {}))				

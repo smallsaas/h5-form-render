@@ -85,9 +85,9 @@
 					// job: '员工',
 				},
 				cellList:[
-					{title: "自查记录", icon: "orders-o", path: "/a"},
-					{title: "复工记录", icon: "label-o", path: "/b"},
-					{title: "执法记录", icon: "label-o", path: "/c"}
+					{title: "自查记录", icon: "orders-o", path: "./selfInspectionRecord"},
+					{title: "复工记录", icon: "label-o", path: ""},
+					{title: "执法记录", icon: "label-o", path: ""}
 				]
 			}
 		},
@@ -99,7 +99,13 @@
 				}
 			},
 			onItemClick(path){
-				console.log('点击 path = ', path)
+				if(path){
+				   uni.navigateTo({
+						url: path
+				   }) 
+				}else{
+					console.log('path 不存在 ')
+				}
 			}
 		}
 	}
