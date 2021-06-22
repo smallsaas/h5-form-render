@@ -61,7 +61,7 @@
 										/>
 									</card>
 									<swiper-images
-											v-if="_get(item,'name')===undefined&&_get(item,'name')===''"
+											v-if="_get(item,'name')===undefined||_get(item,'name')===''"
 										 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
 										 :outStyle="getComponentStyle(item)"
 									/>
@@ -90,7 +90,7 @@
                  />
 							</card>
 							<nav-list
-								v-if="_get(item,'name')===undefined&&_get(item,'name')===''"
+								v-if="_get(item,'name')===undefined||_get(item,'name')===''"
 									:title="_get(item,'name','')"
 									:config="{
 										list: _get(config.moduleData, `${item.key}.navList`, []),

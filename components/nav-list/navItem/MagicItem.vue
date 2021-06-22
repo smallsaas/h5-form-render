@@ -5,18 +5,20 @@
 	>
 	  <navigator :url="getNavigationUrl(item.nav || item.url)" hover-class="navigator-hover">
 	      <view class="magic_item">
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='export'" :style="{'color':item.svg.color}">&#xe703;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='warning'" :style="{'color':item.svg.color}">&#xe7a5;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='instructions'" :style="{'color':item.svg.color}">&#xe622;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='radio'" :style="{'color':item.svg.color}">&#xe656;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='rules'" :style="{'color':item.svg.color}">&#xe60d;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='adminLicence'" :style="{'color':item.svg.color}">&#xe65a;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='drill'" :style="{'color':item.svg.color}">&#xe6a7;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='licence'" :style="{'color':item.svg.color}">&#xe793;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='publicity'" :style="{'color':item.svg.color}">&#xe621;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='lifeguard'" :style="{'color':item.svg.color}">&#xe68c;</i>
-					<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='employees'" :style="{'color':item.svg.color}">&#xe6b0;</i>
-					<image :src="item.img" v-if="item.img!==undefined&&item.svg===undefined" mode="aspectFit" class="image" />
+					<image :src="item.img" v-if="item.img!==undefined&&item.svg===undefined" mode="aspectFit" class="image" ></image>
+					<block v-if="item.svg!=undefined">
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='export'" :style="{'color':item.svg.color}">&#xe703;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='warning'" :style="{'color':item.svg.color}">&#xe7a5;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='instructions'" :style="{'color':item.svg.color}">&#xe622;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='radio'" :style="{'color':item.svg.color}">&#xe656;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='rules'" :style="{'color':item.svg.color}">&#xe60d;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='adminLicence'" :style="{'color':item.svg.color}">&#xe65a;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='drill'" :style="{'color':item.svg.color}">&#xe6a7;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='licence'" :style="{'color':item.svg.color}">&#xe793;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='publicity'" :style="{'color':item.svg.color}">&#xe621;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='lifeguard'" :style="{'color':item.svg.color}">&#xe68c;</i>
+						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='employees'" :style="{'color':item.svg.color}">&#xe6b0;</i>
+					</block>
 					<view class="title"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
 	      </view>
 	  </navigator>
@@ -99,7 +101,7 @@
 			}
 			>.title {
 			    white-space: wrap;
-					width: 5em;
+					// width: 5em;
 					height: 3em;
 					text-align: center;
 			    text-overflow: ellipsis;

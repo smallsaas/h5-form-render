@@ -12,7 +12,7 @@
         methods: {
             handleClick (text) {
                 const obj = {
-                    form: './form?id=10',
+                    form: '/pages/test/form/form?id=1019',
                     list: './list/page',
                     page: './pages/pages',
 									
