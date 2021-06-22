@@ -185,6 +185,7 @@
 					default:
 					    value = comonentScouce
 				}
+                return value
 			},
             // 获取组件容器外层布局
             getComponentStyle (item) {

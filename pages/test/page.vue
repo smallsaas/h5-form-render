@@ -15,7 +15,8 @@
 		},
 		data() {
 			return {
-				api: config.formHost + '/form?id=201'
+				// api: config.formHost + '/form?id=201'
+                api: 'https://api.mock.smallsaas.cn/form?id=300'
 			}
 		}
 	}
