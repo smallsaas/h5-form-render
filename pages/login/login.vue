@@ -10,7 +10,7 @@
 	export default {
 		data() {
 			return {
-				api: globalConfig.formHost + '/form?id=108'
+				api: globalConfig.formHost + '/form?id=130'
 			}
 		},
 		methods: {
