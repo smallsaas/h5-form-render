@@ -115,7 +115,6 @@
               },  
         },
 		mounted() {
-            
             // 有具体配置信息时
             if (Object.keys(this.config).length > 0) {
                 this.formConfig = _.cloneDeep(this.config)
@@ -126,7 +125,6 @@
                // 从默认配置中获取表单
                this.fetchDefaultFormConfig()
             }
-            console.log('进来了===', this.srvFormData, this.formConfig)
 			// 外部传入的数据源
 			if (Object.keys(this.srvFormData).length > 0) {
                 this.form = { ...this.srvFormData }
@@ -307,7 +305,13 @@
                                 title:'操作成功'
                             })
                             setTimeout(() => {
-                                uni.navigateBack()
+                                if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+                                    uni.navigateTo({
+                                        url: '../../pages' + this.config.submittedNavigation
+                                    })
+                                } else {
+                                    uni.navigateBack()
+                                }
                             }, 500)
                         }
                     }
