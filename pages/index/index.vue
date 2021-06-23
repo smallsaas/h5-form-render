@@ -48,8 +48,8 @@
 				<text>执法记录</text>
 			</view>
 			
-			<view class="venue_tag" @click="handleLawEnforcementRecord">
-				<text>执法记录</text>
+			<view class="venue_tag" @click="handleLawEnforcementDetail">
+				<text>执法详情</text>
 			</view>
 			
 			<view class="venue_tag" @click="handleLawProcessPage">
@@ -119,6 +119,11 @@
 			handleLawEnforcementRecord () {
 				uni.navigateTo({
 					url: '../my/lawEnforcementRecord'
+				})
+			},
+			handleLawEnforcementDetail () {
+				uni.navigateTo({
+					url: '../my/lawEnforcementDetail'
 				})
 			},
 			handleLawProcessPage () {

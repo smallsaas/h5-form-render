@@ -122,6 +122,12 @@
 			}
 		},
 		{	
+			"path": "pages/my/lawEnforcementDetail",
+			"style": {
+				"navigationBarTitleText": "执法详情"
+			}
+		},
+		{	
 			"path": "pages/test/processPage",
 			"style": {
 				"navigationBarTitleText": "流程测试页"

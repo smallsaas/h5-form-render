@@ -9,8 +9,6 @@
 </template>
 
 <script>
-    import _ from 'lodash';
-	
 	import dynamicPage from '../../components/dynamic-page/index.vue'
 	import { config } from '@/config.js'
 	
