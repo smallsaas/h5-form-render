@@ -85,6 +85,7 @@
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
 	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
+    import { globalConfig } from '@/config.js'
     
 	export default {
 		components: {
@@ -215,6 +216,10 @@
                   url: _.get(this.config, 'loadApi'),
                   method: 'GET',
                   data: this.listSearch,
+                  header: {
+                      Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
+                      token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
+                  },
                   complete: (res) => {
                      uni.hideLoading()
                      if (['000000', 200].includes(_.get(res, 'data.code'))) {

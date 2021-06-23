@@ -52,11 +52,11 @@
 <script>
 	import _ from 'lodash'
     import BaseVants from './BaseVants.vue'
-    import { config } from '@/config.js'
+    import { globalConfig } from '@/config.js'
 
-    const SUNMIT_API =  config.formHost + '/custom'
-    const LOAD_API = config.formHost + '/userinfos'  // 默认获取数据
-    const DEFAULT_CONFIG = config.formHost + '/form'
+    const SUNMIT_API =  globalConfig.formHost + '/custom'
+    const LOAD_API = globalConfig.formHost + '/userinfos'  // 默认获取数据
+    const DEFAULT_CONFIG = globalConfig.formHost + '/form'
     
 	export default {
         components: { 
@@ -90,6 +90,11 @@
 				fields: [],
 				form: {},
 				skeletonLoading: true,
+                
+                header: { // 请求token
+                    Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
+                    token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
+                }
 			}
 		},
         watch: {
@@ -142,6 +147,7 @@
                 uni.request({
                     url: _.get(this.formConfig, 'loadApi', '') || LOAD_API,
                     method: 'GET',
+                    header: this.header,
                     complete: (res) => {
                        if (_.get(res, 'data.code') === 200) {
                            let resData = _.cloneDeep(_.get(res, 'data.data', {}))
@@ -160,6 +166,7 @@
                     url: DEFAULT_CONFIG + _.get(this.formConfig, 'url', ''),
                     method: 'GET',
                     data:  _.has(this.formConfig, 'id') ? { id: this.formConfig.id } : {},
+                    header: this.header,
                     complete: (res) => {
                         if (_.get(res, 'data.code') === 200) {
                             this.formConfig = {
@@ -299,6 +306,7 @@
                     url: url,
                     method:'POST',
                     data: data,
+                    header: this.header,
                     complete: (res) => {
                         uni.hideLoading()
                         if (_.get(res, 'data.code') === 200) {

@@ -1,6 +1,5 @@
 import { toPromise } from './toPromise'
-import { config } from '@/config.js'
-const { tokenStorageKey } = config
+import { globalConfig } from '@/config.js'
 
 // 封装请求
 export const request = (method, url, params = {}, header = {}) => {
@@ -20,7 +19,7 @@ export const request = (method, url, params = {}, header = {}) => {
   }
 
   if (!header.token) {
-    const token = uni.getStorageSync(`${tokenStorageKey}`) || ''
+    const token = uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
     header.token = token
   }
 
@@ -35,7 +34,7 @@ export const request = (method, url, params = {}, header = {}) => {
 // 上传文件
 export const upLoad = (url, filePath, params, name) => {
   const _upLoad = toPromise(uni.uploadFile)
-  const token = uni.getStorageSync('token')
+  const token = uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
   return _upLoad({
     url: url,
     filePath: filePath,

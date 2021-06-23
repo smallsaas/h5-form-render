@@ -118,6 +118,7 @@
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
 	import card from '../other/Card.vue'
+    import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
 			dynamicList, 
@@ -135,7 +136,12 @@
 			return {
 				config: {}, //页面配置信息
 				pageData: {}, // 页面数据
-                skeletonLoading: true
+                skeletonLoading: true,
+                
+                header: {  // 请求header
+                    Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
+                    token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
+                }
 			}
 		},
 		created() {
@@ -152,9 +158,7 @@
 				uni.request({
 					url: this.API,
 					method: 'GET',
-					header: {
-						Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJvcmdJZCI6IjEwMDAwMDAwMDAwMDAwMDAwMSIsInVzZXJJZCI6Ijg3NjcwODA4MjQzNzE5NzgyNyIsInVzZXJUeXBlIjoxMDEsImJVc2VyVHlwZSI6IlNZU1RFTSIsInRlbmFudE9yZ0lkIjoxMDAwMDAwMDAwMDAwMDAwMDEsImFjY291bnQiOiJhZG1pbiIsImV4dHJhVXNlclR5cGUiOjAsImlhdCI6MTYyNDM0NDE0MSwianRpIjoiODc2NzA4MDgyNDM3MTk3ODI3Iiwic3ViIjoiYWRtaW4iLCJleHAiOjE2MjQ2MDMzNDF9.eeUv5bZ7-hkXxVHEJ1v9JQtYtUkbiwNPBK3YxSyQSPm6nlogI9ApXQQFG5qjzUGLyoqsFQu-HszLUDCPk2lNTg"
-					},
+					header: this.header,
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
 							const resData = _.cloneDeep(_.get(res, 'data.data', {}))
@@ -187,6 +191,7 @@
 					url: pageUrl,
 					method: 'GET',
                     data: _.get(this.config, 'dataSource.request', {}),
+                    header: this.header,
 					complete: (res) => {
 						this.config = { ...resData }
 						this.skeletonLoading = false
