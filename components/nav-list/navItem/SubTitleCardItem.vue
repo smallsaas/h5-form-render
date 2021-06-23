@@ -9,7 +9,7 @@
 	<view class="card">
 		<view class="imageBox" v-if="item.svg!==undefined||item.img!=undefined">
 				<view :class="'cardIcon icon-'+item.svg" v-if="item.svg!==undefined&&item.img===undefined" mode="aspectFit"></view>
-				<image :src="item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&item.img!==undefined"></image>
+				<image :url="item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&item.img!==undefined"></image>
 			</view>
 			<view
 				class="titleBox"
@@ -23,13 +23,28 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	export default {
 		name:"sub-title-card-item",
 		props:{
-			item:Object
+			item: {
+				type: Object,
+				default: function () {
+					return {}
+				}
+			}
 		},
-		data:{
-			
+		onLoad() {
+		},
+		data(){
+			return {
+				
+			}
+		},
+		methods:{
+			_get (data, field, value) {
+				return _.get(data, field, value)
+			}
 		}
 	}
 </script>

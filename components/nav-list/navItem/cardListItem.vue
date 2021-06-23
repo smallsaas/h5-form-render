@@ -21,6 +21,7 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	export default {
 		name:"card-List-Item",
 		data() {
@@ -32,8 +33,8 @@
 			item:Object
 		},
 		methods:{
-			test(){
-				console.log(this.item)
+			_get (data, field, value) {
+				return _.get(data, field, value)
 			}
 		}
 	}
