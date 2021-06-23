@@ -8,7 +8,7 @@
 </template>
 
 <script>
-	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { config } from '@/config.js'
 
 	export default {
@@ -34,10 +34,10 @@
 </script>
 
 <style lang="less">
-	page {
-		height: 100%;
-		background-color: #E5E5E5;
-		padding: 18rpx 0;
-	}
+	// page {
+	// 	height: 100%;
+	// 	background-color: #E5E5E5;
+	// 	padding: 18rpx 0;
+	// }
 
 </style>

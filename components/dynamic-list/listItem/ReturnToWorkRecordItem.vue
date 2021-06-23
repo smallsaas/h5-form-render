@@ -82,7 +82,7 @@
 			onGoToFormClick(e){
 				console.log('this.itemId = ', this.itemId)
 				uni.navigateTo({
-					url: '/pages/my/returnToWork?id=' + this.itemId
+					url: '/pages/companyHome/my/returnToWork?id=' + this.itemId
 				})
 			}
 		},

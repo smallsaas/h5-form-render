@@ -28,7 +28,7 @@
     import _ from 'lodash';
 	import divider from "@/components/custom-c/divider.vue";
 	import { getDynamicFormField, getReturnToWork } from '@/common/api.js'
-	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { config } from '@/config.js'
 	export default {
 		components: {
@@ -37,7 +37,6 @@
 		},
 		onLoad (e){
 			if (e.id) {
-				console.log('e.id = ', e.id)
 				this.dynamicLoadUrl =  config.formHost + '/data?id=' + e.id
 				this.initData(e.id);
 			}else {
