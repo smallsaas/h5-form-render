@@ -20,11 +20,11 @@
 	import card from '../../components/other/Card.vue'
 	// import stateList from '../../components/state-list/state-list.vue'
 	import DynamicPage from '../../components/dynamic-page/index.vue'
-	import { config } from '@/config.js'
+	import { globalConfig } from '@/config.js'
 	export default {
 		data() {
 			return {
-		api: config.formHost + '/form?id=108',
+		api: globalConfig.formHost + '/form?id=108',
 /*			boxListData:[
 				],
 				cardListData:[

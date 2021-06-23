@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import { config } from '@/config.js'
+    import { globalConfig } from '@/config.js'
     export default {
         props: {
             param: {
@@ -89,12 +89,12 @@
             handleAfterRead (event) {
                 const { file } = event.detail
                 uni.uploadFile({
-                    url: config.formHost + '/upload',
+                    url: globalConfig.formHost + '/upload',
                     filePath: file.url,
                     name: 'file',
                     success: (res) => {
                         const list = this.fileList
-                        const resUrl = res.data.substr(0, 5).includes('http') ? res.data :  config.formHost + res.data
+                        const resUrl = res.data.substr(0, 5).includes('http') ? res.data :  globalConfig.formHost + res.data
                         if (_.has(this.param, 'accept') && this.param.accept === 'file') {
                             const index = resUrl.lastIndexOf('.')
                             const str = resUrl.substr(index + 1)
