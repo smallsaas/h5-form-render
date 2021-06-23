@@ -237,7 +237,6 @@
             // 获取组件容器外层布局
             getComponentStyle (item) {
                 if (_.has(item, 'container') && JSON.stringify(item.container) !== '{}') {
-									console.log(_.get(item,'container',{}))
                     return _.get(item, 'container', {})
                 }
                 return _.get(this.config, 'moduleContainer', {})

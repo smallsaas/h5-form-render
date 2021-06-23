@@ -14,7 +14,8 @@
             </view>
             <load-refresh
                 ref="loadRefresh"
-                :isRefresh="!isPropsList && list.length !== 0"
+                :pagination="_get(config, 'pagination', true)"
+                :isRefresh="isRefresh"
                 refreshType="hollowDots"
                 color="#04C4C4"
                 :heightReduce="heightReduce"
@@ -126,6 +127,7 @@
 		  },
           // 列表高度
           fixedHeight () {
+             // 默认传入的为px
              let height = 0
              if (_.get(this.config, 'outStyle.height')) {
                 height = parseInt(_.get(this.config, 'outStyle.height', 0)) - (this.typeList.length > 0 ? 44 : 0)
@@ -133,8 +135,10 @@
              if (height < 0) {
                 height = 0
              }
-             //console.log('height=', height)
-             return height
+             return height * 2
+          },
+          isRefresh () {
+              return !this.isPropsList && this.list.length !== 0
           }
         },
 		mounted() {
