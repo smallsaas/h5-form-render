@@ -18,7 +18,7 @@
 				/>
 			</view>
 			<view class="footer">
-				<view>去填写</view>
+				<view @click="onGoToFormClick">去填写</view>
 			</view>
 		</view>
 	<!-- </navigator> -->
@@ -33,6 +33,12 @@
 			item: Object,
 			ext: Object,
 			itemNavigation: String
+		},
+		data(){
+			return {
+				itemId: '',
+				path: ''
+			}
 		},
 		computed: {
 			navigationUrl() {
@@ -51,30 +57,33 @@
 				   }
 				}
 				return text
+			},
+			setValue(){
+			   this.itemId = this.item.id;
 			}
 		},
 		methods: {
 			onItemClick(item){
 				let path = ''
-				console.log('this.itemNavigation = ', this.itemNavigation)
 				if (this.itemNavigation) {
 				   const route = this.itemNavigation.split('?')[0]
 				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   path += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
+				   path += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route + '?')
 				   if (Object.keys(query).length > 0) {
 				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
+							path += (i + '=' + item[i])
 				       }
-				console.log('route = ', route)
-				       path += '?query=' + encodeURIComponent(JSON.stringify(query))
 				   }
 				}
-				console.log('path = ', path)
-				// uni.navigateTo({
-				// 	url: path
-				// })
+				uni.navigateTo({
+					url: path
+				})
+			},
+			onGoToFormClick(e){
+				console.log('this.itemId = ', this.itemId)
+				uni.navigateTo({
+					url: '/pages/my/returnToWork?id=' + this.itemId
+				})
 			}
 		},
 		mounted(){

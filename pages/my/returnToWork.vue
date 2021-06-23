@@ -12,39 +12,49 @@
 		</view>
 		<divider />
 		<view class="center_content">
-			<dynamic-form :config="config" :ifManualSubmit="true" @submit="handleSubmit"
+<!-- 			<dynamic-form :config="config" :ifManualSubmit="true" @submit="handleSubmit"
+			 /> -->
+			 
+			 <dynamic-page
+			    :API="getPageApi"
+			    :dynamicLoadUrl="dynamicLoadUrl"
 			 />
+			 
 		</view>
 	</view>
 </template>
 
 <script>
-	import dynamicForm from "@/components/dynamic-form/index.vue";
     import _ from 'lodash';
 	import divider from "@/components/custom-c/divider.vue";
 	import { getDynamicFormField, getReturnToWork } from '@/common/api.js'
+	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import { config } from '@/config.js'
 	export default {
 		components: {
-			dynamicForm,
-			divider
+			divider,
+			dynamicPage
 		},
 		onLoad (e){
-			this.initData(e.id);
-			this.initField(e.id);
+			if (e.id) {
+				console.log('e.id = ', e.id)
+				this.dynamicLoadUrl =  config.formHost + '/data?id=' + e.id
+				this.initData(e.id);
+			}else {
+				console.error('获取id异常')
+			}
 		},
 		data() {
 			return {
 				config: {},
-				formData: {}
+				formData: {},
+				
+				dynamicLoadUrl: '',
+				getPageApi: config.formHost + '/form?id=11',
 			}
 		},
 		methods: {
-			async initField(id){
-				const res = await getDynamicFormField({id: id})
-				if (_.get(res, 'code') === 200) {
-				    this.config = { ..._.get(res, 'data', {}) }
-				}
-			},
+
 			async initData(id){
 				const res = await getReturnToWork({id: id})
 				if (_.get(res, 'code') === 200) {

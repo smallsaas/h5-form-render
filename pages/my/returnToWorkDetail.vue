@@ -16,21 +16,16 @@
 			dynamicPage
 		},
 		onLoad(e) {
-			var query = {};
-			if (e.query) {
-				query = { ...JSON.parse(decodeURIComponent(e.query)) }
-			console.log('this.query.id = ', this.query.id)
-				this.dynamicLoadUrl =  config.formHost + '/data?id=' + query.id
+			if (e.id) {
+				this.dynamicLoadUrl =  config.formHost + '/data?id=' + e.id
 			}else {
 				console.error('获取id异常')
 			}
 		},
 		data() {
 			return {
-				record: {
-					dynamicLoadUrl: '',
-					getPageApi: config.formHost + '/form?id=121',
-				},
+				dynamicLoadUrl: '',
+				getPageApi: config.formHost + '/form?id=121',
 			}
 		},
 		methods: {
