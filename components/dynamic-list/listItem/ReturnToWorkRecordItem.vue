@@ -1,5 +1,5 @@
 <template>
-	<navigator :url="navigationUrl" hover-class="navigator-hover">
+	<!-- <navigator : :animation-duration="" hover-class="navigator-hover"> -->
 		<view class='card'>
 			<view class='title'>
 				<view>{{ item.year }}</view>
@@ -14,14 +14,14 @@
 				<dynamic-cell :perem="{
 					title: cItem.title
 				}" 
-				@handleClick="onItemClick(cItem.path)"
+				@handleClick="onItemClick(cItem)"
 				/>
 			</view>
 			<view class="footer">
 				<view>去填写</view>
 			</view>
 		</view>
-	</navigator>
+	<!-- </navigator> -->
 </template>
 <script>
 	import qs from 'qs'
@@ -36,8 +36,6 @@
 		},
 		computed: {
 			navigationUrl() {
-				console.log('item = ', this.item);
-				console.log('itemNavigation = ', this.itemNavigation);
 				let text = ''
 				if (this.itemNavigation) {
 				   const route = this.itemNavigation.split('?')[0]
@@ -49,7 +47,6 @@
 				               query[i] = this.item[i] || ''
 				           }
 				       }
-				console.log('query1111 = ', query);
 				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
 				   }
 				}
@@ -57,8 +54,27 @@
 			}
 		},
 		methods: {
-			onItemClick(path){
-				console.log('path = ', path);
+			onItemClick(item){
+				let path = ''
+				console.log('this.itemNavigation = ', this.itemNavigation)
+				if (this.itemNavigation) {
+				   const route = this.itemNavigation.split('?')[0]
+				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
+				   path += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
+				   if (Object.keys(query).length > 0) {
+				       for (const i in query) {
+				           if (query[i] === '') {
+				               query[i] = this.item[i] || ''
+				           }
+				       }
+				console.log('route = ', route)
+				       path += '?query=' + encodeURIComponent(JSON.stringify(query))
+				   }
+				}
+				console.log('path = ', path)
+				// uni.navigateTo({
+				// 	url: path
+				// })
 			}
 		},
 		mounted(){

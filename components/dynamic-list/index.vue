@@ -56,15 +56,15 @@
 						  ...item,
 						  ...getComponentBindData(item)
 					  }"
-					  :itemNavigation="_get(config, 'config.itemNavigation', '')"
+					  :itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
-					<return-to-work-record-item 
-					  v-if="getListItemKey() === 'ReturnToWorkRecordItem'"
-					  :item="{
-						  ...item,
-						  ...getComponentBindData(item)
-					  }"
-					  :itemNavigation="_get(config, 'config.itemNavigation', '')"
+					<return-to-work-record-item
+						v-if="getListItemKey() === 'ReturnToWorkRecordItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
                   </view>
               </view>
