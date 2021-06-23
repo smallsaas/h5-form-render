@@ -4,9 +4,6 @@
 			<view class="venue_tag" @click="handleToCompany">
 				<text>企业自查</text>
 			</view>
-		    <view class="venue_tag" @click="handleToTest">
-		    	<text>测试</text>
-		    </view>
 			
 		</view>
 		
@@ -36,9 +33,6 @@
 				<text>签名</text>
 			</view>
 			
-			<view class="venue_tag" @click="handleMarket">
-				<text>市场监督</text>
-			</view>
 			
 <!-- 			<view class="venue_tag" @click="handleReturnToWorkRecord">
 				<text>复工记录</text>
@@ -70,11 +64,6 @@
 <script>
 	export default {
 		methods: {
-            handleToTest () {
-               uni.navigateTo({
-                    url: '../test/index'
-               }) 
-            },
 			handleToCompany () {
 				uni.navigateTo({
 					url: '../company/check'
@@ -87,7 +76,7 @@
 			},
 			handleCompanyHome () {
 				uni.navigateTo({
-					url: '../companyHome/index'
+					url: '../companyHome/home'
 				})
 			},
 			// handleToReturnToWork () {
@@ -100,11 +89,6 @@
 			// 		url: '../my/selfInspectionRecord'
 			// 	})
 			// },
-			handleMarket(){
-				uni.navigateTo({
-					url:'../Market-index/Market-index'
-				})
-			},
 			// handleToSelfInspectionDetail () {
 			// 	uni.navigateTo({
 			// 		url: '../my/selfInspectionDetail'

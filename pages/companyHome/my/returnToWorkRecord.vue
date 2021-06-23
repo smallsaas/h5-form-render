@@ -9,17 +9,16 @@
 </template>
 
 <script>
-    import _ from 'lodash';
-	
-	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { globalConfig } from '@/config.js'
+	
 	export default {
 		components:{ dynamicPage },
 		onLoad (e){
 		},
 		data() {
 			return {
-				getPageAapi: globalConfig.formHost + '/form?id=110',
+				getPageAapi: globalConfig.formHost + '/form?id=120',
 			}
 		},
 		methods:{

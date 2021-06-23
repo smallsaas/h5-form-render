@@ -86,8 +86,8 @@
 				},
 				cellList:[
 					{title: "自查记录", icon: "orders-o", path: "./selfInspectionRecord"},
-					{title: "复工记录", icon: "label-o", path: ""},
-					{title: "执法记录", icon: "label-o", path: ""}
+					{title: "复工记录", icon: "label-o", path: "./returnToWorkRecord"},
+					{title: "执法记录", icon: "label-o", path: "./lawEnforcementRecord"}
 				]
 			}
 		},
