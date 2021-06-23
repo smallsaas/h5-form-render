@@ -1,6 +1,5 @@
 <template>
 	<view class="cardList"
-	:style="[_get(item, 'container', {})]"
 	>
 		<view class="cardListBody">
 			<view class="cardList-card">

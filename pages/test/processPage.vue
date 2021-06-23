@@ -10,7 +10,7 @@
 
 <script>
 	import dynamicPage from '../../components/dynamic-page/index.vue'
-	import { config } from '@/config.js'
+	import { globalConfig } from '@/config.js'
 	
 	export default {
 		components:{ dynamicPage },
@@ -18,7 +18,7 @@
 		},
 		data() {
 			return {
-				getPageAapi: config.formHost + '/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
+				getPageAapi: globalConfig.formHost + '/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
 			}
 		},
 		methods:{
