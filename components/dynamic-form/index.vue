@@ -96,6 +96,7 @@
             config: {
                 handler(val, oldVal) {
                   if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
+                    this.formConfig = { ...val }
                     if (_.get(val, 'fields')) {
                         this.handleInitFormData()
                     }
