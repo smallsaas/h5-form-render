@@ -9,7 +9,7 @@
 	<view class="card">
 		<view class="imageBox" v-if="item.svg!==undefined||item.img!=undefined">
 				<view :class="'cardIcon icon-'+item.svg" v-if="item.svg!==undefined&&item.img===undefined" mode="aspectFit"></view>
-				<image :url="item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&item.img!==undefined"></image>
+				<image :src="item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&item.img!==undefined"></image>
 			</view>
 			<view
 				class="titleBox"
