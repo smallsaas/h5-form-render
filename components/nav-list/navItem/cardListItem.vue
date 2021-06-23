@@ -1,5 +1,7 @@
 <template>
-	<view class="cardList">
+	<view class="cardList"
+	:style="[_get(item, 'container', {})]"
+	>
 		<view class="cardListBody">
 			<view class="cardList-card">
 				<view class="cardList-carditem" :style="{'background':item.container.background}">
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	export default {
 		name:"card-List-Item",
 		data() {
@@ -30,8 +33,8 @@
 			item:Object
 		},
 		methods:{
-			test(){
-				console.log(this.item)
+			_get (data, field, value) {
+				return _.get(data, field, value)
 			}
 		}
 	}
