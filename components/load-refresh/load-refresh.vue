@@ -1,7 +1,7 @@
 <template>
 	<view class="load-refresh">
 		<!-- 刷新动画，可自定义，占高100rpx -->
-		<view class="animation" :style="{'--color': color}">
+		<view class="animation" :style="{'--color': color}" v-if="pagination !== false">
 			<view v-if="!playState" class="remind">
 				{{moving ? '↑ 松开释放' : '↓ 下拉刷新'}}
 			</view>
@@ -27,16 +27,23 @@
 			:style="[{
 				background: backgroundCover,
 				transform: coverTransform,
-				transition: coverTransition
+				transition: coverTransition,
+                marginTop: pagination !== false ? '-100rpx' : 0
 			}]"
 			@touchstart="coverTouchstart"
 			@touchmove="coverTouchmove"
 			@touchend="coverTouchend">
-			<scroll-view scroll-y class="list" :scroll-top="scrollTop" @scrolltolower="loadMore" :style="getHeight">
+			<scroll-view 
+                scroll-y 
+                class="list" 
+                :scroll-top="scrollTop" 
+                :style="pagination !== false ? getHeight : ''"
+                @scrolltolower="loadMore" 
+            >
 				<!-- 数据集插槽 -->
 				<slot name="content-list"></slot>
 				<!-- 上拉加载 -->
-				<view class="load-more">{{loadText}}</view>
+				<view class="load-more" v-if="pagination !== false">{{loadText}}</view>
 			</scroll-view>
 		</view>
 	</view>
@@ -77,7 +84,11 @@
 			totalPages: {
 				type: Number,
 				default: 0
-			}
+			},
+            pagination: {
+                type: Boolean,
+                default: true
+            }  // 是否分页加载数据
 		},
 		data() {
 			return {
@@ -97,7 +108,7 @@
 			getHeight() {
 				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
 				if (this.fixedHeight) {
-					return `height: ${this.fixedHeight * 2}rpx;`
+					return `height: ${this.fixedHeight}rpx;`
 				} else {
 					let height = uni.getSystemInfoSync().windowHeight - uni.upx2px(0 + this.heightReduce)
 					return `height: ${height}px;`
@@ -118,6 +129,9 @@
 		methods: {
 			// 根据currentPage和totalPages的值来判断 是否触发@loadMore
 			loadMore() {
+                if (this.pagination === false) {
+                    return
+                }
 				const { currentPage, totalPages } = this
 				if (!this.updating && currentPage < totalPages) {
 					this.updating = true
@@ -127,6 +141,9 @@
 			},
 			// 回弹效果
 			coverTouchstart(e) {
+                if (this.pagination === false) {
+                    return
+                }
 				if (!this.isRefresh) {
 					return
 				}
@@ -145,6 +162,9 @@
 				this.moving = moveDistance >= 50
 			},
 			coverTouchend() {
+                if (this.pagination === false) {
+                    return
+                }
 				if (!this.isRefresh || this.updating) {
 					return
 				}
@@ -156,6 +176,9 @@
 				}
 			},
 			runRefresh() {
+                if (this.pagination === false) {
+                    return
+                }
 				this.scrollTop = 0
 				this.coverTransition = 'transform .1s linear'
 				this.coverTransform = 'translateY(50px)'
@@ -191,7 +214,7 @@
 		width: 100%;
 		.cover-container{
 			width: 100%;
-			margin-top: -100rpx;
+			// margin-top: -100rpx;
 			.list{
 				width: 100%;
 				.load-more{

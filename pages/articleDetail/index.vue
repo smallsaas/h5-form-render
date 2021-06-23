@@ -15,7 +15,9 @@
 		onLoad(e) {
 			if (e.query) {
 				this.queryData = { ...JSON.parse(decodeURIComponent(e.query)) }
-			}
+			} else {
+                this.queryData = { ...e }
+            }
 		}
 	}
 </script>
