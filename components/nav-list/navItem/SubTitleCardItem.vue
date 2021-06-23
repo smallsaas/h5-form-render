@@ -115,7 +115,11 @@
 		.titleBox{
 			.title{
 				color: #2A82E4;
+				width: 100%;
 				font-size: 12px;
+				width: 10em;
+				white-space: wrap;
+				overflow: hidden;
 			}
 			.subTitle{
 				color: #A6A6A6;
