@@ -20,6 +20,11 @@
 					:item="item"
 					>
 					</card-list-item>
+					<sub-title-card-item
+					v-if="_get(config, 'itemModule.name') === 'subTitleCardItem'"
+					:item="item"
+					>
+					</sub-title-card-item>
 			  </block>
 		</view>
 	</view>
@@ -28,11 +33,13 @@
 <script>
 	import magicItem from './navItem/MagicItem.vue'
 	import cardListItem from './navItem/cardListItem.vue'
+	import subTitleCardItem from './navItem/SubTitleCardItem.vue'
 	// import card from '../other/Card.vue'
     export default {
 		components: {
 			magicItem,
-			cardListItem
+			cardListItem,
+			subTitleCardItem
 		},
         props: {
 						title:String,
@@ -46,9 +53,6 @@
         methods: {
 					_get (data, field, value) {
 						return _.get(data, field, value)
-					},
-					a(){
-						console.log(this.config)
 					}
         }
     }

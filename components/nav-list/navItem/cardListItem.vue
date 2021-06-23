@@ -1,5 +1,7 @@
 <template>
-	<view class="cardList">
+	<view class="cardList"
+	:style="[_get(item, 'container', {})]"
+	>
 		<view class="cardListBody">
 			<view class="cardList-card">
 				<view class="cardList-carditem" :style="{'background':item.container.background}">
