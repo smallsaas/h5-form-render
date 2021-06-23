@@ -8,14 +8,14 @@
 
 <script>
 	import dynamicPage from '../../../components/dynamic-page/index.vue'
-    import { config } from '@/config.js'
+    import { globalConfig } from '@/config.js'
 	export default {
 		components: {
 			dynamicPage
 		},
 		data() {
 			return {
-				api: config.formHost + '/form?id=1030'
+				api: globalConfig.formHost + '/form?id=1030'
 			}
 		}
 	}

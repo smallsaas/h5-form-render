@@ -1,7 +1,10 @@
 <script>
+    import { globalConfig } from '@/config.js'
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+            // 测试token
+            // uni.setStorageSync(globalConfig.tokenStorageKey, 'xxx')
 		},
 		onShow: function() {
 			console.log('App Show')

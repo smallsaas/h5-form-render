@@ -9,7 +9,7 @@
 
 <script>
 	import dynamicPage from '@/components/dynamic-page/index.vue'
-	import { config } from '@/config.js'
+	import { globalConfig } from '@/config.js'
 
 	export default {
 		components: {
@@ -17,7 +17,7 @@
 		},
 		onLoad(e) {
 			if (e.id) {
-				this.dynamicLoadUrl =  config.formHost + '/data?id=' + e.id
+				this.dynamicLoadUrl =  globalConfig.formHost + '/data?id=' + e.id
 			}else {
 				console.error('获取id异常')
 			}
@@ -25,7 +25,7 @@
 		data() {
 			return {
 				dynamicLoadUrl: '',
-				getPageApi: config.formHost + '/form?id=141',
+				getPageApi: globalConfig.formHost + '/form?id=141',
 			}
 		},
 		methods: {

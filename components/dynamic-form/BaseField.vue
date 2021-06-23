@@ -2,40 +2,30 @@
     <view :class="[`base_field_containe ${param.inputBlock ? 'van_field_input_block' : ''}`]">
         <van-field
            autosize
+		  :focus="focus"
           :label="param.label"
+          :size="param.size"
+          :type="param.type"
           :required="param.required"
+          :value="param.value"
+          :placeholder="param.placeholder"
+          :clearable="param.clearable"
+          :password="param.password"
           :left-icon="param['left-icon']"
           :right-icon="param['right-icon']"
+          :maxlength="param.maxlength || -1"
           :show-word-limit="param['show-word-limit']"
+          :readonly="param.readonly"
+          :disabled="param.disabled"
           :error="param.error === true"
           :error-message="param['error-message'] || ''"
           :style="param.style"
           label-class="van_field_label"
-        >
-			<template slot="input" style="width: 100%;">
-				<input 
-					v-if="param.type !== 'textarea'"
-					:type="param.type"
-					:placeholder="param.placeholder"
-					:placeholder-style="param['placeholder-style'] || 'color: #C8C9CC'"
-					:disabled="param.disabled || param.readonly"
-					:maxlength="param.maxlength || -1"
-					:password="param.password"
-					:value="param.value"
-					@input="handleInput"
-				/>
-				<textarea 
-					v-else
-					auto-height
-					:placeholder="param.placeholder"
-					:placeholder-style="param['placeholder-style'] || 'color: #C8C9CC'"
-					:disabled="param.disabled || param.readonly"
-					:maxlength="param.maxlength || -1"
-					:value="param.value"
-					@input="handleInput"
-				/>
-			</template>
-		</van-field>
+          @input="handleInput"
+          @clear="handleClear"
+		  @blur="handleBlur"
+		  @focus="handleFocus"
+        />
     </view>
 </template>
 
@@ -72,13 +62,24 @@
 		},
         methods: {
             handleInput (e) {
-               this.$emit("input", e.detail.value)
-            }
+               this.$emit("input", e.detail)
+            },
+            handleClear (e) {
+                this.$emit("clear", e)
+            },
+			handleBlur () {
+				this.focus = false
+			},
+			handleFocus () {
+				this.focus = true
+			}
         }
     }
 </script>
 
 <style lang="less">
     @import "./common.less";
-    .base_field_container {}
+    .base_field_container {
+        
+    }
 </style>

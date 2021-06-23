@@ -3,7 +3,7 @@
 		<view class="top_content">
 		  <view class="item" style="font-size: 16px;">
 			<view style="font-size: 16px;">距离复工上报结束还有 </view>
-			<view style="font-size: 30px; color: #D43030; margin: 0 6px;"> {{formData.days}} </view>
+			<view style="font-size: 30px; color: #D43030; margin: 0 6px;"> {{formData.days ? formData.days: 0}} </view>
 			<view style="font-size: 16px;"> 天 </view>
 		  </view>
 			<view class="item" style="margin-top: 7px; color: #07C160;">
@@ -29,7 +29,7 @@
 	import divider from "@/components/custom-c/divider.vue";
 	import { getDynamicFormField, getReturnToWork } from '@/common/api.js'
 	import dynamicPage from '@/components/dynamic-page/index.vue'
-	import { config } from '@/config.js'
+	import { globalConfig } from '@/config.js'
 	export default {
 		components: {
 			divider,
@@ -37,7 +37,7 @@
 		},
 		onLoad (e){
 			if (e.id) {
-				this.dynamicLoadUrl =  config.formHost + '/data?id=' + e.id
+				this.dynamicLoadUrl =  globalConfig.formHost + '/data?id=' + e.id
 				this.initData(e.id);
 			}else {
 				console.error('获取id异常')
@@ -49,7 +49,7 @@
 				formData: {},
 				
 				dynamicLoadUrl: '',
-				getPageApi: config.formHost + '/form?id=11',
+				getPageApi: globalConfig.formHost + '/form?id=11',
 			}
 		},
 		methods: {

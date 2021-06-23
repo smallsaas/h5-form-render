@@ -10,14 +10,14 @@
 
 <script>
 	import dynamicPage from '@/components/dynamic-page/index.vue'
-	import { config } from '@/config.js'
+	import { globalConfig } from '@/config.js'
 	export default {
 		components:{ dynamicPage },
 		onLoad (e){
 		},
 		data() {
 			return {
-				getPageAapi: config.formHost + '/form?id=140',
+				getPageAapi: globalConfig.formHost + '/form?id=140',
 			}
 		},
 		methods:{
