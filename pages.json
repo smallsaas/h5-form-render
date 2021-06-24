@@ -274,7 +274,14 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+				{
+					"path":"pages/enforcement/enforcementBook",
+					"style":{
+						"navigationBarTitleText":"",
+						"enablePullDownRefresh":false
+					}
+				}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

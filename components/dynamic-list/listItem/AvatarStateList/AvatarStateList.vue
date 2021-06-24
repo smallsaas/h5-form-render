@@ -1,36 +1,70 @@
 <template>
-	<view class="state_allcontent">
-	<navigator :url="itemNavigation">
-	<view class="AvatarStateList">
-		<view class="formNumber">执法单号:<span style="font-weight: bolder;">{{item.formNumber}}</span></view>
-		<view class="body">
-			<view class="avatar">
-				<image :src="item.img" mode="widthFix" class="avatar-img" />
-			</view>
-			<view class="content">
-				<view class="titleBox">
-					<view class="time"><span class="content-title">执法时间:</span>{{item.time}}</view>
-					<view class="object"><span class="content-title">执法对象:</span>{{item.object}}</view>
+	<navigator :url="navigationUrl" hover-class="navigator-hover">
+		<view class="state_allcontent">
+			<view class="AvatarStateList">
+				<view class="formNumber" v-if="item.formNumber">执法单号:<span style="font-weight: bolder;">{{item.formNumber}}</span></view>
+				<view class="body">
+					<view class="avatar" v-if="item.img">
+						<image :src="item.img" mode="widthFix" class="avatar-img" />
+					</view>
+					<view class="content" v-if="item.title||item.remarks||item.item.object">
+						<view class="titleBox" v-if="item.title||item.object">
+							<view class="time" v-if="item.time"><span class="content-title">执法时间:</span>{{item.time}}</view>
+							<view class="object" v-if="item.object"><span class="content-title">执法对象:</span>{{item.object}}</view>
+						</view>
+						<view class="remarks" v-if="item.remarks">{{item.remarks}}</view>
+					</view>
+					<view class="state" v-if="item.state">
+							<view v-if="item.state.modify" class="modify">修改</view>
+							<view v-if="item.state.approval" class="approval">审批</view>
+					</view>
 				</view>
-				<view class="remarks">{{item.remarks}}</view>
-			</view>
-			<view class="state">
-					<view v-if="item.state.modify" class="modify">修改</view>
-					<view v-if="item.state.approval" class="approval">审批</view>
 			</view>
 		</view>
-	</view>
 	</navigator>
-	</view>
 </template>
 
 <script>
-	
+	import qs from 'qs'
 	export default {
 		name:"avatar-state-list",
 		props:{
 			item:Object,
 			itemNavigation:String
+		},
+		onLoad(){
+			this.navigationUrl()
+			console.log(this.navigationUrl())
+		},
+		computed: {
+			navigationUrl() {
+				let text = ''
+				if (this.itemNavigation) {
+				   const route = this.itemNavigation.split('?')[0]
+				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
+		
+				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
+
+					 if(query.id = "[id]"){
+						 query.id = this.item.id
+					 }
+					 console.log(this.item.id)
+					 console.log(route)
+					 console.log(query)
+					 console.log(text)
+				   if (Object.keys(query).length > 0) {
+				       for (const i in query) {
+				           if (query[i] === '') {
+				               query[i] = this.item[i] || ''
+				           }
+				       }
+							 text+='?query='+query.id
+				       // text += '?query=' + encodeURIComponent(JSON.stringify(query))
+							 console.log(text)
+				   }
+				}
+				return text
+			}
 		}
 	}
 </script>
