@@ -1,39 +1,35 @@
 <template>
-	<navigator :url="navigationUrl" hover-class="navigator-hover">
-		<view class='card'>
-			
-			<view class="left">
-				<view class='title'>
-					<view>{{ item.year }}</view>
-				</view>
-				<view class='title' style="font-size: 28rpx;">
-					<view>{{ item.startTime}} - {{ item.endTime }}</view>
-				</view>
+	<view class='card'>
+		
+		<view class="left">
+			<view class='title'>
+				<view>{{ item.year }}</view>
 			</view>
-			
-			
-			<view class="right">
-				<view v-if="item.status === 'pass'" class="status">
-					正常营业
-				</view>
-				<view v-else-if="item.status === 'failed'" class="status" style="background-color: #808080;">
-					关闭
-				</view>
+			<view class='title' style="font-size: 28rpx;">
+				<view>{{ item.startTime}} - {{ item.endTime }}</view>
 			</view>
-			
 		</view>
-	</navigator>
+		
+		
+		<view class="right">
+			<view v-if="item.status === 'pass'" class="status">
+				正常营业
+			</view>
+			<view v-else-if="item.status === 'failed'" class="status" style="background-color: #808080;">
+				关闭
+			</view>
+		</view>
+		
+	</view>
 </template>
 <script>
-	import qs from 'qs'
 	import dynamicCell from "@/components/custom-c/cell.vue";
 	export default {
 		name: 'ReturnToWorkRecordItem',
 		components: { dynamicCell },
 		props: {
 			item: Object,
-			ext: Object,
-			itemNavigation: String
+			ext: Object
 		},
 		data(){
 			return {
@@ -42,23 +38,6 @@
 			}
 		},
 		computed: {
-			navigationUrl() {
-				let text = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
-				       }
-				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
-				   }
-				}
-				return text
-			},
 			setValue(){
 			   this.itemId = this.item.id;
 			}

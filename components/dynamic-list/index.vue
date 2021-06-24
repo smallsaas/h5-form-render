@@ -26,14 +26,17 @@
                 @refresh="refresh"
              >
               <view slot="content-list" class="list_content">
-                  <view v-for="(item, index) in list" :key="index">
+                  <view 
+					v-for="(item, index) in list" 
+					:key="index"
+					@click="handleJumpRoute(item)"
+				  >
                      <article-item
 						 v-if="getListItemKey() === 'ArticleItem'"
                          :item="{
 							 ...item,
 							 ...getComponentBindData(item)
 						 }"
-                         :itemNavigation="_get(config, 'itemNavigation', '')"
                      />
 					 <self-inspection-record-item
 					 	v-if="getListItemKey() === 'SelfInspectionRecordItem'"
@@ -41,14 +44,12 @@
 							...item,
 							...getComponentBindData(item)
 						}"
-					 	:itemNavigation="_get(config, 'itemNavigation', '')"
 					 />
 					<state-item
                       :item="{
 						  ...item,
 						  ...getComponentBindData(item)
 					  }"
-					  :itemNavigation="_get(config, 'config.itemNavigation', '/articleDetail/index?id=&title=&type=')"
 					  v-if="getListItemKey() === 'StateItem'"
 					/>
 					<record-steps-item 
@@ -57,7 +58,6 @@
 						  ...item,
 						  ...getComponentBindData(item)
 					  }"
-					  :itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
 					<return-to-work-record-item
 						v-if="getListItemKey() === 'ReturnToWorkRecordItem'"
@@ -65,7 +65,6 @@
 							...item,
 							...getComponentBindData(item)
 						}"
-						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
 					<venue-list-item
 						v-if="getListItemKey() === 'VenueListItem'"
@@ -73,7 +72,6 @@
 							...item,
 							...getComponentBindData(item)
 						}"
-						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
 <!-- 					<my-report-item
 						v-if="getListItemKey() === 'VenueListItem'"
@@ -81,7 +79,6 @@
 							...item,
 							...getComponentBindData(item)
 						}"
-						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/> -->
 					<avatar-state-item
 						v-if="getListItemKey() === 'avatarStateItem'"
@@ -89,7 +86,6 @@
 							...item,
 							...getComponentBindData(item)
 						}"
-						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
                   </view>
               </view>
@@ -303,6 +299,29 @@
 					comonentScouce[this.config.binding[i]] = _.get(item, i, '')
 				}
 				return comonentScouce
+			},
+			
+			// 统一跳转路由
+			handleJumpRoute (item) {
+				if (!_.get(this.config, 'itemNavigation')) {
+					return
+				}
+				let routeUrl = ''
+				const itemNavigation = this.config.itemNavigation
+				const route = itemNavigation.split('?')[0]
+				const query = itemNavigation.split('?')[1] ? qs.parse(itemNavigation.split('?')[1]) : {}
+				routeUrl += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
+				if (Object.keys(query).length > 0) {
+				    for (const i in query) {
+				        if (query[i] === '') {
+				            query[i] = item[i] || ''
+				        }
+				    }
+				    routeUrl += '?query=' + encodeURIComponent(JSON.stringify(query))
+				}
+				uni.navigateTo({
+					url: routeUrl
+				})
 			}
 		}
 	}

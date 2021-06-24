@@ -1,21 +1,19 @@
 <template>
 	<view class="stateList">
-			<navigator :url="navigationUrl" class="state_allcontent">
-				<view class="stateIcon stateIcon-go"></view>
-				<view class="stateList-content">
-					<view class="stateList-title">{{item.title}}</view>
-					<view class="stateList-company stateList-content-child">主管部门：{{item.company}}</view>
-					<view class="stateList-time stateList-content-child">起止日期：{{item.start}} - {{item.end}}</view>
-				</view>
-				<view class="stateList-stateGroup">
-					<view class="stateList-state" v-if="item.state==='enforcement'" style="background-color: #43CF7C;">
-						待执法
-					</view>
-					<view class="stateList-state" v-if="item.state==='rectification'" style="background-color: #2A82E4;">
-						待整改
-					</view>
-				</view>
-			</navigator>
+		<view class="stateIcon stateIcon-go"></view>
+		<view class="stateList-content">
+			<view class="stateList-title">{{item.title}}</view>
+			<view class="stateList-company stateList-content-child">主管部门：{{item.company}}</view>
+			<view class="stateList-time stateList-content-child">起止日期：{{item.start}} - {{item.end}}</view>
+		</view>
+		<view class="stateList-stateGroup">
+			<view class="stateList-state" v-if="item.state==='enforcement'" style="background-color: #43CF7C;">
+				待执法
+			</view>
+			<view class="stateList-state" v-if="item.state==='rectification'" style="background-color: #2A82E4;">
+				待整改
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -26,32 +24,12 @@
 		onLoad() {
 			this.const()
 		},
-		methods:{
-			navigationUrl() {
-				let text = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
-				       }
-				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
-				   }
-				}
-				return text
-			}
-		},
 		data() {
 			return {
 			};
 		},
 		props:{
-			item:Object,
-			itemNavigation:String
+			item:Object
 		}
 	}
 </script>

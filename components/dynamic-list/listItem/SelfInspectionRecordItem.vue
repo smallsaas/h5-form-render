@@ -1,56 +1,30 @@
 <template>
-	<navigator :url="navigationUrl" hover-class="navigator-hover">
-		<view class="self-item">
-			<view class="flex">
-				<view class="left flex1">
-					<view class="title text-line-1">{{ item.title }}</view>
-					<view class="times text-line-1">
-						期间: {{ item.startTime }} - {{ item.endTime }}
-					</view>
-					<view class="submit-time">提交时间: {{ item.submitTime }}</view>
+	<view class="self-item">
+		<view class="flex">
+			<view class="left flex1">
+				<view class="title text-line-1">{{ item.title }}</view>
+				<view class="times text-line-1">
+					期间: {{ item.startTime }} - {{ item.endTime }}
 				</view>
-				<view class="right">
-					<view v-if="item.status === 'pass'" class="status">
-						通过
-					</view>
-					<view v-else-if="item.status === 'failed'" class="status" style="background-color: #D43030;">
-						未通过
-					</view>
+				<view class="submit-time">提交时间: {{ item.submitTime }}</view>
+			</view>
+			<view class="right">
+				<view v-if="item.status === 'pass'" class="status">
+					通过
+				</view>
+				<view v-else-if="item.status === 'failed'" class="status" style="background-color: #D43030;">
+					未通过
 				</view>
 			</view>
 		</view>
-	</navigator>
+	</view>
 </template>
 <script>
-	import qs from 'qs'
 	export default {
 		name: 'SelfInspectionRecordItem',
 		props: {
 			item: Object,
-			ext: Object,
-			itemNavigation: String
-		},
-		computed: {
-			navigationUrl() {
-				let text = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
-				       }
-				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
-				   }
-				}
-				return text
-			}
-		},
-		methods: {
-
+			ext: Object
 		}
 	}
 </script>

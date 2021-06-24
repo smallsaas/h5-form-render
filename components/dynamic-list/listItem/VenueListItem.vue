@@ -1,58 +1,32 @@
 <template>
-	<navigator :url="navigationUrl" hover-class="navigator-hover">
-		<view class="venue-item">
-			<view class="flex">
-				<view class="left">
-					<image src="../../../static/images/empty.png" />
+	<view class="venue-item">
+		<view class="flex">
+			<view class="left">
+				<image src="../../../static/images/empty.png" />
+			</view>
+			<view class="middle flex1">
+				<view class="title">{{ item.company }}</view>
+				<view class="subTitle">
+					{{ item.address}}
 				</view>
-				<view class="middle flex1">
-					<view class="title">{{ item.company }}</view>
-					<view class="subTitle">
-						{{ item.address}}
-					</view>
+			</view>
+			<view class="right">
+				<view v-if="item.status === 'pass'" class="status">
+					正常营业
 				</view>
-				<view class="right">
-					<view v-if="item.status === 'pass'" class="status">
-						正常营业
-					</view>
-					<view v-else-if="item.status === 'failed'" class="status" style="background-color: #808080;">
-						关闭
-					</view>
+				<view v-else-if="item.status === 'failed'" class="status" style="background-color: #808080;">
+					关闭
 				</view>
 			</view>
 		</view>
-	</navigator>
+	</view>
 </template>
 <script>
-	import qs from 'qs'
 	export default {
 		name: 'SelfInspectionRecordItem',
 		props: {
 			item: Object,
-			ext: Object,
-			itemNavigation: String
-		},
-		computed: {
-			navigationUrl() {
-				let text = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
-				       }
-				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
-				   }
-				}
-				return text
-			}
-		},
-		methods: {
-
+			ext: Object
 		}
 	}
 </script>

@@ -24,19 +24,19 @@ export const getSearchList = (params) => {
 
 // 获取动态表单配置信息
 export const getDynamicFormField = (params) => {
-    const url = `${globalConfig.formHost}/form`
+    const url = `${globalConfig.formHost}`
     return request('GET', url, params)
 }
 
 // 获取动态列表配置信息
 export const getDynamicListField = (params) => {
-    const url = `${globalConfig.formHost}/form`
+    const url = `${globalConfig.formHost}`
     return request('GET', url, params)
 }
 
 // 获取动态页面配置信息
 export const getDynamicPageField = (params) => {
-    const url = `${globalConfig.formHost}/form`
+    const url = `${globalConfig.formHost}`
     return request('GET', url, params)
 }
 
@@ -60,6 +60,6 @@ export const getSelfInspectionRecord = (params) => {
 
 //获取自查详情页面配置
 // export const getSelfInspectionDetailField = (params) => {
-//     const url = `${globalConfig.formHost}/form`
+//     const url = `${globalConfig.formHost}`
 //     return request('GET', url, params)
 // }

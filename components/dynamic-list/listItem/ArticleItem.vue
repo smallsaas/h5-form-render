@@ -1,51 +1,24 @@
 <template>
-  <navigator :url="navigationUrl" hover-class="navigator-hover">
-    <view class="art-item">
-      <view class="flex">
-        <view class="left flex1">
-          <view class="title text-line-1">{{ item.title }}</view>
-          <view class="desc text-line-1">
-            {{ item.desc }}
-          </view>
-          <view class="time">{{ item.time }}</view>
+  <view class="art-item">
+    <view class="flex">
+      <view class="left flex1">
+        <view class="title text-line-1">{{ item.title }}</view>
+        <view class="desc text-line-1">
+          {{ item.desc }}
         </view>
-        <view class="right">
-          <img :src="item.img" />
-        </view>
+        <view class="time">{{ item.time }}</view>
+      </view>
+      <view class="right">
+        <img :src="item.img" />
       </view>
     </view>
-  </navigator>
+  </view>
 </template>
 <script>
-    import qs from 'qs'
     export default {
       name: 'ArticleItem',
       props: {
-        item: Object,
-        ext: Object,
-        itemNavigation: String
-      },
-      computed: {
-         navigationUrl () {
-             let text = ''
-             if (this.itemNavigation) {
-                const route = this.itemNavigation.split('?')[0]
-                const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-                text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-                if (Object.keys(query).length > 0) {
-                    for (const i in query) {
-                        if (query[i] === '') {
-                            query[i] = this.item[i] || ''
-                        }
-                    }
-                    text += '?query=' + encodeURIComponent(JSON.stringify(query))
-                }
-             }
-             return text
-         }
-      },
-      methods: {
-
+        item: Object
       }
     }
 </script>
