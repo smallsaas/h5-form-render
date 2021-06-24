@@ -442,7 +442,14 @@ export default {
       const form = {}
       for (let i = 0; i < this.fields.length; i++) {
         const item = this.fields[i]
-        form[item.__vModel__] = this.form[item.__vModel__] || item.__config__.defaultValue
+        if (item.__config__.layout === 'rowFormItem') {
+          for (let j = 0; j < item.__config__.children.length; j++) {
+            const subtIem = item.__config__.children[j]
+            form[subtIem.__vModel__] = this.form[subtIem.__vModel__] || subtIem.__config__.defaultValue
+          }
+        } else {
+          form[item.__vModel__] = this.form[item.__vModel__] || item.__config__.defaultValue
+        }
       }
       return form
     },
