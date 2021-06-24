@@ -14,6 +14,14 @@ export const getNavTypeList = (params) => {
 	return request('GET', url, params)
 }
 
+// 获取企业信息库搜索数据
+
+export const getSearchList = (params) => {
+    const url = `${globalConfig.dataHost}`
+    return request('GET', url, params)
+}
+
+
 // 获取动态表单配置信息
 export const getDynamicFormField = (params) => {
     const url = `${globalConfig.formHost}/form`

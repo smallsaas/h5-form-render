@@ -295,6 +295,13 @@
 						"navigationBarTitleText":"",
 						"enablePullDownRefresh":false
 					}
+				},
+				{
+					"path":"pages/enforcement/enterpriseDatabase",
+					"style":{
+						"navigationBarTitleText":"",
+						"enablePullDownRefresh":false
+					}
 				}
     ],
 	"globalStyle": {

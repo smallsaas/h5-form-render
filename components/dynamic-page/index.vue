@@ -104,6 +104,10 @@
 						v-if="_get(item,'type') === 'boxList'"
 						:list="_get(config.moduleData,`${item.key}.navList`,[])"
 				 ></box-list>
+						<search
+						 v-if="_get(item, 'type') === 'search'"
+						 :options = "_get(config.moduleData,`${item.key}.options`,[])"
+						></search>
             </view>
           </block>
         </van-skeleton>
@@ -118,6 +122,7 @@
     import navList from '../nav-list/index.vue'
     import boxList from '../box-list/box-list.vue'
 	import card from '../other/Card.vue'
+	import search from '../search/search.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -126,8 +131,9 @@
 			swiperImages,
 			navList,
 			boxList,
-			card
-        },
+			card,
+			search
+		},
 		props: {
 			API: String,  // 请求接口
             dynamicLoadUrl: String
