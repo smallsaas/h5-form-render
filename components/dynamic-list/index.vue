@@ -67,6 +67,14 @@
 						}"
 						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
+					<venue-list-item
+						v-if="getListItemKey() === 'VenueListItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+						:itemNavigation="_get(config, 'itemNavigation', '')"
+					/>
                   </view>
               </view>
             </load-refresh>
@@ -85,6 +93,7 @@
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
 	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
+	import VenueListItem from './listItem/VenueListItem.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -95,7 +104,8 @@
 		  StateItem,
 		  SelfInspectionRecordItem,
 		  RecordStepsItem,
-		  ReturnToWorkRecordItem
+		  ReturnToWorkRecordItem,
+		  VenueListItem
 		},
 		props: {
 			config: {

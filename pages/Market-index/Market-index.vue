@@ -24,7 +24,7 @@
 	export default {
 		data() {
 			return {
-		api: globalConfig.formHost + '/form?id=108',
+		api: globalConfig.formHost + '?id=108',
 /*			boxListData:[
 				],
 				cardListData:[

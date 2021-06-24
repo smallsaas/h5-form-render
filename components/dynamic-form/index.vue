@@ -56,7 +56,7 @@
 
     const SUNMIT_API =  globalConfig.formHost + '/custom'
     const LOAD_API = globalConfig.formHost + '/userinfos'  // 默认获取数据
-    const DEFAULT_CONFIG = globalConfig.formHost + '/form'
+    const DEFAULT_CONFIG = globalConfig.formHost
     
 	export default {
         components: { 

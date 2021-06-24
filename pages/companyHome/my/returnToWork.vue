@@ -37,7 +37,7 @@
 		},
 		onLoad (e){
 			if (e.id) {
-				this.dynamicLoadUrl =  globalConfig.formHost + '/data?id=' + e.id
+				this.dynamicLoadUrl =  globalConfig.dataHost + '?id=' + e.id
 				this.initData(e.id);
 			}else {
 				console.error('获取id异常')
@@ -49,7 +49,7 @@
 				formData: {},
 				
 				dynamicLoadUrl: '',
-				getPageApi: globalConfig.formHost + '/form?id=11',
+				getPageApi: globalConfig.formHost + '?id=11',
 			}
 		},
 		methods: {
