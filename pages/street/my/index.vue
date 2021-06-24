@@ -1,62 +1,28 @@
 <template>
 	<view class="my_container">
 		<view class='container_top'>
-			<van-row>
-				<van-col>
-					<view class='avatar'>
-						<img v-if="userInfo.avatar" :src="userInfo.avatar"/>
-						<img v-else  :src="this.defaultAvatar"/>
-					</view>
-				</van-col>
-				<van-col>
-					<view class='userInfo'>
-						<van-row type="flex">
-							<van-col>
-								<view class='text'>{{userInfo.userName}}</view>
-							</van-col>
-							<van-col>
-								<van-button plain type='info' size='small' round>信息按钮</van-button>
-							</van-col>
-						</van-row>
-						<van-row type="flex">
-							<van-col>
-								<view class='text'>企业编号: </view>
-							</van-col>
-							<van-col>
-								<view class='text'>{{userInfo.enterpriseNumber}} </view>
-							</van-col>
-						</van-row>
-						<van-row type="flex">
-							<van-col>
-								<view class='text'>企业域名: </view>
-							</van-col>
-							<van-col>
-								<view class='text'>{{userInfo.domainName}} </view>
-							</van-col>
-						</van-row>
-						<van-row type="flex">
-							<van-col>
-								<view class='text' style="text-align: right;">职位: </view>
-							</van-col>
-							<van-col>
-								<view class='text' style="text-align: left;">{{userInfo.job}} </view>
-							</van-col>
-						</van-row>
-					</view>
-					
-				</van-col>
-			</van-row>
+			
+			<view class='avatar'>
+				<img v-if="userInfo.avatar" :src="userInfo.avatar"/>
+				<img v-else  :src="this.defaultAvatar"/>
+			</view>
+			<view class='userInfo'>
+				<view class='title'>{{userInfo.userName}}</view>
+				<view class='subTitle'>{{userInfo.userName}}</view>
+			</view>
+			
+				
 		</view>
 
 
 		<view v-for="(item,index) in cellList" :key="index">
-			<dynamic-cell :perem="{
+			<dynamic-cell v-if="item.title" :perem="{
 				title: item.title,
 				icon: item.icon
 			}" 
 			@handleClick="onItemClick(item.path)"
 			/>
-			<divider/>
+			<divider v-else size="18"/>
 			 
 		</view>
 
@@ -89,10 +55,10 @@
 					// job: '员工',
 				},
 				cellList:[
-					{title: "我的上报", icon: "orders-o", path: ""},
+					{title: "我的上报", icon: "orders-o", path: "./myReport"},
 					{title: "我的收藏", icon: "label-o", path: ""},
 					{title: ""},
-					{title: "执法记录", icon: "label-o", path: ""}
+					{title: "设置", icon: "label-o", path: ""}
 				]
 			}
 		},
@@ -131,27 +97,45 @@
 		margin: 18rpx 0;
 		padding: 12rpx 0;
 		background-color: #ffffff;
+		display: flex;
+		flex-direction: column;
 		
 		.avatar {
-			width: 180rpx;
+			display: flex;
+			justify-content: center;
+			margin: 40rpx 0 20rpx 0;
 			>img{
-				width: 110rpx;
-				height: 110rpx;
-				margin-left: 46rpx;
-				margin-top: 50rpx;
+				width: 160rpx;
+				height: 160rpx;
+				border-radius: 50%;
 			}
 		}
 		
 		.userInfo {
 			font-size: 28rpx;
-			margin-top: 40rpx;
-		
+			margin-top: 15rpx;
+			padding-bottom: 20rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			
 			.text {
 				min-width: 130rpx;
 				height: 70rpx;
 				line-height: 70rpx;
 				text-align: center;
-				margin-right: 14rpx;
+			}
+		
+			.title {
+				.text();
+				font-size: 36rpx;
+			}
+			
+			.subTitle {
+				.text();
+				height: 40rpx;
+				line-height: 40rpx;
+				color: #a6a6a6;
 			}
 		}
 	}

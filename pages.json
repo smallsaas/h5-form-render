@@ -168,11 +168,22 @@
 				"navigationBarTitleText": "街道页面入口"
 			}
 		},
-		
 		{	
 			"path": "pages/street/home",
 			"style": {
 				"navigationBarTitleText": "(首页) 街道"
+			}
+		},
+		{	
+			"path": "pages/street/my/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{	
+			"path": "pages/street/my/myReport",
+			"style": {
+				"navigationBarTitleText": "我的上报"
 			}
 		}
 		 ,{

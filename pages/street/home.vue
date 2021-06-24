@@ -36,7 +36,6 @@
 		  onChange(event) {
 			// event.detail 的值为当前选中项的索引
 			this.active = event.detail
-			console.log(event.detail)
 			switch (event.detail){
 				case 0:
 					uni.navigateTo({
@@ -50,7 +49,7 @@
 					break;
 				case 2:
 					uni.navigateTo({
-						url: ''
+						url: './my/index'
 					})
 					break;
 				default:
