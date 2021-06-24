@@ -116,6 +116,7 @@
 
 <script>
 	import _ from 'lodash'
+	import qs from 'qs'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
 	import swiperImages from '../swiper-images/index.vue'
@@ -135,8 +136,13 @@
 			search
 		},
 		props: {
-			API: String,  // 请求接口
-            dynamicLoadUrl: String
+			API: String,  // 页面数据请求接口
+            requsetParam: {  // 页面数据请求参数
+				type: Object,
+				default: function () {
+					return {}
+				}
+			}
 		},
 		data () {
 			return {
@@ -160,6 +166,30 @@
 			_get (data, field, value) {
 				return _.get(data, field, value)
 			},
+			// 获取页面请求数据接口 
+			getRequestUrl (resData) {
+				let url
+				if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
+				   url =  resData.dataSource.api
+				}
+				if (url && Object.keys(this.requsetParam).length > 0) {
+					let str = url.split('?')[0]
+					let query = url.split('?')[1] ? qs.parse(url.split('?')[1]) : {}
+					if (str.includes('/:')) {
+						let newStr = ''
+						str.split('/:').map((x, i) => {
+							newStr += (i === 0 ? x : `/${this.requsetParam[x]}`)
+						})
+						str = newStr
+					}
+					query = {
+						...query,
+						...this.requsetParam
+					}
+					url = str + '?' + qs.stringify(query)
+				}
+				return url
+			},
 			fetchConfigData () {
 				uni.request({
 					url: this.API,
@@ -169,13 +199,7 @@
 						if (_.get(res, 'data.code') === 200) {
 							const resData = _.cloneDeep(_.get(res, 'data.data', {}))
                             // 获取页面请求接口
-                             let pageUrl
-                             if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
-                                pageUrl =  resData.dataSource.api
-                             }
-                             if (this.dynamicLoadUrl) {
-                                pageUrl = this.dynamicLoadUrl
-                             }
+							const pageUrl = this.getRequestUrl(resData)
 							// 加载页面数据
 							if (pageUrl) {
 								this.fetchPageData(resData, pageUrl)
