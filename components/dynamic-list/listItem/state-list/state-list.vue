@@ -1,6 +1,6 @@
 <template>
 	<view class="stateList">
-			<navigator :url="itemNavigation" class="state_allcontent">
+			<navigator :url="navigationUrl" class="state_allcontent">
 				<view class="stateIcon stateIcon-go"></view>
 				<view class="stateList-content">
 					<view class="stateList-title">{{item.title}}</view>
@@ -27,8 +27,22 @@
 			this.const()
 		},
 		methods:{
-			async const(){
-				console.log(item)
+			navigationUrl() {
+				let text = ''
+				if (this.itemNavigation) {
+				   const route = this.itemNavigation.split('?')[0]
+				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
+				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
+				   if (Object.keys(query).length > 0) {
+				       for (const i in query) {
+				           if (query[i] === '') {
+				               query[i] = this.item[i] || ''
+				           }
+				       }
+				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
+				   }
+				}
+				return text
 			}
 		},
 		data() {

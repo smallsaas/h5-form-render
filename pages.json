@@ -266,6 +266,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/enforcement/myEnforcement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

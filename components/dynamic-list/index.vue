@@ -67,6 +67,16 @@
 						}"
 						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
+					<avatar-state-item
+						v-if="getListItemKey() === 'avatarStateItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+						:itemNavigation="_get(config, 'itemNavigation', '')"
+					>
+						
+					</avatar-state-item>
                   </view>
               </view>
             </load-refresh>
@@ -78,13 +88,14 @@
     import _ from 'lodash'
     import qs from 'qs'
     import { Base64 } from './tools.js'
-	import loadRefresh from '../load-refresh/load-refresh.vue'
+		import loadRefresh from '../load-refresh/load-refresh.vue'
     import msTab from '../ms-tabs/ms-tabs.vue'
     import ArticleItem from './listItem/ArticleItem.vue'
     import StateItem from './listItem/state-list/state-list.vue'
-	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
-	import RecordStepsItem from './listItem/RecordStepsItem.vue'
-	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
+		import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
+		import RecordStepsItem from './listItem/RecordStepsItem.vue'
+		import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
+		import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -92,10 +103,11 @@
 		  loadRefresh,
           msTab,
           ArticleItem,
-		  StateItem,
-		  SelfInspectionRecordItem,
-		  RecordStepsItem,
-		  ReturnToWorkRecordItem
+					StateItem,
+					SelfInspectionRecordItem,
+					RecordStepsItem,
+					ReturnToWorkRecordItem,
+					AvatarStateItem
 		},
 		props: {
 			config: {
