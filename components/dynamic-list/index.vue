@@ -75,6 +75,14 @@
 						}"
 						:itemNavigation="_get(config, 'itemNavigation', '')"
 					/>
+<!-- 					<my-report-item
+						v-if="getListItemKey() === 'VenueListItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+						:itemNavigation="_get(config, 'itemNavigation', '')"
+					/> -->
 					<avatar-state-item
 						v-if="getListItemKey() === 'avatarStateItem'"
 						:item="{
@@ -103,6 +111,7 @@
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
 	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
 	import VenueListItem from './listItem/VenueListItem.vue'
+	// import MyReportItem from './listItem/MyReportItem.vue'
 	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
     import { globalConfig } from '@/config.js'
     
@@ -116,6 +125,7 @@
 			RecordStepsItem,
 			ReturnToWorkRecordItem,
 			VenueListItem,
+			// MyReportItem,
 			AvatarStateItem
 		},
 		props: {
