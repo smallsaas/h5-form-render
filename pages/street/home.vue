@@ -50,7 +50,7 @@
 					break;
 				case 2:
 					uni.navigateTo({
-						url: ''
+						url: './my/index'
 					})
 					break;
 				default:

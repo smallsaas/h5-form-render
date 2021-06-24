@@ -1,7 +1,13 @@
 <template>
 	<view class="my_container">
 		<view class='container_top'>
-			<van-row>
+			
+			<van-grid column-num="2">
+			  <van-grid-item>1234</van-grid-item>
+			  <van-grid-item>2323</van-grid-item>
+			</van-grid>
+			
+			<van-row flex>
 				<van-col>
 					<view class='avatar'>
 						<img v-if="userInfo.avatar" :src="userInfo.avatar"/>
@@ -24,22 +30,6 @@
 							</van-col>
 							<van-col>
 								<view class='text'>{{userInfo.enterpriseNumber}} </view>
-							</van-col>
-						</van-row>
-						<van-row type="flex">
-							<van-col>
-								<view class='text'>企业域名: </view>
-							</van-col>
-							<van-col>
-								<view class='text'>{{userInfo.domainName}} </view>
-							</van-col>
-						</van-row>
-						<van-row type="flex">
-							<van-col>
-								<view class='text' style="text-align: right;">职位: </view>
-							</van-col>
-							<van-col>
-								<view class='text' style="text-align: left;">{{userInfo.job}} </view>
 							</van-col>
 						</van-row>
 					</view>
