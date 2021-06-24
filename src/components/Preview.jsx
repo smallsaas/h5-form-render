@@ -1,3 +1,4 @@
+import clonedeep from 'lodash.clonedeep'
 export default {
   props: {
     config: {
@@ -32,16 +33,33 @@ export default {
     },
     initFormData(fields = []) {
       const list = fields.map(item => {
-        let srvValue = this.srvFormData[item.__vModel__]
-        if (['el-select', 'el-radio-group', 'el-checkbox-group'].indexOf(item.__config__.tag) >= 0) {
-          for (let i = 0; i < item.__slot__.options.length; i++) {
-            if (+srvValue === item.__slot__.options[i].value) {
-              srvValue = item.__slot__.options[i].label
+        if (item.__config__.layout === 'rowFormItem') {
+          for (let j = 0; j < item.__config__.children.length; j++) {
+            const subtIem = clonedeep(item.__config__.children[j])
+            let srvValue = this.srvFormData[subtIem.__vModel__]
+            if (['el-select', 'el-radio-group', 'el-checkbox-group'].indexOf(subtIem.__config__.tag) >= 0) {
+              for (let i = 0; i < subtIem.__slot__.options.length; i++) {
+                if (+srvValue === subtIem.__slot__.options[i].value) {
+                  srvValue = subtIem.__slot__.options[i].label
+                }
+              }
+            }
+            const value = srvValue || item.__config__.defaultValue
+            subtIem.__config__.defaultValue = value
+            item.__config__.children[j] = subtIem
+          }
+        } else {
+          let srvValue = this.srvFormData[item.__vModel__]
+          if (['el-select', 'el-radio-group', 'el-checkbox-group'].indexOf(item.__config__.tag) >= 0) {
+            for (let i = 0; i < item.__slot__.options.length; i++) {
+              if (+srvValue === item.__slot__.options[i].value) {
+                srvValue = item.__slot__.options[i].label
+              }
             }
           }
+          const value = srvValue || item.__config__.defaultValue
+          item.__config__.defaultValue = value
         }
-        const value = srvValue || item.__config__.defaultValue
-        item.__config__.defaultValue = value
         return item
       })
       return list

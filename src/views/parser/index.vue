@@ -128,7 +128,11 @@ export default {
       const formData = {}
       Object.keys((data.formData || {})).forEach(key => {
         // const _key = key.toLowerCase()
-        formData[key] = JSON.parse(data.formData[key])
+        try {
+          formData[key] = JSON.parse(data.formData[key])
+        } catch (e) {
+          formData[key] = data.formData[key]
+        }
       })
       this.formData = formData
     },
