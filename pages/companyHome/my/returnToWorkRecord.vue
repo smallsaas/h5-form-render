@@ -18,7 +18,7 @@
 		},
 		data() {
 			return {
-				getPageAapi: globalConfig.formHost + '/form?id=120',
+				getPageAapi: globalConfig.formHost + '?id=120',
 			}
 		},
 		methods:{

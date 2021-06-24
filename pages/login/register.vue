@@ -9,11 +9,11 @@
 	import { globalConfig } from '@/config.js'
 	export default {
 		onLoad(e) {
-			this.api=globalConfig.formHost + '/form?id='+e.id
+			this.api=globalConfig.formHost + '?id='+e.id
 		},
 		data() {
 			return {
-				api: globalConfig.formHost + '/form?id=130'
+				api: globalConfig.formHost + '?id=130'
 			}
 		},
 		methods: {

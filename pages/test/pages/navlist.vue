@@ -15,7 +15,7 @@
 		},
 		data() {
 			return {
-				api: globalConfig.formHost + '/form?id=1025'
+				api: globalConfig.formHost + '?id=1025'
 			}
 		}
 	}

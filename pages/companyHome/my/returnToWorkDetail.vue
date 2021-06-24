@@ -17,7 +17,7 @@
 		},
 		onLoad(e) {
 			if (e.id) {
-				this.dynamicLoadUrl =  globalConfig.formHost + '/data?id=' + e.id
+				this.dynamicLoadUrl =  globalConfig.dataHost + '?id=' + e.id
 			}else {
 				console.error('获取id异常')
 			}
@@ -25,7 +25,7 @@
 		data() {
 			return {
 				dynamicLoadUrl: '',
-				getPageApi: globalConfig.formHost + '/form?id=121',
+				getPageApi: globalConfig.formHost + '?id=121',
 			}
 		},
 		methods: {

@@ -9,7 +9,7 @@
 		<view>
 			<van-tabbar :active="active" @change="onChange">
 			  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-			  <van-tabbar-item icon="comment-o">复工</van-tabbar-item>
+			  <van-tabbar-item icon="comment-o">社区</van-tabbar-item>
 			  <van-tabbar-item icon="friends-o">我的</van-tabbar-item>
 			</van-tabbar>
 		</view>
@@ -27,7 +27,7 @@
 		},
 		data() {
 			return {
-				getPageAapi: globalConfig.formHost + '?id=109',
+				getPageAapi: globalConfig.formHost + '?id=108',
 				active: 0
 			}
 		},
@@ -45,12 +45,12 @@
 					break;
 				case 1:
 					uni.navigateTo({
-						url: './my/returnToWork'
+						url: ''
 					})
 					break;
 				case 2:
 					uni.navigateTo({
-						url: './my/index'
+						url: ''
 					})
 					break;
 				default:

@@ -19,7 +19,7 @@
 			var query = {};
 			if (e.query) {
 				query = { ...JSON.parse(decodeURIComponent(e.query)) }
-				this.dynamicLoadUrl =  globalConfig.formHost + '/data?id=' + query.id
+				this.dynamicLoadUrl =  globalConfig.dataHost + '?id=' + query.id
 			}else {
 				console.error('获取id异常')
 			}
@@ -27,7 +27,7 @@
 		data() {
 			return {
 				dynamicLoadUrl: '',
-				getPageApi: globalConfig.formHost + '/form?id=300',
+				getPageApi: globalConfig.formHost + '?id=300',
 			}
 		},
 		methods: {

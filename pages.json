@@ -140,7 +140,7 @@
 		{	
 			"path": "pages/companyHome/index",
 			"style": {
-				"navigationBarTitleText": "入口"
+				"navigationBarTitleText": "企业页面入口"
 			}
 		},
 		{	
@@ -159,6 +159,20 @@
 			"path": "pages/test/processPage",
 			"style": {
 				"navigationBarTitleText": "流程测试页"
+			}
+		},
+		
+		{	
+			"path": "pages/street/index",
+			"style": {
+				"navigationBarTitleText": "街道页面入口"
+			}
+		},
+		
+		{	
+			"path": "pages/street/home",
+			"style": {
+				"navigationBarTitleText": "(首页) 街道"
 			}
 		}
 		 ,{

@@ -34,19 +34,19 @@ export const getDynamicPageField = (params) => {
 
 //获取复工页面数据
 export const getReturnToWork = (params) => {
-    const url = `${globalConfig.formHost}/data`
+    const url = `${globalConfig.dataHost}`
     return request('GET', url, params)
 }
 
 //获取我的页面数据
 export const getUserInfo = (params) => {
-    const url = `${globalConfig.formHost}/data`
+    const url = `${globalConfig.dataHost}`
     return request('GET', url, params)
 }
 
 //获取自查记录页面数据
 export const getSelfInspectionRecord = (params) => {
-    const url = `${globalConfig.formHost}/data`
+    const url = `${globalConfig.dataHost}`
     return request('GET', url, params)
 }
 
