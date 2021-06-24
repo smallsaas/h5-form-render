@@ -19,7 +19,9 @@ export default {
   watch: {
     $route () {
       const { meta } = this.$route
-      this.$f.setTitle(meta.title)
+      if (this.$f) {
+        this.$f.setTitle(meta.title)
+      }
     }
   },
   methods: {

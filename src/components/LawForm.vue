@@ -171,6 +171,7 @@
 <script>
 import { formatTime } from '../utils'
 import axios from 'axios'
+import { Toast } from 'vant'
 const SUNMIT_API = '/api.page.design.form/submitFormData'
 export default {
   name: 'LawForm',
@@ -299,15 +300,14 @@ export default {
         .then((res) => {
           this.loading = false
           if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code.indexOf('00000') >= 0) {
-            this.$toast('提交成功')
-            // this.$f.toPage()
+            Toast('提交成功')
             this.$emit('OnSubmitFormSuc')
           } else {
-            this.$toast('提交失败')
+            Toast('提交失败')
           }
         })
         .catch(() => {
-          this.$toast('提交失败')
+          Toast('提交失败')
           this.loading = false
         })
     }
