@@ -28,7 +28,7 @@
 		data() {
 			return {
 				dynamicLoadUrl: '',
-				getPageApi: globalConfig.formHost + '/form?id=2002'
+				getPageApi: globalConfig.formHost + '?id=2002'
 			}
 		},
 		methods: {
