@@ -175,18 +175,28 @@
 				if (url && Object.keys(this.requsetParam).length > 0) {
 					let str = url.split('?')[0]
 					let query = url.split('?')[1] ? qs.parse(url.split('?')[1]) : {}
+                    const queryData = {
+                        ...query,
+                        ...this.requsetParam
+                    }
 					if (str.includes('/:')) {
 						let newStr = ''
 						str.split('/:').map((x, i) => {
+                            if (_.has(queryData, x)) {
+                                delete queryData[x]
+                            }
 							newStr += (i === 0 ? x : `/${this.requsetParam[x]}`)
 						})
 						str = newStr
 					}
-					query = {
-						...query,
-						...this.requsetParam
-					}
-					url = str + '?' + qs.stringify(query)
+                    let queryStr = ''
+                    Object.keys(queryData).map((x, i) => {
+                         if (queryData[x] !== '' && this.requsetParam[x] !== '') {
+                            const symbol = (i === Object.keys(queryData).length - 1 ? '' : '&')
+                            queryStr += (query[x] === '' ? `${_.get(this.requsetParam, x, '')}${symbol}` : `${x}=${_.get(this.requsetParam, x, query[x])}${symbol}`) 
+                         }
+                    })
+					url = str + (queryStr ? `?${queryStr}` : '')
 				}
 				return url
 			},
