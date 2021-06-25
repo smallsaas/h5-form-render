@@ -50,7 +50,7 @@
 
 
 		<view v-for="(item,index) in cellList" :key="index">
-			<dynamic-cell :perem="{
+			<dynamic-cell :param="{
 				title: item.title,
 				icon: item.icon
 			}" 

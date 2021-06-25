@@ -32,12 +32,15 @@
 			onItemClick(e){
 				const itemIndex = e.detail
 				let path = ''
+				let query = {}
 				if(this.item.recordSteps && this.item.recordSteps.length > 0){
 					this.item.recordSteps.map((item, index) => {
 						if(itemIndex === index){
-							path = item.path + '?id=' + item.id
+							path = item.path
+							query.id = item.id
 						}
 					})
+					path = path + '?query=' + encodeURIComponent(JSON.stringify(query))
 					if(path){
 						uni.navigateTo({
 							url: path 
@@ -50,7 +53,7 @@
 			}
 		},
 		mounted(){
-			console.log('this.item = ', this.item)
+			// console.log('this.item = ', this.item)
 		}
 	}
 </script>

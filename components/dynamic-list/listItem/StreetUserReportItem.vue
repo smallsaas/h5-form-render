@@ -1,51 +1,66 @@
 <template>
 	<view class='card'>
 		
-		<view class='topTitle'>
-			<view>{{ item.year }}</view>
-		</view>
-		
-		<block v-if="item.record && item.record.length > 0" v-for="(recordItem, recordIndex) in item.record" :key="recordIndex">
-			<view class="listItem">
-				<view class="flex">
-					<view class="left flex1">
-						<view class='times' style="font-size: 28rpx;">
-							<view>{{ recordItem.month }}</view>
-						</view>
-						
-						<view class='title' style="font-size: 28rpx;">
-							<view>{{ recordItem.title }}</view>
-						</view>
-					</view>
-					
-					<view class="right">
-						<view v-if="recordItem.status === 'toBeVerified'" class="status">
-							待验证
-						</view>
-						<view v-else-if="recordItem.status === 'verified'" class="status" style="background-color: #43CF7C;">
-							已验证
-						</view>
-						<view v-else-if="recordItem.status === 'validationFailed'" class="status" style="background-color: #D43030;">
-							验证失败
-						</view>
-					</view>
-				</view>
-				<van-grid column-num="3" border="false">
-				  <van-grid-item use-slot v-for="(imgItem, imgIndex) in recordItem.imgList" :key="imgIndex" >
-					 <van-image width="100" height="100" :src="imgItem.url"/>
-				  </van-grid-item>
-				</van-grid>
-				<divider/>
-				<view class="position">
+		<view class="flex">
+			<view class="left flex1">
+				
+				<view class="userInfo">
 					<view style="margin-top: 3rpx;">
-						<van-icon name="location" size="44rpx" color="#D5D5D5" />
+						<van-image width="100rpx" height="100rpx" round :src="item.avatar ? item.avatar : '../../../static/images/empty.png'"/>
 					</view>
-					<view class="address">定位地点：{{ recordItem.address }}</view>
+					<view class="name">{{ item.name }}</view>
+				</view>
+				
+			</view>
+			
+			<view class="right">
+				<view v-if="item.status === 'toBeVerified'" class="status">
+					待验证
+				</view>
+				<view v-else-if="item.status === 'verified'" class="status" style="background-color: #43CF7C;">
+					已验证
+				</view>
+				<view v-else-if="item.status === 'validationFailed'" class="status" style="background-color: #D43030;">
+					验证失败
 				</view>
 			</view>
-		</block>
-
+		</view>
 		
+		<view class="listItem">
+			<view class="flex">
+				<view class="left flex1">
+					
+					<view class='title' style="font-size: 28rpx;">
+						<view>{{ item.title }}</view>
+					</view>
+				</view>
+				
+				<view class="right">
+					<view v-if="status === 'toBeVerified'" class="status">
+						待验证
+					</view>
+					<view v-else-if="status === 'verified'" class="status" style="background-color: #43CF7C;">
+						已验证
+					</view>
+					<view v-else-if="status === 'validationFailed'" class="status" style="background-color: #D43030;">
+						验证失败
+					</view>
+				</view>
+			</view>
+			<van-grid column-num="3" border="false">
+			  <van-grid-item use-slot v-for="(imgItem, imgIndex) in item.imgList" :key="imgIndex" >
+				 <van-image width="100" height="100" :src="imgItem.url"/>
+			  </van-grid-item>
+			</van-grid>
+			<divider/>
+			<view class="position">
+				<view style="margin-top: 3rpx;">
+					<van-icon name="location" size="44rpx" color="#D5D5D5" />
+				</view>
+				<view class="address">定位地点：{{ item.address }}</view>
+			</view>
+		</view>
+
 	</view>
 </template>
 <script>
@@ -102,16 +117,10 @@
 		display: flex;
 		flex-direction: column;
 	}
-	
-	.topTitle {
-		color: #333;
-		font-weight: 700;
-		font-size: 32rpx;
-		padding-left: 25rpx;
-		margin-bottom: 18rpx;
-	}
+
 	
 	.listItem{
+		margin-top: 10rpx;
 		margin-bottom: 18rpx;
 	}
 	
@@ -121,17 +130,19 @@
 		justify-content: space-between;
 		padding: 0 24rpx;
 		.left {
-			.times {
+			
+			.avatar {
+				width: ;
+			}
+			
+			.topTitle {
 				color: #333;
 				font-weight: 700;
 				font-size: 32rpx;
+				padding-left: 25rpx;
+				margin-bottom: 18rpx;
 			}
-		
-			.title {
-				margin: 10rpx 0;
-				color: #333;
-			}
-		
+			
 		// 	.text-line-1 {
 		// 		text-overflow: ellipsis;
 		// 		white-space: nowrap;
@@ -165,6 +176,19 @@
 			}
 		}
 	}
+	
+	.userInfo{
+		display: flex;
+		flex-direction: row;
+		.name{
+			font-size: 28rpx; 
+			margin-left: 20rpx;
+			display: flex;
+			align-items: center;
+		}
+	}
+	
+
 	
 	.position{
 		display: flex;

@@ -65,6 +65,8 @@
 										 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
 										 :outStyle="getComponentStyle(item)"
 									/>
+									
+									
 								</view>
 								
 					<view v-if="_get(item, 'type') === 'navlist'">
@@ -108,6 +110,15 @@
 						 v-if="_get(item, 'type') === 'search'"
 						 :config = "_get(config.moduleData,item.key,{})"
 						></search>
+						
+						<!-- 新增  2021-2-25 -->
+						<cell
+							v-if="_get(item, 'type') === 'cell'"
+							:param = "_get(config.moduleData,`${item.key}.param`, {})"
+							:days = "getComponentsData(item) || 0"
+						/>
+						<!-- end -->
+						
             </view>
           </block>
         </van-skeleton>
@@ -124,6 +135,7 @@
     import boxList from '../box-list/box-list.vue'
 	import card from '../other/Card.vue'
 	import search from '../search/search.vue'
+	import cell from '../other/Cell.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -133,7 +145,8 @@
 			navList,
 			boxList,
 			card,
-			search
+			search,
+			cell
 		},
 		props: {
 			API: String,  // 页面数据请求接口
@@ -175,18 +188,28 @@
 				if (url && Object.keys(this.requsetParam).length > 0) {
 					let str = url.split('?')[0]
 					let query = url.split('?')[1] ? qs.parse(url.split('?')[1]) : {}
+                    const queryData = {
+                        ...query,
+                        ...this.requsetParam
+                    }
 					if (str.includes('/:')) {
 						let newStr = ''
 						str.split('/:').map((x, i) => {
+                            if (_.has(queryData, x)) {
+                                delete queryData[x]
+                            }
 							newStr += (i === 0 ? x : `/${this.requsetParam[x]}`)
 						})
 						str = newStr
 					}
-					query = {
-						...query,
-						...this.requsetParam
-					}
-					url = str + '?' + qs.stringify(query)
+                    let queryStr = ''
+                    Object.keys(queryData).map((x, i) => {
+                         if (queryData[x] !== '' && this.requsetParam[x] !== '') {
+                            const symbol = (i === Object.keys(queryData).length - 1 ? '' : '&')
+                            queryStr += (query[x] === '' ? `${_.get(this.requsetParam, x, '')}${symbol}` : `${x}=${_.get(this.requsetParam, x, query[x])}${symbol}`) 
+                         }
+                    })
+					url = str + (queryStr ? `?${queryStr}` : '')
 				}
 				return url
 			},
@@ -264,6 +287,11 @@
 					case 'boxList':
 					    value = _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
 						break;
+				    //新增  2021-2-25
+					case 'cell':
+					    value = _.has(comonentScouce, 'days') ? comonentScouce.days : false
+						break;
+					//
 					default:
 					    value = comonentScouce
 				}

@@ -18,6 +18,7 @@
 		data() {
 			return {
 				getPageAapi: globalConfig.formHost + '?id=110',
+				// getPageAapi: uni.getStorageSync('globalConfigStorage').formEP + '?id=110', //通过获取缓存里域名
 			}
 		},
 		methods:{

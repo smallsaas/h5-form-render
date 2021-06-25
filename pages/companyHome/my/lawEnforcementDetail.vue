@@ -2,7 +2,7 @@
 	<view>
 		<dynamic-page
 		   :API="getPageApi"
-		   :dynamicLoadUrl="dynamicLoadUrl"
+		   :requsetParam="requsetParam"
 		/>
 	</view>
 </template>
@@ -16,15 +16,18 @@
 			dynamicPage
 		},
 		onLoad(e) {
-			if (e.id) {
-				this.dynamicLoadUrl =  globalConfig.dataHost + '?id=' + e.id
+			var query = {};
+			console.log('e.query = ',e.query)
+			if (e.query) {
+				query = { ...JSON.parse(decodeURIComponent(e.query)) }
+				this.requsetParam = query
 			}else {
-				console.error('获取id异常')
+				console.error('获取请求参数异常')
 			}
 		},
 		data() {
 			return {
-				dynamicLoadUrl: '',
+				requsetParam: '',
 				getPageApi: globalConfig.formHost + '?id=141',
 			}
 		},

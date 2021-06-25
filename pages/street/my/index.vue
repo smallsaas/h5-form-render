@@ -8,7 +8,7 @@
 			</view>
 			<view class='userInfo'>
 				<view class='title'>{{userInfo.userName}}</view>
-				<view class='subTitle'>{{userInfo.userName}}</view>
+				<view class='subTitle'>{{userInfo.type}}</view>
 			</view>
 			
 				
@@ -16,7 +16,7 @@
 
 
 		<view v-for="(item,index) in cellList" :key="index">
-			<dynamic-cell v-if="item.title" :perem="{
+			<dynamic-cell v-if="item.title" :param="{
 				title: item.title,
 				icon: item.icon
 			}" 

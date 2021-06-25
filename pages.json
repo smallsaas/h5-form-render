@@ -175,6 +175,12 @@
 			}
 		},
 		{	
+			"path": "pages/street/test",
+			"style": {
+				"navigationBarTitleText": "街道页面测试"
+			}
+		},
+		{	
 			"path": "pages/street/my/index",
 			"style": {
 				"navigationBarTitleText": "我的"
@@ -184,6 +190,12 @@
 			"path": "pages/street/my/myReport",
 			"style": {
 				"navigationBarTitleText": "我的上报"
+			}
+		},
+		{	
+			"path": "pages/street/community/streetUserReport",
+			"style": {
+				"navigationBarTitleText": "街道用户信息上报"
 			}
 		}
 		 ,{
