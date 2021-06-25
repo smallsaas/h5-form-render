@@ -313,6 +313,13 @@
 						"navigationBarTitleText":"",
 						"enablePullDownRefresh":false
 					}
+				},
+				{
+					"path":"pages/enforcement/enforcementDetails",
+					"style":{
+						"navigationBarTitleText":"",
+						"enablePullDownRefresh":false
+					}
 				}
     ],
 	"globalStyle": {

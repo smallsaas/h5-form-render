@@ -106,7 +106,7 @@
 				 ></box-list>
 						<search
 						 v-if="_get(item, 'type') === 'search'"
-						 :options = "_get(config.moduleData,`${item.key}.options`,[])"
+						 :config = "_get(config.moduleData,item.key,{})"
 						></search>
             </view>
           </block>

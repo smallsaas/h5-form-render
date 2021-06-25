@@ -34,7 +34,7 @@
 		},
 		onLoad(){
 			this.navigationUrl()
-			console.log(this.navigationUrl())
+			// console.log(this.navigationUrl())
 		},
 		computed: {
 			navigationUrl() {
@@ -48,10 +48,10 @@
 					 if(query.id = "[id]"){
 						 query.id = this.item.id
 					 }
-					 console.log(this.item.id)
-					 console.log(route)
-					 console.log(query)
-					 console.log(text)
+					 // console.log(this.item.id)
+					 // console.log(route)
+					 // console.log(query)
+					 // console.log(text)
 				   if (Object.keys(query).length > 0) {
 				       for (const i in query) {
 				           if (query[i] === '') {
@@ -60,7 +60,7 @@
 				       }
 							 text+='?query='+query.id
 				       // text += '?query=' + encodeURIComponent(JSON.stringify(query))
-							 console.log(text)
+							 // console.log(text)
 				   }
 				}
 				return text
