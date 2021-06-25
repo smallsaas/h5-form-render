@@ -17,9 +17,10 @@
 		},
 		onLoad(e) {
 			var query = {};
+			console.log('e.query = ',e.query)
 			if (e.query) {
 				query = { ...JSON.parse(decodeURIComponent(e.query)) }
-				this.requsetParam =  query
+				this.requsetParam = query
 			}else {
 				console.error('获取请求参数异常')
 			}
