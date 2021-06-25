@@ -11,14 +11,14 @@
 <script>
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { globalConfig } from '@/config.js'
+	
 	export default {
 		components:{ dynamicPage },
 		onLoad (e){
 		},
 		data() {
 			return {
-				getPageAapi: globalConfig.formHost + '?id=110',
-				// getPageAapi: uni.getStorageSync('globalConfigStorage').formEP + '?id=110', //通过获取缓存里域名
+				getPageAapi: globalConfig.formHost + '?id=510',
 			}
 		},
 		methods:{

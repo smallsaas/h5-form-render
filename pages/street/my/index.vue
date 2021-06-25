@@ -8,7 +8,7 @@
 			</view>
 			<view class='userInfo'>
 				<view class='title'>{{userInfo.userName}}</view>
-				<view class='subTitle'>{{userInfo.userName}}</view>
+				<view class='subTitle'>{{userInfo.type}}</view>
 			</view>
 			
 				

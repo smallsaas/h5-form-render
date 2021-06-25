@@ -44,7 +44,7 @@
 					break;
 				case 1:
 					uni.navigateTo({
-						url: ''
+						url: './community/streetUserReport'
 					})
 					break;
 				case 2:

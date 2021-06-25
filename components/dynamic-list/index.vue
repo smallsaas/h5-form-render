@@ -80,6 +80,13 @@
 							...getComponentBindData(item)
 						}"
 					/>
+					<street-user-report-item
+						v-if="getListItemKey() === 'StreetUserReportItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+					/>
 					<avatar-state-item
 						v-if="getListItemKey() === 'avatarStateItem'"
 						:item="{
@@ -108,6 +115,7 @@
 	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
 	import VenueListItem from './listItem/VenueListItem.vue'
 	import MyReportItem from './listItem/MyReportItem.vue'
+	import StreetUserReportItem from './listItem/StreetUserReportItem.vue'
 	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
     import { globalConfig } from '@/config.js'
     
@@ -122,6 +130,7 @@
 			ReturnToWorkRecordItem,
 			VenueListItem,
 			MyReportItem,
+			StreetUserReportItem,
 			AvatarStateItem
 		},
 		props: {
