@@ -1,5 +1,5 @@
 <template>
-	<van-cell :title="perem.title" :icon="perem.icon" 
+	<van-cell :title="param.title" :icon="param.icon" 
 	@click="clickFunc"
 	is-link />
 </template>
@@ -7,7 +7,7 @@
 <script>
 	export default {
 		props:{
-			perem:{
+			param:{
 				type:Object,
 				default: function(){
 					return {

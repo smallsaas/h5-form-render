@@ -65,6 +65,8 @@
 										 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
 										 :outStyle="getComponentStyle(item)"
 									/>
+									
+									
 								</view>
 								
 					<view v-if="_get(item, 'type') === 'navlist'">
@@ -108,6 +110,15 @@
 						 v-if="_get(item, 'type') === 'search'"
 						 :options = "_get(config.moduleData,`${item.key}.options`,[])"
 						></search>
+						
+						<!-- 新增  2021-2-25 -->
+						<cell
+							v-if="_get(item, 'type') === 'cell'"
+							:param = "_get(config.moduleData,`${item.key}.param`, {})"
+							:days = "getComponentsData(item) || 0"
+						/>
+						<!-- end -->
+						
             </view>
           </block>
         </van-skeleton>
@@ -124,6 +135,7 @@
     import boxList from '../box-list/box-list.vue'
 	import card from '../other/Card.vue'
 	import search from '../search/search.vue'
+	import cell from '../other/Cell.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -133,7 +145,8 @@
 			navList,
 			boxList,
 			card,
-			search
+			search,
+			cell
 		},
 		props: {
 			API: String,  // 页面数据请求接口
@@ -274,6 +287,11 @@
 					case 'boxList':
 					    value = _.has(comonentScouce, 'navList') ? comonentScouce.navList : false
 						break;
+				    //新增  2021-2-25
+					case 'cell':
+					    value = _.has(comonentScouce, 'days') ? comonentScouce.days : false
+						break;
+					//
 					default:
 					    value = comonentScouce
 				}

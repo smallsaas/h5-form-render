@@ -175,6 +175,12 @@
 			}
 		},
 		{	
+			"path": "pages/street/test",
+			"style": {
+				"navigationBarTitleText": "街道页面测试"
+			}
+		},
+		{	
 			"path": "pages/street/my/index",
 			"style": {
 				"navigationBarTitleText": "我的"

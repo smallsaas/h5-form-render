@@ -13,13 +13,16 @@
 			
 		</view>
 		
+		<cell/>
 
 	</view>
 
 </template>
 
 <script>
+	import cell from '@/components/other/Cell.vue'
 	export default {
+		components:{cell},
 		methods: {
 
 			handleToMy () {

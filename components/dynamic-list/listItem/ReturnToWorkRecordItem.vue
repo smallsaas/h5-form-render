@@ -11,7 +11,7 @@
 				
 			</view> -->
 			<view v-for="(cItem,cIndex) in item.cellList" :key="cIndex">
-				<dynamic-cell :perem="{
+				<dynamic-cell :param="{
 					title: cItem.title
 				}" 
 				@handleClick="onItemClick(cItem)"
