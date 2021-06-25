@@ -1,6 +1,9 @@
 <template>
-	<van-cell :title="title">
-	  <view style="color: #008EF6" @click="clickFunc">{{ param.content }}</view>
+	<van-cell>
+	  <view slot="title">
+		<view class="van-cell-text" style="font-weight: 700; font-size: 28rpx;">{{ title }}</view>
+	  </view>
+	  <view :style='{ color:  param.textColor }' @click="clickFunc">{{ param.content }}</view>
 	</van-cell>
 </template>
 
@@ -19,7 +22,8 @@
 					return {
 						title: "title",
 						content: "content",
-						path: ""
+						path: "",
+						textColor: "#808080"
 					}
 				}
 			},
@@ -33,7 +37,11 @@
 			}
 		},
 		mounted(){
-			this.title = this.param.title.replace("0", " " + this.days + " ")
+			if(this.days){
+				this.title = this.param.title.replace("0", " " + this.days + " ")
+			}else{
+				this.title = this.param.title
+			}
 		}
 	}
 </script>
