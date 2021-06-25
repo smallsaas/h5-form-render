@@ -63,3 +63,10 @@ export const getSelfInspectionRecord = (params) => {
 //     const url = `${globalConfig.formHost}`
 //     return request('GET', url, params)
 // }
+
+
+// 获取全局配置
+export const getGolobalConfig = (params) => {
+    const url = 'https://api.mock.smallsaas.cn/form?id=1'
+    return request('GET', url, params)
+}
