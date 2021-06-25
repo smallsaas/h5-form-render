@@ -109,6 +109,20 @@
 			}"
             @change="(e) => handleSetValue(e, fields[index])"
 		   />
+			 <c-image
+				v-if="_get(item, '__config__.tag') === 'c-image'"
+				:param="{
+					...getBaseParam(item),
+					..._get(item, 'error', false) ? { error: item.error } : {},
+					..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+					...item['max-count'] ? { 'max-count': item['max-count'] } : {},
+					..._has(item, 'deletable') ? { deletable: item.deletable } : {},
+				          ..._has(item, 'accept') ? { accept: item.accept } : {},
+				}"
+				      @change="(e) => handleSetValue(e, fields[index])"
+			 > 
+			 </c-image>
+			 
        </block>
     </view>
 </template>
@@ -125,6 +139,7 @@
 	import BaseDatePicker from './BaseDatePicker.vue'
 	import BaseRate from './BaseRate.vue'
 	import BaseUpload from './BaseUpload.vue'
+	import cImage from './custom/c-image.vue'
     export default {
         components: {
            BaseField,
@@ -136,7 +151,8 @@
            BaseSlider,
 		   BaseDatePicker,
 		   BaseRate,
-		   BaseUpload
+		   BaseUpload,
+			 cImage
         },
         props: {
           fields: {

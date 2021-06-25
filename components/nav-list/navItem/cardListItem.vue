@@ -32,9 +32,6 @@
 			item:Object
 		},
 		methods:{
-			_get (data, field, value) {
-				return _.get(data, field, value)
-			}
 		}
 	}
 </script>

@@ -1,17 +1,19 @@
 <template>
 	<view class="stateList">
-		<view class="stateIcon stateIcon-go"></view>
-		<view class="stateList-content">
-			<view class="stateList-title">{{item.title}}</view>
-			<view class="stateList-company stateList-content-child">主管部门：{{item.company}}</view>
-			<view class="stateList-time stateList-content-child">起止日期：{{item.start}} - {{item.end}}</view>
-		</view>
-		<view class="stateList-stateGroup">
-			<view class="stateList-state" v-if="item.state==='enforcement'" style="background-color: #43CF7C;">
-				待执法
+		<view class="state_allcontent">
+			<view class="stateIcon stateIcon-go"></view>
+			<view class="stateList-content">
+				<view class="stateList-title">{{item.title}}</view>
+				<view class="stateList-company stateList-content-child">主管部门：{{item.company}}</view>
+				<view class="stateList-time stateList-content-child">起止日期：{{item.start}} - {{item.end}}</view>
 			</view>
-			<view class="stateList-state" v-if="item.state==='rectification'" style="background-color: #2A82E4;">
-				待整改
+			<view class="stateList-stateGroup">
+				<view class="stateList-state" v-if="item.state==='enforcement'" style="background-color: #43CF7C;">
+					待执法
+				</view>
+				<view class="stateList-state" v-if="item.state==='rectification'" style="background-color: #2A82E4;">
+					待整改
+				</view>
 			</view>
 		</view>
 	</view>
@@ -22,7 +24,6 @@
 	export default {
 		name:"state-list",
 		onLoad() {
-			this.const()
 		},
 		data() {
 			return {

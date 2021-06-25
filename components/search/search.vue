@@ -1,61 +1,113 @@
 <!-- 搜索功能已完成，差样式及子项 -->
+<!-- 默认可直接调用，使用stateSearchItem列表子项，调用的api对应的字段通过field来定义 -->
 <template>
-	<view class="search-box">
-		<view class="searchIcon search_Icons">&#xe600;</view>
-		<view class="search-input">
-			<input type="text" class="SearchinputBox" v-model="inputValue" @change="getList()" adjust-position="false" placeholder="请输入....."/>
-			<!-- <view class="inputTextBox" v-show="inputValue!=''">{{inputValue}}</view> -->
-			<!-- 输入盒子，可检测是否存在，若需要展示，可把下面为inputTextBox的样式取消掉注释 -->
-<!-- 			<view v-for="(item,i) in listData" v-if="searchlist!==[]">
-				<view>{{item.name}}</view>
-				<view>{{item.address}}</view>
-				<view>{{item.state.example.number}}</view>
-				<view>{{item.state.self.number}}</view>
-			</view> -->
-			<view v-for="(item,i) in searchlist" v-if="searchlist!==[]">
-				<view>{{item.name}}</view>
-				<view>{{item.address}}</view>
-				<view>{{item.state.example.number}}</view>
-				<view>{{item.state.self.number}}</view>
+	<view>
+		<view class="search-box">
+			<view class="searchIcon search_Icons">&#xe600;</view>
+			<view class="search-input">
+				<input type="text" class="SearchinputBox" v-model="inputValue" @input="getList()" @change="getList()" adjust-position="false" placeholder="请输入....."/>
+			</view>
+			<!-- <view class="talkIcon search_Icons">&#xe6ff;</view> -->
+			<!-- 语音输入按钮 -->
+		</view>
+		<view class="search-list">
+			<view v-for="(item,i) in listData" v-if="inputValue===''">
+				<navigator :url="url[i]">
+					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
+						:item="item"
+					></state-search-item>
+				</navigator>
+			</view>
+			<view v-for="(item,i) in searchlist" v-if="inputValue!==''">
+				<navigator :url="url[i]">
+				<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
+					:item="item"
+				></state-search-item>
+				</navigator>
 			</view>
 		</view>
-		<view class="talkIcon search_Icons">&#xe6ff;</view>
+		<view style="width: auto;color: #ccc;font-size: 12px; font-weight: bolder;margin: 10px;text-align: center;">没有更多了</view>
 	</view>
 </template>
 
 <script>
-	import { getSearchList } from '../../common/api.js'
+	// import { getSearchList } from '../../common/api.js'
+	import { request } from '../../common/request.js'
+	import { globalConfig } from '@/config.js'
+	
+	import stateSearchItem from './item/stateSearch.vue'
 	export default {
 		name:"search",
+		components:{
+			stateSearchItem
+		},
 		data() {
 			return {
 				inputValue:"",
-				listData:[],
-				searchlist:[]
+				listData:null,
+				searchlist:null,
+				itemNavigation:"",
+				url:null
 			};
+		},
+		props:{
+			config:{
+				type:Object,
+				default(){
+					return {
+						loadAPI:null,
+						itemModule:{
+							name:"stateSearchItem"
+						},
+						field:"",
+						id:null
+					}
+				}
+			},
 		},
 		created() {
 			this.getData()
+			// console.log(this.searchlist)
 		},
 		methods:{
+			getSearchList(params){
+				let url=this.config.loadAPI||`${globalConfig.dataHost}`
+				return request('GET', url, params)
+			},
 			async getData(){
-				const res = await getSearchList({id:12311});
-				console.log(res)
+				const res = await this.getSearchList({id:this.config.id||12311});
+				// console.log(res)
 				this.listData = res.data.list
+				this.itemNavigation = res.data.itemNavigation
+				this.url = this.getID(this.listData)
 			},
 			getList(){
 				this.searchlist = []
-				console.log(this.searchlist)
+				// console.log(this.searchlist)
 				if(this.inputValue!==""){
 					for(let i=0;i<this.listData.length;i++){
-						if(this.listData[i].name.indexOf(this.inputValue)!==-1){
-							this.searchlist.push(this.listData[i])
-							console.log(this.searchlist)
+						let list = this.listData[i]
+						if(list[this.config.field||'name'].indexOf(this.inputValue)!==-1){
+							// console.log(this.searchlist)
+							this.searchlist.push(list)
+							this.url=this.getID(this.searchlist)
 						}
 					}
 				}
-				console.log(this.searchlist)
-				console.log(this.inputValue)
+				// console.log(this.searchlist)
+				// console.log(this.inputValue)
+			},
+			getID(list){
+				let urlList=[];
+				let url = this.itemNavigation;
+				// console.log(list)
+				for(let j=0;j<list.length;j++){
+					if(list[j].id){
+						url = this.itemNavigation + "?id=" + list[j].id
+					}
+					urlList.push(url)
+				}
+				return urlList
 			}
 		}
 	}
@@ -78,21 +130,28 @@
 		-moz-osx-font-smoothing: grayscale;
 		position: absolute;
 		text-align: center;
+		top:20px
 	}
 	.searchIcon{
 		left: 8%;
-		top:10px;
 	}
 	.talkIcon{
 		right: 8%;
-		top:10px;
 	}
 	
 	.search-box{
-		position: relative;
+		position: fixed;
+		top: 0;
+		left: 0;
 		width: 100%;
-		
+		background-color: white;
+		opacity: .8;
+		z-index: 10000;
 	}
+	.search-list{
+		margin-top: 50px;
+	}
+	
 	.search-input{
 		margin: 10px auto;
 		width: 90%;
@@ -106,6 +165,7 @@
 		height: 30px;
 		font-size: 14px;
 		color: #333;
+
 	}
 	.inputTextBox{
 		position: relative;
