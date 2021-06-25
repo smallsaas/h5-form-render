@@ -25,7 +25,7 @@
 <script>
 	import dynamicCell from "@/components/custom-c/cell.vue";
 	export default {
-		name: 'ReturnToWorkRecordItem',
+		name: 'MyReportItem',
 		components: { dynamicCell },
 		props: {
 			item: Object,
@@ -39,7 +39,7 @@
 		},
 		computed: {
 			setValue(){
-			   this.itemId = this.item.id;
+			   // this.itemId = this.item.id;
 			}
 		},
 		methods: {
@@ -59,15 +59,10 @@
 					url: path
 				})
 			},
-			onGoToFormClick(e){
-				console.log('this.itemId = ', this.itemId)
-				uni.navigateTo({
-					url: '/pages/companyHome/my/returnToWork?id=' + this.itemId
-				})
-			}
+
 		},
 		mounted(){
-			// console.log('this.item = ', this.item)
+			console.log('this.item = ', this.item)
 		}
 	}
 </script>

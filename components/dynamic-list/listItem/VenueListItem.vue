@@ -23,7 +23,7 @@
 </template>
 <script>
 	export default {
-		name: 'SelfInspectionRecordItem',
+		name: 'VenueListItem',
 		props: {
 			item: Object,
 			ext: Object

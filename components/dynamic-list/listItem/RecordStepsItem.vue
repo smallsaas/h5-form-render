@@ -50,7 +50,7 @@
 			}
 		},
 		mounted(){
-			console.log('this.item = ', this.item)
+			// console.log('this.item = ', this.item)
 		}
 	}
 </script>
