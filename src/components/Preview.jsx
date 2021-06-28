@@ -39,7 +39,7 @@ export default {
             let srvValue = this.srvFormData[subtIem.__vModel__]
             if (['el-select', 'el-radio-group', 'el-checkbox-group'].indexOf(subtIem.__config__.tag) >= 0) {
               for (let i = 0; i < subtIem.__slot__.options.length; i++) {
-                if (+srvValue === subtIem.__slot__.options[i].value) {
+                if ((srvValue + '') === (subtIem.__slot__.options[i].value + '')) {
                   srvValue = subtIem.__slot__.options[i].label
                 }
               }
