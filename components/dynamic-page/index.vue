@@ -128,6 +128,7 @@
 <script>
 	import _ from 'lodash'
 	import qs from 'qs'
+	import { Base64 } from '../../utils/tools.js'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
 	import swiperImages from '../swiper-images/index.vue'
@@ -220,7 +221,7 @@
 					header: this.header,
 					complete: (res) => {
 						if (_.get(res, 'data.code') === 200) {
-							const resData = _.cloneDeep(_.get(res, 'data.data', {}))
+							const resData = _.cloneDeep(_.get(res, 'data.data', {}))									
                             // 获取页面请求接口
 							const pageUrl = this.getRequestUrl(resData)
 							// 加载页面数据
@@ -239,24 +240,23 @@
 					}
 				})
 			},
-			fetchPageData (resData = {}, pageUrl) {
+			fetchPageData (configData = {}, pageUrl) {
 				uni.request({
 					url: pageUrl,
 					method: 'GET',
-                    data: _.get(this.config, 'dataSource.request', {}),
+                    data: _.get(configData, 'dataSource.request', {}),
                     header: this.header,
 					complete: (res) => {
-						this.config = { ...resData }
+						this.config = { ...configData }
 						this.skeletonLoading = false
-						if (_.get(res, 'data.code') === 200) {
-                            // const resData = _.get(res, 'data', {})
-                            // const responseConfig = _.get(this.config, 'dataSource.response', {})
-                            // let dataField = 'data'
-                            // if (_.has(responseConfig, 'data') && responseConfig.data) {
-                            //     dataField = responseConfig.data
-                            // }
-							// this.pageData = _.cloneDeep(_.get(resData, dataField, {}))
-							this.pageData = _.cloneDeep(_.get(res, 'data.data', {}))
+						if (_.get(res, 'data.code') === 200) {			
+							const contentType = _.get(configData, 'contentType', 'json')
+							const contentPayload = _.get(configData, 'contentPayload', 'data')
+							let responseData = _.get(res.data, contentPayload, contentType === 'base64' ? '' : {})
+							if (contentType === 'base64') {
+								responseData = Base64.decode(responseData) ? JSON.parse(Base64.decode(responseData)) : {}
+							}
+							this.pageData = _.cloneDeep(responseData)
 						}
 					}
 				})
