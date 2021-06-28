@@ -58,6 +58,8 @@
 			/>
 		</view>
 
+		<tabBar :current="2" :list="tabList"></tabBar>
+
 	</view>
 
 </template>
@@ -66,13 +68,20 @@
 	import dynamicCell from "@/components/custom-c/cell.vue";
     import _ from 'lodash';
 	import { getUserInfo } from '@/common/api.js'
+	import tabBar from "@/components/other/tabbar.vue"
 	
 	export default {
 		components:{
-			dynamicCell
+			dynamicCell,
+			tabBar
 		},
 		onLoad (e){
 			this.initData("100");
+		},
+		onShow() {
+			uni.hideTabBar({
+				animation: false
+			})
 		},
 		data() {
 			return {
@@ -88,6 +97,25 @@
 					{title: "自查记录", icon: "orders-o", path: "./selfInspectionRecord"},
 					{title: "复工记录", icon: "label-o", path: "./returnToWorkRecord"},
 					{title: "执法记录", icon: "label-o", path: "./lawEnforcementRecord"}
+				],
+				tabList: [
+					{
+						text: '首页',  
+						icon: '/static/tabbar/home.png',  //未选中图标
+						icon_a: '/static/tabbar/home-on.png',  //选中图片
+						path: "/pages/companyHome/home",  //页面路
+					},{
+						text: '复工',
+						icon: '/static/tabbar/work.png',
+						icon_a: '/static/tabbar/work-on.png',
+						path: "/pages/companyHome/my/returnToWork",
+					},{
+						text: '我的',
+						icon: '/static/tabbar/my.png',
+						icon_a: '/static/tabbar/my-on.png',
+						path: "/pages/companyHome/my/index",
+					},
+					
 				]
 			}
 		},
@@ -106,7 +134,7 @@
 				}else{
 					console.log('path 不存在 ')
 				}
-			}
+			},
 		}
 	}
 </script>

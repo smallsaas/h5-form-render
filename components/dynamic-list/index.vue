@@ -336,7 +336,7 @@
 				    }
 				    routeUrl += '?query=' + encodeURIComponent(JSON.stringify(query))
 				}
-				console.log(routeUrl)
+				console.log('routeUrl= ', routeUrl)
 				// 旧跳转方式
 				// uni.navigateTo({
 				// 	url:routeUrl,
