@@ -19,7 +19,7 @@
 
 <script>
 	export default {
-		name:"Image",
+		name:"c-image",
 		props:{
 			param:{
 				type:Object,
