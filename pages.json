@@ -384,6 +384,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/enforcement/more/companySearchDetail/companySearchRecordDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

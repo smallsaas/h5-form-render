@@ -11,10 +11,12 @@
                     @clear="handleClear"
                 />
                 <view v-if="_get(item, '__config__.layout') === 'rowFormItem'">
-					<view class="form_row_title">
-						<view class="line"></view>
-						<view>{{_get(item, '__config__.componentName')}}</view>
-					</view>
+					<card :title="_get(item, '__config__.componentName')" 	
+					>
+					<!-- 以上card为标题容器 -->
+						<!-- <view class="line"></view> -->
+						<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
+					</card>
                     <block v-for="(k, i) in _get(item, '__config__.children', [])" :key="i">
                         <base-vants
                             v-if="_get(k, '__config__.layout') === 'colFormItem'"
@@ -53,14 +55,15 @@
 	import _ from 'lodash'
     import BaseVants from './BaseVants.vue'
     import { globalConfig } from '@/config.js'
-
+		import card from '../other/Card.vue'
     const SUNMIT_API =  globalConfig.formHost + '/custom'
     const LOAD_API = globalConfig.formHost + '/userinfos'  // 默认获取数据
     const DEFAULT_CONFIG = globalConfig.formHost
     
 	export default {
         components: { 
-          BaseVants 
+          BaseVants,
+					card
         },
 		props: {
 			config: {
@@ -339,6 +342,7 @@
             text-align: left;
             font-weight: bold;
             padding: 10rpx 14rpx;
+						border-bottom: 1px solid #EEEEEE;
 			display: flex;
 			align-items: center;
 			& .line {

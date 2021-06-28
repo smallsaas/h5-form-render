@@ -2,14 +2,12 @@
 	<view>
 		<dynamic-page
            :API="api"
-           contentType="json"
-           contentPayload="data"
         />
 	</view>
 </template>
 
 <script>
-	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import dynamicPage from '../../../../components/dynamic-page/index.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: {
@@ -17,8 +15,7 @@
 		},
 		data() {
 			return {
-				// api: globalConfig.formHost + '/form?id=201'
-                api: 'https://api.mock.smallsaas.cn/form?id=300'
+				api: globalConfig.formHost + '?id=2015'
 			}
 		}
 	}

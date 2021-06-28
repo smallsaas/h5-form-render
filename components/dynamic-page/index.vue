@@ -156,7 +156,15 @@
 				default: function () {
 					return {}
 				}
-			}
+			},
+            contentType: {  //页面数据类型 [base64, json]
+                type: String,
+                default: 'json'
+            },
+            contentPayload: {  //页面有效数据位置
+                type: String,
+                default: 'data'
+            }
 		},
 		data () {
 			return {
@@ -182,7 +190,7 @@
 			},
 			// 获取页面请求数据接口 
 			getRequestUrl (resData) {
-				let url
+                let url
 				if (_.has(resData, 'dataSource.api') && resData.dataSource.api) {
 				   url =  resData.dataSource.api
 				}
@@ -220,10 +228,25 @@
 					method: 'GET',
 					header: this.header,
 					complete: (res) => {
-						if (_.get(res, 'data.code') === 200) {
-							const resData = _.cloneDeep(_.get(res, 'data.data', {}))									
+						if (_.get(res, 'data.code') === 200) {                 
+                            const contentType = this.contentType || 'json'
+                            const contentPayload = this.contentPayload || 'data'
+                            let responseData = _.get(res.data, contentPayload, contentType === 'base64' ? '' : {})
+                            if (contentType === 'base64' && responseData) {
+                                try {
+                                   responseData = Base64.decode(responseData) ? JSON.parse(Base64.decode(responseData)) : {}
+                                } catch {}
+                            }
+							const resData = _.cloneDeep(responseData)
+                            
                             // 获取页面请求接口
-							const pageUrl = this.getRequestUrl(resData)
+                            let pageUrl
+                            const dataPayload = _.get(resData, 'dataPayload')
+                            if (dataPayload && _.get(res.data, dataPayload) && typeof _.get(res.data, dataPayload) === 'object' && JSON.stringify(_.get(res.data, dataPayload)) !== '{}') {
+                                pageUrl = ''
+                            } else {
+                               pageUrl = this.getRequestUrl(resData)
+                            }
 							// 加载页面数据
 							if (pageUrl) {
 								this.fetchPageData(resData, pageUrl)
@@ -250,13 +273,13 @@
 						this.config = { ...configData }
 						this.skeletonLoading = false
 						if (_.get(res, 'data.code') === 200) {			
-							const contentType = _.get(configData, 'contentType', 'json')
-							const contentPayload = _.get(configData, 'contentPayload', 'data')
-							let responseData = _.get(res.data, contentPayload, contentType === 'base64' ? '' : {})
-							if (contentType === 'base64') {
-								responseData = Base64.decode(responseData) ? JSON.parse(Base64.decode(responseData)) : {}
-							}
-							this.pageData = _.cloneDeep(responseData)
+                            const resData = _.get(res, 'data', {})
+                            const responseConfig = _.get(this.config, 'dataSource.response', {})
+                            let dataField = 'data'
+                            if (_.has(responseConfig, 'data') && responseConfig.data) {
+                                dataField = responseConfig.data
+                            }
+                            this.pageData = _.cloneDeep(_.get(resData, dataField, {}))
 						}
 					}
 				})
