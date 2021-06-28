@@ -94,6 +94,13 @@
 							...getComponentBindData(item)
 						}"
 					/>
+					<record
+						v-if="getListItemKey() === 'recordItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+					/>
                   </view>
               </view>
             </load-refresh>
@@ -116,6 +123,7 @@
 	import MyReportItem from './listItem/MyReportItem.vue'
 	import StreetUserReportItem from './listItem/StreetUserReportItem.vue'
 	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
+	import record from './listItem/record/record.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -130,7 +138,8 @@
 			VenueListItem,
 			MyReportItem,
 			StreetUserReportItem,
-			AvatarStateItem
+			AvatarStateItem,
+			record
 		},
 		props: {
 			config: {
@@ -327,6 +336,7 @@
 				    }
 				    routeUrl += '?query=' + encodeURIComponent(JSON.stringify(query))
 				}
+				console.log(routeUrl)
 				uni.navigateTo({
 					url: routeUrl
 				})

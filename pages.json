@@ -333,6 +333,15 @@
 						"enablePullDownRefresh":false
 					}
 				}
+        ,{
+            "path" : "pages/enforcement/more/MySearch",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
