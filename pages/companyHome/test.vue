@@ -54,6 +54,10 @@
 				<text>流程测试</text>
 			</view>
 			
+			<view class="venue_tag" @click="handleWxInfo">
+				<text>获取微信用户信息</text>
+			</view>
+			
 		</view>
 		
 
@@ -122,6 +126,11 @@
 			handleLawProcessPage () {
 				uni.navigateTo({
 					url: '../test/processPage'
+				})
+			},
+			handleWxInfo () {
+				uni.navigateTo({
+					url: './getWXInfo'
 				})
 			}
 		}

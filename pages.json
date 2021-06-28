@@ -156,6 +156,12 @@
 			}
 		},
 		{	
+			"path": "pages/companyHome/getWXInfo",
+			"style": {
+				"navigationBarTitleText": "获取微信用户信息"
+			}
+		},
+		{	
 			"path": "pages/test/processPage",
 			"style": {
 				"navigationBarTitleText": "流程测试页"
