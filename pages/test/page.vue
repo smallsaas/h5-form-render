@@ -2,6 +2,8 @@
 	<view>
 		<dynamic-page
            :API="api"
+           contentType="json"
+           contentPayload="data"
         />
 	</view>
 </template>
