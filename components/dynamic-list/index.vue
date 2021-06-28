@@ -337,8 +337,17 @@
 				    routeUrl += '?query=' + encodeURIComponent(JSON.stringify(query))
 				}
 				console.log(routeUrl)
-				uni.navigateTo({
+				// 旧跳转方式
+				// uni.navigateTo({
+				// 	url:routeUrl,
+				// 		// success:res =>{console.log("跳转成功")},
+				// 		// fail:err =>(console.log("跳转失败",err))
+				// })
+				// 栈溢出,改用redirectTo
+				uni.redirectTo({
 					url: routeUrl
+					// success:res =>{console.log("跳转成功")},
+					// fail:err =>(console.log("跳转失败",err))
 				})
 			}
 		}

@@ -49,7 +49,7 @@
 	.recordList_Item{
 		display: flex;
 		// width: auto;
-		border-bottom: 1px solid #666666;
+		border-bottom: 1px solid #eee;
 		.title{
 			// width: 80%;
 			flex: 1;

@@ -342,6 +342,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/enforcement/more/MySearchTime/MySearchTime",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
