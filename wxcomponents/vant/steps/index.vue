@@ -9,7 +9,7 @@
 					<view style="margin-right: 6rpx; color: #a6a6a6;">{{item.textLabel}}</view>
 				</van-col>
 				<van-col>
-					<view>{{ item.text }}</view>
+					<view>{{ item.text }}<span v-if="item.state" style="border:1px solid #007AFF;color: #007AFF;padding: 2px 5px;margin-left: 10px;font-size: 10px;">{{ item.state }}</span></view>
 				</van-col>
 			</van-row>
 		</view>

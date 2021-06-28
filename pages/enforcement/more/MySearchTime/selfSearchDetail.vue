@@ -17,7 +17,7 @@
 		},
 		data() {
 			return {
-				getPageAapi: globalConfig.formHost + '?id=2011',
+				getPageAapi: globalConfig.formHost + '?id=2012',
 			}
 		},
 		methods:{
