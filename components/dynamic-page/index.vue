@@ -232,11 +232,16 @@
                             const contentType = this.contentType || 'json'
                             const contentPayload = this.contentPayload || 'data'
                             let responseData = _.get(res.data, contentPayload, contentType === 'base64' ? '' : {})
-                            if (contentType === 'base64' && responseData) {
+                            if (responseData && contentType === 'base64') {
                                 try {
                                    responseData = Base64.decode(responseData) ? JSON.parse(Base64.decode(responseData)) : {}
                                 } catch {}
                             }
+							if (responseData && _.isString(responseData)) {
+								try {
+								   responseData = JSON.parse(responseData)
+								} catch {}
+							}
 							const resData = _.cloneDeep(responseData)
                             
                             // 获取页面请求接口
