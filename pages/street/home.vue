@@ -5,7 +5,6 @@
 		   :API="getPageAapi"
 		/>
 		
-		
 		<view>
 			<van-tabbar :active="active" @change="onChange">
 			  <van-tabbar-item icon="home-o">首页</van-tabbar-item>

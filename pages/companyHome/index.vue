@@ -24,7 +24,7 @@
                }) 
             },
 			handleToCompany () {
-				uni.navigateTo({
+				uni.switchTab({
 					url: './home'
 				})
 			},

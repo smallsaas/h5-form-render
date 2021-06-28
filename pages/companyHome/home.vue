@@ -5,14 +5,7 @@
 		   :API="getPageAapi"
 		/>
 		
-		
-		<view>
-			<van-tabbar :active="active" @change="onChange">
-			  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-			  <van-tabbar-item icon="comment-o">复工</van-tabbar-item>
-			  <van-tabbar-item icon="friends-o">我的</van-tabbar-item>
-			</van-tabbar>
-		</view>
+		<tabBar :current="0" :list="tabList"></tabBar>
 	</view>
 
 </template>
@@ -21,42 +14,48 @@
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { globalConfig } from '@/config.js'
 	
+	import tabBar from "@/components/other/tabbar.vue"
+	
 	export default {
-		components:{ dynamicPage },
+		components:{ 
+			dynamicPage,
+			tabBar
+		},
 		onLoad (e){
+		},
+		onShow() {
+			uni.hideTabBar({
+				animation: false
+			})
+		},
+		onBackPress() {
+			return true
 		},
 		data() {
 			return {
 				getPageAapi: globalConfig.formHost + '?id=109',
-				active: 0
+				tabList: [
+					{
+						text: '首页',  
+						icon: '/static/tabbar/home.png',  //未选中图标
+						icon_a: '/static/tabbar/home-on.png',  //选中图片
+						path: "/pages/companyHome/home",  //页面路
+					},{
+						text: '复工',
+						icon: '/static/tabbar/work.png',
+						icon_a: '/static/tabbar/work-on.png',
+						path: "/pages/companyHome/my/returnToWork",
+					},{
+						text: '我的',
+						icon: '/static/tabbar/my.png',
+						icon_a: '/static/tabbar/my-on.png',
+						path: "/pages/companyHome/my/index",
+					},
+					
+				]
 			}
 		},
-		
 		methods:{
-		  onChange(event) {
-			// event.detail 的值为当前选中项的索引
-			this.active = event.detail
-			console.log(event.detail)
-			switch (event.detail){
-				case 0:
-					uni.navigateTo({
-						url: './home'
-					})
-					break;
-				case 1:
-					uni.navigateTo({
-						url: './my/returnToWork'
-					})
-					break;
-				case 2:
-					uni.navigateTo({
-						url: './my/index'
-					})
-					break;
-				default:
-					break;
-			}
-		  },
 		}
 	}
 </script>
