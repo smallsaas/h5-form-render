@@ -5,14 +5,14 @@
 				<van-col>
 					<view class='avatar'>
 						<img v-if="userInfo.avatar" :src="userInfo.avatar"/>
-						<img v-else  :src="this.defaultAvatar"/>
+						<img v-else :src="defaultAvatar"/>
 					</view>
 				</van-col>
 				<van-col>
 					<view class='userInfo'>
 						<van-row type="flex">
 							<van-col>
-								<view class='text'>{{userInfo.userName}}</view>
+								<view class='text'>{{userInfo.userName || '用户名'}}</view>
 							</van-col>
 							<van-col>
 								<van-button plain type='info' size='small' round>信息按钮</van-button>
@@ -23,7 +23,7 @@
 								<view class='text'>企业编号: </view>
 							</van-col>
 							<van-col>
-								<view class='text'>{{userInfo.enterpriseNumber}} </view>
+								<view class='text'>{{userInfo.enterpriseNumber || ''}} </view>
 							</van-col>
 						</van-row>
 						<van-row type="flex">
@@ -31,7 +31,7 @@
 								<view class='text'>企业域名: </view>
 							</van-col>
 							<van-col>
-								<view class='text'>{{userInfo.domainName}} </view>
+								<view class='text'>{{userInfo.domainName || ''}} </view>
 							</van-col>
 						</van-row>
 						<van-row type="flex">
@@ -39,7 +39,7 @@
 								<view class='text' style="text-align: right;">职位: </view>
 							</van-col>
 							<van-col>
-								<view class='text' style="text-align: left;">{{userInfo.job}} </view>
+								<view class='text' style="text-align: left;">{{userInfo.job || ''}} </view>
 							</van-col>
 						</van-row>
 					</view>
@@ -58,8 +58,6 @@
 			/>
 		</view>
 
-		<tabBar :current="2" :list="tabList"></tabBar>
-
 	</view>
 
 </template>
@@ -68,20 +66,13 @@
 	import dynamicCell from "@/components/custom-c/cell.vue";
     import _ from 'lodash';
 	import { getUserInfo } from '@/common/api.js'
-	import tabBar from "@/components/other/tabbar.vue"
 	
 	export default {
 		components:{
 			dynamicCell,
-			tabBar
 		},
 		onLoad (e){
 			this.initData("100");
-		},
-		onShow() {
-			uni.hideTabBar({
-				animation: false
-			})
 		},
 		data() {
 			return {
@@ -98,25 +89,6 @@
 					{title: "复工记录", icon: "label-o", path: "./returnToWorkRecord"},
 					{title: "执法记录", icon: "label-o", path: "./lawEnforcementRecord"}
 				],
-				tabList: [
-					{
-						text: '首页',  
-						icon: '/static/tabbar/home.png',  //未选中图标
-						icon_a: '/static/tabbar/home-on.png',  //选中图片
-						path: "/pages/companyHome/home",  //页面路
-					},{
-						text: '复工',
-						icon: '/static/tabbar/work.png',
-						icon_a: '/static/tabbar/work-on.png',
-						path: "/pages/companyHome/my/returnToWork",
-					},{
-						text: '我的',
-						icon: '/static/tabbar/my.png',
-						icon_a: '/static/tabbar/my-on.png',
-						path: "/pages/companyHome/my/index",
-					},
-					
-				]
 			}
 		},
 		methods:{

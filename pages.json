@@ -11,6 +11,16 @@
 			}
 		},
 		{
+			"path":"pages/login/testThirdApi",
+			"style":{
+				"navigationBarTitleText":"",
+				"enablePullDownRefresh": false,
+				"h5":{
+					"titleNView":false
+				}
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"h5": {
@@ -146,7 +156,7 @@
 		{	
 			"path": "pages/companyHome/home",
 			"style": {
-				"navigationBarTitleText": "(首页) 企业"
+				"navigationBarTitleText": "企业"
 			}
 		},
 		{	
@@ -465,19 +475,5 @@
         	"van-share-sheet": "/wxcomponents/vant/share-sheet/index",
         	"van-empty": "/wxcomponents/vant/empty/index"
         }
-	},
-	"tabBar": {
-	        "selectedColor":"#79D5AD",
-	        "color": "#999999",
-	        "backgroundColor":"#ffffff",
-	        "borderStyle": "white",
-	        "height":"0px",
-	        "list": [{
-	            "pagePath":"pages/companyHome/home",
-	            "text": " "
-	        },{
-	            "pagePath":"pages/companyHome/my/index",
-	            "text": " "
-	        }]
 	}
 }
