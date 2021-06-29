@@ -56,7 +56,7 @@ export default {
     argFormData: {
       type: Object,
       default () {
-        return null
+        return {}
       }
     },
     // 是否手动提交

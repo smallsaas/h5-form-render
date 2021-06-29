@@ -75,6 +75,9 @@ export default {
     },
     colFormItemHandler(item) {
       const __config__ = item.__config__
+      if (item.hidden) {
+        return ''
+      }
       const jsx = <van-cell
         title={__config__.label}
         value={__config__.defaultValue}
