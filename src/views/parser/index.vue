@@ -44,7 +44,7 @@ import LawFormPreview from '../../components/LawFormPreview.vue'
 import { urlParam, Base64 } from '@/utils'
 // import { config } from '@/config'
 import axios from 'axios'
-import cloneDeep from 'lodash.clonedeep'
+// import cloneDeep from 'lodash.clonedeep'
 export default {
   name: 'H5FormRender',
   props: {
@@ -99,10 +99,10 @@ export default {
             const config = JSON.parse(Base64.decode(jsonDefine))
             this.config = config
             // 指定表单数据
-            if (this.argFormData && JSON.stringify(this.argFormData) !== '{}') {
-              this.formData = cloneDeep(this.argFormData)
-              return
-            }
+            // if (this.argFormData && JSON.stringify(this.argFormData) !== '{}') {
+            //   this.formData = cloneDeep(this.argFormData)
+            //   return
+            // }
 
             if (!config.loadApi) {
               this.defaultApiHandler(data)
@@ -134,11 +134,11 @@ export default {
           formData[key] = data.formData[key]
         }
       })
-      this.formData = formData
+      this.formData = { ...formData, ...this.argFormData }
     },
     customApiHandler (config) {
       axios.get(config.loadApi).then(rs => {
-        if (Object.prototype.toString.call(rs.data) === '[object Object]' && rs.data.code === '000000') {
+        if (Object.prototype.toString.call(rs.data) === '[object Object]' && rs.data.code === '00000') {
           this.formData = rs.data.data || {}
         }
       }).catch((err) => {

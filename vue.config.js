@@ -28,7 +28,7 @@ module.exports = {
     overlay: false,
     proxy: {
       '/api': {
-        target: 'http://106.53.93.81',
+        target: 'http://r.zbsoft.top',
         ws: true,
         changeOrigin: true
       }

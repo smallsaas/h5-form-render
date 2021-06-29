@@ -60,27 +60,31 @@ export default {
       }
       switch (__config__.tag) {
         case 'el-input':
-          jsx = <van-field
-            label={__config__.label}
-            type={__config__.tagIcon === 'input' ? 'text' : __config__.tagIcon}
-            required={__config__.required}
-            value={this.form[item.__vModel__] || __config__.defaultValue}
-            onInput={(e) => this.handleSimpleSetValue(e, item)}
-            placeholder={item.placeholder}
-            clearable={item.clearable}
-            left-icon={item['prefix-icon']}
-            right-icon={item['suffix-icon']}
-            rows={(item.autosize || {}).maxRows}
-            autosize
-            autocomplete="off"
-            onClear={(e) => this.clearField(e, item)}
-            maxlength={item.maxlength}
-            show-word-limit={item['show-word-limit']}
-            readonly={item.readonly}
-            disabled={item.disabled}
-            style={item.style}
-            rules={rules}
-          />
+          if (item.hidden) {
+            jsx = ''
+          } else {
+            jsx = <van-field
+              label={__config__.label}
+              type={__config__.tagIcon === 'input' ? 'text' : __config__.tagIcon}
+              required={__config__.required}
+              value={this.form[item.__vModel__] || __config__.defaultValue}
+              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              placeholder={item.placeholder}
+              clearable={item.clearable}
+              left-icon={item['prefix-icon']}
+              right-icon={item['suffix-icon']}
+              rows={(item.autosize || {}).maxRows}
+              autosize
+              autocomplete="off"
+              onClear={(e) => this.clearField(e, item)}
+              maxlength={item.maxlength}
+              show-word-limit={item['show-word-limit']}
+              readonly={item.readonly}
+              disabled={item.disabled}
+              style={item.style}
+              rules={rules}
+            />
+          }
           break
         case 'el-input-number':
           jsx = <van-field
