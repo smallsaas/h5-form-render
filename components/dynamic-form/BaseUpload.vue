@@ -89,12 +89,12 @@
             handleAfterRead (event) {
                 const { file } = event.detail
                 uni.uploadFile({
-                    url: globalConfig.formHost + '/upload',
+                    url: globalConfig.uatEP + '/api/fs/uploadfile',
                     filePath: file.url,
                     name: 'file',
                     success: (res) => {
                         const list = this.fileList
-                        const resUrl = res.data.substr(0, 5).includes('http') ? res.data :  globalConfig.formHost + res.data
+                        const resUrl = res.data.substr(0, 5).includes('http') ? res.data :  globalConfig.uatEP + res.data
                         if (_.has(this.param, 'accept') && this.param.accept === 'file') {
                             const index = resUrl.lastIndexOf('.')
                             const str = resUrl.substr(index + 1)

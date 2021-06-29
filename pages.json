@@ -77,6 +77,18 @@
 			}
 		},
 		{	
+			"path": "pages/companyHome/selfCheck/index",
+			"style": {
+				"navigationBarTitleText": "企业自查"
+			}
+		},
+		{	
+			"path": "pages/companyHome/selfCheck/selfCheckComfirm",
+			"style": {
+				"navigationBarTitleText": "企业自查"
+			}
+		},
+		{	
 			"path": "pages/companyHome/my/returnToWork",
 			"style": {
 				"navigationBarTitleText": "复工"

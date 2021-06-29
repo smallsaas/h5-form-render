@@ -11,5 +11,6 @@ export const globalConfig = {
   endpoint: _.get(globalConfigStorage, 'endpoint', 'https://api.cloud.smallsaas.cn'),
   workflow: _.get(globalConfigStorage, 'workflow', 'https://api.wf.smallsaas.cn'),
   authEP: _.get(globalConfigStorage, 'authEP', 'https://api.uaas.smallsaas.cn'),
+  uatEP: _.get(globalConfigStorage, 'uatEP', 'https://api.uat.smallsaas.cn'),
   tokenStorageKey: 'token'  //tokené”
 }

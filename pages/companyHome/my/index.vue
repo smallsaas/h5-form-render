@@ -74,15 +74,14 @@
 		onLoad (e){
 			this.initData("100");
 		},
+		onShow() {
+			console.log('on show')
+			this.initData("100");
+		},
 		data() {
 			return {
 				defaultAvatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
 				userInfo:{
-					// avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201912%2F25%2F20191225224833_zloky.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626422745&t=86d45ded6db55de9e9b4c13fe2084c3a',
-					// userName: '张三',
-					// enterpriseNumber: 'Ab263549898',
-					// domainName: 'hajdshdjAb263549898',
-					// job: '员工',
 				},
 				cellList:[
 					{title: "自查记录", icon: "orders-o", path: "./selfInspectionRecord"},
