@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-// »ñÈ¡È«¾ÖÅäÖÃ
+// ï¿½ï¿½È¡È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 const globalConfigStorage = uni.getStorageSync('globalConfigStorage')
 
 export const globalConfig = {
@@ -12,5 +12,6 @@ export const globalConfig = {
   workflow: _.get(globalConfigStorage, 'workflow', 'https://api.wf.smallsaas.cn'),
   authEP: _.get(globalConfigStorage, 'authEP', 'https://api.uaas.smallsaas.cn'),
   uatEP: _.get(globalConfigStorage, 'uatEP', 'https://api.uat.smallsaas.cn'),
-  tokenStorageKey: 'token'  //tokené”
+  tokenStorageKey: 'token'  ,//tokenï¿½ï¿½
+	tencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' // è·å–åœ°å€sdk key
 }
