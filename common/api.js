@@ -1,6 +1,11 @@
 import { request, upLoad } from './request'
 import { globalConfig } from '@/config.js'
 
+// 搜索测试
+export const getSearchPage = (params)=>{
+	const url = `${globalConfig.formHost}`
+	return request('GET', url, params)
+}
 
 // 获取执法对象数据
 export const getNavList = (params) => {

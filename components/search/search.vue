@@ -20,6 +20,7 @@
 			</view>
 			<view v-for="(item,i) in searchlist" v-if="inputValue!==''">
 				<navigator :url="url[i]">
+					<!-- 子项添加处 -->
 				<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
 					:item="item"
 				></state-search-item>

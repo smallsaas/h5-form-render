@@ -33,6 +33,9 @@
 				<text>签名</text>
 			</view>
 			
+			<view class="venue_tag" @click="handleToSearch">
+				<text>搜索</text>
+			</view>
 			
 <!-- 			<view class="venue_tag" @click="handleReturnToWorkRecord">
 				<text>复工记录</text>
@@ -98,6 +101,11 @@
 			// 		url: '../my/selfInspectionDetail'
 			// 	})
 			// },
+			handleToSearch(){
+				uni.navigateTo({
+					url: '../test/search/search',
+				})
+			},
 			handleToSignature (){
 				uni.navigateTo({
 					url: '../test/signature'
