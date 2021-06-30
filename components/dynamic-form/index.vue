@@ -39,13 +39,52 @@
                     </block>
                 </view>
             </block>
-            
-            <van-button 
-              v-if="_get(config, 'formBtns', true) && fields.length > 0"
-              round type="info" 
-              custom-style="width: 90%;margin: 40rpx auto 20rpx auto;display: flex"
-              @click='handleSubmit'
-              >提交</van-button>
+						<!-- 旧button,无法对齐样式 -->
+<!-- 							<van-button
+							  v-if="_get(config, 'formBtns', true) && fields.length > 0"
+							  round type="info" 
+							  custom-style="width: 90%;margin: 40rpx auto 20rpx auto;display: flex"
+							  @click='handleSubmit'
+							  >提交</van-button>
+								
+							<van-button
+							  v-if="_get(config, 'LastBtns', true) && fields.length > 0"
+							  round type="info" 
+							  custom-style="width: 90%;margin: 40rpx auto 20rpx auto;display: flex"
+							  @click='handleLast'
+							  >上一步</van-button>
+								
+								<van-button
+								  v-if="_get(config, 'nextBtns', true) && fields.length > 0"
+								  round type="info" 
+								  custom-style="width: 90%;margin: 40rpx auto 20rpx auto;display: flex"
+								  @click='handleNext'
+								  >下一步</van-button> -->
+									
+						<!-- 新button -->
+						<view class="button-box">
+							<button
+							class="button"
+							v-if="_get(config, 'LastBtns', false) && fields.length > 0"
+							@click="handleLast"
+							>
+							上一步
+							</button>
+							<button
+							class="button"
+							v-if="_get(config, 'nextBtns', false) && fields.length > 0"
+							@click="handleNext"
+							>
+							下一步
+							</button>
+							<button
+							class="button"
+							v-if="_get(config, 'formBtns', true) && fields.length > 0"
+							@click="handleSubmit"
+							>
+							提交
+							</button>
+						</view>
         </van-skeleton>
 	</view>
     
@@ -266,6 +305,20 @@
                 return data
             },
             
+						// 上一步,数据传递未完成，仅跳转功能
+						handleLast(){
+							console.log(this.config.LastNavigation)
+							uni.navigateBack({
+								delta:1
+							})
+						},
+						// 下一步,数据传递未完成，仅跳转功能
+						handleNext(){
+							uni.navigateTo({
+								url: '/pages' + this.config.NextNavigation
+							})
+						},
+						
             // 提交
             handleSubmit () {
                 const list = this.fields
@@ -319,7 +372,7 @@
                             setTimeout(() => {
                                 if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
                                     uni.navigateTo({
-                                        url: '../../pages' + this.config.submittedNavigation
+                                        url: '/pages' + this.config.submittedNavigation
                                     })
                                 } else {
                                     uni.navigateBack()
@@ -356,4 +409,23 @@
         	width: 80%;
         }
     }
+		
+		.button-box{
+			display: flex;
+			margin-top: 20px;
+			width: 100%;
+			.button{
+				flex: 1;
+				margin: 5px;
+				border-radius: 5px;
+				border: 1px solid #1989FA;
+				background-color: white;
+				color: #1989FA;
+				&:last-child{
+					background-color: #1989FA;
+					color: white;
+				}
+			}
+		}
+
 </style>

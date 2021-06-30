@@ -65,8 +65,6 @@
 										 :list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.banners`, [])"
 										 :outStyle="getComponentStyle(item)"
 									/>
-									
-									
 								</view>
 								
 					<view v-if="_get(item, 'type') === 'navlist'">
@@ -118,6 +116,12 @@
 							:days = "getComponentsData(item) || 0"
 						/>
 						<!-- end -->
+						<!-- 步骤条组件 2021-6-29 -->
+						<steps
+							v-if="_get(item, 'type') === 'steps'"
+							:list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.steps`, [])"
+							:outStyle="getComponentStyle(item)"
+						></steps>
 						
             </view>
           </block>
@@ -137,6 +141,7 @@
 	import card from '../other/Card.vue'
 	import search from '../search/search.vue'
 	import cell from '../other/Cell.vue'
+	import steps from '../Steps/Steps.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -147,7 +152,8 @@
 			boxList,
 			card,
 			search,
-			cell
+			cell,
+			steps
 		},
 		props: {
 			API: String,  // 页面数据请求接口
@@ -320,6 +326,9 @@
 					    value = _.has(comonentScouce, 'days') ? comonentScouce.days : false
 						break;
 					//
+					case 'steps':
+					    value = _.has(comonentScouce, 'steps') ? comonentScouce.steps : false
+						break;
 					default:
 					    value = comonentScouce
 				}
