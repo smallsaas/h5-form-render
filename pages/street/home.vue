@@ -3,15 +3,62 @@
 	<view>
 		<dynamic-page
 		   :API="getPageAapi"
+		    v-if="current == 0"
 		/>
 		
-		<view>
-			<van-tabbar :active="active" @change="onChange">
-			  <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-			  <van-tabbar-item icon="comment-o">社区</van-tabbar-item>
-			  <van-tabbar-item icon="friends-o">我的</van-tabbar-item>
-			</van-tabbar>
-		</view>
+		<street-user-report v-if="current == 1" />
+		
+		<my-page v-if="current === 2" />
+		
+		<van-tabbar :active="current" @change="onChange">
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/home.png"
+				mode="aspectFit"
+				style="width: 30px; height: 18px;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/home-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  首页
+			</van-tabbar-item>
+			
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/work.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/work-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  社区
+			</van-tabbar-item>
+			
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/my.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/my-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  我的
+			</van-tabbar-item>
+		</van-tabbar>
 	</view>
 
 </template>
@@ -19,41 +66,28 @@
 <script>
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { globalConfig } from '@/config.js'
+	import streetUserReport from '@/pages/street/community/streetUserReport'
+	import myPage from '@/pages/street/my/index'
 	
 	export default {
-		components:{ dynamicPage },
+		components:{ 
+			dynamicPage,
+			streetUserReport,
+			myPage
+		},
 		onLoad (e){
 		},
 		data() {
 			return {
 				getPageAapi: globalConfig.formHost + '?id=108',
-				active: 0
+				current: 0
 			}
 		},
 		
 		methods:{
 		  onChange(event) {
-			// event.detail 的值为当前选中项的索引
-			this.active = event.detail
-			switch (event.detail){
-				case 0:
-					uni.navigateTo({
-						url: './home'
-					})
-					break;
-				case 1:
-					uni.navigateTo({
-						url: './community/streetUserReport'
-					})
-					break;
-				case 2:
-					uni.navigateTo({
-						url: './my/index'
-					})
-					break;
-				default:
-					break;
-			}
+				// console.log('event = ', event.detail)
+				this.current = event.detail
 		  },
 		}
 	}

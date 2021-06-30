@@ -55,7 +55,7 @@
 					// job: '员工',
 				},
 				cellList:[
-					{title: "我的上报", icon: "orders-o", path: "./myReport"},
+					{title: "我的上报", icon: "orders-o", path: "/pages/street/my/myReport"},
 					{title: "我的收藏", icon: "label-o", path: ""},
 					{title: ""},
 					{title: "设置", icon: "label-o", path: ""}
@@ -78,6 +78,12 @@
 					console.log('path 不存在 ')
 				}
 			}
+		},
+		mounted() {
+			uni.setNavigationBarTitle({
+			　　title: '我的'
+			})
+			this.initData("100");
 		}
 	}
 </script>
