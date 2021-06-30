@@ -12,7 +12,7 @@
 					<view class='userInfo'>
 						<van-row type="flex">
 							<van-col>
-								<view class='text'>{{userInfo.userName || '用户名'}}</view>
+								<view class='text'>{{userInfo.userName || ''}}</view>
 							</van-col>
 							<van-col>
 								<van-button plain type='info' size='small' round>信息按钮</van-button>
@@ -72,10 +72,7 @@
 			dynamicCell,
 		},
 		onLoad (e){
-			this.initData("100");
-		},
-		onShow() {
-			console.log('on show')
+			console.log('on onLoad')
 			this.initData("100");
 		},
 		data() {
@@ -84,9 +81,9 @@
 				userInfo:{
 				},
 				cellList:[
-					{title: "自查记录", icon: "orders-o", path: "./selfInspectionRecord"},
-					{title: "复工记录", icon: "label-o", path: "./returnToWorkRecord"},
-					{title: "执法记录", icon: "label-o", path: "./lawEnforcementRecord"}
+					{title: "自查记录", icon: "orders-o", path: "/pages/companyHome/my/selfInspectionRecord"},
+					{title: "复工记录", icon: "label-o", path: "/pages/companyHome/my/returnToWorkRecord"},
+					{title: "执法记录", icon: "label-o", path: "/pages/companyHome/my/lawEnforcementRecord"}
 				],
 			}
 		},
@@ -99,6 +96,7 @@
 			},
 			onItemClick(path){
 				if(path){
+					console.log('点击 = ', path)
 				   uni.navigateTo({
 						url: path
 				   }) 
@@ -106,6 +104,12 @@
 					console.log('path 不存在 ')
 				}
 			},
+		},
+		mounted() {
+			uni.setNavigationBarTitle({
+			　　title: '我的'
+			})
+			this.initData("100");
 		}
 	}
 </script>

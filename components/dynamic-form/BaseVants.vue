@@ -135,6 +135,8 @@
 			 				      @change="(e) => handleSetValue(e, fields[index])"
 			 > 
 			 </c-video>
+			 
+
        </block>
     </view>
 </template>
@@ -166,7 +168,7 @@
 		   BaseRate,
 		   BaseUpload,
 			 cImage,
-			 cVideo
+			 cVideo,
         },
         props: {
           fields: {
@@ -200,6 +202,7 @@
                   ..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
                   ..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
                   ..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {},
+                  ..._.has(item, 'api') ? { 'api': _.get(item, 'api') } : "",
                }
            },
 		   _has (item = {}, str) {

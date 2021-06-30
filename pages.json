@@ -168,7 +168,7 @@
 		{	
 			"path": "pages/companyHome/home",
 			"style": {
-				"navigationBarTitleText": "企业"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{	
