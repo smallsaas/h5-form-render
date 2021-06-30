@@ -82,7 +82,7 @@
 							v-if="_get(config, 'formBtns', true) && fields.length > 0"
 							@click="handleSubmit"
 							>
-							提交
+							{{_get(config,'formBtnsText',"提交")}}
 							</button>
 						</view>
         </van-skeleton>
@@ -371,8 +371,12 @@
                             })
                             setTimeout(() => {
                                 if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+																	console.log(this.config.submittedNavigation)
                                     uni.navigateTo({
-                                        url: '/pages' + this.config.submittedNavigation
+                                        url: '/pages' + this.config.submittedNavigation,
+																				fail:(a)=>{
+																					console.log(a)
+																				}
                                     })
                                 } else {
                                     uni.navigateBack()

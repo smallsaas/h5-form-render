@@ -1,6 +1,7 @@
 import { request, upLoad } from './request'
 import { globalConfig } from '@/config.js'
 
+
 // 获取执法对象数据
 export const getNavList = (params) => {
 	const url = `${globalConfig.host}/api/product`

@@ -468,12 +468,20 @@
                 "enablePullDownRefresh": false
             }
             
+        },{
+            "path" : "pages/enforcement/onSiteLawEnforcement/Fifth",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
         ,{
             "path" : "pages/map/venueList/index",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "执法对象",
                 "enablePullDownRefresh": false
             }
             
@@ -482,7 +490,7 @@
 				    "path" : "pages/map/venueNav/index",
 				    "style" :                                                                                    
 				    {
-				        "navigationBarTitleText": "",
+				        "navigationBarTitleText": "执法导航",
 				        "enablePullDownRefresh": false
 				    }
 				    
