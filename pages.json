@@ -415,6 +415,78 @@
             }
             
         }
+        ,{
+            "path" : "pages/enforcement/more/PeopleInformation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "人员信息",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/enforcement/enforcementStateBook",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+				
+        ,{
+            "path" : "pages/enforcement/onSiteLawEnforcement/First",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+				{
+				    "path" : "pages/enforcement/onSiteLawEnforcement/Second",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				}
+        ,{
+            "path" : "pages/enforcement/onSiteLawEnforcement/Third",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/enforcement/onSiteLawEnforcement/Fourth",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/map/venueList/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+				{
+				    "path" : "pages/map/venueNav/index",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

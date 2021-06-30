@@ -101,6 +101,20 @@
 							...getComponentBindData(item)
 						}"
 					/>
+					<message-item
+					v-if="getListItemKey() === 'messageItem'"
+					:item="{
+						...item,
+						...getComponentBindData(item)
+					}"
+					/>
+					<enforcement-state-item
+					v-if="getListItemKey() === 'enforcement-state-item'"
+					:item="{
+						...item,
+						...getComponentBindData(item)
+					}"
+					/>
                   </view>
               </view>
             </load-refresh>
@@ -124,6 +138,8 @@
 	import StreetUserReportItem from './listItem/StreetUserReportItem.vue'
 	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
 	import record from './listItem/record/record.vue'
+	import messageItem from './listItem/messageItem.vue'
+	import enforcementStateItem from './listItem/AvatarStateList/enforcementStateItem.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -139,7 +155,9 @@
 			MyReportItem,
 			StreetUserReportItem,
 			AvatarStateItem,
-			record
+			record,
+			messageItem,
+			enforcementStateItem
 		},
 		props: {
 			config: {
