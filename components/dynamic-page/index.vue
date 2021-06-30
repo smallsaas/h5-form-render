@@ -255,6 +255,7 @@
                             const dataPayload = _.get(resData, 'dataPayload')
                             if (dataPayload && _.get(res.data, dataPayload) && typeof _.get(res.data, dataPayload) === 'object' && JSON.stringify(_.get(res.data, dataPayload)) !== '{}') {
                                 pageUrl = ''
+                                this.pageData = _.cloneDeep(_.get(res.data, dataPayload))
                             } else {
                                pageUrl = this.getRequestUrl(resData)
                             }

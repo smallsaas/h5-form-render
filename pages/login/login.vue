@@ -2,6 +2,7 @@
 	<view>
 		<dynamic-page :API="api"></dynamic-page>
 	</view>
+	
 </template>
 
 <script>
@@ -14,7 +15,6 @@
 			}
 		},
 		methods: {
-			
 		},
 		components: {
 			dynamicPage
