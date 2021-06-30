@@ -58,6 +58,14 @@ export const getSelfInspectionRecord = (params) => {
     return request('GET', url, params)
 }
 
+//2021-6-30
+//获取经办人列表
+export const getAdmUsers = (api, params) => {
+    const url = `${globalConfig.uatEP}${api}`
+    return request('GET', url, params)
+}
+//end
+
 //获取自查详情页面配置
 // export const getSelfInspectionDetailField = (params) => {
 //     const url = `${globalConfig.formHost}`

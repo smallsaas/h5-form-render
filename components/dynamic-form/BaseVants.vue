@@ -135,6 +135,19 @@
 			 				      @change="(e) => handleSetValue(e, fields[index])"
 			 > 
 			 </c-video>
+			 
+			 <!-- 新增 组件 2021-6-30 -->
+				
+				<select-fetch 
+				    v-if="_get(item, '__config__.tag') === 'el-select-fetch'"
+				    :param="{
+				        ...getBaseParam(item),
+				        columns: _get(item, '__slot__.options', []),
+				        ..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {}
+				    }"
+				    @confirm="(e) => handleSetValue(e, fields[index])"
+				/>
+			 <!-- end -->
        </block>
     </view>
 </template>
@@ -153,6 +166,7 @@
 	import BaseUpload from './BaseUpload.vue'
 	import cImage from './custom/c-image.vue'
 	import cVideo from './custom/c-video.vue'
+	import selectFetch from '@/components/custom-c/selectFetch.vue'
     export default {
         components: {
            BaseField,
@@ -166,7 +180,8 @@
 		   BaseRate,
 		   BaseUpload,
 			 cImage,
-			 cVideo
+			 cVideo,
+			 selectFetch
         },
         props: {
           fields: {
@@ -200,6 +215,7 @@
                   ..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
                   ..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
                   ..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {},
+                  ..._.has(item, 'api') ? { 'api': _.get(item, 'api') } : "",
                }
            },
 		   _has (item = {}, str) {
