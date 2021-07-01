@@ -1,7 +1,8 @@
 <template>
 	<view>
-		<view v-if="selectValue">{{selectValue}}</view>
-		<button @click="SplitValue()">请选择</button>
+		<view v-if="selectValue" @change="getValue()">{{selectValue}}</view>
+		<button @click="SplitValue()" @click.native="getValue()">请选择</button>
+		<button @click="getValue()">获取值</button>
 	</view>
 </template>
 
@@ -15,12 +16,26 @@
 				show:true
 			}
 		},
+		mounted() {
+			console.log(this.selectValue)
+			this.getValue()
+		},
+		onReady(){
+			this.getValue()
+		},
+		renderTracked() {
+			this.getValue()
+		},
 		methods:{
 			SplitValue(){
-					uni.reLaunch({
+					uni.navigateTo({
 						url:"/components/dynamic-form/custom/selectBox/selectBox",
 						animationType:"slide-in-left",
 						animationDuration:300,
+						success() {
+							this.getValue()
+							console.log(this.selectValue)
+						},
 						fail(e) {
 							console.log(e)
 						}
@@ -29,6 +44,18 @@
 			shows(){
 				this.show=!this.show;
 			},
+			getValue(){
+				let value;
+				let that = this
+				let va = uni.getStorage({
+					key:"selectName",
+					success(e) {
+						console.log(e.data)
+						that.selectValue = e.data
+					}
+				})
+				// console.log(va.data)
+			}
 		}
 	}
 </script>

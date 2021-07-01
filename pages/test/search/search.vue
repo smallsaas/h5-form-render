@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<search :list="list"></search>
+		<search :config="list"></search>
 	</view>
 </template>
 
@@ -20,7 +20,8 @@
 			async getSearch(){
 				const res = await getSearchPage({id:12311})
 				if (_.get(res, 'code') === 200) {
-					this.list = _.cloneDeep(_.get(res, 'data', {}))
+					this.list = _.get(res, 'data', {})
+					console.log(this.list)
 				}
 			}
 		}
