@@ -504,6 +504,23 @@
             }
             
         }
+        ,{
+            "path" : "pages/test/testsearch",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "components/dynamic-form/custom/selectBox/selectBox",
+            "style" :                                                                                    
+            {
+							"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

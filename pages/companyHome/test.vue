@@ -37,6 +37,10 @@
 				<text>搜索</text>
 			</view>
 			
+			<view class="venue_tag" @click="handleToTest">
+				<text>测试</text>
+			</view>
+			
 <!-- 			<view class="venue_tag" @click="handleReturnToWorkRecord">
 				<text>复工记录</text>
 			</view>	 -->	
@@ -101,6 +105,11 @@
 			// 		url: '../my/selfInspectionDetail'
 			// 	})
 			// },
+			handleToTest(){
+				uni.navigateTo({
+					url: '../test/testsearch'
+				})
+			},
 			handleToSearch(){
 				uni.navigateTo({
 					url: '../test/search/search',

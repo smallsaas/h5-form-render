@@ -89,8 +89,8 @@
 						<!-- 确认协议保存按钮 -->
 						<view v-if="_get(config, 'formCheckBtns', false) && fields.length > 0" class="formcheckbox">
 							<view class="messageBox">
-								<checkbox @click="handlecheck()" :checked="checks" class="Form_CheckBox"></checkbox>
-								<span style="color: red;">{{_get(config,'formCheckBtnsText',"同意协议")}}</span>
+								<checkbox color="blue" style="transform:scale(0.8)" @click="handlecheck()" :checked="checks" class="Form_CheckBox"></checkbox>
+								<span style="color: red;font-size: 10px;">{{_get(config,'formCheckText',"同意协议")}}</span>
 							</view>
 							<button
 							class="sumbitButton"
@@ -329,13 +329,15 @@
             
 						// 上一步,数据传递未完成，仅跳转功能
 						handleLast(){
-							console.log(this.config.LastNavigation)
 							uni.navigateBack({
 								delta:1
 							})
 						},
 						// 下一步,数据传递未完成，仅跳转功能
 						handleNext(){
+							console.log('formInfo',this.formInfo)
+							console.log('id',_.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {})
+							console.log('form',this.form)
 							let NextData = {
 							    ...this.formInfo,
 							    ..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},

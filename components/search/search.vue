@@ -2,7 +2,7 @@
 <!-- 默认可直接调用，使用stateSearchItem列表子项，调用的api对应的字段通过field来定义 -->
 <template>
 	<view>
-		<view class="search-box">
+		<view :class="'search-box '+searchType">
 			<view class="searchIcon search_Icons">&#xe600;</view>
 			<view class="search-input">
 				<input type="text" class="SearchinputBox" v-model="inputValue" @input="getList()" @change="getList()" adjust-position="false" placeholder="请输入....."/>
@@ -10,7 +10,7 @@
 			<!-- <view class="talkIcon search_Icons">&#xe6ff;</view> -->
 			<!-- 语音输入按钮 -->
 		</view>
-		<view class="search-list">
+		<view :class="'search-list '+searchType">
 			<view v-for="(item,i) in listData" v-if="inputValue===''">
 				<navigator :url="url[i]">
 					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
@@ -65,6 +65,12 @@
 					}
 				}
 			},
+			searchType:{
+				type:String,
+				default(){
+					return "top"
+				}
+			}
 		},
 		created() {
 			this.getData()
@@ -142,15 +148,26 @@
 	
 	.search-box{
 		position: fixed;
-		top: 0;
 		left: 0;
 		width: 100%;
 		background-color: white;
 		opacity: .8;
 		z-index: 10000;
+		&.top{
+			top: 0;
+		}
+		&.bottom{
+			bottom: 0;
+			left: 0;
+		}
 	}
 	.search-list{
-		margin-top: 50px;
+		&.top{
+			margin-top: 50px;
+		}
+		&.bottom{
+			margin-top: 0px;
+		}
 	}
 	
 	.search-input{
