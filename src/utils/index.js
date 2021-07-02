@@ -1,6 +1,6 @@
 import router from '@/router'
 import axios from 'axios'
-const OSS_URL = 'http://jimangmensso.oss-cn-shenzhen.aliyuncs.com/'
+const OSS_URL = 'https://jimangmensso.oss-cn-shenzhen.aliyuncs.com/'
 
 /**
  * @function

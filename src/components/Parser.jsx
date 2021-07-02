@@ -317,7 +317,9 @@ export default {
             is-link
             onClick={(e) => this.openSignatureDialog(e, item)}
             placeholder={item.placeholder}
-          />
+          >
+            <img style="width: 100%;" src={this.form[item.__vModel__]} alt="" />
+          </van-cell>
           break
         default:
           break
