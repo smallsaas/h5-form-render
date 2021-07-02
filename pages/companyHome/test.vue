@@ -41,6 +41,9 @@
 				<text>测试</text>
 			</view>
 			
+			<view class="venue_tag" @click="handleToNewFormTest">
+				<text>真表单对接测试</text>
+			</view>
 <!-- 			<view class="venue_tag" @click="handleReturnToWorkRecord">
 				<text>复工记录</text>
 			</view>	 -->	
@@ -140,6 +143,12 @@
 			// 		url: '../my/lawEnforcementDetail'
 			// 	})
 			// },
+			
+			handleToNewFormTest(){
+				uni.navigateTo({
+					url: '../test/newFormTest/newFormTest'
+				})
+			},
 			handleLawProcessPage () {
 				uni.navigateTo({
 					url: '../test/processPage'

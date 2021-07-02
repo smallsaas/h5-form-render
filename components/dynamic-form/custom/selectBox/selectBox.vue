@@ -37,6 +37,9 @@
 		onLoad() {
 			this.getSearch()
 		},
+		onHide() {
+			console.log("hide")
+		},
 		methods: {
 			async getSearch(){
 				const res = await getSearchPage({id:12311})
@@ -44,9 +47,6 @@
 					this.list = _.cloneDeep(_.get(res, 'data', {}))
 				}
 			},
-			SumbitValue(){
-				
-			}
 		}
 	}
 </script>

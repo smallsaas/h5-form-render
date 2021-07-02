@@ -135,7 +135,7 @@
 			 				      @change="(e) => handleSetValue(e, fields[index])"
 			 > 
 			 </c-video>
-			 <c-select-list
+<!-- 			 <c-select-list
 				 v-if="_get(item, '__config__.tag') === 'c-video'"
 				 :param="{
 					...getBaseParam(item),
@@ -146,7 +146,20 @@
 									 ..._has(item, 'accept') ? { accept: item.accept } : {},
 				 }"
 							 @change="(e) => handleSetValue(e, fields[index])"
-			 ></c-select-list>
+			 ></c-select-list> -->
+			 
+			 <c-select
+			 				 v-if="_get(item, '__config__.tag') === 'c-select'"
+			 				 :param="{
+			 					...getBaseParam(item),
+			 					..._get(item, 'error', false) ? { error: item.error } : {},
+			 					..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+			 					...item['max-count'] ? { 'max-count': item['max-count'] } : {},
+			 					..._has(item, 'deletable') ? { deletable: item.deletable } : {},
+								..._has(item, 'accept') ? { accept: item.accept } : {},
+			 				 }"
+			 							 @change="(e) => handleSetValue(e, fields[index])"
+			 ></c-select>
        </block>
     </view>
 </template>
@@ -165,7 +178,8 @@
 	import BaseUpload from './BaseUpload.vue'
 	import cImage from './custom/c-image.vue'
 	import cVideo from './custom/c-video.vue'
-	import cSelectList from './custom/c-select-list.vue'
+	// import cSelectList from './custom/c-select-list.vue'
+	import cSelect from './custom/c-select/c-select.vue'
     export default {
         components: {
            BaseField,
@@ -180,7 +194,8 @@
 		   BaseUpload,
 			 cImage,
 			 cVideo,
-			 cSelectList
+			 // cSelectList,
+			 cSelect
         },
         props: {
           fields: {
