@@ -77,12 +77,27 @@
 							>
 							下一步
 							</button>
+
 							<button
 							class="button"
 							v-if="_get(config, 'formBtns', true) && fields.length > 0"
 							@click="handleSubmit"
 							>
 							{{_get(config,'formBtnsText',"提交")}}
+							</button>
+						</view>
+						<!-- 确认协议保存按钮 -->
+						<view v-if="_get(config, 'formCheckBtns', false) && fields.length > 0" class="formcheckbox">
+							<view class="messageBox">
+								<checkbox color="blue" style="transform:scale(0.8)" @click="handlecheck()" :checked="checks" class="Form_CheckBox"></checkbox>
+								<span style="color: red;font-size: 10px;">{{_get(config,'formCheckText',"同意协议")}}</span>
+							</view>
+							<button
+							class="sumbitButton"
+							@click="handleSubmit"
+							:disabled="!checks"
+							>
+							{{_get(config,'formCheckBtnsText',"提交")}}
 							</button>
 						</view>
         </van-skeleton>
@@ -128,6 +143,7 @@
 		},
 		data() {
 			return {
+				checks:false,
                 formConfig: {}, // 表单配置
 				fields: [],
 				form: {},
@@ -241,6 +257,12 @@
             	this.fields = [...renderChild(_.cloneDeep(_.get(this.formConfig, 'fields', [])))]
 				this.skeletonLoading = false
             },
+						
+						// 是否确认协议
+						handlecheck(){
+							this.checks = !this.checks
+						},
+						
             // 改变值时
             handleChange (e, item) {
               this.form[item.__vModel__] = e
@@ -307,13 +329,22 @@
             
 						// 上一步,数据传递未完成，仅跳转功能
 						handleLast(){
-							console.log(this.config.LastNavigation)
 							uni.navigateBack({
 								delta:1
 							})
 						},
 						// 下一步,数据传递未完成，仅跳转功能
 						handleNext(){
+							console.log('formInfo',this.formInfo)
+							console.log('id',_.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {})
+							console.log('form',this.form)
+							let NextData = {
+							    ...this.formInfo,
+							    ..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
+							    ...this.form
+							}
+							// 获取当前页提交数据
+							console.log(NextData)
 							uni.navigateTo({
 								url: '/pages' + this.config.NextNavigation
 							})
@@ -431,5 +462,28 @@
 				}
 			}
 		}
-
+		.sumbitButton:disabled{
+			background-color: #2A82E4;
+			color: white;
+		}
+		.formcheckbox{
+			width: 90%;
+			margin: 0 auto;
+		}
+		.sumbitButton{
+			background-color: #2A82E4;
+			color: white;
+		}
+		.Form_CheckBox{
+			margin: 10px auto;
+		}
+		.Form_CheckBox[checked]{
+			color: white!important;
+		}
+		.sumbitButton[disabled] {
+			opacity: .5;
+		  background-color: #2A82E4!important;
+		  color: white!important;
+		}
+		
 </style>

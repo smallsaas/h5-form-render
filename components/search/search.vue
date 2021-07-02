@@ -2,7 +2,7 @@
 <!-- 默认可直接调用，使用stateSearchItem列表子项，调用的api对应的字段通过field来定义 -->
 <template>
 	<view>
-		<view class="search-box">
+		<view :class="'search-box '+searchType">
 			<view class="searchIcon search_Icons">&#xe600;</view>
 			<view class="search-input">
 				<input type="text" class="SearchinputBox" v-model="inputValue" @input="getList()" @change="getList()" adjust-position="false" placeholder="请输入....."/>
@@ -10,19 +10,30 @@
 			<!-- <view class="talkIcon search_Icons">&#xe6ff;</view> -->
 			<!-- 语音输入按钮 -->
 		</view>
-		<view class="search-list">
+		<view :class="'search-list '+searchType">
 			<view v-for="(item,i) in listData" v-if="inputValue===''">
 				<navigator :url="url[i]">
 					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
 						:item="item"
 					></state-search-item>
+					<radio-select v-if="config.itemModule.name==='radioItem'"
+						:item="item"
+						@getAddress="getAddress"
+						@getName="getName"
+					></radio-select>
 				</navigator>
 			</view>
 			<view v-for="(item,i) in searchlist" v-if="inputValue!==''">
 				<navigator :url="url[i]">
+					<!-- 子项添加处 -->
 				<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
 					:item="item"
 				></state-search-item>
+				<radio-select v-if="config.itemModule.name==='radioItem'"
+					:item="item"
+					@getAddress="getAddress"
+					@getName="getName"
+				></radio-select>
 				</navigator>
 			</view>
 		</view>
@@ -36,10 +47,12 @@
 	import { globalConfig } from '@/config.js'
 	
 	import stateSearchItem from './item/stateSearch.vue'
+	import RadioSelect from './item/RadioSelect.vue'
 	export default {
 		name:"search",
 		components:{
-			stateSearchItem
+			stateSearchItem,
+			RadioSelect
 		},
 		data() {
 			return {
@@ -47,8 +60,15 @@
 				listData:null,
 				searchlist:null,
 				itemNavigation:"",
-				url:null
+				url:null,
+				RadioValue:{
+					name:null,
+					address:null
+				}
 			};
+		},
+		onLoad() {
+			this.getChecked()
 		},
 		props:{
 			config:{
@@ -64,26 +84,57 @@
 					}
 				}
 			},
+			searchType:{
+				type:String,
+				default(){
+					return "top"
+				}
+			}
 		},
 		created() {
+			uni.removeStorage({
+			    key: 'selectName',
+			    success: function (res) {
+			        console.log("清除缓存成功");
+			    }
+			});
 			this.getData()
 			// console.log(this.searchlist)
 		},
 		methods:{
+			getAddress(e){
+				this.address = e
+				 console.log(this.address)
+			},
+			getName(e){
+				this.name = e
+				let name = this.name
+				console.log(this.name)
+				uni.navigateBack({
+					success(e){
+						uni.setStorage({
+							key:"selectName",
+							data:name,
+							success(e) {
+								console.log("保存缓存成功",name)
+							}
+						})
+					}
+				})
+			},
 			getSearchList(params){
 				let url=this.config.loadAPI||`${globalConfig.dataHost}`
 				return request('GET', url, params)
 			},
 			async getData(){
 				const res = await this.getSearchList({id:this.config.id||12311});
-				// console.log(res)
 				this.listData = res.data.list
 				this.itemNavigation = res.data.itemNavigation
 				this.url = this.getID(this.listData)
 			},
 			getList(){
 				this.searchlist = []
-				// console.log(this.searchlist)
+				console.log(this.searchlist)
 				if(this.inputValue!==""){
 					for(let i=0;i<this.listData.length;i++){
 						let list = this.listData[i]
@@ -141,15 +192,26 @@
 	
 	.search-box{
 		position: fixed;
-		top: 0;
 		left: 0;
 		width: 100%;
 		background-color: white;
 		opacity: .8;
 		z-index: 10000;
+		&.top{
+			top: 0;
+		}
+		&.bottom{
+			bottom: 0;
+			left: 0;
+		}
 	}
 	.search-list{
-		margin-top: 50px;
+		&.top{
+			margin-top: 50px;
+		}
+		&.bottom{
+			margin-top: 64px;
+		}
 	}
 	
 	.search-input{
