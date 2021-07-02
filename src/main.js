@@ -24,8 +24,11 @@ import {
   CellGroup
 } from 'vant'
 import './style/global.less'
+import vueEsign from 'vue-esign'
+
 remInit()
 
+Vue.use(vueEsign)
 Vue.use(Field)
 Vue.use(Form)
 Vue.use(Stepper)

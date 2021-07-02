@@ -1,6 +1,6 @@
 {
   "name": "h5-form-render",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "author": "zhengyf",
   "private": false,
   "main": "./src/index.js",
@@ -15,6 +15,7 @@
     "lodash.clonedeep": "^4.5.0",
     "vant": "^2.11.3",
     "vue": "^2.6.11",
+    "vue-esign": "^1.0.5",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {

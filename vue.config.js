@@ -31,6 +31,14 @@ module.exports = {
         target: 'http://r.zbsoft.top',
         ws: true,
         changeOrigin: true
+      },
+      '/upload': {
+        target: 'http://jimangmensso.oss-cn-shenzhen.aliyuncs.com',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/upload': ''
+        }
       }
     }
   },

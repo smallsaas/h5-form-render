@@ -2,7 +2,9 @@ import cloneDeep from 'lodash.clonedeep'
 import { formatTime } from '../utils'
 import { Toast } from 'vant'
 import axios from 'axios'
+import esign from '../views/esign'
 const SUNMIT_API = '/api.page.design.form/submitFormData'
+let signatureKey = ''
 export default {
   props: {
     config: {
@@ -25,13 +27,17 @@ export default {
     },
     ifManualSubmit: Boolean
   },
+  components: {
+    esign
+  },
   data() {
     return {
       form: {},
       showPicker: {},
       select: {},
       fields: [],
-      loading: false
+      loading: false,
+      showSignature: false
     }
   },
   render() {
@@ -302,10 +308,31 @@ export default {
             </template>
           </van-field>
           break
+        case 'signature':
+          signatureKey = item.__vModel__
+          jsx = <van-cell
+            class="signature-cell"
+            title={__config__.label}
+            value={this.form[item.__vModel__] || __config__.defaultValue}
+            is-link
+            onClick={(e) => this.openSignatureDialog(e, item)}
+            placeholder={item.placeholder}
+          />
+          break
         default:
           break
       }
       return jsx
+    },
+    openSignatureDialog() {
+      this.showSignature = true
+    },
+    closeSignatureDialog() {
+      this.showSignature = false
+    },
+    signatureSuc(url) {
+      this.showSignature = false
+      this.form[signatureKey] = url
     },
     rowFormItemHandler(item) {
       const children = item.__config__.children
@@ -346,16 +373,22 @@ export default {
     getRenderDom() {
       const fields = this.initFormData(this.config.fields || [])
       this.fields = fields
-      return <van-form onSubmit={this.onSubmit} label-width="5.2em">
-        {
-          fields.map((item) => {
-            return this.getEleItem(item)
-          })
-        }
-        <div class="mg-t15 pd-l20 pd-r20 pd-b20">
-          <van-button round block type="info" loading={this.loading} native-type="submit">提交</van-button>
-        </div>
-      </van-form>
+      return <div>
+        <van-form onSubmit={this.onSubmit} label-width="5.2em">
+          {
+            fields.map((item) => {
+              return this.getEleItem(item)
+            })
+          }
+          <div class="mg-t15 pd-l20 pd-r20 pd-b20">
+            <van-button round block type="info" loading={this.loading} native-type="submit">提交</van-button>
+          </div>
+        </van-form>
+
+        <van-popup v-model={this.showSignature} position="bottom">
+          <esign class="mg-b20" onSignatureSuc={this.signatureSuc} onClose={this.closeSignatureDialog}></esign>
+        </van-popup>
+      </div>
     },
     handleSimpleSetValue(e, item) {
       this.delDefaultValue(item)

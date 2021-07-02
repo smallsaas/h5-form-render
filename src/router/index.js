@@ -21,6 +21,15 @@ const routes = [
       title: 'example',
       keepAlive: false
     }
+  },
+  {
+    path: '/esign',
+    name: 'Esign',
+    component: () => import('@/views/esign'),
+    meta: {
+      title: 'esign',
+      keepAlive: false
+    }
   }
 ]
 
