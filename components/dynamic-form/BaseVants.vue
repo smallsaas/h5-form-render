@@ -201,8 +201,7 @@
                   ..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
                   ..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
                   ..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
-                  ..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {},
-                  ..._.has(item, 'api') ? { 'api': _.get(item, 'api') } : "",
+                  ..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
                }
            },
 		   _has (item = {}, str) {
