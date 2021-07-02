@@ -78,6 +78,12 @@ export default {
       if (item.hidden) {
         return ''
       }
+      if (__config__.tag === 'signature') {
+        return <div class="pd-t10 pd-b10 pd-l15 pd-r15">
+          <div class="mg-b10">签名</div>
+          <img src={__config__.defaultValue}></img>
+        </div>
+      }
       const jsx = <van-cell
         title={__config__.label}
         value={__config__.defaultValue}

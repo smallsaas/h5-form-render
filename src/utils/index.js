@@ -276,9 +276,9 @@ export const uploader = (file, blob) => {
   return axios({
     method: 'post',
     // 测试用
-    // 真实地址 http://jimangmensso.oss-cn-shenzhen.aliyuncs.com
+    // 真实地址 https://jimangmensso.oss-cn-shenzhen.aliyuncs.com
     // url: '/upload',
-    url: 'http://jimangmensso.oss-cn-shenzhen.aliyuncs.com',
+    url: 'https://jimangmensso.oss-cn-shenzhen.aliyuncs.com',
     data: formData
   }).then(() => {
     return OSS_URL + fileKey
