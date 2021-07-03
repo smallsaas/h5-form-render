@@ -9,11 +9,10 @@ export const globalConfig = {
   formHost: _.get(globalConfigStorage, 'formEP', 'https://api.mock.smallsaas.cn/form'),
   dataHost: _.get(globalConfigStorage, 'dataEP', 'https://api.mock.smallsaas.cn/data'),
   endpoint: _.get(globalConfigStorage, 'endpoint', 'https://api.cloud.smallsaas.cn'),
-  workflow: _.get(globalConfigStorage, 'workflow', 'https://api.wf.smallsaas.cn'),
-  authEP: _.get(globalConfigStorage, 'authEP', 'https://api.uaas.smallsaas.cn'),
-  uatEP: _.get(globalConfigStorage, 'uatEP', 'https://api.uat.smallsaas.cn'),
-  designEP:  _.get(globalConfigStorage, 'designEP', 'https://api.uat.smallsaas.cn'),
   workflowEP: _.get(globalConfigStorage, 'workflowEP', 'https://api.uat.smallsaas.cn'),
+  authEP: _.get(globalConfigStorage, 'authEP', 'https://api.uaas.smallsaas.cn'),
+  // uatEP: _.get(globalConfigStorage, 'workflowEP', 'https://api.uat.smallsaas.cn'),
+  designEP:  _.get(globalConfigStorage, 'designEP', 'https://api.uat.smallsaas.cn'),
   extraEP: _.get(globalConfigStorage, 'extraEP', 'https://api.uat.smallsaas.cn'),
   tokenStorageKey: 'token',//token��
   sstencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' // 获取地址sdk key

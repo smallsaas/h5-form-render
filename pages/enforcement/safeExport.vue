@@ -17,7 +17,7 @@
 		},
 		data() {
 			return {
-				api: globalConfig.uatEP + '/api/u/workflow/process/code?id=9a2da0df30200a2096bd882ffd7b5d6f'
+				api: globalConfig.workflowEP + '/api/u/workflow/process/code?id=9a2da0df30200a2096bd882ffd7b5d6f'
 			}
 		},
 		methods:{
