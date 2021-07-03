@@ -357,17 +357,15 @@
 				}
 				console.log('routeUrl= ', routeUrl)
 				// 旧跳转方式
-				// uni.navigateTo({
-				// 	url:routeUrl,
-				// 		// success:res =>{console.log("跳转成功")},
-				// 		// fail:err =>(console.log("跳转失败",err))
-				// })
-				// 栈溢出,改用redirectTo
-				uni.redirectTo({
-					url: routeUrl
-					// success:res =>{console.log("跳转成功")},
-					// fail:err =>(console.log("跳转失败",err))
+				uni.navigateTo({
+					url:routeUrl
 				})
+				// 栈溢出,改用redirectTo
+				// uni.redirectTo({
+				// 	url: routeUrl
+				// 	// success:res =>{console.log("跳转成功")},
+				// 	// fail:err =>(console.log("跳转失败",err))
+				// })
 			}
 		}
 	}

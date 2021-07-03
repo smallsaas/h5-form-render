@@ -1,7 +1,10 @@
 <template>
 	<view class="load-refresh">
 		<!-- 刷新动画，可自定义，占高100rpx -->
-		<view class="animation" :style="{'--color': color}" v-if="pagination !== false">
+		<view class="animation" 
+			:style="{'--color': color}" 
+			v-if="isRefresh"
+		>
 			<view v-if="!playState" class="remind">
 				{{moving ? '↑ 松开释放' : '↓ 下拉刷新'}}
 			</view>
@@ -28,7 +31,7 @@
 				background: backgroundCover,
 				transform: coverTransform,
 				transition: coverTransition,
-                marginTop: pagination !== false ? '-100rpx' : 0
+                marginTop: isRefresh ? '-100rpx' : 0
 			}]"
 			@touchstart="coverTouchstart"
 			@touchmove="coverTouchmove"
@@ -55,7 +58,7 @@
 		props: {
 			isRefresh: {
 				type: Boolean,
-				default: true
+				default: false
 			},
 			refreshType: {
 				type: String,

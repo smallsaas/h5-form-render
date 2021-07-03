@@ -12,6 +12,9 @@ export const globalConfig = {
   workflow: _.get(globalConfigStorage, 'workflow', 'https://api.wf.smallsaas.cn'),
   authEP: _.get(globalConfigStorage, 'authEP', 'https://api.uaas.smallsaas.cn'),
   uatEP: _.get(globalConfigStorage, 'uatEP', 'https://api.uat.smallsaas.cn'),
-  tokenStorageKey: 'token'  ,//token��
-	tencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' // 获取地址sdk key
+  designEP:  _.get(globalConfigStorage, 'designEP', 'https://api.uat.smallsaas.cn'),
+  workflowEP: _.get(globalConfigStorage, 'workflowEP', 'https://api.uat.smallsaas.cn'),
+  extraEP: _.get(globalConfigStorage, 'extraEP', 'https://api.uat.smallsaas.cn'),
+  tokenStorageKey: 'token',//token��
+  sstencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' // 获取地址sdk key
 }
