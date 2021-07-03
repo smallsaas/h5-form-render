@@ -1,6 +1,6 @@
 <template>
 	<view class="venue_list_container">
-        <view class="tab_list">
+        <view class="tab_list" v-if="typeList.length > 0">
             <ms-tabs 
                 :list="typeList" 
                 v-model="tabActive"
@@ -12,7 +12,7 @@
             :isRefresh="false"
             refreshType="hollowDots"
             color="#04C4C4"
-            heightReduce="96"
+            :heightReduce="typeList.length > 0 ? 96 : 0"
             backgroundCover="#F3F5F5"
             :currentPage="listCurrentPage"
             :totalPages="listTotalPages" 

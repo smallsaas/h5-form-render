@@ -66,8 +66,8 @@
 				default: '0'
 			},
 			heightReduce: {
-				type: String,
-				default: '0'
+				type: Number,
+				default: 0
 			},
 			color: {
 				type: String,

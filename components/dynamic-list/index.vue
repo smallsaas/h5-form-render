@@ -201,7 +201,8 @@
              return height * 2
           },
           isRefresh () {
-              return !this.isPropsList && this.list.length !== 0
+              // return !this.isPropsList && this.list.length !== 0
+			  return false
           }
         },
 		mounted() {
