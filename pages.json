@@ -205,7 +205,7 @@
 		{	
 			"path": "pages/street/home",
 			"style": {
-				"navigationBarTitleText": "(首页) 街道"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{	
