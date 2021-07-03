@@ -2,18 +2,24 @@
 	<view class="self-item">
 		<view class="flex">
 			<view class="left flex1">
-				<view class="title text-line-1">{{ item.title }}</view>
+				<view class="title text-line-1">{{ item.name }}</view>
 				<view class="times text-line-1">
-					期间: {{ item.startTime }} - {{ item.endTime }}
+					期间: {{ item.code }}
 				</view>
-				<view class="submit-time">提交时间: {{ item.submitTime }}</view>
+				<view class="submit-time">提交时间: {{ item.createTime }}</view>
 			</view>
 			<view class="right">
-				<view v-if="item.status === 'pass'" class="status">
-					通过
+				<view v-if="item.status === 'START'" class="status">
+					待审核
 				</view>
-				<view v-else-if="item.status === 'failed'" class="status" style="background-color: #D43030;">
-					未通过
+				<view v-else-if="item.status === 'VERIFYING'" class="status" style="background-color: #F5A623;">
+					审核中
+				</view>
+				<view v-else-if="item.status === 'CLOSE_REJECTED'" class="status" style="background-color: #D43030;">
+					被拒绝
+				</view>
+				<view v-else-if="item.status === 'CLOSE_APPROVED'" class="status" style="background-color: #979797;">
+					已审核
 				</view>
 			</view>
 		</view>

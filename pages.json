@@ -172,6 +172,12 @@
 			}
 		},
 		{	
+			"path": "pages/companyHome/lawEnforcement/index",
+			"style": {
+				"navigationBarTitleText": "执法"
+			}
+		},
+		{	
 			"path": "pages/companyHome/test",
 			"style": {
 				"navigationBarTitleText": "企业页面测试"
