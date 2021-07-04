@@ -194,7 +194,8 @@ export default {
         return {}
       }
     },
-    ifManualSubmit: Boolean
+    ifManualSubmit: Boolean,
+    token: String
   },
   data () {
     return {
@@ -296,7 +297,11 @@ export default {
     },
     submitFn (url, params) {
       this.loading = true
-      axios.post(url, params)
+      axios.post(url, params, {
+        headers: {
+          accessToken: this.token
+        }
+      })
         .then((res) => {
           this.loading = false
           if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code.indexOf('00000') >= 0) {

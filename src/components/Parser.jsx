@@ -25,7 +25,8 @@ export default {
         return {}
       }
     },
-    ifManualSubmit: Boolean
+    ifManualSubmit: Boolean,
+    token: String
   },
   components: {
     esign
@@ -348,6 +349,7 @@ export default {
       </div>
     },
     getDateJsx(item, __config__, rules) {
+      const minDate = new Date(1949, 0, 1)
       const jsx = <div>
         <van-field
           readonly
@@ -365,6 +367,7 @@ export default {
         <van-popup v-model={this.showPicker[item.__vModel__]} position="bottom">
           <van-datetime-picker
             type={__config__.tagIcon}
+            minDate={minDate}
             onConfirm={(e) => this.handleDatePickerConfrim(e, item)}
             onCancel={() => this.handlePickerCancel(item)}
           />
@@ -544,7 +547,11 @@ export default {
     },
     submitFn(url, params) {
       this.loading = true
-      axios.post(url, params)
+      axios.post(url, params, {
+        headers: {
+          accessToken: this.token
+        }
+      })
         .then((res) => {
           this.loading = false
           if (Object.prototype.toString.call(res.data) === '[object Object]' && res.data.code.indexOf('00000') >= 0) {

@@ -7,6 +7,7 @@
         :form-info="formInfo"
         :srv-form-data="formData"
         :if-manual-submit="ifManualSubmit"
+        :token="token"
         @submit="submit"
         @OnSubmitFormSuc="OnSubmitFormSuc"
         ref="h5FormParserCompRef"
@@ -17,6 +18,7 @@
         :form-info="formInfo"
         :srv-form-data="formData"
         :if-manual-submit="ifManualSubmit"
+        :token="token"
         @submit="submit"
         @OnSubmitFormSuc="OnSubmitFormSuc"
         ref="h5FormParserCompRef"
@@ -26,10 +28,12 @@
       <Preview
         :config="config"
         :srv-form-data="formData"
+        :token="token"
         v-if="!config.isLawForm"
       />
       <LawFormPreview
         :config="config"
+        :token="token"
         :srv-form-data="formData"
         v-if="config.isLawForm"
       />
@@ -62,6 +66,7 @@ export default {
     // 是否手动提交
     ifManualSubmit: Boolean,
     argMod: String, // 默认编辑 edit: 编辑  preview: 预览
+    token: String
   },
   components: {
     Parser,
