@@ -274,7 +274,7 @@
                       if (x['__vModel__'] === item['__vModel__']) {
 						  const formType = _.get(x, '__config__.tag') 
                           x.error = _.get(x, '__config__.required') ? !e : false
-                          if (['el-upload', 'el-checkbox-group'].includes(formType)) {
+                          if (['el-upload', 'el-checkbox-group', 'el-multiple-modal-select'].includes(formType)) {
                              x.error = _.get(x, '__config__.required') ? (!e || e.length === 0) : false
                           }
                       }
@@ -312,7 +312,7 @@
                         if (['', undefined, null].includes(this.form[x.__vModel__])) {
                             x.error = true
                         }
-                        if (formType === 'el-checkbox-group' && _.get(this.form, x.__vModel__, []).length === 0) {
+                        if (['el-checkbox-group', 'el-multiple-modal-select'].includes(formType) && _.get(this.form, x.__vModel__, []).length === 0) {
                            x.error = true 
                         }
 						if (formType === 'el-switch' && ['', undefined, null, false].includes(this.form[x.__vModel__])) {
@@ -377,6 +377,7 @@
                     ..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
                     ...this.form
                 }
+				
                 if (_.isFunction(_.get(this.$parent, 'formatSubmitData'))) {
                     submitData = this.$parent.formatSubmitData(submitData)
                 }
