@@ -35,6 +35,7 @@
 	import cardListItem from './navItem/cardListItem.vue'
 	import subTitleCardItem from './navItem/SubTitleCardItem.vue'
 	// import card from '../other/Card.vue'
+	import _ from 'lodash'
     export default {
 		components: {
 			magicItem,

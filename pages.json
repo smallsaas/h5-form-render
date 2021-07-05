@@ -172,6 +172,12 @@
 			}
 		},
 		{	
+			"path": "pages/companyHome/lawEnforcement/index",
+			"style": {
+				"navigationBarTitleText": "执法"
+			}
+		},
+		{	
 			"path": "pages/companyHome/test",
 			"style": {
 				"navigationBarTitleText": "企业页面测试"
@@ -199,7 +205,7 @@
 		{	
 			"path": "pages/street/home",
 			"style": {
-				"navigationBarTitleText": "(首页) 街道"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{	
@@ -518,6 +524,24 @@
             "style" :                                                                                    
             {
 							"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/test/newFormTest/newFormTest",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/enforcement/safeExport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
             }
             
         }

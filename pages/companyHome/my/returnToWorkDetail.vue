@@ -39,7 +39,6 @@
 	page {
 		height: 100%;
 		background-color: #E5E5E5;
-		padding: 18rpx 0;
 	}
 
 </style>

@@ -3,14 +3,23 @@
         <van-skeleton row="10" :loading="skeletonLoading">
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
+							<dynamic-form
+								v-if="_get(item, 'type') === 'autoform'&&item.id"
+								:config="{
+									 ...getCode(item.API,item.id),
+									 outStyle: getComponentStyle(item)
+								}"
+							:srvFormData="getComponentsData(item) || {}"
+								 />
                 <dynamic-form
-                   v-if="_get(item, 'type') === 'autoform'"
+                   v-if="_get(item, 'type') === 'autoform'&&!item.code"
                    :config="{
                       ..._get(config.moduleData, item.key, {}),
                       outStyle: getComponentStyle(item)
                    }"
-				   :srvFormData="getComponentsData(item) || {}"
+									:srvFormData="getComponentsData(item) || {}"
                 />
+		
 										<view
 										v-if="_get(item, 'type') === 'autolist'"
 										>
@@ -132,6 +141,8 @@
 <script>
 	import _ from 'lodash'
 	import qs from 'qs'
+	import { getFormAPIdata } from '../../common/api.js'
+	import { request } from '../../common/request.js'
 	import { Base64 } from '../../utils/tools.js'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
@@ -176,13 +187,17 @@
 			return {
 				config: {}, //页面配置信息
 				pageData: {}, // 页面数据
-                skeletonLoading: true,
-                
-                header: {  // 请求header
-                    Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
-                    token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
-                }
+				skeletonLoading: true,
+				
+				header: {  // 请求header
+						Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
+						token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
+				},
+				codeData:{},
+				codeAPI:"",
+				code:""
 			}
+
 		},
 		created() {
 		  if (!this.API) {
@@ -190,10 +205,46 @@
 		  }
 		  this.fetchConfigData()
 		},
+		//#ifdef MP-WEIXIN
+		mounted(){
+			this.getCodeData(this.codeAPI,this.code)
+		},
+		//#endif
+		// #ifdef APP-PLUS
+		updated(){
+			this.getCodeData(this.codeAPI,this.code)
+		},
+		// #endif
 		methods: {
 			_get (data, field, value) {
 				return _.get(data, field, value)
 			},
+			// 获取有code时，API数据更改为真正表单数据
+			async getCodeData(API,code){
+				let res = await getFormAPIdata(API,{"formId":code})
+				let form;
+				let jsonDefineBase64;
+				let jsonDefine;
+				let json;
+				let fields
+				if(res.code = 200){
+					form = _.get(res.data,"form",{}),
+					jsonDefineBase64 = _.get(form,"jsonDefine","")
+					jsonDefine = Base64.decode(jsonDefineBase64)
+					json = JSON.parse(jsonDefine)
+				}
+				this.codeData = json
+			},
+			
+			getCode(API,code){
+				this.codeAPI = API
+				this.code = code
+				if(this.codeData){
+					console.log(this.codeData)
+				}
+				return this.codeData
+			},
+			
 			// 获取页面请求数据接口 
 			getRequestUrl (resData) {
                 let url

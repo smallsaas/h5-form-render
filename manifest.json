@@ -1,5 +1,5 @@
 {
-    "name" : "kqd-mini",
+    "name" : "综合执法",
     "appid" : "__UNI__100CE59",
     "description" : "",
     "versionName" : "1.0.0",
@@ -57,11 +57,16 @@
             "urlCheck" : true,
             "es6" : true,
             "postcss" : true,
-            "minified" : false
+            "minified" : true
         },
         "usingComponents" : true,
         "uniStatistics" : {
             "enable" : true
+        },
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "获取地理位置"
+            }
         }
     },
     "mp-alipay" : {

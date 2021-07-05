@@ -112,6 +112,7 @@
 				console.log(this.name)
 				uni.navigateBack({
 					success(e){
+						console.log(e)
 						uni.setStorage({
 							key:"selectName",
 							data:name,
@@ -119,7 +120,8 @@
 								console.log("保存缓存成功",name)
 							}
 						})
-					}
+					},
+					"Name" : name
 				})
 			},
 			getSearchList(params){

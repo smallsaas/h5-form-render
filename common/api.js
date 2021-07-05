@@ -7,6 +7,13 @@ export const getSearchPage = (params)=>{
 	return request('GET', url, params)
 }
 
+
+export const getFormAPIdata = (API,params)=>{
+	const url = `${globalConfig.workflowEP}${API}`
+	console.log(url)
+	return request('POST', url, params)
+}
+
 // 获取执法对象数据
 export const getNavList = (params) => {
 	const url = `${globalConfig.host}/api/product`
@@ -23,7 +30,7 @@ export const getNavTypeList = (params) => {
 // 获取企业信息库搜索数据
 
 export const getSearchList = (params) => {
-    const url = `${globalConfig.dataHost}`
+    const url = `${globalConfig.workflowEP}/api/u/user`
     return request('GET', url, params)
 }
 
@@ -67,7 +74,7 @@ export const getSelfInspectionRecord = (params) => {
 //2021-6-30
 //获取经办人列表
 export const getAdmUsers = (api, params) => {
-    const url = `${globalConfig.uatEP}${api}`
+    const url = `${globalConfig.workflowEP}${api}`
     return request('GET', url, params)
 }
 //end

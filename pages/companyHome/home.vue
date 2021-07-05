@@ -6,9 +6,11 @@
 		   :API="getPageAapi"
 		/>
 		
-		<return-to-work v-if="current == 1"/>
+		<law-enforcement v-if="current == 1" />
 		
-		<my-page v-if="current == 2"/>
+		<return-to-work v-if="current == 2"/>
+		
+		<my-page v-if="current == 3"/>
 		
 		<van-tabbar :active="current" @change="onChange">
 			<van-tabbar-item>
@@ -25,6 +27,22 @@
 				style="width: 44rpx; height: 44rpx;"
 			  />
 			  首页
+			</van-tabbar-item>
+			
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/work.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/work-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  执法
 			</van-tabbar-item>
 			
 			<van-tabbar-item>
@@ -68,6 +86,7 @@
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import myPage from '@/pages/companyHome/my/index.vue'
 	import returnToWork from '@/pages/companyHome/my/returnToWork.vue'
+	import lawEnforcement from '@/pages/companyHome/lawEnforcement/index.vue'
 	import { globalConfig } from '@/config.js'
 	
 	
@@ -75,12 +94,10 @@
 		components:{ 
 			dynamicPage,
 			myPage,
-			returnToWork
+			returnToWork,
+			lawEnforcement
 		},
 		onLoad (e){
-		},
-		onBackPress() {
-			return true
 		},
 		data() {
 			return {

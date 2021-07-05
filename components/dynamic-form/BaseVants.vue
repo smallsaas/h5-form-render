@@ -135,7 +135,7 @@
 			 				      @change="(e) => handleSetValue(e, fields[index])"
 			 > 
 			 </c-video>
-			 <c-select-list
+<!-- 			 <c-select-list
 				 v-if="_get(item, '__config__.tag') === 'c-video'"
 				 :param="{
 					...getBaseParam(item),
@@ -146,7 +146,35 @@
 									 ..._has(item, 'accept') ? { accept: item.accept } : {},
 				 }"
 							 @change="(e) => handleSetValue(e, fields[index])"
-			 ></c-select-list>
+			 ></c-select-list> -->
+			 
+			 <c-select
+			 				 v-if="_get(item, '__config__.tag') === 'c-select'"
+			 				 :param="{
+			 					...getBaseParam(item),
+			 					..._get(item, 'error', false) ? { error: item.error } : {},
+			 					..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+			 					...item['max-count'] ? { 'max-count': item['max-count'] } : {},
+			 					..._has(item, 'deletable') ? { deletable: item.deletable } : {},
+								..._has(item, 'accept') ? { accept: item.accept } : {},
+			 				 }"
+			 							 @change="(e) => handleSetValue(e, fields[index])"
+			 ></c-select>
+			 
+			 <base-single-modal-select
+			 	v-if="['el-single-modal-select', 'el-multiple-modal-select'].includes(_get(item, '__config__.tag'))"
+				:selectType="_get(item, '__config__.tag') === 'el-multiple-modal-select' ? 'checkbox' : 'radio'"
+				:param="{
+			 		...getBaseParam(item),
+			        ..._get(item, 'error', false) ? { error: item.error } : {},
+			 		..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+					..._get(item, 'listUrl') ? { 'listUrl': item.listUrl } : {},
+					..._get(item, 'titleField') ? { 'titleField': item.titleField } : {},
+					..._get(item, 'valueField') ? { 'valueField': item.valueField } : {},
+					..._get(item, 'listField') ? { 'listField': item.listField } : {}
+			 	}"
+			 	@change="(e) => handleSetValue(e, fields[index])"
+			/>
        </block>
     </view>
 </template>
@@ -165,7 +193,9 @@
 	import BaseUpload from './BaseUpload.vue'
 	import cImage from './custom/c-image.vue'
 	import cVideo from './custom/c-video.vue'
-	import cSelectList from './custom/c-select-list.vue'
+	// import cSelectList from './custom/c-select-list.vue'
+	import cSelect from './custom/c-select/c-select.vue'
+	import BaseSingleModalSelect from './BaseSingleModalSelect.vue'
     export default {
         components: {
            BaseField,
@@ -178,9 +208,11 @@
 		   BaseDatePicker,
 		   BaseRate,
 		   BaseUpload,
-			 cImage,
-			 cVideo,
-			 cSelectList
+		   cImage,
+		   cVideo,
+		   // cSelectList,
+		   cSelect,
+		   BaseSingleModalSelect
         },
         props: {
           fields: {
