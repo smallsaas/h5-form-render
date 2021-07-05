@@ -158,6 +158,7 @@
 			 					..._has(item, 'deletable') ? { deletable: item.deletable } : {},
 								..._has(item, 'accept') ? { accept: item.accept } : {},
 			 				 }"
+							 :loadAPI="_get(item,'loadApi','')"
 			 							 @change="(e) => handleSetValue(e, fields[index])"
 			 ></c-select>
 			 

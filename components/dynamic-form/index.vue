@@ -11,12 +11,14 @@
                     @clear="handleClear"
                 />
                 <view v-if="_get(item, '__config__.layout') === 'rowFormItem'">
-					<card :title="_get(item, '__config__.componentName')" 	
-					>
-					<!-- 以上card为标题容器 -->
-						<!-- <view class="line"></view> -->
-						<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
-					</card>
+									<card :title="_get(item, '__config__.componentName')" 	
+									:jump="_get(item,'__config__.jump',false)"
+									:url="config.NextNavigation||config.submittedNavigation"
+									>
+									<!-- 以上card为标题容器 -->
+										<!-- <view class="line"></view> -->
+										<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
+									</card>
                     <block v-for="(k, i) in _get(item, '__config__.children', [])" :key="i">
                         <base-vants
                             v-if="_get(k, '__config__.layout') === 'colFormItem'"
@@ -404,6 +406,7 @@
                             uni.showToast({
                                 title:'操作成功'
                             })
+														this.$emit("state","success")
                             setTimeout(() => {
                                 if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
 																	console.log(this.config.submittedNavigation)
@@ -417,7 +420,9 @@
                                     uni.navigateBack()
                                 }
                             }, 500)
-                        }
+                        }else{
+													this.$emit("state","error")
+												}
                     }
                 })
             }
