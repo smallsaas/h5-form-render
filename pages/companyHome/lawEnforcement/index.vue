@@ -1,0 +1,112 @@
+<template>
+	
+	<view>
+		<dynamic-page
+			v-if="current == 0"
+		   :API="getPageAapi"
+		/>
+		
+		<return-to-work v-if="current == 1"/>
+		
+		<my-page v-if="current == 2"/>
+		
+		<van-tabbar :active="current" @change="onChange">
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/home.png"
+				mode="aspectFit"
+				style="width: 30px; height: 18px;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/home-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  首页
+			</van-tabbar-item>
+			
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/work.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/work-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  复工
+			</van-tabbar-item>
+			
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				src="/static/tabbar/my.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  <image
+				slot="icon-active"
+				src="/static/tabbar/my-on.png"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  我的
+			</van-tabbar-item>
+		</van-tabbar>
+		
+	</view>
+
+</template>
+
+<script>
+	import dynamicPage from '@/components/dynamic-page/index.vue'
+	import myPage from '@/pages/companyHome/my/index.vue'
+	import returnToWork from '@/pages/companyHome/my/returnToWork.vue'
+	import { globalConfig } from '@/config.js'
+	
+	
+	export default {
+		components:{ 
+			dynamicPage,
+			myPage,
+			returnToWork
+		},
+		onLoad (e){
+			uni.setNavigationBarTitle({
+			　　title: '执法'
+			})
+		},
+		onBackPress() {
+			return true
+		},
+		data() {
+			return {
+				getPageAapi: globalConfig.formHost + '?id=107',
+				current: 0
+			}
+		},
+		methods:{
+			onChange(event) {
+				console.log('event = ', event.detail)
+				this.current = event.detail
+			},
+		},
+		mounted() {
+		}
+	}
+</script>
+
+<style lang="less">
+	// page {
+	// 	height: 100%;
+	// 	background-color: #E5E5E5;
+	// 	padding: 6rpx 0;
+	// }
+	
+</style>
