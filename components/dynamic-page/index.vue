@@ -3,24 +3,24 @@
         <van-skeleton row="10" :loading="skeletonLoading">
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
-							<dynamic-form
-								v-if="_get(item, 'type') === 'autoform'&&item.code"
-								:config="{
-									 ...getCode(item.API,item.code),
-									 outStyle: getComponentStyle(item)
-								}"
-							:srvFormData="getComponentsData(item) || {}"
-							@state="setState"
-								 />
-                <dynamic-form
-                   v-if="_get(item, 'type') === 'autoform'&&!item.code"
-                   :config="{
-                      ..._get(config.moduleData, item.key, {}),
-                      outStyle: getComponentStyle(item)
-                   }"
-									:srvFormData="getComponentsData(item) || {}"
-									@state="setState"
-                />
+								<dynamic-form
+									v-if="_get(item, 'type') === 'autoform'&&item.code"
+									:config="{
+										 ...getCode(item.API,item.code),
+										 outStyle: getComponentStyle(item)
+									}"
+								:srvFormData="getComponentsData(item) || {}"
+								@state="setState"
+									 />
+									<dynamic-form
+										 v-if="_get(item, 'type') === 'autoform'&&!item.code"
+										 :config="{
+												..._get(config.moduleData, item.key, {}),
+												outStyle: getComponentStyle(item)
+										 }"
+										:srvFormData="getComponentsData(item) || {}"
+										@state="setState"
+									/>
 		<!-- @state:获取工作流提交后状态 -->
 										<view
 										v-if="_get(item, 'type') === 'autolist'"
@@ -136,6 +136,10 @@
 						<sumbit-state
 						 v-if="_get(item, 'type') === 'sumbitState'"
 						 :state="state"></sumbit-state>
+						 <c-button
+						 	v-if="_get(item, 'type') === 'button'"
+						 	:config = "_get(config.moduleData,item.key,{})"
+						 ></c-button>
             </view>
           </block>
         </van-skeleton>
@@ -158,6 +162,7 @@
 	import cell from '../other/Cell.vue'
 	import steps from '../Steps/Steps.vue'
 	import sumbitState from '../other/SumbitState.vue'
+	import cButton from '../other/C-Button.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -170,7 +175,8 @@
 			search,
 			cell,
 			steps,
-			sumbitState
+			sumbitState,
+			cButton
 		},
 		props: {
 			API: String,  // 页面数据请求接口

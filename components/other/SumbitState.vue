@@ -1,5 +1,5 @@
 <template>
-	<view class="Sumbit">
+	<view class="Sumbit" style="clear: both;">
 		<view class="success state" v-if="state==='success'">
 			<view class="SumbitState" style="color:#24C891">&#xe613;</view>
 			<view class="sumbitText">提交成功</view>
@@ -56,6 +56,7 @@
 	
 	.Sumbit{
 		width: 100%;
+		height: 230px;
 		position: relative;
 		text-align: center;
 		.sumbitText{

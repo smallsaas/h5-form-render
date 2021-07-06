@@ -140,6 +140,8 @@ export default {
 }
 .Card-Layout-Child{
 	font-size: 12px;
-	font-weight: bolder;
+	// font-weight: bolder;
+	overflow: hidden;
+	height: auto;
 }
 </style>

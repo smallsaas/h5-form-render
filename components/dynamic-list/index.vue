@@ -115,6 +115,13 @@
 						...getComponentBindData(item)
 					}"
 					/>
+					<avatar-item
+					v-if="getListItemKey() === 'avatarItem'"
+					:item="{
+						...item,
+						...getComponentBindData(item)
+					}"
+					/>
                   </view>
               </view>
             </load-refresh>
@@ -140,6 +147,7 @@
 	import record from './listItem/record/record.vue'
 	import messageItem from './listItem/messageItem.vue'
 	import enforcementStateItem from './listItem/AvatarStateList/enforcementStateItem.vue'
+	import AvatarItem from './listItem/DefaultAvatarItem.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -157,7 +165,8 @@
 			AvatarStateItem,
 			record,
 			messageItem,
-			enforcementStateItem
+			enforcementStateItem,
+			AvatarItem
 		},
 		props: {
 			config: {

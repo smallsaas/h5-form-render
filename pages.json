@@ -554,6 +554,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/enforcement/onSiteLawEnforcement/enforcementMessage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
