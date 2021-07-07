@@ -3,23 +3,25 @@
         <van-skeleton row="10" :loading="skeletonLoading">
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
-							<dynamic-form
-								v-if="_get(item, 'type') === 'autoform'&&item.id"
-								:config="{
-									 ...getCode(item.API,item.id),
-									 outStyle: getComponentStyle(item)
-								}"
-							:srvFormData="getComponentsData(item) || {}"
-								 />
-                <dynamic-form
-                   v-if="_get(item, 'type') === 'autoform'&&!item.code"
-                   :config="{
-                      ..._get(config.moduleData, item.key, {}),
-                      outStyle: getComponentStyle(item)
-                   }"
-									:srvFormData="getComponentsData(item) || {}"
-                />
-		
+								<dynamic-form
+									v-if="_get(item, 'type') === 'autoform'&&item.code"
+									:config="{
+										 ...getCode(item.API,item.code),
+										 outStyle: getComponentStyle(item)
+									}"
+								:srvFormData="getComponentsData(item) || {}"
+								@state="setState"
+									 />
+									<dynamic-form
+										 v-if="_get(item, 'type') === 'autoform'&&!item.code"
+										 :config="{
+												..._get(config.moduleData, item.key, {}),
+												outStyle: getComponentStyle(item)
+										 }"
+										:srvFormData="getComponentsData(item) || {}"
+										@state="setState"
+									/>
+		<!-- @state:获取工作流提交后状态 -->
 										<view
 										v-if="_get(item, 'type') === 'autolist'"
 										>
@@ -131,7 +133,13 @@
 							:list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.steps`, [])"
 							:outStyle="getComponentStyle(item)"
 						></steps>
-						
+						<sumbit-state
+						 v-if="_get(item, 'type') === 'sumbitState'"
+						 :state="state"></sumbit-state>
+						 <c-button
+						 	v-if="_get(item, 'type') === 'button'"
+						 	:config = "_get(config.moduleData,item.key,{})"
+						 ></c-button>
             </view>
           </block>
         </van-skeleton>
@@ -153,6 +161,8 @@
 	import search from '../search/search.vue'
 	import cell from '../other/Cell.vue'
 	import steps from '../Steps/Steps.vue'
+	import sumbitState from '../other/SumbitState.vue'
+	import cButton from '../other/C-Button.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -164,7 +174,9 @@
 			card,
 			search,
 			cell,
-			steps
+			steps,
+			sumbitState,
+			cButton
 		},
 		props: {
 			API: String,  // 页面数据请求接口
@@ -195,7 +207,8 @@
 				},
 				codeData:{},
 				codeAPI:"",
-				code:""
+				code:"",
+				state:null,
 			}
 
 		},
@@ -204,6 +217,7 @@
 			  return
 		  }
 		  this.fetchConfigData()
+			this.getState()
 		},
 		//#ifdef MP-WEIXIN
 		mounted(){
@@ -221,7 +235,7 @@
 			},
 			// 获取有code时，API数据更改为真正表单数据
 			async getCodeData(API,code){
-				let res = await getFormAPIdata(API,{"formId":code})
+				let res = await getFormAPIdata(API,{"code":code})
 				let form;
 				let jsonDefineBase64;
 				let jsonDefine;
@@ -244,7 +258,22 @@
 				}
 				return this.codeData
 			},
-			
+			// 获取工作流提交成功后状态
+			setState(e){
+				// this.statset
+				uni.setStorage({
+				    key: 'state',
+				    data: e,
+				    success: function () {
+				        console.log('success');
+				    }
+				});
+			},
+			getState(){
+				const state = uni.getStorageSync('state')
+				console.log(state)
+				this.state = state
+			},
 			// 获取页面请求数据接口 
 			getRequestUrl (resData) {
                 let url

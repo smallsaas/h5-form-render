@@ -9,6 +9,7 @@
 			</view>
 			<!-- <view class="talkIcon search_Icons">&#xe6ff;</view> -->
 			<!-- 语音输入按钮 -->
+			<view class="talkIcon search_Icons" style="color: #2C405A;" @click="additems()">&#xe7fe;</view>
 		</view>
 		<view :class="'search-list '+searchType">
 			<view v-for="(item,i) in listData" v-if="inputValue===''">
@@ -16,11 +17,12 @@
 					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
 						:item="item"
 					></state-search-item>
-					<radio-select v-if="config.itemModule.name==='radioItem'"
+<!-- 					<radio-select v-if="config.itemModule.name==='radioItem'"
 						:item="item"
 						@getAddress="getAddress"
-						@getName="getName"
-					></radio-select>
+						@getName="getName" 
+					></radio-select> -->
+					<!-- 有bug -->
 				</navigator>
 			</view>
 			<view v-for="(item,i) in searchlist" v-if="inputValue!==''">
@@ -29,11 +31,11 @@
 				<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
 					:item="item"
 				></state-search-item>
-				<radio-select v-if="config.itemModule.name==='radioItem'"
+<!-- 				<radio-select v-if="config.itemModule.name==='radioItem'"
 					:item="item"
 					@getAddress="getAddress"
 					@getName="getName"
-				></radio-select>
+				></radio-select> -->
 				</navigator>
 			</view>
 		</view>
@@ -45,7 +47,6 @@
 	// import { getSearchList } from '../../common/api.js'
 	import { request } from '../../common/request.js'
 	import { globalConfig } from '@/config.js'
-	
 	import stateSearchItem from './item/stateSearch.vue'
 	import RadioSelect from './item/RadioSelect.vue'
 	export default {
@@ -59,7 +60,6 @@
 				inputValue:"",
 				listData:null,
 				searchlist:null,
-				itemNavigation:"",
 				url:null,
 				RadioValue:{
 					name:null,
@@ -80,6 +80,7 @@
 							name:"stateSearchItem"
 						},
 						field:"",
+						itemNavigation:"",
 						id:null
 					}
 				}
@@ -126,12 +127,14 @@
 			},
 			getSearchList(params){
 				let url=this.config.loadAPI||`${globalConfig.dataHost}`
-				return request('GET', url, params)
+				let header = {
+					Authorization:`Bearer ${globalConfig.enforcementKey}`
+				}
+				return request('GET', url, params,header)
 			},
 			async getData(){
-				const res = await this.getSearchList({id:this.config.id||12311});
-				this.listData = res.data.list
-				this.itemNavigation = res.data.itemNavigation
+				const res = await this.getSearchList(this.config.params);
+				this.listData = res.data.records
 				this.url = this.getID(this.listData)
 			},
 			getList(){
@@ -152,11 +155,11 @@
 			},
 			getID(list){
 				let urlList=[];
-				let url = this.itemNavigation;
-				// console.log(list)
+				let url = this.config.itemNavigation;
+				console.log(this.config.itemNavigation)
 				for(let j=0;j<list.length;j++){
 					if(list[j].id){
-						url = this.itemNavigation + "?id=" + list[j].id
+						url = this.config.itemNavigation + "?id=" + list[j].id
 					}
 					urlList.push(url)
 				}
@@ -169,11 +172,11 @@
 <style lang="less">
 	// 图标文件
 	@font-face {
-	  font-family: 'search';  /* Project id 2631740 */
-	  src: url('//at.alicdn.com/t/font_2631740_nv78ry9vbap.woff2?t=1624530258486') format('woff2'),
-				 url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAQQAAsAAAAACGQAAAPCAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDHAqEDINwATYCJAMQCwoABCAFhG0HRBt6B1GUDkqL7GdC2eaDpjGE7A53c3LKsCMbVS/VfWz8GwH8/ah5sRFF3dbWtLRURZBXYg16JMdNRfn/b05/kd3wXueTtnLICm1D/xK+vMtlCMJMmQlbYSYcSCChN/96mT8d7KmgkhTAJOXArJUnjb2t0AgGr1Wff3A5/ZUHOM+yXMZaNActrMcwKw4oXWOSlTA2jF1cxjUCKk2ZldxY3d6D6rUqAhiSphUGwuRwbZsq5FmDXJIclAtK607NEH7JEG+T78BT9/fhm17Ig6gkgbbT3umKAYObP+9FCvu/dpBeXPeXAbtHlCBhbGamcF7uOJTyw2NSKvOCaQsAB8tFerV6L7QsX7QqRbn+l0cSBUIp4MRqMId0yY4JTTaJj9hEPhaiE9glg3JU4B2+I013P0dmcZJDIhLI+ECqXcEvIQwmCBjCLpJXcpSiDDvwX+doEVKn4q00L77qCE7+kBCMIBIUBYCf/qORxPsTS3/+wL9eAy+fkzipIQRCpdF0zVtLAiZwRg86P9rt+KWEHN0+uMZlyNbe7iZ7RSigpXqOiEUZTbrYEHaXeACAbdH8jxwOoOH3EMR5PnaX1kSKY6J+H+xpPhjvYbeJFsCWAerqYR1MeJp9cL8oZomJmpxljpJie5nz3OA63IAbXaZJFCvZcNcbbg31bjI7s78/axZzsTWbdCekt1m9XLDlTG0hLeqzcvdZ0P1H6Wx+9Qw3krI0jIRU67aebgemCjSP/tu6O2p91R5PlbfuxuA63MBa600iklRzn6xFzd09PIwzRaoYPsQz7IXfRUvpGnpfuCwwMfxo8Ss9n3sajLYn26NwNQgBipcJS6EAxc/UkxTv2USvM0jd/ADd1HU979em5asO3vfhdzW4knpKL1BYW/C6nbIC5UsD2UvOl0homoriFzJu6jwYUambeb9xGr31oWm5idGgXEsIUZkeSMr1oZkyBiWqzEGpcstQadTa7CpNuJSQC8CIBwBBvSeIar2HpN4zmimvUKLVH5SqDymotB9aS1YZCHZxiaMq0CDaCbF1FlDDLIpe8g6asafyqNilHSCPbB/pSp1kbA0D5H2MiA7NnhCUUM58sgp2Q89jJOTMQV1IlhDhpCzTvA9JOvOhaB2HVAIyEJoThE3HBKhdXCimvr8DmWIeFS8hlTgPIC5il090STo10DVFUIt0Lq0jh0w9gkBxL4pjfMQqtCFPDzNEmN/JgXSCxGoRDE2SUS5aVyGNr/KvcAlU0t6RQzKRSqQTGai60PuOrQamFavZiMVRzFKqYQAAAAA=') format('woff2'),
-	       url('//at.alicdn.com/t/font_2631740_nv78ry9vbap.woff?t=1624530258486') format('woff'),
-	       url('//at.alicdn.com/t/font_2631740_nv78ry9vbap.ttf?t=1624530258486') format('truetype');
+		font-family: 'search';  /* Project id 2631740 */
+		src: url('//at.alicdn.com/t/font_2631740_0t7xyvzf3dk.woff2?t=1625558763632') format('woff2'),
+       url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
+       url('//at.alicdn.com/t/font_2631740_1hmbob4mchq.woff?t=1625558734873') format('woff'),
+       url('//at.alicdn.com/t/font_2631740_1hmbob4mchq.ttf?t=1625558734873') format('truetype');
 	}
 	.search_Icons{
 		font-family: "search" !important;
@@ -186,10 +189,10 @@
 		top:20px
 	}
 	.searchIcon{
-		left: 8%;
+		left: 25px;
 	}
 	.talkIcon{
-		right: 8%;
+		right: 25px;
 	}
 	
 	.search-box{
@@ -217,8 +220,8 @@
 	}
 	
 	.search-input{
-		margin: 10px auto;
-		width: 90%;
+		margin: 10px 10px;
+		width: auto;
 		height: 30px;
 		border-radius: 30px;
 		border: 2px solid #ccc;

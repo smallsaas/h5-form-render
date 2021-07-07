@@ -33,7 +33,11 @@ export const getSearchList = (params) => {
     const url = `${globalConfig.workflowEP}/api/u/user`
     return request('GET', url, params)
 }
-
+// select组件使用
+export const getselectList = (loadAPI,params) =>{
+	const url = loadAPI
+	return request('GET',url,params)
+}
 
 // 获取动态表单配置信息
 export const getDynamicFormField = (params) => {

@@ -11,12 +11,14 @@
                     @clear="handleClear"
                 />
                 <view v-if="_get(item, '__config__.layout') === 'rowFormItem'">
-					<card :title="_get(item, '__config__.componentName')" 	
-					>
-					<!-- 以上card为标题容器 -->
-						<!-- <view class="line"></view> -->
-						<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
-					</card>
+									<card :title="_get(item, '__config__.componentName')" 	
+									:jump="_get(item,'__config__.jump',false)"
+									:url="config.NextNavigation||config.submittedNavigation"
+									>
+									<!-- 以上card为标题容器 -->
+										<!-- <view class="line"></view> -->
+										<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
+									</card>
                     <block v-for="(k, i) in _get(item, '__config__.children', [])" :key="i">
                         <base-vants
                             v-if="_get(k, '__config__.layout') === 'colFormItem'"
@@ -152,7 +154,7 @@
                 header: { // 请求token
                     Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
                     token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
-                }
+                },
 			}
 		},
         watch: {
@@ -203,22 +205,59 @@
             _get (item, str, defauleValue = '') {
               return _.get(item, str, defauleValue)
             },
+						// 校检loadAPI
+						getLoadApi(url){
+							let pages = getCurrentPages()
+							let currentPage = pages[pages.length-1]
+							let options = currentPage.options
+							let urlList;
+							let newUrl;
+							console.log(options)
+							if(url.indexOf("$$id")!==-1){
+								urlList=url.split("$$")
+								newUrl = urlList[0]+options.id
+							}else{
+								newUrl = url
+							}
+							return newUrl
+						},
             // 获取表单数据
             fetchFormData () {
-                uni.request({
-                    url: _.get(this.formConfig, 'loadApi', '') || LOAD_API,
-                    method: 'GET',
-                    header: this.header,
-                    complete: (res) => {
-                       if (_.get(res, 'data.code') === 200) {
-                           let resData = _.cloneDeep(_.get(res, 'data.data', {}))
-                           if (_.isFunction(_.get(this.$parent, 'formatLoadData'))) {
-                               resData = this.$parent.formatLoadData(resData)
-                           }
-                           this.form = { ...this.form, ...resData }
-                       }
-                    }
-                })
+							let loadApi = _.get(this.formConfig, 'loadApi', '')
+							let newAPI = this.getLoadApi(loadApi)
+							// console.log(newAPI)
+							let head;
+							let enfToken = globalConfig.enforcementKey
+							if(loadApi.indexOf("/admin/companyinfo/")!==-1){
+								head = {
+									Authorization: `Bearer ${enfToken || ''}`,
+								}
+								console.log(this.header)
+							}else{
+								head = this.header
+							}
+								uni.request({
+								    url: newAPI || LOAD_API,
+								    method: 'GET',
+								    header: head,
+								    complete: (res) => {
+								       if (_.get(res, 'data.code') === 200) {
+								           let resData = _.cloneDeep(_.get(res, 'data.data', {}))
+								           if (_.isFunction(_.get(this.$parent, 'formatLoadData'))) {
+								               resData = this.$parent.formatLoadData(resData)
+								           }
+								           this.form = { ...this.form, ...resData }
+								       }else{
+												 let resData = _.cloneDeep(_.get(res, 'data.data', {}))
+												 if (_.isFunction(_.get(this.$parent, 'formatLoadData'))) {
+												     resData = this.$parent.formatLoadData(resData)
+														 console.log(resData)
+												 }
+												 this.form = { ...this.form, ...resData }
+												 console.log(this.form)
+											 }
+								    }
+								})
             },
             
             // 从默认接口中获取表单配置
@@ -385,7 +424,19 @@
                 if (this.ifManualSubmit) {
                     this.$emit('submit', submitData)
                 } else {
-                    this.handleSubmitRequest(submitData)
+									if(_.get(this.config,"workflow")){
+										let workflowData = {
+											"processDefineKey":_.get(this.config,"processDefineKey"),
+											"version":"1",
+											"userId": "43072172e459483d95e0d4c364b917c2",
+											"userName": "张体委",
+											"fromData":submitData,
+											"comment": "同意"
+										}
+										this.handleSubmitRequest(workflowData)
+									}else{
+										this.handleSubmitRequest(submitData)
+									}
                 }
             },
             
@@ -404,6 +455,7 @@
                             uni.showToast({
                                 title:'操作成功'
                             })
+														this.$emit("state","success")
                             setTimeout(() => {
                                 if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
 																	console.log(this.config.submittedNavigation)
@@ -417,7 +469,9 @@
                                     uni.navigateBack()
                                 }
                             }, 500)
-                        }
+                        }else{
+													this.$emit("state","error")
+												}
                     }
                 })
             }

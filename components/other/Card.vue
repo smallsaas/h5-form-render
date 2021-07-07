@@ -18,7 +18,9 @@
 			'textAlign':Style===undefined?'':Style.title.align,
 			'font':Style===undefined?'':Style.title.font,
 			}"
-			>{{title}}</view>
+			>{{title}}
+			<span v-if="jump" @click="jumpUrl()" style="position: absolute;right: 5px;color: #1A5EB5;font-size: 14px;">跳过</span>
+			</view>
       <view class="Card-Layout-Child">
 				<slot></slot>
 			</view>
@@ -29,17 +31,24 @@
 <script>
 /* eslint-disable */
 export default {
-    name:"",
+    name:"card",
     methods:{
+			jumpUrl(){
+				uni.navigateTo({
+					url:'/pages'+this.url
+				})
+			}
     },
 	data(){
 	  return {
 	  };
 	},
     props:{
+			url:String,
       title:{
         type:String
       },
+			jump:Boolean,
       Style:{
 				title:{
 					color:{
@@ -131,6 +140,8 @@ export default {
 }
 .Card-Layout-Child{
 	font-size: 12px;
-	font-weight: bolder;
+	// font-weight: bolder;
+	overflow: hidden;
+	height: auto;
 }
 </style>

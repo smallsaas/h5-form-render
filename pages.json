@@ -545,6 +545,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/enforcement/onSiteLawEnforcement/toSumbit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/enforcement/onSiteLawEnforcement/enforcementMessage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
