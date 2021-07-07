@@ -385,6 +385,7 @@
 				for (const i in item.binding) {
 					comonentScouce[item.binding[i]] = _.get(this.pageData, i, '')
 				}
+				console.log(comonentScouce)
 				let value
 				switch (item.type) {
 					case 'autoform':

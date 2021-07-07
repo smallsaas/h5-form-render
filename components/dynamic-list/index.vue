@@ -115,6 +115,13 @@
 						...getComponentBindData(item)
 					}"
 					/>
+					<state-to-item
+					 	v-if="getListItemKey() === 'stateToItem'"
+					 	:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+					></state-to-item>
 					<avatar-item
 					v-if="getListItemKey() === 'avatarItem'"
 					:item="{
@@ -122,6 +129,7 @@
 						...getComponentBindData(item)
 					}"
 					/>
+
                   </view>
               </view>
             </load-refresh>
@@ -148,6 +156,7 @@
 	import messageItem from './listItem/messageItem.vue'
 	import enforcementStateItem from './listItem/AvatarStateList/enforcementStateItem.vue'
 	import AvatarItem from './listItem/DefaultAvatarItem.vue'
+	import StateToItem from './listItem/StateToList.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -166,7 +175,8 @@
 			record,
 			messageItem,
 			enforcementStateItem,
-			AvatarItem
+			AvatarItem,
+			StateToItem
 		},
 		props: {
 			config: {
@@ -216,12 +226,12 @@
         },
 		mounted() {
 		 // 外部传入数据源
-		 if (this.isPropsList) {
-		 	this.list = _.cloneDeep(this.config.list)
+		 if (_.get(this.config, 'loadApi')) {
+		    this.updateData()
 		 } else {
-			if (_.get(this.config, 'loadApi')) {
-			   this.updateData()
-			}
+			 if (this.isPropsList) {
+				this.list = _.cloneDeep(this.config.list)
+			 }
 		 }
 		},
 		methods: {
@@ -286,7 +296,7 @@
               })
               uni.request({
                   url: _.get(this.config, 'loadApi'),
-                  method: 'GET',
+                  method: _.get(this.config,'method','GET'),
                   data: this.listSearch,
                   header: {
                       Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
@@ -295,7 +305,7 @@
                   complete: (res) => {
                      uni.hideLoading()
                      if (['000000', 200].includes(_.get(res, 'data.code'))) {
-                        const data = _.get(res, 'data.data', {})
+                        const data = _.get(res, 'data.data')
                         const listField = _.get(this.config, 'response.list', '')
                         const totolField = _.get(this.config, 'response.total', 0)
                         
@@ -306,6 +316,18 @@
                         this.listTotalPages = total < 10 ? 1 : Math.floor(total / 10)
                         this.$refs.loadRefresh.completed()
                      }
+										if(res.data.code==='00000'){
+											const data = _.get(res, 'data.data')
+											const listField = _.get(this.config, 'response.list', '')
+											const totolField = _.get(this.config, 'response.total', 0)
+											
+											const prevList = _.get(searchData, 'refresh') ? [] : this.list
+											this.list = prevList.concat(listField ? _.get(data, listField, []) : _.get(res, 'list', []))
+											const total = _.get(data, totolField, 0)
+											this.listCurrentPage = this.list.length < 10 ? 1 :  Math.floor(total / 10)
+											this.listTotalPages = total < 10 ? 1 : Math.floor(total / 10)
+											this.$refs.loadRefresh.completed()
+										}
                   }
               })  
             },

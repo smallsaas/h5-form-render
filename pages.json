@@ -563,6 +563,33 @@
             }
             
         }
+        ,{
+            "path" : "pages/addCompany/BusinessLicense",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/addCompany/contactInformation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/companyHome/selfExplain",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "企业自查",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

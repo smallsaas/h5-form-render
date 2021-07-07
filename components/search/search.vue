@@ -9,7 +9,7 @@
 			</view>
 			<!-- <view class="talkIcon search_Icons">&#xe6ff;</view> -->
 			<!-- 语音输入按钮 -->
-			<view class="talkIcon search_Icons" style="color: #2C405A;" @click="additems()">&#xe7fe;</view>
+			<view class="talkIcon search_Icons" style="color: #2C405A;" v-if="config.addIcon" @click="additems()">&#xe7fe;</view>
 		</view>
 		<view :class="'search-list '+searchType">
 			<view v-for="(item,i) in listData" v-if="inputValue===''">
@@ -106,6 +106,13 @@
 			getAddress(e){
 				this.address = e
 				 console.log(this.address)
+			},
+			additems(){
+				if(this.config.addUrl){
+					uni.navigateTo({
+						url:this.config.addUrl
+					})
+				}
 			},
 			getName(e){
 				this.name = e

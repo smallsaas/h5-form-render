@@ -64,7 +64,7 @@
 								  >下一步</van-button> -->
 									
 						<!-- 新button -->
-						<view class="button-box">
+						<view class="button-box" v-if="!Details">
 							<button
 							class="button"
 							v-if="_get(config, 'LastBtns', false) && fields.length > 0"
@@ -110,6 +110,7 @@
 <script>
 	import _ from 'lodash'
     import BaseVants from './BaseVants.vue'
+		import {Base64} from '../../utils/tools.js'
     import { globalConfig } from '@/config.js'
 		import card from '../other/Card.vue'
     const SUNMIT_API =  globalConfig.formHost + '/custom'
@@ -128,6 +129,12 @@
                     return {}
                 }
             },
+				Details:{
+					type:Boolean,
+					default(){
+						return false
+					}
+				},
 			srvFormData: {
 			  type: Object,
 			  default() {
@@ -416,6 +423,12 @@
                     ..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
                     ...this.form
                 }
+								// 工作流自定义数据接口
+								let custom = {
+									...submitData
+								}
+								let customData = Base64.encode(JSON.stringify(custom))	//
+								
 				
                 if (_.isFunction(_.get(this.$parent, 'formatSubmitData'))) {
                     submitData = this.$parent.formatSubmitData(submitData)
@@ -428,9 +441,10 @@
 										let workflowData = {
 											"processDefineKey":_.get(this.config,"processDefineKey"),
 											"version":"1",
-											"userId": "43072172e459483d95e0d4c364b917c2",
+											"userId": 26,
 											"userName": "张体委",
-											"fromData":submitData,
+											"formData":submitData,
+											"customData":customData,
 											"comment": "同意"
 										}
 										this.handleSubmitRequest(workflowData)

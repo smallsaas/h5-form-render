@@ -27,12 +27,12 @@
                 @click.stop="handleToMap(item)"
 			>
 				<view 
-					:style="{backgroundImage: item.image || `url(${require('../../../static/images/empty.png')})`}"
+					:style="{backgroundImage: item.houseOwershipImages || `url(${require('../../../static/images/empty.png')})`}"
 					class="image"
 				/>
 				<view class="message_content">
 					<view class="title_status">
-						<text class="title">{{item.title}}</text>
+						<text class="title">{{item.name}}</text>
 						<view 
                             class="status" 
                             :style='{
@@ -49,7 +49,7 @@
                     </view>
 					<view class="phone">
                         <image src="../../../static/icons/nav/phone.svg" class="phone_icon"/>
-                        <view class="phone_text" @click.stop="handleCallPhone(item.phone)">{{item.phone}}</view>
+                        <view class="phone_text" @click.stop="handleCallPhone(item.personPhone)">{{item.personPhone}}</view>
                     </view>
 				</view>
 			</view>
@@ -97,14 +97,18 @@
             
             // 获取类别数据
             async fetchTypeList () {
-                const res = await getNavTypeList()
+                const res = await getNavTypeList({
+									size: 10,
+									current: 2,
+									type: "EDU"
+								})
                 
                 // ** 测试数据
                 // const res = navTypeList
                 // **
 
                 if (res.code === 200) {
-                    const list = _.cloneDeep(_.get(res, 'data.list', []))
+                    const list = _.cloneDeep(_.get(res, 'data.records', []))
                     list.unshift({ title: '全部'})
                     this.typeList = [...list]
                 }
@@ -114,21 +118,23 @@
                 uni.showLoading({ title: 'loading...', mask:true })
                 
                 // ** 测试数据
-                const res = navList
+                // const res = navList
                 // **
                 
-				// const res = await getNavList({ 
-    //                 size: 10, 
-    //                 page: this.listCurrentPage,
-    //                 ...this.currentType !== '全部' ? { type: this.currentType } : {}
-    //              })
+				const res = await getNavList({ 
+                    size: 10, 
+                    page: this.listCurrentPage,
+                    ...this.currentType !== '全部' ? { type: this.currentType } : {},
+										current: 2,
+										type: "EDU"
+                 })
                 uni.hideLoading()		
-				this.list = this.list.concat([..._.get(res, 'data.list', [])])
+				this.list = this.list.concat([..._.get(res, 'data.records', [])])
                 
                 //** 测试数据
                 this.list.map((item, index) => {
-                    if (!_.has(item, 'title')) {
-                        item.title = '温泉体育馆'
+                    if (!_.has(item, 'name')) {
+                        item.name = '温泉体育馆'
                     }
                     if (!_.has(item, 'address')) {
                         item.address = '北京市通州区北京市人民政府'
@@ -136,8 +142,8 @@
                     if (!_.has(item, 'status')) {
                         item.status = '未检查'
                     }
-                    if (!_.has(item, 'phone')) {
-                        item.phone = '8892046  88923190'
+                    if (!_.has(item, 'personPhone')) {
+                        item.personPhone = '8892046  88923190'
                     }
                     if (!_.has(item, 'latitude')) {
                         item.latitude = 39.910925
@@ -148,8 +154,8 @@
                     if (!_.has(item, 'longitude')) {
                         item.longitude = 116.352963
                     }
-                    if (!_.has(item, 'image')) {
-                        item.image = ''
+                    if (!_.has(item, 'houseOwershipImages')) {
+                        item.houseOwershipImages = ''
                     }
                 })
                 // **

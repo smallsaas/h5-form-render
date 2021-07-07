@@ -58,8 +58,8 @@
                     v-for="(item, index) in typeList" 
                     :key="index" 
                     :url="item.icon" 
-                    :title="item.title"
-                    :imageBg="item.bgColor"
+                    :title="item.name"
+                    :imageBg="item.bgColor||'#333'"
                     :selectTitle="currentType"
                 	@onClick="handleClick"
                 />
@@ -129,32 +129,34 @@
 		methods: {
             // 获取类别数据
             async fetchTypeList () {
-                const res = await getNavTypeList()
+                const res = await getNavTypeList({size:10,current:2,type:"EDU"})
                 
                 //** 测试数据
                 // const res = navTypeList
                 // **
-                
-                if (res.code === 200) {
-                    this.typeList = _.cloneDeep(_.get(res, 'data.list', []))
+                console.log(res)
+                if (res.code === 0) {
+                    this.typeList = _.cloneDeep(_.get(res, 'data.records', []))
+										// console.log(this.typeList)
                 }
             },
 			async fetchList () {
-				// const res = await getNavList()
-                
+				const res = await getNavList({size:10,current:2,type:"EDU"})
+                console.log(res)
                 // ** 试数据
-                const res = navList
+                // const res = navList
                 // **
                 
-				if (res.code === 200) {
-					this.list = _.get(res, 'data.list', [])
+				if (res.code === 0) {
+					this.list = _.get(res, 'data.records', [])
                     const markersList = []
 					this.list.map((item, index) => {
+						// console.log(item.latitude)
 						markersList.push({
 							id: index + 1,
 							latitude: item.latitude,
 							longitude: item.longitude,
-							title: item.title,
+							title: item.name,
 							customCallout: {...customCallout},
                             bgColor: this.getCustomCalloutBgColor(item.type),
                             type: item.type,
@@ -175,7 +177,8 @@
 			},
 			handleClick (title) {
                 this.currentType = title
-                this.markers = this.allmarkers.filter(x => x.type === title)
+                this.markers = this.allmarkers.filter(x => x.title === title)
+								console.log(this.markers)
 				if (this.markers.length > 0) {
 					this.latitude = _.get(this.markers, '[0].latitude')
 					this.longitude = _.get(this.markers, '[0].longitude')
