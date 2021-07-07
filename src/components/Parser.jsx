@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep'
-import { formatTime, getLicence, urlParam } from '../utils'
+import { formatTime, getLicence, urlParam, uploader, file2Base64 } from '../utils'
 import { Toast } from 'vant'
 import axios from 'axios'
 import esign from '../views/esign'
@@ -337,38 +337,47 @@ export default {
             <van-field
               label="企业名称"
               value={this.form.business_name}
-              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              onInput={(e) => this.handleSimpleSetValue(e, { __config__: {}, __vModel__: 'business_name' })}
               placeholder="请输入企业名称"
               clearable={true}
               autocomplete="off"
-              onClear={(e) => this.clearField(e, item)}
+              onClear={(e) => this.clearField(e, { __config__: {}, __vModel__: 'business_name' })}
             />
             <van-field
               label="企业类型"
               value={this.form.business_type}
-              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              onInput={(e) => this.handleSimpleSetValue(e, { __config__: {}, __vModel__: 'business_type' })}
               placeholder="请输入企业类型"
               clearable={true}
               autocomplete="off"
-              onClear={(e) => this.clearField(e, item)}
+              onClear={(e) => this.clearField(e, { __config__: {}, __vModel__: 'business_type' })}
             />
             <van-field
               label="企业地址"
               value={this.form.business_address}
-              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              onInput={(e) => this.handleSimpleSetValue(e, { __config__: {}, __vModel__: 'business_address' })}
               placeholder="请输入企业地址"
               clearable={true}
               autocomplete="off"
-              onClear={(e) => this.clearField(e, item)}
+              onClear={(e) => this.clearField(e, { __config__: {}, __vModel__: 'business_address' })}
             />
             <van-field
               label="企业法人"
               value={this.form.business_person}
-              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              onInput={(e) => this.handleSimpleSetValue(e, { __config__: {}, __vModel__: 'business_person' })}
               placeholder="请输入企业地址"
               clearable={true}
               autocomplete="off"
-              onClear={(e) => this.clearField(e, item)}
+              onClear={(e) => this.clearField(e, { __config__: {}, __vModel__: 'business_person' })}
+            />
+            <van-field
+              label="统一信用码"
+              value={this.form.business_reg_num}
+              onInput={(e) => this.handleSimpleSetValue(e, { __config__: {}, __vModel__: 'business_reg_num' })}
+              placeholder="请输入统一信用码"
+              clearable={true}
+              autocomplete="off"
+              onClear={(e) => this.clearField(e, { __config__: {}, __vModel__: 'business_reg_num' })}
             />
             {this.getDateJsx(
               {
@@ -558,14 +567,26 @@ export default {
     },
     lecenceAfterRead(file) {
       const token = this.token || urlParam('token')
-      getLicence(file, token).then(data => {
-        this.form.business_name = data.name
-        this.form.business_type = data.type
-        this.form.business_address = data.address
-        this.form.business_person = data.person
-        this.form.business_establish_date = (data.establish_date).slice(0, 4) + '-' + (data.establish_date).slice(4, 6) + '-' + (data.establish_date).slice(6)
-        this.$nextTick(() => {
-          this.$forceUpdate()
+      Toast.loading({
+        duration: 0,
+        forbidClick: true,
+        message: '识别中...'
+      })
+      file2Base64(file.file).then(base64 => {
+        uploader(file.file, base64).then(rs => {
+          this.form.business_cert_url = rs
+          getLicence(file, token).then(data => {
+            this.form.business_name = data.name
+            this.form.business_type = data.type
+            this.form.business_address = data.address
+            this.form.business_person = data.person
+            this.form.business_reg_num = data.reg_num
+            this.form.business_establish_date = (data.establish_date).slice(0, 4) + '-' + (data.establish_date).slice(4, 6) + '-' + (data.establish_date).slice(6)
+            Toast.clear()
+            this.$nextTick(() => {
+              this.$forceUpdate()
+            })
+          })
         })
       })
     },
