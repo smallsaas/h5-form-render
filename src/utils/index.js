@@ -250,6 +250,35 @@ export const Base64 = {
   }
 }
 
+export const getLicence = (file, token) => {
+  const formData = new FormData()
+  formData.append('fileName', file.file.name)
+  formData.append('file', file.file)
+  return axios({
+    method: 'post',
+    url: '/executive/companyattachment/ocr/licence',
+    data: formData,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }).then((rs) => {
+    return rs.data.data || {}
+  }).catch(e => {
+    return {}
+  })
+}
+
+export const file2Base64 = (file) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = function (ev) {
+      const dataURL = ev.target.result
+      resolve(dataURL)
+    }
+  })
+}
+
 export const uploader = (file, blob) => {
   const policyText = {
     expiration: '2099-01-01T12:00:00.000Z', // 设置该Policy的失效时间，超过这个失效时间之后，就没有办法通过这个policy上传文件了

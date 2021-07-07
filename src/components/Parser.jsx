@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep'
-import { formatTime } from '../utils'
+import { formatTime, getLicence } from '../utils'
 import { Toast } from 'vant'
 import axios from 'axios'
 import esign from '../views/esign'
@@ -322,6 +322,67 @@ export default {
             <img style="width: 100%;" src={this.form[item.__vModel__]} alt="" />
           </van-cell>
           break
+        case 'licence':
+          signatureKey = item.__vModel__
+          jsx = <van-cell-group class="licence-cell mg-t10 mg-b10">
+            <van-cell
+              title={__config__.label}
+              is-link
+              placeholder={item.placeholder}
+            >
+              <van-uploader afterRead={(e) => this.lecenceAfterRead(e)}>
+                <div>自动获取营业执照信息</div>
+              </van-uploader>
+            </van-cell>
+            <van-field
+              label="企业名称"
+              value={this.form.business_name}
+              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              placeholder="请输入企业名称"
+              clearable={true}
+              autocomplete="off"
+              onClear={(e) => this.clearField(e, item)}
+            />
+            <van-field
+              label="企业类型"
+              value={this.form.business_type}
+              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              placeholder="请输入企业类型"
+              clearable={true}
+              autocomplete="off"
+              onClear={(e) => this.clearField(e, item)}
+            />
+            <van-field
+              label="企业地址"
+              value={this.form.business_address}
+              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              placeholder="请输入企业地址"
+              clearable={true}
+              autocomplete="off"
+              onClear={(e) => this.clearField(e, item)}
+            />
+            <van-field
+              label="企业法人"
+              value={this.form.business_person}
+              onInput={(e) => this.handleSimpleSetValue(e, item)}
+              placeholder="请输入企业地址"
+              clearable={true}
+              autocomplete="off"
+              onClear={(e) => this.clearField(e, item)}
+            />
+            {this.getDateJsx(
+              {
+                placeholder: '请选择企业成立日期',
+                __vModel__: 'business_establish_date',
+                __config__: {}
+              },
+              {
+                tagIcon: 'date',
+                label: '成立日期'
+              }
+            )}
+          </van-cell-group>
+          break
         default:
           break
       }
@@ -459,7 +520,6 @@ export default {
       this.$nextTick(() => {
         this.$forceUpdate()
       })
-      console.log('debug form ', this.form)
     },
     handleUploader(e, item) {
 
@@ -495,6 +555,18 @@ export default {
     },
     delDefaultValue(item, arg) {
       item.__config__.defaultValue = arg || ''
+    },
+    lecenceAfterRead(file) {
+      getLicence(file, this.token).then(data => {
+        this.form.business_name = data.name
+        this.form.business_type = data.type
+        this.form.business_address = data.address
+        this.form.business_person = data.person
+        this.form.business_establish_date = (data.establish_date).slice(0, 4) + '-' + (data.establish_date).slice(4, 6) + '-' + (data.establish_date).slice(6)
+        this.$nextTick(() => {
+          this.$forceUpdate()
+        })
+      })
     },
     getSubmitData() {
       const form = {}
