@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep'
-import { formatTime, getLicence } from '../utils'
+import { formatTime, getLicence, urlParam } from '../utils'
 import { Toast } from 'vant'
 import axios from 'axios'
 import esign from '../views/esign'
@@ -557,7 +557,8 @@ export default {
       item.__config__.defaultValue = arg || ''
     },
     lecenceAfterRead(file) {
-      getLicence(file, this.token).then(data => {
+      const token = this.token || urlParam('token')
+      getLicence(file, token).then(data => {
         this.form.business_name = data.name
         this.form.business_type = data.type
         this.form.business_address = data.address
@@ -621,7 +622,7 @@ export default {
       this.loading = true
       axios.post(url, params, {
         headers: {
-          accessToken: this.token
+          accessToken: this.token || urlParam('token')
         }
       })
         .then((res) => {
