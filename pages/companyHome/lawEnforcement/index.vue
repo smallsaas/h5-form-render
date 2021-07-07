@@ -4,7 +4,6 @@
 		<dynamic-page
 		   :API="getPageAapi"
 		/>
-		
 	</view>
 
 </template>

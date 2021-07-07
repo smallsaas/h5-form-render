@@ -110,12 +110,7 @@
 				console.log('event = ', event.detail)
 				this.current = event.detail
 			},
-		},
-		tabList: [
-			{ id: 0, title: '首页', normal: '/static/tabbar/home.png', active: '/static/tabbar/home-on.png' },
-			{ id: 1, title: '复工', normal: '/static/tabbar/work.png', active: '/static/tabbar/work-on.png' },
-			{ id: 2, title: '我的', normal: '/static/tabbar/my.png', active: '/static/tabbar/my-on.png' }
-		]
+		}
 	}
 </script>
 
