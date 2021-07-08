@@ -6,7 +6,7 @@
         >
             <image :src='url' class="image" />
         </view>
-        <text>{{title}}</text>
+        <text class="title">{{title}}</text>
     </view>
 </template>
 
@@ -61,6 +61,14 @@
             opacity: 1;
 			box-shadow: 0 0 6px 1px #d1d1d1;
             transition: all 0.3s;
+        }
+        .title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: box;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
         }
     }
 </style>

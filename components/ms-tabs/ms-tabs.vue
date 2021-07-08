@@ -102,7 +102,10 @@
 					// lineWidth = el.width / 2
 					
 					const item = this.list[this.currentIndex]
-					lineWidth = item[this.field || 'title'].length * 26
+                    
+                    if (item[this.field || 'title']) {
+                        lineWidth = item[this.field || 'title'].length * 26
+                    }
 					
 					// lineLeft = el.width * (this.currentIndex + 0.5)  // 此种只能针对每个item长度一致的
 					lineLeft = el.width / 2 + (-data[0].left) + el.left

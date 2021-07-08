@@ -97,17 +97,12 @@
             
             // 获取类别数据
             async fetchTypeList () {
-                const res = await getNavTypeList({
-									size: 10,
-									current: 2,
-									type: "EDU"
-								})
-                
-                // ** 测试数据
-                // const res = navTypeList
-                // **
-
-                if (res.code === 200) {
+                const res = await getNavTypeList(
+                    {
+						size: 10,
+						type: "EDU"
+					})
+                if (res.code === 0) {
                     const list = _.cloneDeep(_.get(res, 'data.records', []))
                     list.unshift({ title: '全部'})
                     this.typeList = [...list]
@@ -116,52 +111,16 @@
             
 			async fetchList (data) {
                 uni.showLoading({ title: 'loading...', mask:true })
-                
-                // ** 测试数据
-                // const res = navList
-                // **
-                
 				const res = await getNavList({ 
                     size: 10, 
-                    page: this.listCurrentPage,
+                    current: this.listCurrentPage,
                     ...this.currentType !== '全部' ? { type: this.currentType } : {},
-										current: 2,
-										type: "EDU"
+					type: "EDU"
                  })
                 uni.hideLoading()		
 				this.list = this.list.concat([..._.get(res, 'data.records', [])])
-                
-                //** 测试数据
-                this.list.map((item, index) => {
-                    if (!_.has(item, 'name')) {
-                        item.name = '温泉体育馆'
-                    }
-                    if (!_.has(item, 'address')) {
-                        item.address = '北京市通州区北京市人民政府'
-                    }
-                    if (!_.has(item, 'status')) {
-                        item.status = '未检查'
-                    }
-                    if (!_.has(item, 'personPhone')) {
-                        item.personPhone = '8892046  88923190'
-                    }
-                    if (!_.has(item, 'latitude')) {
-                        item.latitude = 39.910925
-                    }
-                    if (!_.has(item, 'longitude')) {
-                        item.longitude = 116.352963
-                    }
-                    if (!_.has(item, 'longitude')) {
-                        item.longitude = 116.352963
-                    }
-                    if (!_.has(item, 'houseOwershipImages')) {
-                        item.houseOwershipImages = ''
-                    }
-                })
-                // **
-                
-				this.listCurrentPage = _.get(res, 'data.page', 1)
-				this.listTotalPages = _.get(res, 'data.totalpages', 1)
+				this.listCurrentPage = _.get(res, 'data.current', 1)
+				this.listTotalPages = _.get(res, 'data.pages', 1)
                 this.$refs.loadRefresh.completed()
 			},
 			loadMore () {
@@ -176,7 +135,6 @@
 						longitude: _.get(item, 'longitude')
 					},
 					(res) => {
-						console.log('localcurrent', res)
 						uni.hideLoading()
 						uni.openLocation({
 						    latitude: item.latitude,
