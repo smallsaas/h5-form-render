@@ -19,7 +19,7 @@
 			'font':Style===undefined?'':Style.title.font,
 			}"
 			>{{title}}
-			<span v-if="jump" @click="jumpUrl()" style="position: absolute;right: 5px;color: #1A5EB5;font-size: 14px;">跳过</span>
+			<span v-if="jump" @click="jumpUrl()" style="position: absolute;right: 5px;color: #1A5EB5;font-size: 14px;">{{jumpText}}</span>
 			</view>
       <view class="Card-Layout-Child">
 				<slot></slot>
@@ -49,6 +49,12 @@ export default {
         type:String
       },
 			jump:Boolean,
+			jumpText:{
+				type:String,
+				default(){
+					return "跳过"
+				}
+			},
       Style:{
 				title:{
 					color:{

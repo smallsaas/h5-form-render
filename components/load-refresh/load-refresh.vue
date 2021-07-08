@@ -36,17 +36,24 @@
 			@touchstart="coverTouchstart"
 			@touchmove="coverTouchmove"
 			@touchend="coverTouchend">
+			<!-- 原方法 -->
 			<scroll-view 
                 scroll-y 
                 class="list" 
                 :scroll-top="scrollTop" 
                 :style="pagination !== false ? getHeight : ''"
                 @scrolltolower="loadMore" 
-            >
+            >						
+<!-- 				<scroll-view
+									scroll-y 
+									class="list" 
+									:scroll-top="scrollTop" 
+									@scrolltolower="loadMore" 
+							> -->
 				<!-- 数据集插槽 -->
 				<slot name="content-list"></slot>
 				<!-- 上拉加载 -->
-				<view class="load-more" v-if="pagination !== false">{{loadText}}</view>
+				<view class="load-more" v-if="pagination !== false&&!unloading">{{loadText}}</view>
 			</scroll-view>
 		</view>
 	</view>
@@ -56,6 +63,12 @@
 	export default {
 		name: 'loadRefresh',
 		props: {
+			unloading:{
+				type:Boolean,
+				default(){
+					return false
+				}
+			},
 			isRefresh: {
 				type: Boolean,
 				default: false
@@ -109,6 +122,7 @@
 		computed: {
 			// 计算组件所占屏幕高度
 			getHeight() {
+				console.log(this.unloading)
 				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
 				if (this.fixedHeight) {
 					return `height: ${this.fixedHeight}rpx;`
@@ -119,13 +133,15 @@
 			},
 			// 判断loadText，可以根据需求自定义
 			loadText() {
-				const { currentPage, totalPages, updating, updateType } = this
-				if (!updateType && updating) {
-					return '加载中...'
-				} else if (currentPage < totalPages) {
-					return '上拉加载更多'
-				} else {
-					return '没更多数据了'
+				if(!this.unloading){
+					const { currentPage, totalPages, updating, updateType } = this
+					if (!updateType && updating) {
+						return '加载中...'
+					} else if (currentPage < totalPages) {
+						return '上拉加载更多'
+					} else {
+						return '没更多数据了'
+					}
 				}
 			}
 		},
@@ -220,6 +236,7 @@
 			// margin-top: -100rpx;
 			.list{
 				width: 100%;
+				height: auto;
 				.load-more{
 					text-align: center;
 					color: #AAAAAA;

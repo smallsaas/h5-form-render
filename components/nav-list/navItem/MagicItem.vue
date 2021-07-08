@@ -18,6 +18,8 @@
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='publicity'" :style="{'color':item.svg.color}">&#xe621;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='lifeguard'" :style="{'color':item.svg.color}">&#xe68c;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='employees'" :style="{'color':item.svg.color}">&#xe6b0;</i>
+						<image :src="icon[item.svg.icon]" v-if="icon[item.svg.icon]" mode="aspectFit" style="width: 70rpx;height: 70rpx;"/>
+						<!-- <image :src="icon[item.svg.icon]" mode="widthFix" class="swiper_image" /> -->
 					</block>
 					<view class="title"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
 	      </view>
@@ -26,6 +28,7 @@
 </template>
 
 <script>
+	import {globalConfig} from '../../../config.js'
 	import _ from 'lodash'
 	import qs from 'qs'
 	export default {
@@ -36,6 +39,14 @@
 					return {}
 				}
 			}
+		},
+		data(){
+			return{
+				icon:globalConfig.icon
+			}
+		},
+		created() {
+			console.log(this.icon[this.item.svg.icon])
 		},
 		methods: {
 			_get (data, field, value) {

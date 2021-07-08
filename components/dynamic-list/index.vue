@@ -22,6 +22,7 @@
                 :fixedHeight="fixedHeight"
                 :currentPage="listCurrentPage"
                 :totalPages="listTotalPages" 
+								:unloading="unloading"
                 @loadMore="loadMore" 
                 @refresh="refresh"
              >
@@ -184,6 +185,12 @@
 				default: function() {
 					return {}
 				}
+			},
+			unloading:{
+				type:Boolean,
+				default(){
+					return false
+				}
 			}
 		},
 		data() {
@@ -197,6 +204,7 @@
                 listSearch: {}, // 列表查询参数
                 pageNoField: '',  // 页数配置的字段名
                 pageSizeField: '' // size配置的字段名
+								
 			}
 		},
         computed: {
@@ -334,6 +342,8 @@
             
             // 加载更多
             loadMore () {
+							if(!this.unloading){
+							console.log("加载更多")
 				if (this.isPropsList) {
 					return
 				}
@@ -342,10 +352,14 @@
                     [this.pageNoField]: this.listSearch[this.pageNoField] + 1
                 }
                 this.fetchList()
+								
+								}
             },
             
             // 上拉加载刷新
             refresh () {
+							if(!this.unloading){
+								console.log("刷新")
 				if (this.isPropsList) {
 					return
 				}
@@ -354,6 +368,7 @@
             	    [this.pageNoField]: 1
             	}
             	this.fetchList({ refresh: true })
+							}
             },
 			
 			// 列表项组件与列表数据绑定

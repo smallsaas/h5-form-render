@@ -10,7 +10,6 @@ export const getSearchPage = (params)=>{
 
 export const getFormAPIdata = (API,params)=>{
 	const url = `${globalConfig.workflowEP}${API}`
-	console.log(url)
 	return request('POST', url, params)
 }
 
@@ -94,4 +93,11 @@ export const getAdmUsers = (api, params) => {
 export const getGolobalConfig = (params) => {
     const url = 'https://api.mock.smallsaas.cn/form?id=1'
     return request('GET', url, params)
+}
+
+
+// 获取图片资源
+export const getIcon = (params)=>{
+	const url = 'https://api.mock.smallsaas.cn/data?id=9999999'
+	return request('GET',url,params)
 }

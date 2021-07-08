@@ -468,13 +468,15 @@
                         if (_.get(res, 'data.code') === 200) {
                             uni.showToast({
                                 title:'操作成功'
-                            })
-														this.$emit("state","success")
+                            }),
                             setTimeout(() => {
                                 if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
 																	console.log(this.config.submittedNavigation)
                                     uni.navigateTo({
                                         url: '/pages' + this.config.submittedNavigation,
+																				success() {
+																						this.$emit("state","success")
+																				},
 																				fail:(a)=>{
 																					console.log(a)
 																				}
