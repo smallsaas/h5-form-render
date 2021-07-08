@@ -18,7 +18,7 @@
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='publicity'" :style="{'color':item.svg.color}">&#xe621;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='lifeguard'" :style="{'color':item.svg.color}">&#xe68c;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='employees'" :style="{'color':item.svg.color}">&#xe6b0;</i>
-						<image :src="icon[item.svg.icon]" v-if="icon[item.svg.icon]" mode="aspectFit" style="width: 70rpx;height: 70rpx;"/>
+						<image :src="icon[item.svg.icon]" v-if="icon[item.svg.icon]" mode="aspectFit" class="image"/>
 						<!-- <image :src="icon[item.svg.icon]" mode="widthFix" class="swiper_image" /> -->
 					</block>
 					<view class="title"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
@@ -100,7 +100,8 @@
 			align-items: center;
 			font-size: 28rpx;
 			border-radius: 6rpx;
-			>.image {
+			padding: 10rpx;
+			.image {
 			    width: 90rpx;
 			    height: 90rpx;
 					line-height: 90rpx;
@@ -113,7 +114,7 @@
 			>.title {
 			    white-space: wrap;
 					// width: 5em;
-					height: 3em;
+					// height: 3em;
 					text-align: center;
 			    text-overflow: ellipsis;
 			    overflow: hidden;
