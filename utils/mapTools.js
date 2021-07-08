@@ -3,7 +3,6 @@ import { globalConfig } from '@/config.js'
 import QQMapWX from '../components/qqmap-wx-jssdk1.2/qqmap-wx-jssdk.js'
 
 export async function getAddress ({ latitude, longitude }, callback) {
-	console.log('进来了', latitude, longitude)
 	if (!latitude || !longitude) {
 		if (_.isFunction(callback)) {
 			callback({})

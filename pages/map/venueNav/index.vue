@@ -102,11 +102,9 @@
 			}
 		},
 		async mounted() {
-			uni.showLoading({title: '',mask: true})
 			uni.getLocation({
 				type: 'gcj02',
 				success: (res) => {
-					uni.hideLoading()
 					getAddress(
 						{
 							latitude:  _.get(res, 'latitude'), 
@@ -129,41 +127,36 @@
 		methods: {
             // 获取类别数据
             async fetchTypeList () {
-                const res = await getNavTypeList({size:10,current:2,type:"EDU"})
-                
-                //** 测试数据
-                // const res = navTypeList
-                // **
-                console.log(res)
+                const res = await getNavTypeList({ size:10, type:"EDU" })
                 if (res.code === 0) {
                     this.typeList = _.cloneDeep(_.get(res, 'data.records', []))
-										// console.log(this.typeList)
                 }
             },
 			async fetchList () {
-				const res = await getNavList({size:10,current:2,type:"EDU"})
-                console.log(res)
-                // ** 试数据
-                // const res = navList
-                // **
-                
+                uni.showLoading({title: '',mask: true})
+				const res = await getNavList({
+                    size: 9007199254740992,
+                    type:"EDU"
+                })
+                uni.hideLoading()
 				if (res.code === 0) {
 					this.list = _.get(res, 'data.records', [])
                     const markersList = []
 					this.list.map((item, index) => {
-						// console.log(item.latitude)
-						markersList.push({
-							id: index + 1,
-							latitude: item.latitude,
-							longitude: item.longitude,
-							title: item.name,
-							customCallout: {...customCallout},
+                        markersList.push({
+                        	id: index + 1,
+                            // latitude: 23.12463,
+                            // longitude: 113.36199,
+                        	latitude: item.latitude,
+                        	longitude: item.longitude,
+                        	title: item.name,
+                        	customCallout: {...customCallout},
                             bgColor: this.getCustomCalloutBgColor(item.type),
                             type: item.type,
                             address: item.address
-						})
+                        })
 					})
-                    this.markers = [...markersList];
+                    this.markers = [...markersList]
                     this.allmarkers = [...markersList]
 				}
 			},
@@ -178,7 +171,6 @@
 			handleClick (title) {
                 this.currentType = title
                 this.markers = this.allmarkers.filter(x => x.title === title)
-								console.log(this.markers)
 				if (this.markers.length > 0) {
 					this.latitude = _.get(this.markers, '[0].latitude')
 					this.longitude = _.get(this.markers, '[0].longitude')
