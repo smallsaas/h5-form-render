@@ -29,7 +29,7 @@
 			  首页
 			</van-tabbar-item>
 			
-			<van-tabbar-item>
+<!-- 			<van-tabbar-item>
 			  <image
 				slot="icon"
 				src="/static/tabbar/work.png"
@@ -59,7 +59,7 @@
 				style="width: 44rpx; height: 44rpx;"
 			  />
 			  复工
-			</van-tabbar-item>
+			</van-tabbar-item> -->
 			
 			<van-tabbar-item>
 			  <image
