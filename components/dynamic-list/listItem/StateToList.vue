@@ -35,12 +35,14 @@
 			ext: Object
 		},
 		created() {
-			console.log(this.item)
+			// console.log(this.item)
 			this.getCustomData()
-			console.log(this.custom)
+			// console.log(this.custom)
 		},
 		data(){
-			custom:null
+			return {
+				custom:null
+			}
 		},
 		methods:{
 			 _get (item, str, defauleValue = '') {

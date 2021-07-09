@@ -102,7 +102,7 @@
 						size: 10,
 						type: "EDU"
 					})
-                if (res.code === 0) {
+                if (res.code === 200) {
                     const list = _.cloneDeep(_.get(res, 'data.records', []))
                     list.unshift({ title: '全部'})
                     this.typeList = [...list]

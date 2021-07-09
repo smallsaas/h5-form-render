@@ -128,7 +128,8 @@
             // 获取类别数据
             async fetchTypeList () {
                 const res = await getNavTypeList({ size:10, type:"EDU" })
-                if (res.code === 0) {
+								console.log(res)
+                if (res.code === 200) {
                     this.typeList = _.cloneDeep(_.get(res, 'data.records', []))
                 }
             },
@@ -139,8 +140,9 @@
                     type:"EDU"
                 })
                 uni.hideLoading()
-				if (res.code === 0) {
+				if (res.code === 200) {
 					this.list = _.get(res, 'data.records', [])
+					console.log(this.list)
                     const markersList = []
 					this.list.map((item, index) => {
                         markersList.push({
@@ -163,17 +165,22 @@
 			getCustomCalloutBgColor (title) {
 				let color = '#333'
 			    if (this.typeList.some(x => x.title === title)) {
+						console.log(this.typeList)
 				   const item = this.typeList.find(x => x.title === title)
 				   color = item.bgColor
 			    }
 				return color
 			},
 			handleClick (title) {
+				console.log(this.latitude,'lat')
+				console.log(this.longitude,'long')
                 this.currentType = title
-                this.markers = this.allmarkers.filter(x => x.title === title)
+                this.markers = this.allmarkers.filter(x => x.type === title)
+								console.log(this.markers,'markers')
 				if (this.markers.length > 0) {
 					this.latitude = _.get(this.markers, '[0].latitude')
 					this.longitude = _.get(this.markers, '[0].longitude')
+
 					uni.createMapContext("nav_map", this).moveToLocation({  
 						longitude: this.longitude,  
 						latitude: this.latitude,  

@@ -11,7 +11,7 @@
 			<!-- 语音输入按钮 -->
 			<view class="talkIcon search_Icons" style="color: #2C405A;" v-if="config.addIcon" @click="additems()">&#xe7fe;</view>
 		</view>
-		<view :class="'search-list '+searchType">
+		<view :class="'search-list '+searchType" @touchstart="touchStart" @touchmove="loadMore">
 			<view v-for="(item,i) in listData" v-if="inputValue===''">
 				<navigator :url="url[i]">
 					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
@@ -39,7 +39,7 @@
 				</navigator>
 			</view>
 		</view>
-		<view style="width: auto;color: #ccc;font-size: 12px; font-weight: bolder;margin: 10px;text-align: center;">没有更多了</view>
+		<view style="width: auto;color: #ccc;font-size: 12px; font-weight: bolder;margin: 10px;text-align: center;">{{text}}</view>
 	</view>
 </template>
 
@@ -64,7 +64,11 @@
 				RadioValue:{
 					name:null,
 					address:null
-				}
+				},
+				size:10,
+				touchData:{},
+				total:null,
+				text:"下拉刷新"
 			};
 		},
 		onLoad() {
@@ -99,7 +103,7 @@
 			        console.log("清除缓存成功");
 			    }
 			});
-			this.getData()
+			this.getData(this.config.params)
 			// console.log(this.searchlist)
 		},
 		methods:{
@@ -139,10 +143,48 @@
 				}
 				return request('GET', url, params,header)
 			},
-			async getData(){
-				const res = await this.getSearchList(this.config.params);
-				this.listData = res.data.records
-				this.url = this.getID(this.listData)
+			// 记录滑动
+			touchStart(e){
+				// this.touchData.clientX = e.changeTouches[0].clientX;//X轴滑动
+				// console.log(e)
+				this.touchData.clientY = e.changedTouches[0].clientY;//Y轴滑动
+				this.value=this.size+5
+			},
+			// 加载更多
+			loadMore(e){
+				// 移动
+				
+				const subY = e.changedTouches[0].clientY - this.touchData.clientY
+				if(subY>-50){
+					uni.showLoading({
+						title:"加载中"
+					})
+					setTimeout(()=>{
+						let params;
+						if(this.config.pz&&this.config.pn){
+							params={
+								...this.config.params,
+								"pageSize":this.value,
+								"pageNo":1
+							}
+						}else{
+							params = this.config.params
+						}
+							if(this.size>=this.total){
+								this.text = "没有更多数据了"
+							}else{
+								this.getData(params)
+						}
+						uni.hideLoading()
+					},500)
+				}
+			},
+			async getData(params){
+					const res = await this.getSearchList(params);
+					this.listData = res.data.records
+					this.url = this.getID(this.listData)
+					this.total = res.data.total
+					this.size = res.data.records.length
 			},
 			getList(){
 				this.searchlist = []

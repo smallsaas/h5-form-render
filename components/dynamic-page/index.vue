@@ -34,9 +34,13 @@
 														}
 													}"
 													:title="_get(item,'name','')"
+													:jump="_get(_get(config.moduleData,item.key,{}),'jump',false)"
+													:jumpText="_get(_get(config.moduleData,item.key,{}),'jumpText','')"
+													:url="_get(_get(config.moduleData,item.key,{}),'jumpUrl','')"
 													v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
 													>
 									    <dynamic-list
+											:unloading="_get(_get(config.moduleData,item.key,{}),'unloading',false)"
 									      :config="{
 									          ..._get(config.moduleData, item.key, {}),
 									...getComponentsData(item) ? { list: getComponentsData(item) } : {},
@@ -45,6 +49,7 @@
 									    />
 											</card>
 											<dynamic-list
+											:unloading="_get(_get(config.moduleData,item.key,{}),'unloading',false)"
 												:config="{
 																	..._get(config.moduleData, item.key, {}),
 												...getComponentsData(item) ? { list: getComponentsData(item) } : {},
