@@ -427,7 +427,8 @@
 								let custom = {
 									...submitData
 								}
-								let customData = Base64.encode(JSON.stringify(custom))	//
+								// let customData = Base64.encode(JSON.stringify(custom))	//
+								let customData = custom	//
 								
 				
                 if (_.isFunction(_.get(this.$parent, 'formatSubmitData'))) {
@@ -444,7 +445,7 @@
 											"userId": 26,
 											"userName": "张体委",
 											"formData":submitData,
-											"customData":customData,
+											"customValues":customData,
 											"comment": "同意"
 										}
 										this.handleSubmitRequest(workflowData)

@@ -49,7 +49,8 @@
 					return _.get(item, str, defauleValue)
 			 },
 			getCustomData(){
-				this.custom=JSON.parse(Base64.decode(this.item.customData))
+				// this.custom=JSON.parse(Base64.decode(this.item.customValues))
+				this.custom=this.item.customValues
 			}
 		}
 	}

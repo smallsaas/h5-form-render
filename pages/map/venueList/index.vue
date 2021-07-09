@@ -75,8 +75,9 @@
 		data () {
 			return {
 				listCurrentPage: 1,
-				listTotalPages: 1,
+				listTotalPages: 10,
 				list: [],
+				listPages:2,
                 typeList: [],
                 tabActive: 0,
                 currentType: '全部'  // 当前所选类别
@@ -98,10 +99,7 @@
             // 获取类别数据
             async fetchTypeList () {
                 const res = await getNavTypeList(
-                    {
-						size: 10,
-						type: "EDU"
-					})
+                    )
                 if (res.code === 200) {
                     const list = _.cloneDeep(_.get(res, 'data.records', []))
                     list.unshift({ title: '全部'})
@@ -112,20 +110,22 @@
 			async fetchList (data) {
                 uni.showLoading({ title: 'loading...', mask:true })
 				const res = await getNavList({ 
-                    size: 10, 
-                    current: this.listCurrentPage,
+                    pageSize: this.listTotalPages, 
+                    pageNum: this.listCurrentPage,
                     ...this.currentType !== '全部' ? { type: this.currentType } : {},
-					type: "EDU"
                  })
                 uni.hideLoading()		
 				this.list = this.list.concat([..._.get(res, 'data.records', [])])
-				this.listCurrentPage = _.get(res, 'data.current', 1)
-				this.listTotalPages = _.get(res, 'data.pages', 1)
+				this.listCurrentPage = this.listCurrentPage+1
+				// this.listTotalPages = this.listTotalPages
+				this.listPages = _.get(res, 'data.pages', 1)
                 this.$refs.loadRefresh.completed()
 			},
 			loadMore () {
-				this.listCurrentPage = this.listCurrentPage + 1
-				this.fetchList()
+				// this.listCurrentPage = this.listCurrentPage + 1
+				if(this.listCurrentPage<=this.listPages){
+					this.fetchList()
+				}
 			},
 			handleToMap (item) {
 				uni.showLoading({ title: '', mask: true })
@@ -149,13 +149,13 @@
             // 选中tab时
             handleSelectTab (e) {
                 this.tabActive = e
-                const type = this.typeList[e].title
+                const type = this.typeList[e].type
                 if (this.currentType === type) {
                     return
                 }
 				this.currentType = type
                 this.listCurrentPage = 1
-                this.listTotalPages = 1
+                this.listTotalPages = 10
 				setTimeout(() => {
 					this.list = []
 					this.fetchList()

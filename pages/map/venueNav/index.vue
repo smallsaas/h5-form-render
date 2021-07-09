@@ -23,13 +23,13 @@
                         alignItems: 'center',
                         padding: '10rpx',
 						boxShadow: '0 0 10px 0 #c1c1c1',
-                        backgroundColor: item.bgColor || '#333',
+                        backgroundColor: item.colour || '#333',
                     }"
 				>
 					<button 
                         class="map_customCallout"
                         :style="{
-                            backgroundColor: item.bgColor || '#333'
+                            backgroundColor: item.colour || '#333'
                         }"
                     >
                       {{item.title}}
@@ -60,7 +60,7 @@
                     :url="item.url" 
                     :title="item.title"
 										:type="item.type"
-                    :imageBg="item.bgColor||'#333'"
+                    :imageBg="item.colour||'#333'"
                     :selectTitle="currentType"
                 	@onClick="handleClick"
                 />
@@ -128,7 +128,7 @@
 		methods: {
             // 获取类别数据
             async fetchTypeList () {
-                const res = await getNavTypeList({ size:10, type:"EDU" })
+                const res = await getNavTypeList()
 								console.log(res)
                 if (res.code === 200) {
                     this.typeList = _.cloneDeep(_.get(res, 'data.records', []))
@@ -137,8 +137,8 @@
 			async fetchList () {
                 uni.showLoading({title: '',mask: true})
 				const res = await getNavList({
-                    size: 9007199254740992,
-                    type:"EDU"
+                    // size: 9007199254740992,
+                    // type:"EDU"
                 })
                 uni.hideLoading()
 				if (res.code === 200) {
@@ -154,7 +154,7 @@
                         	longitude: item.longitude,
                         	title: item.name,
                         	customCallout: {...customCallout},
-                            bgColor: this.getCustomCalloutBgColor(item.type),
+                            colour: this.getCustomCalloutBgColor(item.type),
                             type: item.type,
                             address: item.address
                         })
@@ -165,10 +165,11 @@
 			},
 			getCustomCalloutBgColor (title) {
 				let color = '#333'
-			    if (this.typeList.some(x => x.title === title)) {
+			    if (this.typeList.some(x => x.type === title)) {
 						console.log('typeList',this.typeList)
-				   const item = this.typeList.find(x => x.title === title)
-				   color = item.bgColor
+				   const item = this.typeList.find(x => x.type === title)
+					 console.log(item)
+				   color = item.colour
 			    }
 				return color
 			},
