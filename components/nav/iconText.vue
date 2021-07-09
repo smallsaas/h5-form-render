@@ -19,11 +19,12 @@
             imageBg: {
                 type: String,
                 default: 'rgba(42, 130, 228, 1)'
-            }
+            },
+						type:String
         },
 		methods: {
 			handleClick() {
-				this.$emit('onClick', this.title)
+				this.$emit('onClick', this.type)
 			}
 		}
     }

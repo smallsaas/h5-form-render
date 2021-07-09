@@ -15,8 +15,8 @@
 					:key="item.id" 
 					:marker-id="item.id"
                     :style="{
-                        width: '100rpx',
-                        height: '100rpx',
+                        width: '116rpx',
+                        height: '116rpx',
                         borderRadius: '50%',
                         display: 'flex',
                         justifyContent: 'center',
@@ -57,8 +57,9 @@
                 <icon-text
                     v-for="(item, index) in typeList" 
                     :key="index" 
-                    :url="item.icon" 
-                    :title="item.name"
+                    :url="item.url" 
+                    :title="item.title"
+										:type="item.type"
                     :imageBg="item.bgColor||'#333'"
                     :selectTitle="currentType"
                 	@onClick="handleClick"
@@ -165,7 +166,7 @@
 			getCustomCalloutBgColor (title) {
 				let color = '#333'
 			    if (this.typeList.some(x => x.title === title)) {
-						console.log(this.typeList)
+						console.log('typeList',this.typeList)
 				   const item = this.typeList.find(x => x.title === title)
 				   color = item.bgColor
 			    }
@@ -176,15 +177,16 @@
 				console.log(this.longitude,'long')
                 this.currentType = title
                 this.markers = this.allmarkers.filter(x => x.type === title)
-								console.log(this.markers,'markers')
 				if (this.markers.length > 0) {
-					this.latitude = _.get(this.markers, '[0].latitude')
-					this.longitude = _.get(this.markers, '[0].longitude')
+					for(let i=0;i<this.markers.length;i++){
+						this.latitude = _.get(this.markers, '['+i+'].latitude')
+						this.longitude = _.get(this.markers, '['+i+'].longitude')
+						uni.createMapContext("nav_map", this).moveToLocation({
+							longitude: this.longitude,  
+							latitude: this.latitude,  
+						});  
+					}
 
-					uni.createMapContext("nav_map", this).moveToLocation({  
-						longitude: this.longitude,  
-						latitude: this.latitude,  
-					});  
 				}
 			},
             handleToList () {
@@ -243,12 +245,13 @@
 			text-align: center;
 			color: #fff;
 			font-size: 22rpx;
-			text-overflow: ellipsis;
-			overflow: unset;
-			white-space: pre-wrap;
+			display: -webkit-box; /*弹性伸缩盒子模型显示*/
+			-webkit-box-orient: vertical; /*排列方式*/ 
+			-webkit-line-clamp: 1; /*显示文本行数(这里控制多少行隐藏)*/
+			overflow: hidden; /*溢出隐藏*/
             line-height: unset;
             margin: 0;
-            padding: 10rpx;
+            padding: 5rpx;
             position: relative;
             z-index: 999;
 		}
