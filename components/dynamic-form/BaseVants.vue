@@ -176,6 +176,12 @@
 			 	}"
 			 	@change="(e) => handleSetValue(e, fields[index])"
 			/>
+            <base-signature 
+                v-if="_get(item, '__config__.tag') === 'el-signature'"
+                :param="{
+                	...getBaseParam(item)
+                }"
+            />
        </block>
     </view>
 </template>
@@ -197,6 +203,7 @@
 	// import cSelectList from './custom/c-select-list.vue'
 	import cSelect from './custom/c-select/c-select.vue'
 	import BaseSingleModalSelect from './BaseSingleModalSelect.vue'
+    import BaseSignature from './BaseSignature.vue'
     export default {
         components: {
            BaseField,
@@ -213,7 +220,8 @@
 		   cVideo,
 		   // cSelectList,
 		   cSelect,
-		   BaseSingleModalSelect
+		   BaseSingleModalSelect,
+           BaseSignature
         },
         props: {
           fields: {
