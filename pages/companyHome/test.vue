@@ -68,6 +68,10 @@
 				<text>获取微信用户信息</text>
 			</view>
 			
+			<view class="venue_tag" @click="handleParser">
+				<text>营业证书识别</text>
+			</view>
+			
 		</view>
 		
 
@@ -157,6 +161,11 @@
 			handleWxInfo () {
 				uni.navigateTo({
 					url: './getWXInfo'
+				})
+			},
+			handleParser () {
+				uni.navigateTo({
+					url: '/pages/test/testImgParser'
 				})
 			}
 		}
