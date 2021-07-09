@@ -3,6 +3,10 @@
 	<view class="base_vants_container" :style="[_get(config, 'outStyle', {})]">
         <van-skeleton row="20" :loading="skeletonLoading">
             <block v-for="(item, index) in fields" :key="index">
+							<c-lincense
+							v-if="_get(item,'__config__.tag')==='c-lincense'"
+								@getValue="lincenseValue"
+							></c-lincense>
                 <base-vants 
                     v-if="_get(item, '__config__.layout') === 'colFormItem'"
                     :fields="[{...item}]"
@@ -20,6 +24,10 @@
 										<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
 									</card>
                     <block v-for="(k, i) in _get(item, '__config__.children', [])" :key="i">
+											<c-lincense
+											v-if="_get(k,'__config__.tag')==='c-lincense'"
+												@getValue="lincenseValue"
+											></c-lincense>
                         <base-vants
                             v-if="_get(k, '__config__.layout') === 'colFormItem'"
                             :fields="[{...k}]"
@@ -112,6 +120,7 @@
     import BaseVants from './BaseVants.vue'
 		import {Base64} from '../../utils/tools.js'
     import { globalConfig } from '@/config.js'
+		import cLincense from './custom/c-lincense.vue'
 		import card from '../other/Card.vue'
     const SUNMIT_API =  globalConfig.formHost + '/custom'
     const LOAD_API = globalConfig.formHost + '/userinfos'  // 默认获取数据
@@ -120,7 +129,8 @@
 	export default {
         components: { 
           BaseVants,
-					card
+					card,
+					cLincense
         },
 		props: {
 			config: {
@@ -162,6 +172,7 @@
                     Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
                     token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
                 },
+				lincense:null
 			}
 		},
         watch: {
@@ -212,6 +223,9 @@
             _get (item, str, defauleValue = '') {
               return _.get(item, str, defauleValue)
             },
+						lincenseValue(e){
+							this.form = e
+						},
 						// 校检loadAPI
 						getLoadApi(url){
 							let pages = getCurrentPages()
@@ -243,6 +257,8 @@
 							}else{
 								head = this.header
 							}
+							let a = this.$emit('getForm')
+							console.log(a)
 								uni.request({
 								    url: newAPI || LOAD_API,
 								    method: 'GET',
@@ -260,7 +276,7 @@
 												     resData = this.$parent.formatLoadData(resData)
 														 console.log(resData)
 												 }
-												 this.form = { ...this.form, ...resData }
+												 this.form = { ...this.form, ...resData}
 												 console.log(this.form)
 											 }
 								    }

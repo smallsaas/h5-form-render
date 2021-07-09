@@ -139,6 +139,7 @@
 				const res = await getNavList({
                     // size: 9007199254740992,
                     // type:"EDU"
+										searchAll:true
                 })
                 uni.hideLoading()
 				if (res.code === 200) {
@@ -166,9 +167,9 @@
 			getCustomCalloutBgColor (title) {
 				let color = '#333'
 			    if (this.typeList.some(x => x.type === title)) {
-						console.log('typeList',this.typeList)
+						// console.log('typeList',this.typeList)s
 				   const item = this.typeList.find(x => x.type === title)
-					 console.log(item)
+					 // console.log(item)s
 				   color = item.colour
 			    }
 				return color

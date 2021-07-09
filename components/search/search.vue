@@ -65,6 +65,7 @@
 					name:null,
 					address:null
 				},
+				num:1,
 				size:10,
 				touchData:{},
 				total:null,
@@ -148,7 +149,8 @@
 				// this.touchData.clientX = e.changeTouches[0].clientX;//X轴滑动
 				// console.log(e)
 				this.touchData.clientY = e.changedTouches[0].clientY;//Y轴滑动
-				this.value=this.size+5
+				this.num=1
+				this.value=this.size+10
 			},
 			// 加载更多
 			loadMore(e){
@@ -159,29 +161,29 @@
 					uni.showLoading({
 						title:"加载中"
 					})
-					setTimeout(()=>{
 						let params;
 						if(this.config.pz&&this.config.pn){
 							params={
 								...this.config.params,
 								"pageSize":this.value,
-								"pageNo":1
+								"pageNum":this.num
 							}
 						}else{
 							params = this.config.params
 						}
-							if(this.size>=this.total){
-								this.text = "没有更多数据了"
-							}else{
+							if(this.size<this.total){
 								this.getData(params)
+							}else{
+								this.text = "没有更多数据了"
 						}
 						uni.hideLoading()
-					},500)
 				}
 			},
 			async getData(params){
 					const res = await this.getSearchList(params);
-					this.listData = res.data.records
+					let list;
+					list = res.data.records
+					this.listData=list
 					this.url = this.getID(this.listData)
 					this.total = res.data.total
 					this.size = res.data.records.length

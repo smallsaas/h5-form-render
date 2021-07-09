@@ -6,11 +6,11 @@
 		   :API="getPageAapi"
 		/>
 		
-		<law-enforcement v-if="current == 1" />
+<!-- 		<law-enforcement v-if="current == 1" />
 		
-		<return-to-work v-if="current == 2"/>
+		<return-to-work v-if="current == 2"/> -->
 		
-		<my-page v-if="current == 3"/>
+		<my-page v-if="current == 1"/>
 		
 		<van-tabbar :active="current" @change="onChange">
 			<van-tabbar-item>
