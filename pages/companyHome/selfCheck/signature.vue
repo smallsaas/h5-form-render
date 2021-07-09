@@ -136,6 +136,7 @@
 					title: '提示',
 					content: '确定保存签名吗',
 					success: (response) => {
+                        console.log('TTTTT', response)
 						uni.canvasToTempFilePath({
 							// x: response.windowWidth / 2 - 150,
 							x: response.windowWidth,
