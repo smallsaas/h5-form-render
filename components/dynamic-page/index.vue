@@ -4,7 +4,7 @@
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
 								<dynamic-form
-									v-if="_get(item, 'type') === 'autoform'&&item.code"
+									v-if="_get(item, 'type') === 'autoform'&&(item.code||item.FormKey)"
 									:config="{
 										 ...getCode(item.API,item.code),
 										 outStyle: getComponentStyle(item)
@@ -156,7 +156,7 @@
 	import qs from 'qs'
 	import { getFormAPIdata } from '../../common/api.js'
 	import { request } from '../../common/request.js'
-	import { Base64 } from '../../utils/tools.js'
+	import { Base64,guid } from '../../utils/tools.js'
 	import dynamicList from '../dynamic-list/index.vue'
     import dynamicForm from '../dynamic-form/index.vue'
 	import swiperImages from '../swiper-images/index.vue'
@@ -218,25 +218,68 @@
 
 		},
 		created() {
+			console.log(this.number)
 		  if (!this.API) {
 			  return
 		  }
 		  this.fetchConfigData()
 			this.getState()
+			
 		},
 		//#ifdef MP-WEIXIN
 		mounted(){
-			this.getCodeData(this.codeAPI,this.code)
+			this.config.modules.map((item,i)=>{
+				if(_.get(item, 'type') === 'autoform'){
+					let FormKey = _.get(item,'FormKey','')
+					if(FormKey){
+						console.log(FormKey)
+						this.getWorkflow(FormKey)	
+					}else{
+						this.getCodeData(this.codeAPI,this.code)
+					}
+				}
+			})
 		},
 		//#endif
 		// #ifdef APP-PLUS
 		updated(){
-			this.getCodeData(this.codeAPI,this.code)
+			this.config.modules.map((item,i)=>{
+				if(_.get(item, 'type') === 'autoform'){
+					let FormKey = _.get(item,'FormKey','')
+					if(FormKey){
+						console.log(FormKey)
+						this.getWorkflow(FormKey)	
+					}else{
+						this.getCodeData(this.codeAPI,this.code)
+					}
+				}
+			})
 		},
 		// #endif
 		methods: {
 			_get (data, field, value) {
 				return _.get(data, field, value)
+			},
+			async getWorkflow(Key){
+				let res = await this.getWorkflowlist(Key)
+				if(res.code==="00000"){
+					console.log(res.data.formEntity.code)
+					let api = '/api.page.design.form/loadFormInfo'
+					let code = res.data.formEntity.code
+					console.log(api)
+					console.log(code)
+					
+					this.getCodeData(api,code)
+				}
+			},
+			// 自查编号
+			getWorkflowlist(Key){
+				let url = `${globalConfig.workflowEP}/api.flow.examine/toComplete`
+				let data = {
+					processDefineKey:Key,
+					version:1
+				} 
+				return request('POST',url,data)
 			},
 			// 获取有code时，API数据更改为真正表单数据
 			async getCodeData(API,code){
@@ -251,6 +294,7 @@
 					jsonDefineBase64 = _.get(form,"jsonDefine","")
 					jsonDefine = Base64.decode(jsonDefineBase64)
 					json = JSON.parse(jsonDefine)
+					console.log(json)
 				}
 				this.codeData = json
 			},

@@ -22,7 +22,6 @@
 							
 							uni.setStorageSync('iconList',_.get(icon,'data',{}))
 						}
-
 		},
 		onShow: function() {
 			console.log('App Show')

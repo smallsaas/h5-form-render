@@ -118,7 +118,7 @@
 <script>
 	import _ from 'lodash'
     import BaseVants from './BaseVants.vue'
-		import {Base64} from '../../utils/tools.js'
+		import {Base64,guid} from '../../utils/tools.js'
     import { globalConfig } from '@/config.js'
 		import cLincense from './custom/c-lincense.vue'
 		import card from '../other/Card.vue'
@@ -441,7 +441,8 @@
                 }
 								// 工作流自定义数据接口
 								let custom = {
-									...submitData
+									...submitData,
+									"fileno":guid(),
 								}
 								// let customData = Base64.encode(JSON.stringify(custom))	//
 								let customData = custom	//
@@ -458,8 +459,6 @@
 										let workflowData = {
 											"processDefineKey":_.get(this.config,"processDefineKey"),
 											"version":"1",
-											"userId": 26,
-											"userName": "张体委",
 											"formData":submitData,
 											"customValues":customData,
 											"comment": "同意"

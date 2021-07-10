@@ -146,9 +146,9 @@
 		},
         //
         onLoad() {
-            uni.navigateTo({
-                url: '../test/form'
-            })
+            // uni.navigateTo({
+            //     url: '../test/form'
+            // })
         }
 	}
 </script>

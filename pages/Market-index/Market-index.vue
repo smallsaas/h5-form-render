@@ -18,7 +18,7 @@
 			}
 		},
 		onLoad(){
-				
+			uni.hideHomeButton()
 		},
 		methods: {
 
