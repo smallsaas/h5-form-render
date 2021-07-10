@@ -143,13 +143,7 @@
 		},
 		components: {
 			dynamicPage
-		},
-        //
-        onLoad() {
-            uni.navigateTo({
-                url: '../test/form'
-            })
-        }
+		}
 	}
 </script>
 
