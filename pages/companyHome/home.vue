@@ -98,6 +98,7 @@
 			lawEnforcement
 		},
 		onLoad (e){
+			uni.hideHomeButton()
 		},
 		data() {
 			return {

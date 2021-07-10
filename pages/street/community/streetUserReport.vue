@@ -18,7 +18,8 @@
 		},
 		data() {
 			return {
-				getPageAapi: globalConfig.formHost + '?id=510',
+				// getPageAapi: globalConfig.formHost + '?id=510',
+				getPageAapi: globalConfig.formHost + '?id=5600',
 			}
 		},
 		methods:{
