@@ -2,7 +2,7 @@
 	<view>
 		<dynamic-page :API="api"></dynamic-page>
 		<!-- 登录模块 -->
-		<view
+<!-- 		<view
 			class="LoginBox"
 			v-if="checkout"
 		>
@@ -16,7 +16,6 @@
 			<input class="inputText" :type="pType" v-model="LoginData.password" placeholder="请输入密码"/>
 			<checkbox style="float: right;" color="#2C405A" @click="changeType" :checkout="isCheckout">显示密码</checkbox>
 			</view>
-<!-- 			<button @click="register">测试注册</button> -->
 			<button @click="getToken" class="loginBtn">登录</button>
 			<view class="Select" @click="checkoutSelect">没有用户？去注册</view>
 		</view>
@@ -34,10 +33,9 @@
 					<input class="inputText" :type="pType" v-model="registerData.password" placeholder="请输入密码"/>
 					<checkbox style="float: right;" color="#2C405A" @click="changeType" :checkout="isCheckout">显示密码</checkbox>
 					</view>
-		<!-- 			<button @click="register">测试注册</button> -->
 					<button @click="register" class="loginBtn">注册</button>
 					<view class="Select" @click="checkoutSelect">已有用户？去登录</view>
-				</view>
+			</view> -->
 	</view>
 	
 </template>
