@@ -132,7 +132,15 @@
 																			uni.showModal({
 																				title:"登录失败",
 																				position:'center',
-																				duration: 500
+																				duration: 500,
+																				success(click){
+																					// console.log(click.confirm)
+																					if(click.confirm||click.cancel){
+																						uni.navigateBack({
+																							delta:1
+																						})
+																					}
+																				}
 																			})
 																			uni.clearStorage(globalConfig.tokenStorageKey)
 																		}

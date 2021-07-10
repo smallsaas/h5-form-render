@@ -143,11 +143,12 @@
 			dynamicPage
 		},
         //
-        onLoad() {
-            // uni.navigateTo({
-            //     url: '../test/form'
-            // })
-        }
+        // onLoad() {
+        //     // uni.navigateTo({
+        //     //     url: '../test/form'
+        //     // })
+        // }
+		// }
 	}
 </script>
 
