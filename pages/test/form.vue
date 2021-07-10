@@ -53,7 +53,7 @@
 						  "__config__": {
 						    "label": "签名",
 						    "tag": "el-signature",  // 多个选
-						   // "defaultValue": ['0', '876708082437197830', '876708082437197847', '876708082437197845'],
+						   // "defaultValue": '',
 						    "required": true,
 						    "layout": "colFormItem",
 						  },

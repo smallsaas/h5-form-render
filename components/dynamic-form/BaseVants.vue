@@ -179,8 +179,11 @@
             <base-signature 
                 v-if="_get(item, '__config__.tag') === 'el-signature'"
                 :param="{
-                	...getBaseParam(item)
+                	...getBaseParam(item),
+					..._get(item, 'error', false) ? { error: item.error } : {},
+					..._get(item, 'error') ? { 'error-message' : item['error-message'] || '请签名' } : {},
                 }"
+				@change="(e) => handleSetValue(e, fields[index])"
             />
        </block>
     </view>

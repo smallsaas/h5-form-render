@@ -12,7 +12,19 @@
           label-class="van_field_label"
         >
           <template slot="input">
-              <button size="mini" @click="handleSignture">点击签名</button>
+              <view class="field_input">
+				  <button size="mini" @click="handleSignture">
+					  {{param.value ? '修改签名' : '点击签名'}}
+				  </button>
+				  <view 
+					  :style="{
+						  backgroundImage: `url(${param.value})`
+					  }"
+					  class="image"
+					  v-if="param.value" 
+					  @click="handlePreview" 
+				  />
+			  </view>
           </template>
         </van-field>
         <mask v-if="showModal">
@@ -27,20 +39,24 @@
                         @touchend="handleTouchend"
                     />
                     <view class="buttons">
-                        <view class="but" @click="clear">清除</view>
-                        <view class="but primary" @click='handlePreview'>预览</view>
-                    	<view class="but primary" @click="finish">保存</view>
-                    	<view class="but" @click="close">返回</view>
+						<view class="but" @click="handleClear">重绘</view>
+						<view class="but" @click="handleBack">返回</view>
+						<view class="but primary" @click="finish">保存</view>
                     </view>
-        			<!-- <image :src="image" /> -->
         		</view>
         	</view>
         </mask>
-    </view>
+		<mask v-if="preViewModal">
+			<view class="preview_image_content" @click="handleClosePreviewModal">
+				<image mode="heightFix" :src="param.value" />
+			</view>
+		</mask>
+	</view>
 </template>
 
 <script>
     import _ from 'lodash'
+	import { pathToBase64 } from 'image-tools'
     import mask from '../mask/index.vue'
     export default {
         components: {
@@ -52,7 +68,8 @@
                 
                 canvasContext: "",
                 points: [], //路径点集合 
-                image: ""
+                image: "",
+				preViewModal: false
             } 
         },
         props: {
@@ -72,13 +89,18 @@
             }
         },
         methods: {
+			handlePreview () {
+				if (!_.get(this.param, 'value')) {
+					return
+				}
+				this.preViewModal = true
+			},
             handleSignture () {
                 this.showModal = true
                 this.initCanvas()
             },
             initCanvas() {
             	this.canvasContext = uni.createCanvasContext('signature_canvas', this);
-            	console.log('SSS', this.canvasContext);
             	//设置画笔样式
             	this.canvasContext.setLineWidth(4);
             	this.canvasContext.setLineCap('round');
@@ -129,20 +151,17 @@
             	this.canvasContext.lineTo(point2.X, point2.Y)
             	this.canvasContext.stroke()
             	this.canvasContext.draw(true)
-                
-                // console.log('JJJJ', this.canvasContext)
             },
             //清空画布
-            clear() {
-            	let that = this;
+            handleClear() {
             	uni.getSystemInfo({
-            		success: function(res) {
-            			let canvasw = res.windowWidth;
-            			let canvash = res.windowHeight;
-            			that.canvasContext.clearRect(0, 0, canvasw, canvash);
-            			that.canvasContext.draw(true);
-                        this.canvasContext.get
-            		},
+            		success: (res) => {
+						const canvasw = res.windowWidth;
+						const canvash = res.windowHeight;
+						this.canvasContext.clearRect(0, 0, canvasw, canvash);
+						this.canvasContext.draw(true);
+						// this.canvasContext.get
+					},
             	})
             },
             //保存
@@ -166,26 +185,16 @@
             },
             
             // 生成图片
-            handleGenerate (callback) {
+            handleGenerate () {
                 uni.canvasToTempFilePath({
                 	x: 0,
                 	y: 0,
                 	canvasId: 'signature_canvas',
                 	success: (resp) => {
-                		//图片转base64
-                        uni.request({
-                        	url: resp.tempFilePath,
-                        	method: 'GET',
-                        	responseType: 'arraybuffer',
-                        	success: res => {
-                        		const base64 = uni.arrayBufferToBase64(res.data); //把arraybuffer转成base64
-                        		const toBase64Url = 'data:image/jpeg;base64,' + base64; //不加上这串字符，在页面无法显示
-                        		console.log(toBase64Url);
-                                if (_.isFunction(callback)) {
-                                    callback(toBase64Url)
-                                }
-                        	}
-                        })
+						pathToBase64(resp.tempFilePath).then(url => {
+							this.$emit('change', url)
+							this.showModal = false
+						})
                 		//保存图片到本地
                 		// this.saveImgToLocal(resp.tempFilePath);
                 	},
@@ -200,7 +209,6 @@
             	uni.saveImageToPhotosAlbum({
             		filePath: url,
             		success: (response) => {
-            			console.log('签名保存成功 = ', response);
             			uni.showModal({
             				title: '提示',
             				content: '保存成功',
@@ -231,33 +239,33 @@
             	})
             },
             
-            // 预览图片
-            handlePreview () {
-                uni.showLoading({
-                    title: '', mask: true
-                })
-                this.handleGenerate((res) => {
-                    console.log('EEEEE', res)
-                    uni.hideLoading()
-                    uni.previewImage({
-                        current: 0,
-                        urls: [res]
-                    })
-                })
-            },
-            
-            close () {
+            handleBack () {
                 this.showModal = false
                 this.canvasContext = null
-            }
-        }
-    }
+            },
+			handleClosePreviewModal () {
+				this.preViewModal = false
+			}
+        },
+		beforeDestroy() {
+			this.canvasContext = null
+		}
+	}
 </script>
 
 <style lang="less">
     @import './common.less';
     .base_signature_container {
-        
+        .field_input {
+			.image {
+				width: 170rpx;
+				height: 170rpx;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				border: 1px solid #f2f2f2;
+			}
+		}
     }
     .signature_content {
         width: 100vw;
@@ -272,7 +280,7 @@
             }
             .buttons {
                 display: flex;
-                justify-content: space-around;
+                justify-content: center;
                 text-align: center;
                 padding: 40rpx 0;
                 .but {
@@ -281,6 +289,7 @@
                     padding: 20rpx 0;
                     border-radius: 12rpx;
                     font-size: 28rpx;
+					margin: 0 5%;
                 }
                 .primary {
                     background-color: #2196f3;
@@ -293,4 +302,13 @@
             }
         }
     }
+	.preview_image_content {
+		background-color: #fff;
+		height: 100vh;
+		width: 100%;
+		image {
+			width: 100%;
+			height: calc(100vh - 162rpx);
+		}
+	}
 </style>
