@@ -52,7 +52,7 @@
 						{
 						  "__config__": {
 						    "label": "签名",
-						    "tag": "el-signature",  // 多个选
+						    "tag": "signature",  // 多个选
 						   // "defaultValue": '',
 						    "required": true,
 						    "layout": "colFormItem",

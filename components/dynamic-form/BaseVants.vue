@@ -177,7 +177,7 @@
 			 	@change="(e) => handleSetValue(e, fields[index])"
 			/>
             <base-signature 
-                v-if="_get(item, '__config__.tag') === 'el-signature'"
+                v-if="_get(item, '__config__.tag') === 'signature'"
                 :param="{
                 	...getBaseParam(item),
 					..._get(item, 'error', false) ? { error: item.error } : {},
