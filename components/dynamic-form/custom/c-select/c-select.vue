@@ -1,9 +1,9 @@
 <template>
 	<view class="SelectBox">
 		<view class="Content">
-			<view class="Content_Value">{{param.label}}</view>
+			<view class="Content_Value"><span v-if="param.required" style="color: #EE0A87;">*</span>{{param.label}}</view>
 			<view class="Content_Box">
-				<span v-show="content" style="float: left;padding: 0 10px;">{{content}}</span>
+				<span v-show="content" style="float: left;padding: 0 10px;max-width: 8em;overflow: hidden;margin-right: 5px;">{{content}}</span>
 				<button class="SelectBtn" style="float: right;flex: 1;width: 100%;" @click="showView()">选择用户列表</button>
 			</view>
 		</view>
@@ -12,7 +12,7 @@
 			<view class="listBody" style="background-color: white;">
 				<view v-for="(item,i) in list" class="allList" :key="i">
 					<view @click="hide(i),isCheck(i)" class="SelectList" >
-						<view class="title">{{item.userName}}</view>
+						<view class="title">{{item.firstName}}</view>
 						<view class="subtitle">{{item.orgName}}</view>
 						<view class="radio">
 							<radio color="#1A5EB5" :checked="radioSelect===i"></radio>
@@ -38,7 +38,8 @@
 				list:{},
 				show:false,
 				content:"",
-				radioSelect:null
+				radioSelect:null,
+				data:null
 			}
 		},
 		created() {
@@ -46,18 +47,45 @@
 		},
 		methods:{
 			async getValue(){
+				if(this.loadAPI===""||this.loadAPI===undefined){
+					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
+				}
 				let url = this.loadAPI
-				let data = this.data||{}
-				const res = await getselectList(url,data);
+				console.log(url)
+				let data = this.data||{
+					"processDefineKey":"test",
+					"version":"1"
+				}
+				let _this = this
+				console.log(data)
+				uni.request({
+					url:url,
+					data:data,
+					method:"POST",
+					header:{
+							Authorization: `Bearer ${globalConfig.enforcementKey}`
+					},
+					complete(res) {
+						console.log(res.data.data.userList)
+						if(res.data.code==="00000"){
+							_this.list = res.data.data.userList
+							console.log(_this.list)
+						}else{
+							console.log(res.data.data.msg)
+						}
+					}
+				})
+				// const res = await getselectList(url,data);
 				// console.log(res)
-				this.list = res.data.records
+				// this.list = res.data.userList
 			},
 			showView(){
 				this.show = true
 			},
 			hide(i){
-				this.content = this.list[i].userName
+				this.content = this.list[i].firstName
 				this.$emit("change",this.list[i].id)
+				this.$emit("list",this.list[i])
 			},
 			isCheck(i){
 				this.radioSelect = i
@@ -72,6 +100,7 @@
 			clear(){
 				this.content = null
 				this.$emit("change",null),
+				this.$emit("list",null),
 				this.radioSelect = null,
 				this.content = ""
 			}
@@ -80,6 +109,7 @@
 			loadAPI:{
 				type:String,
 				default(){
+					return `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
 				}
 			},
 			param: {

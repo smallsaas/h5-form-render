@@ -12,6 +12,7 @@
                     :fields="[{...item}]"
                     :form="form"
                     @change="handleChange"
+										@user="handleUser"
                     @clear="handleClear"
                 />
                 <view v-if="_get(item, '__config__.layout') === 'rowFormItem'">
@@ -33,6 +34,7 @@
                             :fields="[{...k}]"
                             :form="form"
                             @change="handleChange"
+														@user="handleUser"
                             @clear="handleClear"
                         />
                         <view v-else>
@@ -43,6 +45,7 @@
                                 :fields="_get(k, '__config__.children', [])"
                                 :form="form"
                                 @change="handleChange"
+																@user="handleUser"
                                 @clear="handleClear"
                             />
                         </view>
@@ -145,6 +148,12 @@
 						return false
 					}
 				},
+				processDefineKey:{
+					type:String,
+					default(){
+						return ""
+					}
+				},
 			srvFormData: {
 			  type: Object,
 			  default() {
@@ -172,7 +181,8 @@
                     Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
                     token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
                 },
-				lincense:null
+				lincense:null,
+				userlist:null
 			}
 		},
         watch: {
@@ -349,6 +359,9 @@
               }
               this.fields = [...checkRequired(this.fields)]
             },
+						handleUser(e){
+							this.userlist=e
+						},
             // 清空时
             handleClear (e, item) {
                 this.form[item.__vModel__] = ''
@@ -441,13 +454,12 @@
                 }
 								// 工作流自定义数据接口
 								let custom = {
-									...submitData,
 									"fileno":guid(),
 								}
 								// let customData = Base64.encode(JSON.stringify(custom))	//
 								let customData = custom	//
 								
-				
+								let sumbit = submitData
                 if (_.isFunction(_.get(this.$parent, 'formatSubmitData'))) {
                     submitData = this.$parent.formatSubmitData(submitData)
                 }
@@ -457,20 +469,86 @@
                 } else {
 									if(_.get(this.config,"workflow")){
 										console.log(this.config)
-										let workflowData = {
-											"processDefineKey":_.get(this.config,"processDefineKey"),
-											"version":"1",
-											"formData":submitData,
-											"customValues":customData,
-											"comment": "同意"
+										let workflowData;
+										if(this.userlist){
+											workflowData = {
+												"processDefineKey":this.processDefineKey,
+												"version":"1",
+												"userId":this.userlist.id,
+												"userName":this.userlist.firstName,
+												"formData":submitData,
+												"customValues":customData,
+												"comment": "同意"
+											}
+										}else{
+											workflowData = {
+												"processDefineKey":this.processDefineKey,
+												"version":"1",
+												"formData":submitData,
+												"customValues":customData,
+												"comment": "同意"
+											}
 										}
-										this.handleSubmitRequest(workflowData)
+										if(_.get(this.formConfig,'saveApi','')===''){
+											this.workflowRequest(workflowData)
+										}else{
+											this.handleSubmitRequest(workflowData)
+										}
 									}else{
 										this.handleSubmitRequest(submitData)
 									}
                 }
             },
-            
+            workflowRequest(data){
+							const url = `${globalConfig.workflowEP}/api.flow.examine/complete`
+							uni.showLoading({ title: '', mask: true })
+							uni.request({
+							    url: url,
+							    method:'POST',
+							    data: data,
+							    header: this.header,
+							    complete: (res) => {
+							        uni.hideLoading()
+							        if (_.get(res, 'data.code') === 200) {
+							            uni.showToast({
+							                title:'操作成功'
+							            }),
+							            setTimeout(() => {
+							                if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+																console.log(this.config.submittedNavigation)
+							                    uni.navigateTo({
+							                        url: '/pages' + this.config.submittedNavigation,
+																			success() {
+																					this.$emit("state","success")
+																			},
+																			fail:(a)=>{
+																				console.log(a)
+																			}
+							                    })
+							                } else {
+							                    uni.navigateBack()
+							                }
+							            }, 500)
+							        }else if(_.get(res,'data.code')==="00000"){
+												let pages = getCurrentPages()
+												let LastPage = pages[pages.length-2]
+												let pageUrl = LastPage.$page.fullPath
+												console.log(pageUrl)
+												  uni.reLaunch({
+														url:pageUrl
+													})
+											}else{
+												this.$emit("state","error")
+												uni.showToast({
+													title:res.data.msg
+												})
+												setTimeout(()=>{
+													uni.hideToast()
+												},1000)
+											}
+							    }
+							})
+						},
             // 组件内默认提交
             handleSubmitRequest (data) {
                 const url = _.get(this.formConfig, 'saveApi') || SUNMIT_API
@@ -512,6 +590,12 @@
 														})
 												}else{
 													this.$emit("state","error")
+													uni.showToast({
+														title:res.data.msg
+													})
+													setTimeout(()=>{
+														uni.hideToast()
+													},1000)
 												}
                     }
                 })

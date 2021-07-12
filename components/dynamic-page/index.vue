@@ -10,6 +10,7 @@
 										 outStyle: getComponentStyle(item)
 									}"
 								:srvFormData="getComponentsData(item) || {}"
+								:processDefineKey="processDefineKey"
 								@state="setState"
 									 />
 									<dynamic-form
@@ -19,6 +20,7 @@
 												outStyle: getComponentStyle(item)
 										 }"
 										:srvFormData="getComponentsData(item) || {}"
+										:processDefineKey="processDefineKey"
 										@state="setState"
 									/>
 		<!-- @state:获取工作流提交后状态 -->
@@ -198,7 +200,12 @@
             contentPayload: {  //页面有效数据位置
                 type: String,
                 default: 'data'
-            }
+            },
+						// 工作流定义提交类型
+						processDefineKey:{
+							type:String,
+							default:''
+						}
 		},
 		data () {
 			return {

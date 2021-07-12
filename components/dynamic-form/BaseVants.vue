@@ -159,7 +159,8 @@
 								..._has(item, 'accept') ? { accept: item.accept } : {},
 			 				 }"
 							 :loadAPI="_get(item,'loadApi','')"
-			 							 @change="(e) => handleSetValue(e, fields[index])"
+							 @change="(e) => handleSetValue(e, fields[index])"
+										 @list="(e)=>handleList(e)"
 			 ></c-select>
 			 
 			 <base-single-modal-select
@@ -272,6 +273,9 @@
            handleSetValue (e, item) {
               this.$emit('change', e, item)
            },
+					 handleList(e){
+						 this.$emit("user",e)
+					 },
            handleClear (e, item) {
                this.$emit('clear', e, item)
            }

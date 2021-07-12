@@ -8,6 +8,7 @@
 		/> -->
 		<dynamic-page
 		   :API="getPageAapi"
+			 processDefineKey="test"
 		/>
 	</view>
 

@@ -143,7 +143,7 @@
 																					}
 																				}
 																			})
-																			uni.clearStorage(globalConfig.tokenStorageKey)
+																			// uni.clearStorage(globalConfig.tokenStorageKey)
 																		}
 	
                                 }
