@@ -2,6 +2,10 @@
 	
 	<view>
 		<dynamic-page
+		:style="{
+			'margin':0,
+			'padding':0
+		}"
 		   :API="getPageAapi"
 		    v-if="current == 0"
 		/>
@@ -26,10 +30,14 @@
 			  />
 			  首页
 			</van-tabbar-item>
-			
-				<button style="background-color: #1A5EB5;color: white;width: 60px;height: auto;line-height: 30px;text-align: center;
-				box-shadow: 0px 0px 0px #666;margin: 10px auto;font-weight: bolder;
-				" @click="add()">+</button>
+				<span
+				style="background-color: #1A5EB5;color: white;width: 50px;height: 40px;line-height: 40px;
+				box-shadow: 0px 0px 0px #666;margin: 5px auto;font-weight: bolder;border-radius: 15px;font-size: 25px;
+				text-align: center;
+				" @click="add()"
+				>
+					+
+				</span>
 			
 			<van-tabbar-item>
 			  <image
@@ -89,10 +97,7 @@
 </script>
 
 <style lang="less">
-	// page {
-	// 	height: 100%;
-	// 	background-color: #E5E5E5;
-	// 	padding: 6rpx 0;
-	// }
+	
+	
 	
 </style>

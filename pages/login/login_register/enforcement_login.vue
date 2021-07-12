@@ -18,7 +18,8 @@
 							from:2,
 							app:"internal",
 							rawData:'',
-							type:0
+							type:0,
+							auth:null
 						}
 					}
         },
@@ -60,25 +61,25 @@
             onGotUserInfo(e) {
 							let _this = this
                 // 获取用户信息
-                uni.getUserInfo({
-                    // 获取信息成功
-                    success(res) {
-                        console.log("获取用户信息",res);
-												_this.userInfo.iv=res.iv;
-												_this.userInfo.encryptedData=res.encryptedData;
-												_this.userInfo.rawData = res.rawData;
-												_this.userInfo.type = e
+								uni.login({
+								  success (res) {
+										_this.userInfo.auth = res.code
+								     console.log(res);
+										uni.getUserInfo({
+												// 获取信息成功
+												success(res) {
+														console.log("获取用户信息",res);
+														_this.userInfo.iv=res.iv;
+														_this.userInfo.encryptedData=res.encryptedData;
+														_this.userInfo.rawData = res.rawData;
+														_this.userInfo.type = e
                         // 成功后进行登录,获取code
-                        uni.login({
-                          success (res) {
-                             console.log(res);
-                            if (res.code) 
+
+                            if (_this.userInfo.auth) 
 														{
-															let auth = res.code
 															// 登录所需数据
 															let LoginData = {
 																..._this.userInfo,
-																auth:auth
 															}
 															console.log(LoginData)
                               //发起网络请求
@@ -127,7 +128,7 @@
 																					}
 																				}
 																			})
-																			uni.setStorageSync(globalConfig.tokenStorageKey,token)
+																			// uni.setStorageSync(globalConfig.tokenStorageKey,token)
 																		}else{
 																			uni.showModal({
 																				title:"登录失败",

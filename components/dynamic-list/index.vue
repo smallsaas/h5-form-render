@@ -130,6 +130,13 @@
 						...getComponentBindData(item)
 					}"
 					/>
+					<to-do-list-item
+						v-if="getListItemKey() === 'toDoListItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+					></to-do-list-item>
 
                   </view>
               </view>
@@ -158,6 +165,7 @@
 	import enforcementStateItem from './listItem/AvatarStateList/enforcementStateItem.vue'
 	import AvatarItem from './listItem/DefaultAvatarItem.vue'
 	import StateToItem from './listItem/StateToList.vue'
+	import ToDoListItem from './listItem/todoListItem.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -177,7 +185,8 @@
 			messageItem,
 			enforcementStateItem,
 			AvatarItem,
-			StateToItem
+			StateToItem,
+			ToDoListItem
 		},
 		props: {
 			config: {

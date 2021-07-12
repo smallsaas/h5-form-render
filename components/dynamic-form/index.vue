@@ -456,6 +456,7 @@
                     this.$emit('submit', submitData)
                 } else {
 									if(_.get(this.config,"workflow")){
+										console.log(this.config)
 										let workflowData = {
 											"processDefineKey":_.get(this.config,"processDefineKey"),
 											"version":"1",
@@ -501,7 +502,15 @@
                                     uni.navigateBack()
                                 }
                             }, 500)
-                        }else{
+                        }else if(_.get(res,'data.code')==="00000"){
+													let pages = getCurrentPages()
+													let LastPage = pages[pages.length-2]
+													let pageUrl = LastPage.$page.fullPath
+													console.log(pageUrl)
+													  uni.reLaunch({
+															url:pageUrl
+														})
+												}else{
 													this.$emit("state","error")
 												}
                     }

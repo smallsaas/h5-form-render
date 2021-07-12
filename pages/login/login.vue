@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<dynamic-page :API="api"></dynamic-page>
-		<!-- 登录模块 -->
-<!-- 		<view
+		<!-- 测试用的登录模块 -->
+		<view
 			class="LoginBox"
 			v-if="checkout"
 		>
@@ -35,7 +35,7 @@
 					</view>
 					<button @click="register" class="loginBtn">注册</button>
 					<view class="Select" @click="checkoutSelect">已有用户？去登录</view>
-			</view> -->
+			</view>
 	</view>
 	
 </template>
