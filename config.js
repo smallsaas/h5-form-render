@@ -5,6 +5,8 @@ const globalConfigStorage = uni.getStorageSync('globalConfigStorage')
 // 获取图标库
 const iconList = uni.getStorageSync('iconList')
 
+const token = uni.getStorageSync('tokenStorageKey')
+
 export const globalConfig = {
   host: 'https://xxx',
   useCache: globalConfigStorage.useCache || false,

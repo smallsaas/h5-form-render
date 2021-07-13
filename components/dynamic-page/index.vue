@@ -4,7 +4,7 @@
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
 								<dynamic-form
-									v-if="_get(item, 'type') === 'autoform'&&(item.code||item.FormKey)"
+									v-if="_get(item, 'type') === 'autoform'&&(item.code||item.FormKey||FormKey)"
 									:config="{
 										 ...getCode(item.API,item.code),
 										 outStyle: getComponentStyle(item)
@@ -147,6 +147,11 @@
 						 	v-if="_get(item, 'type') === 'button'"
 						 	:config = "_get(config.moduleData,item.key,{})"
 						 ></c-button>
+						 <confirm
+							v-if="_get(item,'type')==='confirm'"
+							:config="_get(config.moduleData,item.key,{})"
+							:LastKey="LastKey"
+						 ></confirm>
             </view>
           </block>
         </van-skeleton>
@@ -170,6 +175,7 @@
 	import steps from '../Steps/Steps.vue'
 	import sumbitState from '../other/SumbitState.vue'
 	import cButton from '../other/C-Button.vue'
+	import confirm from '../confirm.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -183,7 +189,8 @@
 			cell,
 			steps,
 			sumbitState,
-			cButton
+			cButton,
+			confirm
 		},
 		props: {
 			API: String,  // 页面数据请求接口
@@ -205,6 +212,14 @@
 						processDefineKey:{
 							type:String,
 							default:''
+						},
+						//上一步的processDefineKey
+						LastKey:{
+							type:Object,
+							default:{}
+						},
+						FormKey:{
+							type:String
 						}
 		},
 		data () {
@@ -235,12 +250,16 @@
 		},
 		//#ifdef MP-WEIXIN
 		mounted(){
+			let TFormKey = this.FormKey
+			console.log(this.FormKey)
 			this.config.modules.map((item,i)=>{
 				if(_.get(item, 'type') === 'autoform'){
 					let FormKey = _.get(item,'FormKey','')
 					if(FormKey){
 						console.log(FormKey)
 						this.getWorkflow(FormKey)	
+					}else if(TFormKey){
+						this.getWorkflow(TFormKey)
 					}else{
 						this.getCodeData(this.codeAPI,this.code)
 					}
@@ -250,12 +269,16 @@
 		//#endif
 		// #ifdef APP-PLUS
 		updated(){
+			let TFormKey = this.FormKey
+			console.log(this.FormKey)
 			this.config.modules.map((item,i)=>{
 				if(_.get(item, 'type') === 'autoform'){
 					let FormKey = _.get(item,'FormKey','')
 					if(FormKey){
 						console.log(FormKey)
 						this.getWorkflow(FormKey)	
+					}else if(TFormKey){
+						this.getWorkflow(TFormKey)
 					}else{
 						this.getCodeData(this.codeAPI,this.code)
 					}
@@ -283,8 +306,7 @@
 			getWorkflowlist(Key){
 				let url = `${globalConfig.workflowEP}/api.flow.examine/toComplete`
 				let data = {
-					processDefineKey:Key,
-					version:1
+					processDefineKey:Key
 				} 
 				return request('POST',url,data)
 			},

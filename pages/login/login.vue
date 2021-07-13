@@ -1,6 +1,10 @@
 <template>
 	<view>
 		<dynamic-page :API="api"></dynamic-page>
+		<!-- 测试用解除绑定 -->
+		<button @click="remove()">解除执法绑定</button>
+		<button @click="removeQ()">解除企业绑定</button>
+		<button @click="removeS()">解除街道绑定</button>
 		<!-- 测试用的登录模块 -->
 		<view
 			class="LoginBox"
@@ -66,6 +70,65 @@
 			}
 		},
 		methods: {
+			// 测试用解除绑定模块
+			remove(){
+				uni.request({
+					url:"https://api.uat.smallsaas.cn/api/u/bind/unbind",
+					method:"POST",
+					data:{
+						"type":"EXECUTOR",
+						"code":"B080060"
+					},
+					complete(res) {
+						// console.log(res)
+						if(res.data.data){
+							uni.showToast({
+								title:"解除绑定成功",
+								duration:1000
+							})
+						}
+					}
+				})
+			},
+			removeQ(){
+				uni.request({
+					url:"https://api.uat.smallsaas.cn/api/u/bind/unbind",
+					method:"POST",
+					data:{
+						"type":"COMPANY",
+						"userId":"73"
+					},
+					complete(res) {
+						// console.log(res)
+						if(res.data.data){
+							uni.showToast({
+								title:"解除绑定成功",
+								duration:1000
+							})
+						}
+					}
+				})
+			},
+			removeS(){
+				uni.request({
+					url:"https://api.uat.smallsaas.cn/api/u/bind/unbind",
+					method:"POST",
+					data:{
+						"type":"STREET",
+						"userId":"73"
+					},
+					complete(res) {
+						// console.log(res)
+						if(res.data.data){
+							uni.showToast({
+								title:"解除绑定成功",
+								duration:1000
+							})
+						}
+					}
+				})
+			},
+			
 			changeType(){
 				this.isCheckout=!this.isCheckout
 				if(this.isCheckout){

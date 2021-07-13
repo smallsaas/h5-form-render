@@ -149,7 +149,7 @@
 			 ></c-select-list> -->
 			 
 			 <c-select
-			 				 v-if="_get(item, '__config__.tag') === 'c-select'"
+			 				 v-if="_get(item, '__config__.tag') === 'c-select'&&!Details"
 			 				 :param="{
 			 					...getBaseParam(item),
 			 					..._get(item, 'error', false) ? { error: item.error } : {},
@@ -239,7 +239,13 @@
              default: function () {
                  return {}
              } 
-          }
+          },
+					Details:{
+						type:Boolean,
+						default:function(){
+							return false
+						}
+					}
         },
         methods: {
            getBaseParam (item) {

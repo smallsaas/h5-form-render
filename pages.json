@@ -571,6 +571,33 @@
             }
             
         }
+        ,{
+            "path" : "pages/cofirmRefuse/cofirmRefuse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+				,{
+				    "path" : "pages/login/register",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				},
+				{
+				    "path" : "pages/enforcement/enforcement",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

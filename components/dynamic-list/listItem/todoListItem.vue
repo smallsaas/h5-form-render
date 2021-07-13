@@ -28,10 +28,17 @@
 		},
 		methods:{
 			getIcon(e){
+				console.log(e)
 				let icon;
-				let zc = this.iconList.typeZc
+				let list = {
+					"zc":this.iconList.typeZc,
+					"test":this.iconList.typeTest,
+					"zglc":this.iconList.typeZglc
+				}
 				switch(e){
-					case "zc":icon=zc;break;
+					case "zc":icon=list.zc;break;
+					case "test":icon=list.test;break;
+					case "zglc":icon=list.zglc;break;
 				}
 				return icon
 			}

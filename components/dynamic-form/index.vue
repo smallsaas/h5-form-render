@@ -11,6 +11,7 @@
                     v-if="_get(item, '__config__.layout') === 'colFormItem'"
                     :fields="[{...item}]"
                     :form="form"
+										:Details="Details"
                     @change="handleChange"
 										@user="handleUser"
                     @clear="handleClear"
@@ -33,6 +34,7 @@
                             v-if="_get(k, '__config__.layout') === 'colFormItem'"
                             :fields="[{...k}]"
                             :form="form"
+														:Details="Details"
                             @change="handleChange"
 														@user="handleUser"
                             @clear="handleClear"
@@ -44,6 +46,7 @@
                             <base-vants
                                 :fields="_get(k, '__config__.children', [])"
                                 :form="form"
+																:Details="Details"
                                 @change="handleChange"
 																@user="handleUser"
                                 @clear="handleClear"
@@ -531,7 +534,7 @@
 							            }, 500)
 							        }else if(_.get(res,'data.code')==="00000"){
 												let pages = getCurrentPages()
-												let LastPage = pages[pages.length-2]
+												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
 												console.log(pageUrl)
 												  uni.reLaunch({

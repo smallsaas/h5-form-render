@@ -85,7 +85,8 @@
                               //发起网络请求
                               uni.request({
                                 // 请求路径
-                                url: 'https://api.uat.smallsaas.cn/auth/oauth/token',
+                                // url: 'https://api.uat.smallsaas.cn/auth/oauth/token',//第三方登录
+																url:"https://api.uat.smallsaas.cn/api/u/bind/login",//登录
                                 // 请求参数code
 																header:{
 																	'content-type': 'application/x-www-form-urlencoded',
@@ -93,7 +94,44 @@
                                 data: LoginData,
                                 method: 'POST',
                                 success(res){
+																	console.log(res)
                                     // 请求成功后获取openid和session_key
+																	if(!res.data.bind){
+																		uni.showModal({
+																			title:"请注册",
+																			content:"您没有注册，是否前往注册？",
+																			cancelText:"其他角色",
+																			confirmText:"立即注册",
+																			success(button) {
+																				let list = {
+																					"type":e,
+																					"userId":res.data.user_id
+																				}
+																				// console.log(res.data)
+																				// console.log(list)
+																				// console.log(button)
+																				if(button.confirm){
+																					// console.log(true)
+																					uni.redirectTo({
+																						url:"/pages/login/register?query="+encodeURIComponent(JSON.stringify(list)),
+																						success() {
+																							console.log("跳转成功")
+																						},
+																						fail(toFail){
+																							console.log(toFail)
+																						}
+																					})
+																				}else if(button.cancel){
+																					uni.navigateBack({
+																						delta:10
+																					})
+																				}
+																			},
+																			fail(fail){
+																				console.log(fail)
+																			}
+																		})
+																	}else{
 																		if(res.data.encryptedData){
 																			let token;
 																			token = res.data.encryptedData
@@ -102,9 +140,9 @@
 																				position:'center',
 																				duration: 500,
 																				success(click){
-																					console.log(click.confirm)
+																					// console.log(click.confirm)
 																					if(click.confirm||click.cancel){
-																						console.log(e)
+																						// console.log(e)
 																						switch(e){
 																							case '2':uni.reLaunch({
 																								url:"/pages/Market-index/Market-index",
@@ -128,7 +166,7 @@
 																					}
 																				}
 																			})
-																			// uni.setStorageSync(globalConfig.tokenStorageKey,token)
+																			uni.setStorageSync(globalConfig.tokenStorageKey,token)
 																		}else{
 																			uni.showModal({
 																				title:"登录失败",
@@ -143,9 +181,9 @@
 																					}
 																				}
 																			})
-																			// uni.clearStorage(globalConfig.tokenStorageKey)
+																			uni.clearStorage(globalConfig.tokenStorageKey)
 																		}
-	
+																	}
                                 }
                               })
 															

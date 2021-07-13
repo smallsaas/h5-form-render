@@ -5,10 +5,10 @@
 			:srvFormData="formData"
 			:Details="true"
 		></dynamic-form>
-<!-- 		<dynamic-page
+		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
-		></dynamic-page> -->
+		></dynamic-page>
 	</view>
 </template>
 
@@ -44,8 +44,8 @@
 				header:{
 					Authorization: `Bearer ${globalConfig.enforcementKey}`
 				},
-				// api: globalConfig.formHost + '?id=66000',
-				// processDefineKey:{}
+				api: globalConfig.formHost + '?id=66000',
+				processDefineKey:{}
 			}
 		},
 		methods: {

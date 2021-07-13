@@ -2,9 +2,9 @@
 	<view class="self-item">
 		<view class="flex">
 			<view class="left flex1">
-				<view class="title text-line-1">{{ _get(custom,"selfID","") }}</view>
+				<view class="title text-line-1">{{ _get(custom,"fileno","") }}</view>
 				<view class="times text-line-1">
-					{{ _get(custom,"selfexplain","") }}
+					{{ _get(item,"formName","") }}
 				</view>
 				<view class="submit-time">提交时间: {{ item.actApplyTime }}</view>
 			</view>
