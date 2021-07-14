@@ -96,7 +96,7 @@
                                 success(res){
 																	console.log(res)
                                     // 请求成功后获取openid和session_key
-																	if(!res.data.bind){
+																		if(!res.data.bind){
 																		uni.showModal({
 																			title:"请注册",
 																			content:"您没有注册，是否前往注册？",
@@ -134,7 +134,16 @@
 																	}else{
 																		if(res.data.encryptedData){
 																			let token;
+																			let nickName;
+																			let avatar;
 																			token = res.data.encryptedData
+																			nickName = res.data.nickname
+																			avatar = JSON.parse(LoginData.rawData).avatarUrl
+																			console.log(avatar)
+																			let query = {
+																				"nickname":nickName	,//微信登录的用户名
+																				"avatar":avatar, //微信登录头像
+																			}
 																			uni.showModal({
 																				title:"登录成功",
 																				position:'center',
@@ -143,9 +152,10 @@
 																					// console.log(click.confirm)
 																					if(click.confirm||click.cancel){
 																						// console.log(e)
+																						console.log(query)
 																						switch(e){
 																							case '2':uni.reLaunch({
-																								url:"/pages/Market-index/Market-index",
+																								url:"/pages/Market-index/Market-index?query="+encodeURIComponent(JSON.stringify(query)),
 																								fail(ea) {
 																									console.log(ea)
 																								}

@@ -237,7 +237,42 @@
               return _.get(item, str, defauleValue)
             },
 						lincenseValue(e){
-							this.form = e
+							this.skeletonLoading = true
+							let fields = this.config.fields
+							let vModel=[];
+							fields.map((_config,_index)=>{
+								if(_config.__config__.children){
+									let children = _config.__config__.children
+									children.map((c_config,c_index)=>{
+										vModel[c_index]=c_config.__vModel__
+										// console.log(c_config)
+									})
+									// config = 
+								}else{
+									vModel[_index] = _config.__vModel__
+									// console.log(children)
+									// children.map((c_config,c_index)=>{
+									// 	vModel[c_index]=c_config.__vModel__
+									// 	// console.log(c_config)
+									// })
+								}
+								// console.log(_config.__config__)
+							})
+							console.log(vModel)
+							console.log(e)
+								
+							vModel.map((_Model,_v)=>{
+								this.form[_Model]=e[_Model]
+							})
+								// this.config.map((item,key)=>{
+								// 	console.log(item.__vModel__)
+								// })
+								// if(typeof(e[i])!=="object"&&typeof(e[i])!=="array"){
+								// 	this.form[i] = e[i]
+								// }
+							
+							console.log(this.form)
+							this.skeletonLoading = false
 						},
 						// 校检loadAPI
 						getLoadApi(url){
@@ -476,7 +511,6 @@
 										if(this.userlist){
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
-												"version":"1",
 												"userId":this.userlist.id,
 												"userName":this.userlist.firstName,
 												"formData":submitData,
@@ -486,7 +520,6 @@
 										}else{
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
-												"version":"1",
 												"formData":submitData,
 												"customValues":customData,
 												"comment": "同意"
@@ -537,9 +570,24 @@
 												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
 												console.log(pageUrl)
-												  uni.reLaunch({
-														url:pageUrl
-													})
+												setTimeout(() => {
+												    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+															console.log(this.config.submittedNavigation)
+												        uni.navigateTo({
+												            url: '/pages' + this.config.submittedNavigation,
+																		success() {
+																				this.$emit("state","success")
+																		},
+																		fail:(a)=>{
+																			console.log(a)
+																		}
+												        })
+												    } else {
+												        uni.reLaunch({
+												        	url:pageUrl
+												        })
+												    }
+												}, 500)
 											}else{
 												this.$emit("state","error")
 												uni.showToast({
@@ -588,9 +636,24 @@
 													let LastPage = pages[pages.length-2]
 													let pageUrl = LastPage.$page.fullPath
 													console.log(pageUrl)
-													  uni.reLaunch({
-															url:pageUrl
-														})
+													setTimeout(() => {
+													    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+																console.log(this.config.submittedNavigation)
+													        uni.navigateTo({
+													            url: '/pages' + this.config.submittedNavigation,
+																			success() {
+																					this.$emit("state","success")
+																			},
+																			fail:(a)=>{
+																				console.log(a)
+																			}
+													        })
+													    } else {
+													        uni.reLaunch({
+													        	url:pageUrl
+													        })
+													    }
+													}, 500)
 												}else{
 													this.$emit("state","error")
 													uni.showToast({

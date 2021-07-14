@@ -140,10 +140,33 @@
 								// }
 							}
 						}else{
-							uni.showModal({
-								showCancel:false,
-								content:data.data.message
-							})
+							if(Type==="COMPANY"){
+								uni.showModal({
+									showCancel:false,
+									content:data.data.message,
+									confirmText:"录入企业",
+									success(ModalConfirm) {
+										if(ModalConfirm.confirm){
+											uni.redirectTo({
+												url:"/pages/login/addCompany"
+											})
+										}
+									}
+								})
+							}else{
+								uni.showModal({
+									content:data.data.message,
+									cancelText:"更改角色",
+									confirmText:"重新填写",
+									success(MConfirm) {
+										if(MConfirm.cancel){
+											uni.navigateBack({
+												delta:10
+											})
+										}
+									}
+								})
+							}
 						}
 					}
 				})

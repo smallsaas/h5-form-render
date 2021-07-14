@@ -3,7 +3,8 @@
 	<view>
 		<dynamic-page
 		   :API="getPageAapi"
-			 processDefineKey="jdsb"
+			 processDefineKey="yyzz"
+			 FormKey="yyzz"
 		/>
 	</view>
 
@@ -19,8 +20,7 @@
 		},
 		data() {
 			return {
-				// getPageAapi: globalConfig.formHost + '?id=510',
-				getPageAapi: globalConfig.formHost + '?id=5600',
+				getPageAapi: globalConfig.formHost + '?id=12000',
 			}
 		},
 		methods:{
@@ -29,10 +29,4 @@
 </script>
 
 <style lang="less">
-	page {
-		height: 100%;
-		background-color: #E5E5E5;
-		padding: 6rpx 0;
-	}
-	
 </style>

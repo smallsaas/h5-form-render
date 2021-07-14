@@ -37,7 +37,9 @@
 				const data = {
 					file: file
 				}
-
+				uni.showLoading({
+					title:"识别中"
+				})
 				uni.uploadFile({
 					url: globalConfig.workflowEP + '/executive/companyattachment/ocr/licence',
 					filePath: file.url,
@@ -49,6 +51,7 @@
 							const jsonObject = this.strToJson(res.data)
 							console.log('返回数据 = ', jsonObject)
 							this.$emit('getValue',jsonObject.data)
+							uni.hideLoading()
 						}
 					},
 					fail:(err) =>{
