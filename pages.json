@@ -1,6 +1,15 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
+		{
+				"path" : "pages/login/third-Login/third-Login",
+				"style" :                                                                                    
+				{
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+				}
+				
+		},
+		// 旧登录界面
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -124,6 +133,7 @@
 		{
 			"path": "pages/Market-index/Market-index",
 			"style": {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "市场监督"
 			}
 		},
@@ -172,7 +182,8 @@
 		{
 			"path": "pages/companyHome/home",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -198,12 +209,6 @@
 			"path": "pages/street/index",
 			"style": {
 				"navigationBarTitleText": "街道页面入口"
-			}
-		},
-		{
-			"path": "pages/street/home",
-			"style": {
-				"navigationBarTitleText": "首页"
 			}
 		},
 		{
@@ -616,6 +621,32 @@
             }
             
         }
+        
+        ,{
+            "path" : "pages/login/third-Login/IsLogin",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/third-Login/third-register",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+				{
+					"path": "pages/street/home",
+					"style": {
+						"navigationBarTitleText": "首页",
+						"enablePullDownRefresh": true
+					}
+				}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

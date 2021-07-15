@@ -1,8 +1,9 @@
 <template>
 	<view>
-		<avatar :item="item"></avatar>
+		<avatar :theme="theme" :item="item"></avatar>
 		<view class="ListBody">
 			<view @click="jump(item.nav)" class="ListChild" v-for="(item,i) in list">
+				<image :src="icon[list.icon]" v-if="list.icon"></image>
 				<view class="ListTitle">{{item.title}}</view>
 				<image :src="icon.arrowRight" class="Arrow"></image>
 			</view>
@@ -17,10 +18,6 @@
 		name:"my",
 		data() {
 			return {
-				list:[
-					{"title":"我的执法记录","nav":"/enforcement/myEnforcement"},
-					// {"title":"我的执法记录","nav":"/enforcement/myEnforcement"}
-				],
 				icon:{
 					
 				}
@@ -38,7 +35,23 @@
 			}
 		},
 		props:{
-			item:Object
+			item:Object,
+			theme:{
+				type:String,
+				default(){
+					return "enforcement"
+				}
+			},
+			list:{
+				type:Array,
+				default(){
+					return [
+						{"title":"我的执法记录","nav":"/enforcement/myEnforcement"}
+						// {"title":"我的执法记录","nav":"/enforcement/myEnforcement"}
+					]
+				}
+			}
+
 		},
 		components:{
 			Avatar
@@ -52,7 +65,7 @@
 	}
 	.ListBody{
 		margin: 20px 10px;
-		box-shadow: 0px 0px 5px #aaa;
+		/* box-shadow: 0px 0px 5px #aaa; */
 	}
 	.ListChild{
 		height: 50px;

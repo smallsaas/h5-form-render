@@ -86,6 +86,7 @@
                               uni.request({
                                 // 请求路径
                                 // url: 'https://api.uat.smallsaas.cn/auth/oauth/token',//第三方登录
+                                // url: 'https://api.uat.smallsaas.cn/oauth/token',//第三方登录
 																url:"https://api.uat.smallsaas.cn/api/u/bind/login",//登录
                                 // 请求参数code
 																header:{
@@ -136,13 +137,16 @@
 																			let token;
 																			let nickName;
 																			let avatar;
+																			let code;
 																			token = res.data.encryptedData
 																			nickName = res.data.nickname
+																			code = res.data.bindCode
 																			avatar = JSON.parse(LoginData.rawData).avatarUrl
 																			console.log(avatar)
 																			let query = {
 																				"nickname":nickName	,//微信登录的用户名
 																				"avatar":avatar, //微信登录头像
+																				"code":code
 																			}
 																			uni.showModal({
 																				title:"登录成功",
@@ -199,6 +203,20 @@
 															
                             } else {
                               console.log('登录失败！' + res.errMsg)
+															uni.showModal({
+																title:"登录失败",
+																position:'center',
+																duration: 500,
+																success(click){
+																	// console.log(click.confirm)
+																	if(click.confirm||click.cancel){
+																		uni.navigateBack({
+																			delta:1
+																		})
+																	}
+																}
+															})
+															uni.clearStorage(globalConfig.tokenStorageKey)
                             }
                           }
                         })

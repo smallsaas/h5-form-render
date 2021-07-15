@@ -493,6 +493,7 @@
 								// 工作流自定义数据接口
 								let custom = {
 									"fileno":guid(),
+									"fileseq":0
 								}
 								// let customData = Base64.encode(JSON.stringify(custom))	//
 								let customData = custom	//
@@ -515,14 +516,14 @@
 												"userName":this.userlist.firstName,
 												"formData":submitData,
 												"customValues":customData,
-												"comment": "同意"
+												// "comment": "同意"
 											}
 										}else{
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
 												"formData":submitData,
 												"customValues":customData,
-												"comment": "同意"
+												// "comment": "同意"
 											}
 										}
 										if(_.get(this.formConfig,'saveApi','')===''){
@@ -569,7 +570,8 @@
 												let pages = getCurrentPages()
 												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
-												console.log(pageUrl)
+												console.log(LastPage)
+												
 												setTimeout(() => {
 												    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
 															console.log(this.config.submittedNavigation)
@@ -583,8 +585,10 @@
 																		}
 												        })
 												    } else {
-												        uni.reLaunch({
-												        	url:pageUrl
+												        uni.navigateBack({
+																	success(){
+																	},
+												        	delta:10
 												        })
 												    }
 												}, 500)

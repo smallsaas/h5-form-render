@@ -3,8 +3,8 @@
 		<view class="Content">
 			<view class="Content_Value"><span v-if="param.required" style="color: #EE0A87;">*</span>{{param.label}}</view>
 			<view class="Content_Box">
-				<span v-show="content" style="float: left;padding: 0 10px;max-width: 8em;overflow: hidden;margin-right: 5px;">{{content}}</span>
-				<button class="SelectBtn" style="float: right;flex: 1;width: 100%;" @click="showView()">选择用户列表</button>
+				<span v-show="content" style="float: left;padding: 0 10px;max-width: 12em;overflow: hidden;margin-right: 5px;">{{content}}</span>
+				<image @click="showView()" class="SelectBtn" style="height: 30px;width: 30px;" :src="icon.select"></image>
 			</view>
 		</view>
 		<scroll-view scroll-y="true" show-scrollbar="true" class="windows" v-show="show">
@@ -39,10 +39,12 @@
 				show:false,
 				content:"",
 				radioSelect:null,
-				data:null
+				data:null,
+				icon:{}
 			}
 		},
 		created() {
+			this.icon=globalConfig.icon
 			this.getValue()
 		},
 		methods:{
@@ -149,38 +151,42 @@
 
 	.SelectBox{
 		background-color: white;
+		border-bottom: 1px solid #eee;
 	}
 	.Content{
 		padding: 10px;
-		height: 30px;
+		height: auto;
 		line-height: 30px;
 		display: flex;
 		.Content_Value{
-			text-align: center;
+			text-align: left;
 			font-size: 14px;
 			font-weight: bolder;
-			width: 20%;
+			width: 7em;
 			// float: left;
 			// flex: 1;
 		}
 		.Content_Box{
 			// flex: 1;
 			padding: 0 10px;
-			display: flex;
+			// display: flex;
+			// width: 80%;
 			width: 80%;
 		}
 		.SelectBtn{
+			position: absolute;
+			right: 20px;
 			&:hover{
 				opacity: .8;
 			}
 			// width: 60px;
 			// width: 120px;
 			// padding: 0px 10px;
-			height: 30px;
+			height: auto;
 			line-height: 30px;
 			font-size: 16px;
-			background-color: #1A5EB5;
-			color: white;
+			// background-color: #1A5EB5;
+			// color: white;
 		}
 	}
 	.windows{

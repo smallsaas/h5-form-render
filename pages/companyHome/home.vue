@@ -9,8 +9,9 @@
 <!-- 		<law-enforcement v-if="current == 1" />
 		
 		<return-to-work v-if="current == 2"/> -->
+		<my theme="company" :item="query" :list="list" v-if="current == 1"></my>
 		
-		<my-page v-if="current == 1"/>
+		<!-- <my-page v-if="current == 1"/> -->
 		
 		<van-tabbar :active="current" @change="onChange">
 			<van-tabbar-item>
@@ -84,6 +85,7 @@
 
 <script>
 	import dynamicPage from '@/components/dynamic-page/index.vue'
+	import my from '../enforcement/my/my.vue'
 	import myPage from '@/pages/companyHome/my/index.vue'
 	import returnToWork from '@/pages/companyHome/my/returnToWork.vue'
 	import lawEnforcement from '@/pages/companyHome/lawEnforcement/index.vue'
@@ -95,15 +97,26 @@
 			dynamicPage,
 			myPage,
 			returnToWork,
-			lawEnforcement
+			lawEnforcement,
+			my
 		},
 		onLoad (e){
+			let query = JSON.parse(decodeURIComponent(e.query))
+			this.query = query
+			this.icon=globalConfig.icon
 			uni.hideHomeButton()
 		},
 		data() {
 			return {
 				getPageAapi: globalConfig.formHost + '?id=109',
-				current: 0
+				current: 0,
+				icon:{},
+				query:{},
+				list:[
+					{"title":"自查记录","nav":"/companyHome/my/selfInspectionRecord"},
+					{"title":"执法记录","nav":"/companyHome/my/lawEnforcementRecord"},
+					{"title":"复工记录","nav":"/companyHome/my/returnToWorkRecord"}
+				]
 			}
 		},
 		methods:{

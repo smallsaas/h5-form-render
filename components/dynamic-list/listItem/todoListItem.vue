@@ -3,10 +3,10 @@
 		<image :src="getIcon(item.processDefineKey)" mode="aspectFit" v-if="item.processDefineKey" style="margin:auto 15px;width:50px;height: 50px;"></image>
 		<view class="ToDoBody">
 			<view class='taskName'>
-				待办事项：{{item.taskName}}
+				<span class="Title">待办事项：</span>{{item.businessName}}
 			</view>
 			<view class='createTime'>
-				发起时间：{{item.createTime}}
+				<span class="Title">发起时间：</span>{{item.createTime}}
 			</view>
 		</view>
 	</view>
@@ -30,15 +30,18 @@
 			getIcon(e){
 				console.log(e)
 				let icon;
-				let list = {
-					"zc":this.iconList.typeZc,
-					"test":this.iconList.typeTest,
-					"zglc":this.iconList.typeZglc
-				}
+				// let list = {
+				// 	"zc":this.iconList.typeZc,
+				// 	"test":this.iconList.typeTest,
+				// 	"zglc":this.iconList.typeZglc,
+				// 	"jdsb":this.iconList.typeJdsb,
+				// }
+				let list = this.iconList
 				switch(e){
-					case "zc":icon=list.zc;break;
-					case "test":icon=list.test;break;
-					case "zglc":icon=list.zglc;break;
+					case "zc":icon=list.typeZc;break;
+					case "test":icon=list.typeTest;break;
+					case "zglc":icon=list.typeZglc;break;
+					case "jdsb":icon=list.typeJdsb;break;
 				}
 				return icon
 			}
@@ -56,4 +59,10 @@
 			background-color: #eee;
 		}
 	}
+		.ToDoBody{
+			.Title{
+				font-weight: bolder;
+			}
+		}
+
 </style>

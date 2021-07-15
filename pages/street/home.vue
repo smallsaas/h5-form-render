@@ -1,9 +1,8 @@
 <template>
 	
-	<view>
+	<view style="margin-top:-3px">
 		<dynamic-page
 		:style="{
-			'margin':0,
 			'padding':0
 		}"
 		   :API="getPageAapi"
@@ -11,8 +10,9 @@
 		/>
 		
 		<!-- <street-user-report v-if="current == 1" /> -->
+		<my theme="street" :item="query" :list="list" v-if="current == 1"></my>
 		
-		<my-page v-if="current === 1" />
+		<!-- <my-page v-if="current === 1" /> -->
 		
 		<van-tabbar :active="current" @change="onChange">
 			<van-tabbar-item>
@@ -28,7 +28,7 @@
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
-			  首页
+			  街道
 			</van-tabbar-item>
 				<span
 				style="background-color: #1A5EB5;color: white;width: 50px;height: 40px;line-height: 40px;
@@ -64,21 +64,33 @@
 	import { globalConfig } from '@/config.js'
 	import streetUserReport from '@/pages/street/community/streetUserReport'
 	import myPage from '@/pages/street/my/index'
+	import my from '../enforcement/my/my.vue'
 	
 	export default {
 		components:{ 
 			dynamicPage,
 			streetUserReport,
-			myPage
+			myPage,
+			my
 		},
 		onLoad (e){
+			let query = JSON.parse(decodeURIComponent(e.query))
+			this.query = query
+			this.icon=globalConfig.icon
 			uni.hideHomeButton()
 		},
 		data() {
 			return {
 				getPageAapi: globalConfig.formHost + '?id=108',
 				// getSPageApi: globalConfig.formHost + '?id=5600',
-				current: 0
+				current: 0,
+				icon:{},
+				query:{},
+				list:[
+					{"title":"我的上报","nav":"/street/my/myReport"},
+					{"title":"我的收藏","nav":""},
+					{"title":"设置","nav":""}
+				]
 			}
 		},
 		

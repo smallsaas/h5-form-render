@@ -54,7 +54,8 @@
 					"processDefineKey":this.LastKey.processDefineKey,
 					"version":"1",
 					"customValues":{
-						"fileno":this.LastKey.fileno
+						"fileno":this.LastKey.fileno,
+						"fileseq":this.LastKey.fileseq
 					},
 					"operType":"next",
 					"comment":this.comment,
@@ -99,7 +100,8 @@
 					"processDefineKey":this.LastKey.processDefineKey,
 					"version":"1",
 					"customValues":{
-						"fileno":this.LastKey.fileno
+						"fileno":this.LastKey.fileno,
+						"fileseq":this.LastKey.fileseq+1
 					},
 					"operType":"backToApply",
 					"comment":this.comment,

@@ -78,6 +78,7 @@
 							that.processDefineKey ={
 								"processDefineKey":res.data.data.processDefineKey,
 								"fileno":res.data.data.customValues.fileno,
+								"fileseq":res.data.data.customValues.fileseq,
 								"processDefinitionId":res.data.data.processDefinitionId,
 								"taskId":that.taskId
 							}
