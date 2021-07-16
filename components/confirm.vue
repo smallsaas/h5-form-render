@@ -43,6 +43,7 @@
 			GetAgree(){
 				// console.log(value);
 				// console.log(this.comment)
+				console.log(this.LastKey)
 				let pages = getCurrentPages()
 				let page = pages[0]
 				let token = uni.getStorageSync(globalConfig.tokenStorageKey)
@@ -101,7 +102,7 @@
 					"version":"1",
 					"customValues":{
 						"fileno":this.LastKey.fileno,
-						"fileseq":this.LastKey.fileseq+1
+						"fileseq":String(Number(this.LastKey.fileseq)+1)
 					},
 					"operType":"backToApply",
 					"comment":this.comment,
@@ -120,11 +121,11 @@
 								duration:500,
 								title:"审批成功"
 							})
-							// let data = {
-							// 	...that.config.query,
-							// 	"taskId":""
-							// }
-							let backUrl = '/pages'+that.config.failUrl+'?query='+encodeURIComponent(JSON.stringify(that.config.query))
+							let querydata = {
+								...that.config.query,
+								...data
+							}
+							let backUrl = '/pages'+that.config.failUrl+'?query='+encodeURIComponent(JSON.stringify(querydata))
 							console.log(backUrl)
 							uni.navigateTo({
 								url:backUrl

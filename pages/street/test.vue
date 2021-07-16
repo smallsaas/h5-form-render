@@ -27,7 +27,7 @@
 
 			handleToMy () {
 				uni.navigateTo({
-					url: '../street/home'
+					url: '../street/myhome'
 				})
 			},
 			handleCompanyHome () {

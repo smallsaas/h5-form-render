@@ -10,6 +10,7 @@
 		   :API="getPageAapi"
 			 :processDefineKey="key"
 			 :FormKey="key"
+			 :customValues="custom"
 		/>
 	</view>
 
@@ -23,13 +24,15 @@
 		components:{ dynamicPage },
 		onLoad (e){
 			let decode = JSON.parse(decodeURIComponent(e.query))
-			console.log(decode)
+			console.log("decode",decode)
 			this.key=decode.key
+			this.custom=decode.customValues
 		},
 		data() {
 			return {
 				getPageAapi: globalConfig.formHost + '?id=10090',
-				key:""
+				key:"",
+				custom:""
 			}
 		},
 		methods:{

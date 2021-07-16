@@ -1,8 +1,9 @@
 <template>
 	<view>
 		<dynamic-page :API="api"></dynamic-page>
-		<view @click="MoreIndex()" style="position: fixed;bottom: 0;left: 0;width: 80px;">主页</view>
-		<view @click="jumpOld()" style="position: fixed;bottom: 0;right: 0;width: 80px;">旧登录方式</view>
+		<!-- 开发者选项 -->
+<!-- 		<view @click="MoreIndex()" style="position: fixed;bottom: 0;left: 0;width: 80px;">主页</view>
+		<view @click="jumpOld()" style="position: fixed;bottom: 0;right: 0;width: 80px;">旧登录方式</view> -->
 	</view>
 </template>
 
@@ -33,7 +34,7 @@
 										url:"/pages/companyHome/home"
 									});break;
 									case 2:uni.navigateTo({
-										url:"/pages/street/home"
+										url:"/pages/street/myhome"
 									});break;
 								}
 						},

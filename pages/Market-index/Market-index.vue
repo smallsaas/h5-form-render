@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<dynamic-page :API="api" v-if="current===0">
+		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
 		</dynamic-page>
 		
 		<my :item="query" v-if="current===1"></my>
@@ -53,12 +53,35 @@
 				api: globalConfig.formHost + '?id=2000',
 				icon:"",
 				current: 0,
-				query:""
+				query:"",
+				loading:false
 			}
+		},
+		// onShow() {
+		// 	uni.hideHomeButton()
+		// },
+		created() {
+			uni.hideHomeButton()
+			this.icon=globalConfig.ico
+		},
+		onInit() {
+			uni.hideHomeButton()
+			this.icon=globalConfig.icon
+		},
+		onPullDownRefresh() {
+			uni.showLoading({
+				title:"加载中..."
+			})
+			this.loading=true
+			console.log(this.loading)
+			// this.$forceUpdate()
+			this.loading=false
+			uni.hideLoading()
 		},
 		onLoad(e){
 			let query = JSON.parse(decodeURIComponent(e.query))
 			this.query = query
+			console.log(query)
 			this.icon=globalConfig.icon
 			uni.hideHomeButton()
 		},

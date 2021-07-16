@@ -132,7 +132,7 @@
 								// 		}
 								// 	});break;
 								// 	case '3':uni.reLaunch({
-								// 		url:"/pages/street/home",
+								// 		url:"/pages/street/myhome",
 								// 		success() {
 								// 			uni.hideLoading()
 								// 		}

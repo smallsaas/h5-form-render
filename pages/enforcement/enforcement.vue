@@ -75,6 +75,7 @@
 							let data = res.data.data.formData
 							that.formData = data
 							// console.log(form)
+							console.log("enforcementSeq",res.data.data.customValues.fileseq)
 							that.processDefineKey ={
 								"processDefineKey":res.data.data.processDefineKey,
 								"fileno":res.data.data.customValues.fileno,

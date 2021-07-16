@@ -6,7 +6,7 @@
 				<span class="Title">待办事项：</span>{{item.businessName}}
 			</view>
 			<view class='createTime'>
-				<span class="Title">发起时间：</span>{{item.createTime}}
+				<span class="Title">发起时间：</span>{{item.createTime||item.startTime}}
 			</view>
 		</view>
 	</view>
@@ -42,6 +42,7 @@
 					case "test":icon=list.typeTest;break;
 					case "zglc":icon=list.typeZglc;break;
 					case "jdsb":icon=list.typeJdsb;break;
+					case "yyzz":icon=list.typeYyzz;break;
 				}
 				return icon
 			}

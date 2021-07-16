@@ -140,11 +140,12 @@
 																			let code;
 																			token = res.data.encryptedData
 																			nickName = res.data.nickname
+																			console.log(nickName)
 																			code = res.data.bindCode
 																			avatar = JSON.parse(LoginData.rawData).avatarUrl
 																			console.log(avatar)
 																			let query = {
-																				"nickname":nickName	,//微信登录的用户名
+																				"nickName":nickName	,//微信登录的用户名
 																				"avatar":avatar, //微信登录头像
 																				"code":code
 																			}
@@ -171,7 +172,7 @@
 																								}
 																							});break;
 																							case '3':uni.reLaunch({
-																								url:"/pages/street/home",
+																								url:"/pages/street/myhome",
 																								fail(ea) {
 																									console.log(ea)
 																								}

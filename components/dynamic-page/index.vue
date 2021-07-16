@@ -7,7 +7,8 @@
 									v-if="_get(item, 'type') === 'autoform'&&(item.code||item.FormKey||FormKey)"
 									:config="{
 										 ...getCode(item.API,item.code),
-										 outStyle: getComponentStyle(item)
+										 outStyle: getComponentStyle(item),
+										 ...customValues
 									}"
 								:srvFormData="getComponentsData(item) || {}"
 								:processDefineKey="processDefineKey"
@@ -220,6 +221,9 @@
 						},
 						FormKey:{
 							type:String
+						},
+						customValues:{
+							type:Object
 						}
 		},
 		data () {
@@ -300,6 +304,11 @@
 					console.log(code)
 					
 					this.getCodeData(api,code)
+				}else{
+					uni.showModal({
+						title:res.msg,
+						showCancel:false
+					})
 				}
 			},
 			// 自查编号
@@ -324,6 +333,12 @@
 					jsonDefine = Base64.decode(jsonDefineBase64)
 					json = JSON.parse(jsonDefine)
 					console.log(json)
+				}else{
+					// console.log("值为",res)
+					uni.showModal({
+						title:res.msg,
+						showCancel:false
+					})
 				}
 				this.codeData = json
 			},

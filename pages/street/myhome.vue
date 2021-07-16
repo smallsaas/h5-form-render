@@ -73,6 +73,14 @@
 			myPage,
 			my
 		},
+		onInit() {
+			this.icon=globalConfig.icon
+			uni.hideHomeButton()
+		},
+		created() {
+			this.icon=globalConfig.icon
+			uni.hideHomeButton()
+		},
 		onLoad (e){
 			let query = JSON.parse(decodeURIComponent(e.query))
 			this.query = query
@@ -87,9 +95,9 @@
 				icon:{},
 				query:{},
 				list:[
-					{"title":"我的上报","nav":"/street/my/myReport"},
-					{"title":"我的收藏","nav":""},
-					{"title":"设置","nav":""}
+					{"icon":"record","title":"我的上报","nav":"/street/my/myReport"},
+					{"icon":"record","title":"我的收藏","nav":""},
+					{"icon":"record","title":"设置","nav":""}
 				]
 			}
 		},

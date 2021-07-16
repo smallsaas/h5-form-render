@@ -641,7 +641,7 @@
             
         },
 				{
-					"path": "pages/street/home",
+					"path": "pages/street/myhome",
 					"style": {
 						"navigationBarTitleText": "首页",
 						"enablePullDownRefresh": true

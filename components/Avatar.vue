@@ -2,25 +2,23 @@
 	<view>
 		<view class="AvatarCard" v-if="theme==='enforcement'||theme==='company'">
 			<view class="avatar_Box">
-				<image :src="item.avatar||icon.avatarMy" class="avatar"></image>
+				<image :src="list.avatar||icon.avatarMy" class="avatar"></image>
 			</view>
 			<view class="title_Box" v-if="theme==='enforcement'">
-				<view class="row"><span class="title">姓名:</span>{{item.nickname||item.username||'-'}}</view>
-				<view class="row"><span class="title">证号:</span>{{item.code||'-'}}</view>
+				<view class="row"><span class="title">姓名:</span>{{list.nickName||list.username||'-'}}</view>
+				<view class="row"><span class="title">证号:</span>{{list.code||'-'}}</view>
 			</view>
 			<view class="title_Box" v-if="theme==='company'">
-				<view class="row"><span class="title">姓名:</span>{{item.nickname||item.username||'-'}}</view>
-				<view class="row"><span class="title">企业编号:</span>{{item.code||'-'}}</view>
-				<view class="row"><span class="title">企业域名:</span>{{item.address||'-'}}</view>
-				<view class="row"><span class="title">企业域名:</span>{{item.position||'-'}}</view>
+				<view class="row"><span class="title">公司名称:</span>{{list.nickName||list.username||'-'}}</view>
+				<view class="row"><span class="title">营业执照号:</span>{{list.code||'-'}}</view>
 			</view>
 		</view>
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
 			<view class="avatar_Box">
-				<image :src="item.avatar||icon.avatarMy" class="avatar"></image>
+				<image :src="list.avatar||icon.avatarMy" class="avatar"></image>
 			</view>
 			<view class="title_Box">
-				<view class="row"><span class="title">{{item.nickname||item.username||'-'}}</span></view>
+				<view class="row"><span class="title">{{list.nickName||list.username||'-'}}</span></view>
 			</view>
 		</view>
 	</view>
@@ -33,7 +31,8 @@
 		name:"Avatar",
 		data() {
 			return {
-				icon:{}
+				icon:{},
+				list:{}
 			};
 		},
 		components:{
@@ -46,8 +45,15 @@
 			theme:String
 		},
 		created() {
+			
+			if(this.item){
+				this.list=this.item
+			}else{
+				this.list = uni.getStorageSync(globalConfig.userInfo)
+				console.log(this.list)
+			}
 			this.icon = globalConfig.icon
-			console.log(this.item)
+			console.log("userInfo",globalConfig.userInfo)
 		}
 	}
 </script>

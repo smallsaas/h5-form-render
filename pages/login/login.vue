@@ -53,13 +53,13 @@
 				LoginData:{
 					username:'',
 					password:'',
-					app:'internal',
+					app:'public',
 					from:5
 				},
 				registerData:{
 					username:'',
 					password:'',
-					app:'internal',
+					app:'public',
 					from:5
 				},
 				api: globalConfig.formHost + '?id=130',

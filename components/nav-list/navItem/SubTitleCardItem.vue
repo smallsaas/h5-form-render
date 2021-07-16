@@ -9,7 +9,7 @@
 	<view class="card">
 		<view class="imageBox" v-if="item.svg!==undefined||item.img!=undefined">
 				<view :class="'cardIcon icon-'+item.svg" v-if="item.svg!==undefined&&item.img===undefined" mode="aspectFit"></view>
-				<image :src="item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&item.img!==undefined"></image>
+				<image :src="getIcon(item.cIcon)||item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&(item.img!==undefined||item.cIcon!==undefined)"></image>
 			</view>
 			<view
 				class="titleBox"
@@ -24,6 +24,7 @@
 
 <script>
 	import _ from 'lodash'
+	import {globalConfig} from '@/config.js'
 	export default {
 		name:"sub-title-card-item",
 		props:{
@@ -34,16 +35,23 @@
 				}
 			}
 		},
-		onLoad() {
+		created() {
+			this.icon = globalConfig.icon
+			// this.getIcon()
 		},
 		data(){
 			return {
-				
+				icon:""
 			}
 		},
 		methods:{
 			_get (data, field, value) {
 				return _.get(data, field, value)
+			},
+			getIcon(value){
+				console.log(value)
+				console.log(this.icon[value])
+				return this.icon[value]
 			}
 		}
 	}

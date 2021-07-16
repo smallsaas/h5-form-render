@@ -100,6 +100,14 @@
 			lawEnforcement,
 			my
 		},
+		onInit() {
+			this.icon=globalConfig.icon
+			uni.hideHomeButton()
+		},
+		created() {
+			this.icon=globalConfig.icon
+			uni.hideHomeButton()
+		},
 		onLoad (e){
 			let query = JSON.parse(decodeURIComponent(e.query))
 			this.query = query
@@ -113,9 +121,9 @@
 				icon:{},
 				query:{},
 				list:[
-					{"title":"自查记录","nav":"/companyHome/my/selfInspectionRecord"},
-					{"title":"执法记录","nav":"/companyHome/my/lawEnforcementRecord"},
-					{"title":"复工记录","nav":"/companyHome/my/returnToWorkRecord"}
+					{"icon":"record","title":"自查记录","nav":"/companyHome/my/selfInspectionRecord"},
+					{"icon":"record","title":"执法记录","nav":"/companyHome/my/lawEnforcementRecord"},
+					{"icon":"record","title":"复工记录","nav":"/companyHome/my/returnToWorkRecord"}
 				]
 			}
 		},

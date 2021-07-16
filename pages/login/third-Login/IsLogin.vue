@@ -10,6 +10,7 @@
 
 <script>
 	import {globalConfig} from '@/config.js'
+	import {Base64} from '@/utils/tools.js'
     export default {
         data() {
 					return {
@@ -82,15 +83,30 @@
 										 // that.userInfo = res.userInfo;
 										 that.userInfo.iv=res.iv;
 										 that.userInfo.encryptedData=res.encryptedData;
-										 that.userInfo.rawData = res.rawData;
+										 //自动解析rawData更改用
+										 let newRawData;        
+										 let jsonRaw = JSON.parse(res.rawData)
+										// 更改字段
+										for(let i in jsonRaw){
+											if(i==="nickName"){
+												jsonRaw.nickname=jsonRaw.nickName
+												delete jsonRaw["nickName"]
+											}
+										}
+										newRawData = JSON.stringify(jsonRaw)
+										// let testData
+										// testData = Base64.decode(res.encryptedData)
+										// console.log(testData)
+										 that.userInfo.rawData = newRawData;
+										 // that.userInfo.rawData = res.rawData;
 										 that.userInfo.type = e
-										 
+
 										 			if (_this.userInfo.auth){
 										 					// 登录所需数据
 										 					let LoginData = {
 										 						..._this.userInfo,
 										 					}
-										 					console.log(LoginData)
+										 					// console.log(LoginData)
 										           //发起网络请求
 										           uni.request({
 										             // 请求路径
@@ -113,6 +129,7 @@
 										 									cancelText:"其他角色",
 										 									confirmText:"立即注册",
 										 									success(button) {
+
 										 										let list = {
 										 											..._this.userInfo,
 										 											"type":e
@@ -148,14 +165,15 @@
 																			let username;
 										 									let avatar;
 										 									let code;
+																			// console.log(res.data)
 										 									token = res.data.encryptedData
 										 									nickName = res.data.nickname
 																			username = res.data.username
 										 									code = res.data.bindCode
 										 									avatar = JSON.parse(LoginData.rawData).avatarUrl
-										 									console.log(avatar)
+										 									// console.log(avatar)
 										 									let query = {
-										 										"nickname":nickName	,//微信登录的用户名
+										 										"nickName":nickName	,//微信登录的用户名
 										 										"avatar":avatar, //微信登录头像
 										 										"code":code,
 																				"username":username
@@ -168,24 +186,27 @@
 										 											// console.log(click.confirm)
 										 											if(click.confirm||click.cancel){
 										 												// console.log(e)
-										 												console.log(query)
+										 												// console.log(query)
+																						uni.setStorageSync("userInfo",query)
+																						uni.getStorageSync("userInfo")
+																						// console.log("获取",a)
 										 												switch(e){
 										 													case '2':uni.reLaunch({
 										 														url:"/pages/Market-index/Market-index?query="+encodeURIComponent(JSON.stringify(query)),
 										 														fail(ea) {
-										 															console.log(ea)
+										 															// console.log(ea)
 										 														}
 										 													});break;
 										 													case '4':uni.reLaunch({
 										 														url:"/pages/companyHome/home?query="+encodeURIComponent(JSON.stringify(query)),
 										 														fail(ea) {
-										 															console.log(ea)
+										 															// console.log(ea)
 										 														}
 										 													});break;
 										 													case '3':uni.reLaunch({
-										 														url:"/pages/street/home"+encodeURIComponent(JSON.stringify(query)),
+										 														url:"/pages/street/myhome?query="+encodeURIComponent(JSON.stringify(query)),
 										 														fail(ea) {
-										 															console.log(ea)
+										 															// console.log(ea)
 										 														}
 										 													});break;
 										 												}

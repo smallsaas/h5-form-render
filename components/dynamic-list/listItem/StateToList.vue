@@ -1,25 +1,28 @@
 <template>
 	<view class="self-item">
 		<view class="flex">
+			<view>
+				<image class="icon" :src="icon.street"></image>
+			</view>
 			<view class="left flex1">
-				<view class="title text-line-1">{{ _get(custom,"fileno","") }}</view>
-				<view class="times text-line-1">
+				<!-- <view class="title text-line-1">{{ _get(custom,"fileno","") }}</view> -->
+				<view class="title text-line-1">
 					{{ _get(item,"formName","") }}
 				</view>
 				<view class="submit-time">提交时间: {{ item.actApplyTime }}</view>
 			</view>
 			<view class="right">
-				<view v-if="item.finishState === '3'" class="status">
+<!-- 				<view v-if="item.finishState === '3'" class="status">
 					待审核
 				</view>
 				<view v-else-if="item.finishState === '2'" class="status" style="background-color: #F5A623;">
 					审核中
+				</view> -->
+				<view v-if="item.finishState === '1'" class="status" style="background-color: #2dffab;">
+					已完成
 				</view>
-				<view v-else-if="item.finishState === '1'" class="status" style="background-color: #D43030;">
-					被拒绝
-				</view>
-				<view v-else-if="item.finishState === '0'" class="status" style="background-color: #979797;">
-					已审核
+				<view v-else-if="item.finishState === '0'" class="status" style="background-color: #F5A623;">
+					未完成
 				</view>
 			</view>
 		</view>
@@ -28,6 +31,7 @@
 <script>
 	import _ from 'lodash'
 	import {Base64} from '../../../utils/tools.js'
+	import {globalConfig} from '@/config.js'
 	export default {
 		name: 'stateToList',
 		props: {
@@ -37,11 +41,13 @@
 		created() {
 			// console.log(this.item)
 			this.getCustomData()
+			this.icon = globalConfig.icon
 			// console.log(this.custom)
 		},
 		data(){
 			return {
-				custom:null
+				custom:null,
+				icon:null
 			}
 		},
 		methods:{
@@ -57,7 +63,7 @@
 </script>
 <style lang="less" scoped>
 	.self-item {
-		padding: 32rpx;
+		padding: 26rpx;
 		background: #fff;
 		border-bottom: 1px solid #eee;
 		font-size: 28rpx;
@@ -67,7 +73,15 @@
 		.flex {
 			display: flex;
 			justify-content: space-between;
-
+				.icon{
+					width: 35rpx;
+					height: 35rpx;
+					// padding: 5rpx;
+					position: relative;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%);
+				}
 			.left {
 				.title {
 					color: #333;
@@ -94,22 +108,33 @@
 			.flex1 {
 				flex: 1;
 				max-width: calc(100% - 200rpx);
+				margin-top: 15rpx;
+				// position: relative;
+				// top: 50%;
+				// left: 50%;
+				// transform: translate(-50%,-50%);
 			}
 
 			.right {
 				width: 164rpx;
-				height: 128rpx;
+				height: 85rpx;
 
 				.status {
 					width: 170rpx;
-					height: 50rpx;
-					line-height: 50rpx;
+					height: 60rpx;
+					line-height: 60rpx;
 					text-align: center;
-					font-size: 24rpx;
+					font-size: 28rpx;
 					background-color: #43CF7C;
 					color: #ffffff;
 					border-radius: 12rpx;
-					margin-top: 40rpx;
+					font-weight: bolder;
+					// display: flex;
+					// margin-top: 20rpx;
+					// align-items: center;
+					position: relative;
+					top: 50%;
+					transform: translate(0, -50%);
 				}
 			}
 		}

@@ -492,8 +492,8 @@
                 }
 								// 工作流自定义数据接口
 								let custom = {
-									"fileno":guid(),
-									"fileseq":0
+									"fileno":this.config.fileno||guid(),
+									"fileseq":this.config.fileseq||0
 								}
 								// let customData = Base64.encode(JSON.stringify(custom))	//
 								let customData = custom	//
@@ -557,13 +557,23 @@
 							                        url: '/pages' + this.config.submittedNavigation,
 																			success() {
 																					this.$emit("state","success")
+																					 let page = getCurrentPages().pop();  //跳转页面成功之后
+																					 if (!page) return;  
+																					 page.onLoad(); //如果页面存在，则重新刷新页面
 																			},
 																			fail:(a)=>{
 																				console.log(a)
 																			}
 							                    })
 							                } else {
-							                    uni.navigateBack()
+							                    uni.navigateBack({
+																		success(){
+																			let page = getCurrentPages().pop();  //跳转页面成功之后
+																			if (!page) return;  
+																			page.onLoad(); //如果页面存在，则重新刷新页面
+																		},
+																		delta:10
+																	})
 							                }
 							            }, 500)
 							        }else if(_.get(res,'data.code')==="00000"){
@@ -579,6 +589,9 @@
 												            url: '/pages' + this.config.submittedNavigation,
 																		success() {
 																				this.$emit("state","success")
+																				let page = getCurrentPages().pop();  //跳转页面成功之后
+																				if (!page) return;  
+																				page.onLoad(); //如果页面存在，则重新刷新页面
 																		},
 																		fail:(a)=>{
 																			console.log(a)
@@ -587,6 +600,9 @@
 												    } else {
 												        uni.navigateBack({
 																	success(){
+																		let page = getCurrentPages().pop();  //跳转页面成功之后
+																		if (!page) return;  
+																		page.onLoad(); //如果页面存在，则重新刷新页面
 																	},
 												        	delta:10
 												        })
@@ -626,6 +642,9 @@
                                         url: '/pages' + this.config.submittedNavigation,
 																				success() {
 																						this.$emit("state","success")
+																						let page = getCurrentPages().pop();  //跳转页面成功之后
+																						if (!page) return;  
+																						page.onLoad(); //如果页面存在，则重新刷新页面
 																				},
 																				fail:(a)=>{
 																					console.log(a)
@@ -647,6 +666,9 @@
 													            url: '/pages' + this.config.submittedNavigation,
 																			success() {
 																					this.$emit("state","success")
+																					let page = getCurrentPages().pop();  //跳转页面成功之后
+																					if (!page) return;  
+																					page.onLoad(); //如果页面存在，则重新刷新页面
 																			},
 																			fail:(a)=>{
 																				console.log(a)

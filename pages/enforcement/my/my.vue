@@ -2,10 +2,10 @@
 	<view>
 		<avatar :theme="theme" :item="item"></avatar>
 		<view class="ListBody">
-			<view @click="jump(item.nav)" class="ListChild" v-for="(item,i) in list">
-				<image :src="icon[list.icon]" v-if="list.icon"></image>
-				<view class="ListTitle">{{item.title}}</view>
-				<image :src="icon.arrowRight" class="Arrow"></image>
+			<view @click="jump(listitem.nav)" class="ListChild" v-for="(listitem,i) in list">
+				<image class="icon" :src="icon[listitem.icon]" v-if="listitem.icon"></image>
+				<view class="ListTitle">{{listitem.title}}</view>
+				<image :src="icon.arrowRight" class="icon"></image>
 			</view>
 		</view>
 	</view>
@@ -25,7 +25,9 @@
 		},
 		created() {
 			this.icon = globalConfig.icon
-			console.log(this.item)
+			// console.log("list",this.list)
+			// console.log("icon",this.icon[this.list.icon])
+			
 		},
 		methods: {
 			jump(nav){
@@ -46,7 +48,7 @@
 				type:Array,
 				default(){
 					return [
-						{"title":"我的执法记录","nav":"/enforcement/myEnforcement"}
+						{"icon":"record","title":"我的执法记录","nav":"/enforcement/myEnforcement"}
 						// {"title":"我的执法记录","nav":"/enforcement/myEnforcement"}
 					]
 				}
@@ -65,10 +67,11 @@
 	}
 	.ListBody{
 		margin: 20px 10px;
-		/* box-shadow: 0px 0px 5px #aaa; */
+/* 		box-shadow: 0px 5px 5px 10px #aaa; */
 	}
 	.ListChild{
 		height: 50px;
+		line-height: 50px;
 		background-color: white;
 		border-bottom: 1px solid #EEEEEE;
 		display: flex;
@@ -77,13 +80,13 @@
 		height: 50px;
 		line-height: 50px;
 		flex: 1;
-		margin-left: 10px;
+		/* margin-left: 10px; */
 		font-weight: bolder;
-		font-size: 16px;
+		font-size: 18px;
 	}
-	.Arrow{
-		padding: 10px;
-		width: 30px;
-		height: 30px;
+	.icon{
+		padding: 15px;
+		width: 20px;
+		height: 20px;
 	}
 </style>
