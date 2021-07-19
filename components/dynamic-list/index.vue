@@ -200,6 +200,12 @@
 				default(){
 					return false
 				}
+			},
+			fileno:{
+				type:String,
+				default(){
+					return {}
+				}
 			}
 		},
 		data() {
@@ -212,7 +218,7 @@
                 
                 listSearch: {}, // 列表查询参数
                 pageNoField: '',  // 页数配置的字段名
-                pageSizeField: '' // size配置的字段名
+                pageSizeField: '', // size配置的字段名
 								
 			}
 		},
@@ -285,6 +291,22 @@
             updateData () {  
                 this.typeList =  _.get(this.config, 'tabConfig.show') === true ? _.get(this.config, 'tabConfig.list', []) : []
                 const requestData = _.get(this.config, 'request', {})
+								let customData;
+								let fileno;
+								console.log(this.fileno)
+								
+								if(_.get(this.config,'request.fileno')==='fileno'){
+									if(this.fileno){
+										 fileno=this.fileno
+										 customData = {
+										 	"customValues":{
+												"fileno":fileno
+											}
+										 }
+										 console.log(customData)
+									}
+								}
+
                 const searchData = {}
                 for (const key in requestData) {
                     if (key !== 'default') {
@@ -297,9 +319,10 @@
                 if (_.has(searchData, 'pageSize')) {
                     searchData.pageSize = 10
                 }
+								
                 this.pageNoField = _.get(searchData, 'pn', 'pageNo')
                 this.pageSizeField = _.get(searchData, 'pn', 'pageSize')
-                this.listSearch = { ...searchData, ..._.get(this.config, 'request.default', {}) }
+                this.listSearch = { ...searchData, ..._.get(this.config, 'request.default', {}),...customData||{} }
                 if (_.get(this.config, 'loadApi')) {
                     this.fetchList({ refresh: true })
                 }

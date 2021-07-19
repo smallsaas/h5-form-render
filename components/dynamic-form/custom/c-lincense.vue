@@ -85,9 +85,11 @@
 	.content{
 		// margin: 15px 0 0 15px;
 		// position: relative;
-		margin: 20px;
+		margin: 0px 15px;
+		padding: 10px 0;
 		width: auto;
 		display: flex;
+		border-bottom: 1px solid #F5F6F7;
 		// box-shadow: 0px 0px 1px #aaa;
 		.title{
 			font-weight: bolder;

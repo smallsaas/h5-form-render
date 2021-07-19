@@ -62,17 +62,19 @@
 				username:'',
 				password:'',
 				app:'public',
-				from:5
+				// from:5,
+				type:"1"
 			}
 		},
 		methods:{
 			getToken(){
 					uni.request({
 					  // 请求路径
-					  url: 'https://api.uat.smallsaas.cn/auth/oauth/form',
+					  url: 'https://api.uat.smallsaas.cn/api/sys/oauth/app/login',
 					  data: this.LoginData,
 					  header: {
-						'content-type': 'application/x-www-form-urlencoded'
+						// 'content-type': 'application/x-www-form-urlencoded'
+						'content-type': 'application/json'
 					  },
 					  method: 'POST',
 					  success(res){

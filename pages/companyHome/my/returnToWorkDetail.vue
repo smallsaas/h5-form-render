@@ -15,6 +15,7 @@
 <script>
 	import {Base64} from '@/utils/tools.js'
 	import {globalConfig} from '@/config.js'
+	import {convert} from '@/utils/customTools.js'
 	import dynamicForm from '../../../components/dynamic-form/index.vue'
 	// import confirm from '../../components/confirm.vue'
 	import dynamicPage from '../../../components/dynamic-page/index.vue'
@@ -42,7 +43,7 @@
 				},
 				formData:null,
 				header:{
-					Authorization: `Bearer ${globalConfig.enforcementKey}`
+					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
 				api: globalConfig.formHost + '?id=66000',
 				processDefineKey:{}
@@ -74,17 +75,44 @@
 							let form = res.data.data.form
 							let data = res.data.data.formData
 							that.formData = data
-							// console.log(form)
-							console.log("enforcementSeq",res.data.data.customValues.fileseq)
-							that.processDefineKey ={
-								"processDefineKey":res.data.data.processDefineKey,
-								"fileno":res.data.data.customValues.fileno,
-								"fileseq":res.data.data.customValues.fileseq,
-								"processDefinitionId":res.data.data.processDefinitionId,
-								"taskId":that.taskId
+							if(res.data.data.customValues){
+								if(res.data.data.customValues.fileno){
+									that.processDefineKey ={
+										"processDefineKey":res.data.data.processDefineKey,
+										"fileno":res.data.data.customValues.fileno,
+										"fileseq":res.data.data.customValues.fileseq||0,
+										"processDefinitionId":res.data.data.processDefinitionId,
+										"taskId":that.taskId
+									}
+								}else{
+									that.processDefineKey ={
+										"processDefineKey":res.data.data.processDefineKey,
+										// "fileno":res.data.data.customValues.fileno,
+										// "fileseq":res.data.data.customValues.fileseq||0,
+										"processDefinitionId":res.data.data.processDefinitionId,
+										"taskId":that.taskId
+									}
+								}
+							}else{
+								that.processDefineKey ={
+									"processDefineKey":res.data.data.processDefineKey,
+									// "fileno":res.data.data.customValues.fileno,
+									// "fileseq":res.data.data.customValues.fileseq||0,
+									"processDefinitionId":res.data.data.processDefinitionId,
+									"taskId":that.taskId
+								}
 							}
+							// console.log(form)
+							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							// that.processDefineKey ={
+							// 	"processDefineKey":res.data.data.processDefineKey,
+							// 	"fileno":res.data.data.customValues.fileno,
+							// 	"fileseq":res.data.data.customValues.fileseq||0,
+							// 	"processDefinitionId":res.data.data.processDefinitionId,
+							// 	"taskId":that.taskId
+							// }
 							let jsonDefine = form.jsonDefine
-							that.config = JSON.parse(Base64.decode(jsonDefine))
+							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
 							console.log(that.processDefineKey)
 							// console.log(that.config)
 						}

@@ -6,8 +6,10 @@
 	  <navigator :url="getNavigationUrl(item.nav || item.url)" hover-class="navigator-hover">
 	      <view class="magic_item">
 					<image :src="item.img" v-if="item.img!==undefined&&item.svg===undefined" mode="aspectFit" class="image" ></image>
+					
 					<block v-if="item.svg!=undefined">
-						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='export'" :style="{'color':item.svg.color}">&#xe703;</i>
+						<image :src="getVal(item.svg.icon)" v-if="item.svg.icon!==undefined" mode="aspectFit" class="image" ></image>
+<!-- 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='export'" :style="{'color':item.svg.color}">&#xe703;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='warning'" :style="{'color':item.svg.color}">&#xe7a5;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='instructions'" :style="{'color':item.svg.color}">&#xe622;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='radio'" :style="{'color':item.svg.color}">&#xe656;</i>
@@ -18,7 +20,7 @@
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='publicity'" :style="{'color':item.svg.color}">&#xe621;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='lifeguard'" :style="{'color':item.svg.color}">&#xe68c;</i>
 						<i mode="aspectFit" class="navIcon image" v-if="item.svg.icon==='employees'" :style="{'color':item.svg.color}">&#xe6b0;</i>
-						<image :src="icon[item.svg.icon]" v-if="icon[item.svg.icon]" mode="aspectFit" class="image"/>
+						<image :src="icon[item.svg.icon]" v-if="icon[item.svg.icon]" mode="aspectFit" class="image"/> -->
 						<!-- <image :src="icon[item.svg.icon]" mode="widthFix" class="swiper_image" /> -->
 					</block>
 					<view class="title"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
@@ -51,6 +53,13 @@
 		methods: {
 			_get (data, field, value) {
 				return _.get(data, field, value)
+			},
+			getVal(string){
+				string = "nav"+string.replace(string[0],string[0].toUpperCase())
+				// console.log(string)
+				// console.log(this.icon)
+				// console.log(this.icon[string])
+				return this.icon[string]
 			},
 			getNavigationUrl (str) {
 			    let text = ''
@@ -102,13 +111,13 @@
 			border-radius: 6rpx;
 			padding: 10rpx;
 			.image {
-			    width: 90rpx;
-			    height: 90rpx;
-					line-height: 90rpx;
-					font-size: 70rpx;
+			    width: 60rpx;
+			    height: 60rpx;
+					line-height: 60rpx;
+					font-size: 60rpx;
 					margin: 0 auto;
 			    border-radius: 50%;
-			    padding: 20rpx;
+			    padding: 30rpx;
 					text-align: center;
 			}
 			>.title {

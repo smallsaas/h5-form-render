@@ -1,77 +1,61 @@
 <template>
-	<navigator :url="navigationUrl" hover-class="navigator-hover">
+	<!-- <navigator :url="navigationUrl" hover-class="navigator-hover"> -->
 		<view class="state_allcontent">
 			<view class="AvatarStateList">
-				<view class="formNumber" v-if="item.formNumber">
-					执法单号:
-					<span style="font-weight: bolder;">{{item.formNumber}}</span>
-					<span class="enforcementState enforcement" v-if="item.enforcementState==='enforcement'">执法中</span>
-					<span class="enforcementState rectification" v-if="item.enforcementState==='rectification'">待整改</span>
-					<span class="enforcementState closeCase" v-if="item.enforcementState==='closeCase'">已结案</span>
+				<view class="formNumber" v-if="item.customValues.fileno">
+					卷宗号:
+					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.customValues.fileno}}</span>
+					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
+					<span class="enforcementState rectification" v-if="item.finishState==='1'">待整改</span>
+					<span class="enforcementState closeCase" v-if="item.finishState==='0'">已结案</span>
 				</view>
 				<view class="body">
-					<view class="avatar" v-if="item.img">
-						<image :src="item.img" mode="widthFix" class="avatar-img" />
+					<view class="avatar" v-if="item.pdKey">
+						<image :src="getVal(item.pdKey)" mode="widthFix" class="avatar-img" />
 					</view>
-					<view class="content" v-if="item.remarks||item.object||item.company||item.department||item.time">
-						<view class="titleBox" v-if="item.remarks||item.object||item.company||item.department||item.time">
-							<view class="time" v-if="item.time"><span class="content-title">执法时间:</span>{{item.time}}</view>
-							<view class="object" v-if="item.object"><span class="content-title">执法对象:</span>{{item.object}}</view>
-							<view class="company" v-if="item.company"><span class="content-title">执法单位:</span>{{item.company}}</view>
-							<view class="department" v-if="item.department"><span class="content-title">执法科室:</span>{{item.department}}</view>
-							<view class="remarks" v-if="item.remarks"><span class="content-title">执法标题:</span>{{item.remarks}}</view>
+					<view class="content">
+						<view class="titleBox">
+							<view class="time" v-if="item.actApplyTime"><span class="content-title">开始时间:</span>{{item.actApplyTime}}</view>
+							<view class="object" v-if="item.actApplyUserName"><span class="content-title">执法人员:</span>{{item.actApplyUserName}}</view>
+							<view class="company" v-if="item.actCurrDualUserName"><span class="content-title">下一步执行人:</span>{{item.actCurrDualUserName}}</view>
+							<!-- <view class="department" v-if="item.department"><span class="content-title">执法科室:</span>{{item.department}}</view> -->
+							<view class="remarks" v-if="item.formName"><span class="content-title">执法单名:</span>{{item.formName}}</view>
 						</view>
 					</view>
-					<view class="state" v-if="item.state">
+<!-- 					<view class="state" v-if="item.state">
 							<view v-if="item.state.modify" class="modify">修改</view>
 							<view v-if="item.state.approval" class="approval">审批</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
-	</navigator>
+	<!-- </navigator> -->
 </template>
 
 <script>
 	import qs from 'qs'
+	import {globalConfig} from '@/config.js'
 	export default {
 		name:"avatar-state-list",
 		props:{
 			item:Object,
 			itemNavigation:String
 		},
+		data:{
+			iconList:{}
+		},
+		created() {
+			this.iconList = globalConfig.icon
+		},
 		onLoad(){
-			this.navigationUrl()
+			// this.navigationUrl()
 			// console.log(this.navigationUrl())
 		},
-		computed: {
-			navigationUrl() {
-				let text = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-		
-				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-
-					 if(query.id = "[id]"){
-						 query.id = this.item.id
-					 }
-					 // console.log(this.item.id)
-					 // console.log(route)
-					 // console.log(query)
-					 // console.log(text)
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
-				       }
-							 text+='?query='+query.id
-				       // text += '?query=' + encodeURIComponent(JSON.stringify(query))
-							 // console.log(text)
-				   }
-				}
-				return text
+		methods:{
+			getVal(string){
+				string = "type"+string.replace(string[0],string[0].toUpperCase())
+				// console.log(this.iconList[string])
+				return this.iconList[string]
 			}
 		}
 	}
@@ -90,14 +74,14 @@
 		.formNumber{
 			width: auto;
 			text-align: left;
-			font-size: 12px;
+			font-size: 14px;
 			border-bottom: 1px solid #EBEBEB;
 			padding: 5px 0px;
 			margin: 5px 10px 10px 10px;
 			.enforcementState{
 				padding: 5px 10px;
 				font-weight: bolder;
-				font-size: 8px;
+				font-size: 10px;
 				float: right;
 				margin-top: -5px;
 				border-radius: 5px;
@@ -131,11 +115,11 @@
 			display: flex;
 			width: 100%;
 			.avatar{
-				width: 50px;
+				width: 70px;
 				.avatar-img{
-					border-radius: 50%;
-					width: 32px;
-					height: 32px;
+					// border-radius: 50%;
+					width: 40px;
+					height: 40px;
 					position: relative;
 					left: 50%;
 					transform: translate(-50%);
@@ -145,7 +129,7 @@
 				width: 58%;
 				.titleBox{
 					margin-bottom: 10px;
-					font-size: 10px;
+					font-size: 14px;
 				}
 				.content-title{
 					color: #666;
@@ -154,7 +138,7 @@
 				}
 			}
 			.state{
-				font-size: 8px;
+				font-size: 10px;
 				.modify{
 					color: #5FA1EB;
 					border: 1px solid #5FA1EB;

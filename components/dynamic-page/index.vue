@@ -49,6 +49,7 @@
 									...getComponentsData(item) ? { list: getComponentsData(item) } : {},
 									          outStyle: getComponentStyle(item)
 									      }"
+												:fileno = "customValues.fileno"
 									    />
 											</card>
 											<dynamic-list
@@ -59,6 +60,7 @@
 																	outStyle: getComponentStyle(item)
 												}"
 												v-if="_get(item,'name')===undefined||_get(item,'name')===''"
+												:fileno = "customValues.fileno"
 											></dynamic-list>
 										</view>
 										
@@ -162,6 +164,7 @@
 <script>
 	import _ from 'lodash'
 	import qs from 'qs'
+	import {convert} from '@/utils/customTools.js'
 	import { getFormAPIdata } from '../../common/api.js'
 	import { request } from '../../common/request.js'
 	import { Base64,guid } from '../../utils/tools.js'
@@ -340,7 +343,7 @@
 						showCancel:false
 					})
 				}
-				this.codeData = json
+				this.codeData = convert(json)
 			},
 			
 			getCode(API,code){
@@ -351,6 +354,8 @@
 				}
 				return this.codeData
 			},
+			
+
 			// 获取工作流提交成功后状态
 			setState(e){
 				// this.statset

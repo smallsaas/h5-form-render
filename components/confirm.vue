@@ -1,9 +1,10 @@
 <template>
-	<view>
+	<view class="Confirm" style="position: relative;">
 		<view class="comment">
 			<view class="title" v-if="config.placeholder">{{config.placeholder}}</view>
 			<textarea adjust-position="true" v-model:value="comment" class="comment_input"
 			:placeholder="'请输入'+(config.placeholder||'...')"
+			maxlength="-1"
 			></textarea>
 		</view>
 		<view class="ConfirmBox">
@@ -69,7 +70,6 @@
 					data:data,
 					method:this.config.method||"POST",
 					complete(res) {
-						console.log(res)
 						if(res.data.code==="00000"){
 							uni.showToast({
 								duration:500,
@@ -81,6 +81,10 @@
 								fail(e) {
 									console.log(e)
 								}
+							})
+						}else{
+							uni.showModal({
+								content:res.data.msg
 							})
 						}
 					}
@@ -130,6 +134,10 @@
 							uni.navigateTo({
 								url:backUrl
 							})
+						}else{
+							uni.showModal({
+								content:res.data.msg
+							})
 						}
 					}
 				})
@@ -139,47 +147,65 @@
 </script>
 
 <style lang="less">
+	.Confirm{
+		width: 90%;
+		margin: 0 auto;
+		box-shadow: 0px 0px 5px #999;
+		border-radius: 5px;
+		background-color: #eee;
+		padding: 5px;
+	}
 	.ConfirmBox{
-		width: 100%;
+		z-index: 10000;
+		width: 50%;
+		position: absolute;
+		right: 5px;
+		bottom: 10px;
 		height: 40px;
 		margin-top: 20px;
 		display: flex;
 		border-radius: 10px;
 		.button{
 			flex: 1;
-			box-shadow: 0px 0px 5px #999;
-			height: 50px;
-			line-height: 50px;
+			// box-shadow: 0px 0px 5px #999;
+			height: 40px;
+			line-height: 40px;
 			margin: 0 5%;
 			text-align: center;
+			font-size: 14px;
+			font-weight: bolder;
+			border-radius: 5px;
 			// line-height: 60px;
 			&:hover{
 				opacity: .8;
 			}
 		}
 		.agree{
-			background-color: #335B39;
+			background-color: #46aa46;
 			color: white;
 		}
 		.refuse{
-			background-color: #B10000;
+			background-color: #e75f5f;
 			color: white;
 		}
 	}
 	.comment{
+		z-index: 1;
 		width: 100%;
 		.comment_input{
 			width: 90%;
+			background-color: white;
 			margin: 0 auto;
-			border: 1px dashed #aaa;
+			border: 1px dotted #aaa;
+			// border-bottom: 1px dotted #aaa;
 			padding: 1em;
 		}
 		.title{
 			font-weight: bolder;
 			margin: 5px;
-			padding: 5px 0;
+			// padding: 5px 0;
 			font-size: 14px;
-			border-bottom: 1px solid #999;
+			// border-bottom: 1px solid #999;
 		}
 	}
 </style>

@@ -1,84 +1,121 @@
 <template>
 	<view>
+		<dynamic-form
+			:config="config"
+			:srvFormData="formData"
+			:Details="true"
+		></dynamic-form>
 		<dynamic-page
-		   :API="getPageApi"
-		   :dynamicLoadUrl="dynamicLoadUrl"
-		/>
+			 :API="api"
+			 :LastKey="processDefineKey"
+		></dynamic-page>
 	</view>
 </template>
 
 <script>
+	import {Base64} from '../../utils/tools.js'
+	import {globalConfig} from '@/config.js'
+	import {convert} from '@/utils/customTools.js'
+	import dynamicForm from '../../components/dynamic-form/index.vue'
+	// import confirm from '../../components/confirm.vue'
 	import dynamicPage from '../../components/dynamic-page/index.vue'
-	import { globalConfig } from '@/config.js'
-
 	export default {
-		components: {
+		onLoad(e) {
+			console.log(e)
+			this.getPiId(e.query)
+			this.getConfig()
+		},
+		components:{
+			dynamicForm,
 			dynamicPage
 		},
-		onLoad(e) {
-			var query = {};
-			if (e.query) {
-			console.log('this.query = ', e.query)
-				this.dynamicLoadUrl =  globalConfig.formHost + '/data?id=' + e.query
-			}else {
-				console.error('获取id异常')
-			}
-			console.log(this.dynamicLoadUrl)
+		onReady() {
+			console.log(this.config)
 		},
 		data() {
 			return {
-				dynamicLoadUrl: '',
-				getPageApi: globalConfig.formHost + '?id=2002'
+				loadApi:`${globalConfig.workflowEP}/api.flow.examine/processDetail`,
+				piId:"",
+				taskId:"",
+				config:null,
+				method:"POST",
+				data:{
+				},
+				formData:null,
+				header:{
+					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+				},
+				api: globalConfig.formHost + '?id=2002',
+				processDefineKey:{}
 			}
 		},
 		methods: {
-			
+			getPiId(e){
+				let decode = JSON.parse(decodeURIComponent(e))
+				this.piId=decode.piId
+				this.taskId=decode.taskId
+				console.log(this.taskId)
+				this.data = {
+					"processInstanceId": this.piId
+				}
+			},
+			getConfig(){
+				// console.log(this.data)
+				// console.log(this.method)
+				let that = this
+				uni.request({
+					url:this.loadApi,
+					method:this.method,
+					data:this.data,
+					header:this.header,
+					complete(res) {
+						// console.log(res)
+						if(res.data.code === "00000"){
+							// console.log(res)
+							let form = res.data.data.form
+							let data = res.data.data.formData
+							that.formData = data
+							// console.log(form)
+							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							if(res.data.data.customValues){
+								if(res.data.data.customValues.fileno){
+									that.processDefineKey ={
+										"processDefineKey":res.data.data.processDefineKey,
+										"fileno":res.data.data.customValues.fileno,
+										"fileseq":res.data.data.customValues.fileseq||0,
+										"processDefinitionId":res.data.data.processDefinitionId,
+										"taskId":that.taskId
+									}
+								}else{
+									that.processDefineKey ={
+										"processDefineKey":res.data.data.processDefineKey,
+										// "fileno":res.data.data.customValues.fileno,
+										// "fileseq":res.data.data.customValues.fileseq||0,
+										"processDefinitionId":res.data.data.processDefinitionId,
+										"taskId":that.taskId
+									}
+								}
+							}else{
+								that.processDefineKey ={
+									"processDefineKey":res.data.data.processDefineKey,
+									// "fileno":res.data.data.customValues.fileno,
+									// "fileseq":res.data.data.customValues.fileseq||0,
+									"processDefinitionId":res.data.data.processDefinitionId,
+									"taskId":that.taskId
+								}
+							}
+							let jsonDefine = form.jsonDefine
+							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
+							// console.log(that.processDefineKey)
+							console.log(that.config)
+						}
+					}
+				})
+			},
 		}
 	}
 </script>
 
-<style lang="less">
-	page {
-		height: 100%;
-		background-color: #E5E5E5;
-		padding: 18rpx 0;
-	}
+<style>
 
-	.card {
-		padding: 26rpx 16rpx;
-		background-color: #ffffff;
-		border-radius: 16rpx;
-		margin-bottom: 14rpx;
-	}
-
-	.title {
-		color: #505050;
-		font-size: 32rpx;
-		line-height: 150%;
-		text-align: left;
-		font-weight: bold;
-		padding-left: 20rpx;
-		margin-bottom: 10rpx;
-	}
-
-	.enterprise-info{
-		padding: 0 0rpx 0rpx 20rpx;
-		
-		.item{
-			height: 50rpx;
-			display: flex;
-			align-items: center;
-			.label{
-				font-size: 26rpx;
-				width: 188rpx;
-				color: #808080;
-			}
-			
-			.text{
-				font-size: 28rpx;
-				color: #383838;
-			}
-		}
-	
-	}
 </style>

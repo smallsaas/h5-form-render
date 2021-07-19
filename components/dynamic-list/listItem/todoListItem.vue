@@ -1,6 +1,6 @@
 <template>
 	<view class="ToDoListItem">
-		<image :src="getIcon(item.processDefineKey)" mode="aspectFit" v-if="item.processDefineKey" style="margin:auto 15px;width:50px;height: 50px;"></image>
+		<image :src="getVal(item.processDefineKey)" mode="aspectFit" v-if="item.processDefineKey" style="margin:auto 15px;min-width:40px;min-height: 40px;width: 40px;height: 50px;"></image>
 		<view class="ToDoBody">
 			<view class='taskName'>
 				<span class="Title">待办事项：</span>{{item.businessName}}
@@ -27,24 +27,10 @@
 			}
 		},
 		methods:{
-			getIcon(e){
-				console.log(e)
-				let icon;
-				// let list = {
-				// 	"zc":this.iconList.typeZc,
-				// 	"test":this.iconList.typeTest,
-				// 	"zglc":this.iconList.typeZglc,
-				// 	"jdsb":this.iconList.typeJdsb,
-				// }
-				let list = this.iconList
-				switch(e){
-					case "zc":icon=list.typeZc;break;
-					case "test":icon=list.typeTest;break;
-					case "zglc":icon=list.typeZglc;break;
-					case "jdsb":icon=list.typeJdsb;break;
-					case "yyzz":icon=list.typeYyzz;break;
-				}
-				return icon
+			getVal(string){
+				string = "type"+string.replace(string[0],string[0].toUpperCase())
+				// console.log(this.iconList[string])
+				return this.iconList[string]
 			}
 		}
 	}
@@ -58,6 +44,14 @@
 		border-bottom: 1px solid #eee;
 		&:hover{
 			background-color: #eee;
+		}
+		.ToDoBody{
+			.taskName{
+				font-size: 14px;
+			}
+			.createTime{
+				font-size: 14px;
+			}
 		}
 	}
 		.ToDoBody{

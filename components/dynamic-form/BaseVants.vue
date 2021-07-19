@@ -43,7 +43,7 @@
                }"
                @change="(e) => handleSetValue(e, fields[index])"
            />
-            
+           <view style="font-size: 14px;font-weight: bolder;margin: 0 5px;width: auto;color: #888;" v-if="_get(item,'__config__.title')">{{_get(item,'__config__.title')}}</view>
            <base-radio 
                v-if="_get(item, '__config__.tag') === 'el-radio-group'"
                :param="{
@@ -250,6 +250,7 @@
         methods: {
            getBaseParam (item) {
                return {
+								 // title:_.get(item,'__config__.title'),
                   label: _.get(item, '__config__.label'),
                   required: _.get(item, '__config__.required', false),
                   readonly: _.get(item, 'readonly', false),

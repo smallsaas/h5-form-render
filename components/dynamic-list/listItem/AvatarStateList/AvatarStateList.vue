@@ -53,7 +53,7 @@
 	export default {
 		name:"avatar-state-list",
 		props:{
-			item:Object,
+			item:Array,
 			itemNavigation:String
 		},
 		onLoad(){

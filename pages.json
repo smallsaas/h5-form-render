@@ -647,6 +647,24 @@
 						"enablePullDownRefresh": true
 					}
 				}
+        ,{
+            "path" : "pages/enforcement/book/moreBook",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/enforcement/otherBook/otherBook",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

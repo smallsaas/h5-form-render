@@ -8,7 +8,7 @@ const iconList = uni.getStorageSync('iconList')
 const userInfo = uni.getStorageSync("userInfo")
 
 // const userInfo = uni.getStorageSync('userInfo')
-const token = uni.getStorageSync('tokenStorageKey')
+const token = uni.getStorageSync('token')
 
 export const globalConfig = {
   host: 'https://xxx',

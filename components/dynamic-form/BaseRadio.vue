@@ -12,6 +12,7 @@
           label-class="van_field_label"
         >
           <template slot="input">
+						<!-- <view v-if="param.title">{{param.title}}</view> -->
             <van-radio-group
               direction="horizontal"
               :readonly="param.readonly"

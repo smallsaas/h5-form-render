@@ -65,7 +65,7 @@
 					data:data,
 					method:"POST",
 					header:{
-							Authorization: `Bearer ${globalConfig.enforcementKey}`
+							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 					},
 					complete(res) {
 						console.log(res.data.data.userList)
