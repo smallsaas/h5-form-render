@@ -3,7 +3,9 @@
 		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
 		</dynamic-page>
 		
-		<my :item="query" v-if="current===1"></my>
+		<DataBase style="background-color: white;" v-if="current===1"></DataBase>
+		
+		<my :item="query" v-if="current===2"></my>
 		
 		<van-tabbar :active="current" @change="onChange">
 					<van-tabbar-item>
@@ -20,6 +22,22 @@
 						style="width: 44rpx; height: 44rpx;"
 					  />
 					  执法
+					</van-tabbar-item>
+					
+					<van-tabbar-item>
+					  <image
+						slot="icon"
+						:src="icon.tabbarCompanyData"
+						mode="aspectFit"
+						style="width: 44rpx; height: 44rpx;"
+					  />
+					  <image
+						slot="icon-active"
+						:src="icon.tabbarCompanyDataActive"
+						mode="aspectFit"
+						style="width: 44rpx; height: 44rpx;"
+					  />
+					  企业库
 					</van-tabbar-item>
 					
 					<van-tabbar-item>
@@ -45,6 +63,7 @@
 	import _ from 'lodash'
 	import card from '../../components/other/Card.vue'
 	import DynamicPage from '../../components/dynamic-page/index.vue'
+	import DataBase from '../enforcement/enterpriseDatabase.vue'
 	import my from '../enforcement/my/my.vue'
 	import { globalConfig } from '@/config.js'
 	export default {
@@ -93,7 +112,8 @@
 		},
 		components:{
 			DynamicPage,
-			my
+			my,
+			DataBase
 		}
 	}
 </script>

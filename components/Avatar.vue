@@ -17,6 +17,7 @@
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
 			<view class="avatar_Box">
 				<image :src="list.avatar||icon.avatarMy" class="avatar"></image>
+				<view class="unBind" @click="unbinding">解绑</view>
 			</view>
 			<view class="title_Box">
 				<view class="row"><span class="title">{{list.nickName||list.username||'-'}}</span></view>

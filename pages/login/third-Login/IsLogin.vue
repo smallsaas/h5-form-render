@@ -219,7 +219,7 @@
 										 									uni.setStorageSync(globalConfig.tokenStorageKey,token)
 										 								}else{
 										 									uni.showModal({
-										 										title:"登录失败",
+										 										title:res.data.msg,
 										 										position:'center',
 										 										duration: 500,
 										 										success(click){
@@ -231,7 +231,7 @@
 										 											}
 										 										}
 										 									})
-										 									uni.clearStorage(globalConfig.tokenStorageKey)
+										 									// uni.clearStorage(globalConfig.tokenStorageKey)
 										 								}
 										 							}
 										             }
@@ -252,7 +252,7 @@
 										 							}
 										 						}
 										 					})
-										 					uni.clearStorage(globalConfig.tokenStorageKey)
+										 					// uni.clearStorage(globalConfig.tokenStorageKey)
 										         }
 										     //   }
 										     // })

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="background-color: white;">
 		<dynamic-page
            :API="api"
         />
@@ -10,6 +10,7 @@
 	import dynamicPage from '../../components/dynamic-page/index.vue'
     import { globalConfig } from '@/config.js'
 	export default {
+		name:"DataBase",
 		components: {
 			dynamicPage
 		},

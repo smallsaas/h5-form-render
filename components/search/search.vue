@@ -110,7 +110,7 @@
 		methods:{
 			getAddress(e){
 				this.address = e
-				 console.log(this.address)
+				 // console.log(this.address)
 			},
 			additems(){
 				if(this.config.addUrl){
