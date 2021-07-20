@@ -20,48 +20,48 @@
 				}
 			}
 		},
-		{
-			"path": "pages/test/index",
-			"style": {
-				"navigationBarTitleText": "测试页"
-			}
-		},
-		{
-			"path": "pages/login/testThirdApi",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"h5": {
-					"titleNView": false
-				}
-			}
-		},
-		{
-			"path": "pages/index/index",
-			"style": {
-				"h5": {
-					"titleNView": false
-				}
-			}
-		},
-		{
-			"path": "pages/test/form",
-			"style": {
-				"navigationBarTitleText": "动态表单"
-			}
-		},
-		{
-			"path": "pages/test/list",
-			"style": {
-				"navigationBarTitleText": "动态列表"
-			}
-		},
-		{
-			"path": "pages/test/page",
-			"style": {
-				"navigationBarTitleText": "动态页面"
-			}
-		},
+		// {
+		// 	"path": "pages/test/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "测试页"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/login/testThirdApi",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false,
+		// 		"h5": {
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"h5": {
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/test/form",
+		// 	"style": {
+		// 		"navigationBarTitleText": "动态表单"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/test/list",
+		// 	"style": {
+		// 		"navigationBarTitleText": "动态列表"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/test/page",
+		// 	"style": {
+		// 		"navigationBarTitleText": "动态页面"
+		// 	}
+		// },
 		{
 			"path": "pages/articleDetail/index",
 			"style": {
@@ -104,26 +104,26 @@
 				"navigationBarTitleText": "复工"
 			}
 		},
-		{
-			"path": "pages/companyHome/test",
-			"style": {
-				"navigationBarTitleText": "企业页面测试"
-			}
-		},
-		{
-			"path": "pages/test/cardtest",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/test/banner",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
+		// {
+		// 	"path": "pages/companyHome/test",
+		// 	"style": {
+		// 		"navigationBarTitleText": "企业页面测试"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/test/cardtest",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/test/banner",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// },
 		{
 			"path": "pages/companyHome/my/selfInspectionRecord",
 			"style": {
@@ -143,12 +143,12 @@
 				"navigationBarTitleText": "自查详情"
 			}
 		},
-		{
-			"path": "pages/test/signature",
-			"style": {
-				"navigationBarTitleText": "签名"
-			}
-		},
+		// {
+		// 	"path": "pages/test/signature",
+		// 	"style": {
+		// 		"navigationBarTitleText": "签名"
+		// 	}
+		// },
 		{
 			"path": "pages/companyHome/my/returnToWorkRecord",
 			"style": {
@@ -198,12 +198,12 @@
 				"navigationBarTitleText": "获取微信用户信息"
 			}
 		},
-		{
-			"path": "pages/test/processPage",
-			"style": {
-				"navigationBarTitleText": "流程测试页"
-			}
-		},
+		// {
+		// 	"path": "pages/test/processPage",
+		// 	"style": {
+		// 		"navigationBarTitleText": "流程测试页"
+		// 	}
+		// },
 
 		{
 			"path": "pages/street/index",
@@ -211,12 +211,12 @@
 				"navigationBarTitleText": "街道页面入口"
 			}
 		},
-		{
-			"path": "pages/street/test",
-			"style": {
-				"navigationBarTitleText": "街道页面测试"
-			}
-		},
+		// {
+		// 	"path": "pages/street/test",
+		// 	"style": {
+		// 		"navigationBarTitleText": "街道页面测试"
+		// 	}
+		// },
 		{
 			"path": "pages/street/my/index",
 			"style": {
@@ -234,102 +234,104 @@
 			"style": {
 				"navigationBarTitleText": "街道用户信息上报"
 			}
-		}, {
-			"path": "pages/test/list/articleItem",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		}, 
+		//{
+		// 	"path": "pages/test/list/articleItem",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		},
+		// },
+		// {
+		// 	"path": "pages/test/list/stateItem",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// },
+		// {
+		// 	"path": "pages/test/list/selfInspectionRecordItem",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// },
+		// {
+		// 	"path": "pages/test/list/page",
+		// 	"style": {
+		// 		"navigationBarTitleText": "列表子项展示",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// }, {
+		// 	"path": "pages/test/pages/pages",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// },
+		// {
+		// 	"path": "pages/test/pages/autoform",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// }, {
+		// 	"path": "pages/test/pages/autolist",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// },
+		// {
+		// 	"path": "pages/test/pages/banner",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/test/pages/navlist",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// }, {
+		// 	"path": "pages/test/pages/boxlist",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// },
+		// {
+		// 	"path": "pages/test/pages/autopage",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// }, {
+		// 	"path": "pages/test/form/form",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// }, {
+		// 	"path": "pages/test/testImgParser",
+		// 	"style": {
+		// 		"navigationBarTitleText": "营业证书识别",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// }, 
 		{
-			"path": "pages/test/list/stateItem",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/test/list/selfInspectionRecordItem",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/test/list/page",
-			"style": {
-				"navigationBarTitleText": "列表子项展示",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/test/pages/pages",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/test/pages/autoform",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/test/pages/autolist",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/test/pages/banner",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/test/pages/navlist",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/test/pages/boxlist",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/test/pages/autopage",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/test/form/form",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/test/testImgParser",
-			"style": {
-				"navigationBarTitleText": "营业证书识别",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
 			"path": "pages/enforcement/myEnforcement",
 			"style": {
 				"navigationBarTitleText": "",
@@ -467,34 +469,38 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
-			"path": "pages/test/search/search",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		 }, 
+		 //{
+		// 	"path": "pages/test/search/search",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
-			"path": "pages/test/testsearch",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// }, {
+		// 	"path": "pages/test/testsearch",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
+		// },
+		{
 			"path": "components/dynamic-form/custom/selectBox/selectBox",
 			"style": {
 				"navigationStyle": "custom"
 			}
 
-		}, {
-			"path": "pages/test/newFormTest/newFormTest",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		}, 
+		// {
+		// 	"path": "pages/test/newFormTest/newFormTest",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
+		// }, 
+		{
 			"path": "pages/enforcement/safeExport",
 			"style": {
 				"navigationBarTitleText": "",
@@ -558,15 +564,15 @@
 			}
 
 		}
-	    ,{
-            "path" : "pages/test/BusinessLicensePage/BusinessLicensePage",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+	    // ,{
+     //        "path" : "pages/test/BusinessLicensePage/BusinessLicensePage",
+     //        "style" :                                                                                    
+     //        {
+     //            "navigationBarTitleText": "",
+     //            "enablePullDownRefresh": false
+     //        }
             
-        }
+     //    }
         ,{
             "path" : "pages/login/login_register/enforcement_login",
             "style" :                                                                                    
