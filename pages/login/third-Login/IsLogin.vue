@@ -110,7 +110,7 @@
 										           //发起网络请求
 										           uni.request({
 										             // 请求路径
-										             url: 'https://api.uat.smallsaas.cn/auth/oauth/token',//第三方登录
+										             url: `${globalConfig.loginEP}/auth/oauth/token`,//第三方登录
 										             // url: 'https://api.uat.smallsaas.cn/oauth/token',//第三方登录
 										 						// url:"https://api.uat.smallsaas.cn/api/u/bind/login",//登录
 										             // 请求参数code
@@ -165,18 +165,21 @@
 																			let username;
 										 									let avatar;
 										 									let code;
+																			let userid;
 																			// console.log(res.data)
 										 									token = res.data.encryptedData
 										 									nickName = res.data.nickname
 																			username = res.data.username
 										 									code = res.data.bindCode
+																			userid = res.data.user_id
 										 									avatar = JSON.parse(LoginData.rawData).avatarUrl
 										 									// console.log(avatar)
 										 									let query = {
 										 										"nickName":nickName	,//微信登录的用户名
 										 										"avatar":avatar, //微信登录头像
 										 										"code":code,
-																				"username":username
+																				"username":username,
+																				"userId":userid
 										 									}
 										 									uni.showModal({
 										 										title:"登录成功",

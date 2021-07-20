@@ -3,6 +3,7 @@
 		<view class="AvatarCard" v-if="theme==='enforcement'||theme==='company'">
 			<view class="avatar_Box">
 				<image :src="list.avatar||icon.avatarMy" class="avatar"></image>
+				<view class="unBind" @click="unbinding">解绑</view>
 			</view>
 			<view class="title_Box" v-if="theme==='enforcement'">
 				<view class="row"><span class="title">姓名:</span>{{list.nickName||list.username||'-'}}</view>
@@ -44,6 +45,34 @@
 			},
 			theme:String
 		},
+		methods:{
+			unbinding(){
+				uni.request({
+					url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
+					method:"PUT",
+					header:{
+							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+					},
+					success(e) {
+						console.log(e)
+						if(e.data.data===true){
+							uni.showLoading({
+								content:"解绑成功",
+								showCancel:false
+							})
+							setTimeout(()=>{
+								uni.reLaunch({
+									url:"/pages/login/third-Login/third-Login",
+									success() {
+										uni.hideLoading()
+									}
+								})
+							},2000)
+						}
+					}
+				})
+			}
+		},
 		created() {
 			
 			if(this.item){
@@ -67,6 +96,19 @@
 		// box-shadow: 0px 0px 5px #aaa;
 		.avatar_Box{
 			padding: 5px;
+			.unBind{
+				position: relative;
+				bottom: 0;
+				width: 30px;
+				font-size: 10px;
+				background-color: #00ACA7;
+				color: white;
+				text-align: center;
+				left: 50%;
+				transform: translate(-50%);
+				padding: 3px 10px;
+				border-radius: 3px;
+			}
 			.avatar{
 				width: 50px;
 				height: 50px;

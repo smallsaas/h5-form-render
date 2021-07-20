@@ -96,13 +96,14 @@ export const getAdmUsers = (api, params) => {
 
 // 获取全局配置
 export const getGolobalConfig = (params) => {
-    const url = 'https://api.mock.smallsaas.cn/form?id=1'
+	const url = `${globalConfig.formHost}?id=1`
+    // const url = 'https://api.mock.smallsaas.cn/form?id=1'
     return request('GET', url, params)
 }
 
 
 // 获取图片资源
 export const getIcon = (params)=>{
-	const url = 'https://api.mock.smallsaas.cn/data?id=9999999'
+	const url = `${globalConfig.dataHost}?id=9999999`
 	return request('GET',url,params)
 }

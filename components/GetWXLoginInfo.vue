@@ -3,6 +3,7 @@
 </template>
 
 <script>
+	import {globalConfig} from '@/config.js'
 	export default {
 		name:"GetWXLoginInfo",
 		data() {
@@ -50,7 +51,7 @@
 		                  //发起网络请求
 		                  uni.request({
 		                    // 请求路径
-		                    url: 'https://api.uat.smallsaas.cn/auth/oauth/token',
+		                    url: `${globalConfig.loginEP}/auth/oauth/token`,
 		                    // 请求参数code
 												'content-type': 'application/x-www-form-urlencoded',
 		                    data: LoginData,

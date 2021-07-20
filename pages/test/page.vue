@@ -18,7 +18,7 @@
 		data() {
 			return {
 				// api: globalConfig.formHost + '/form?id=201'
-                api: 'https://api.mock.smallsaas.cn/form?id=300'
+                api: `${globalConfig.formHost}?id=300`
 			}
 		}
 	}

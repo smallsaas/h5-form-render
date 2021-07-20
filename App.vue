@@ -70,7 +70,7 @@
 			getToken(){
 					uni.request({
 					  // 请求路径
-					  url: 'https://api.uat.smallsaas.cn/api/sys/oauth/app/login',
+					  url: `${globalConfig.loginEP}/api/sys/oauth/app/login`,
 					  data: this.LoginData,
 					  header: {
 						// 'content-type': 'application/x-www-form-urlencoded'

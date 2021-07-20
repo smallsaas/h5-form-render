@@ -11,12 +11,13 @@
 </template>
 
 <script>
+	import {globalConfig} from '@/config.js'
 	import search from '../../../search/search.vue'
 	export default {
 		data() {
 			return {
 				config:{
-            loadAPI:"https://api.mock.smallsaas.cn/data",
+            loadAPI:`${globalConfig.dataHost}`,
             id:"12313",
             field:"address",
             itemModule:{

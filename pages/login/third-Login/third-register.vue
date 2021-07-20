@@ -70,7 +70,7 @@
 			return {
 				type:"",
 				lincenseNo:null,
-				api:"https://api.uat.smallsaas.cn/admin/appuser/bindUser",
+				api:`${globalConfig.loginEP}/admin/appuser/bindUser`,
 				methods:"POST",
 				data:{},
 				query:"",

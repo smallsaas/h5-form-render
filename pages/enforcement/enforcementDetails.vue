@@ -22,7 +22,7 @@
 			return {
 				api: globalConfig.formHost + '?id=2004',
 				data:null,
-				dataApi:"https://api.uat.smallsaas.cn/api/u/companyInfo",
+				dataApi:`${globalConfig.workflowEP}/api/u/companyInfo`,
 				id:"",
 				method:"GET",
 				reload:false

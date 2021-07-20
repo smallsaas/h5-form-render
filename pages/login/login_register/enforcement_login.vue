@@ -87,7 +87,7 @@
                                 // 请求路径
                                 // url: 'https://api.uat.smallsaas.cn/auth/oauth/token',//第三方登录
                                 // url: 'https://api.uat.smallsaas.cn/oauth/token',//第三方登录
-																url:"https://api.uat.smallsaas.cn/api/u/bind/login",//登录
+																url:`${globalConfig.loginEP}/api/u/bind/login`,//登录
                                 // 请求参数code
 																header:{
 																	'content-type': 'application/x-www-form-urlencoded',
