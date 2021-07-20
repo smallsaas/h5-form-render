@@ -180,14 +180,15 @@
                 this.currentType = title
                 this.markers = this.allmarkers.filter(x => x.type === title)
 				if (this.markers.length > 0) {
-					for(let i=0;i<this.markers.length;i++){
-						this.latitude = _.get(this.markers, '['+i+'].latitude')
-						this.longitude = _.get(this.markers, '['+i+'].longitude')
+					// for(let i=0;i<this.markers.length;i++){
+						// this.latitude = _.get(this.markers, '['+i+'].latitude')
+						this.latitude = _.get(this.markers, '[0].latitude')
+						this.longitude = _.get(this.markers, '[0].longitude')
 						uni.createMapContext("nav_map", this).moveToLocation({
 							longitude: this.longitude,  
 							latitude: this.latitude,  
 						});  
-					}
+					// }
 
 				}
 			},

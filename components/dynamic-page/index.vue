@@ -10,7 +10,7 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
-								:srvFormData="getComponentsData(item) || {}"
+								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
 								@state="setState"
 									 />
@@ -20,7 +20,7 @@
 												..._get(config.moduleData, item.key, {}),
 												outStyle: getComponentStyle(item)
 										 }"
-										:srvFormData="getComponentsData(item) || {}"
+										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
 										@state="setState"
 									/>
@@ -227,6 +227,9 @@
 						},
 						customValues:{
 							type:Object
+						},
+						srvFormData:{
+							type:Object
 						}
 		},
 		data () {
@@ -247,7 +250,7 @@
 
 		},
 		created() {
-			console.log(this.number)
+			console.log("srv",this.srvFormData)
 		  if (!this.API) {
 			  return
 		  }

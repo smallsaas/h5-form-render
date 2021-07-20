@@ -198,6 +198,7 @@
 							// console.log(this.searchlist)
 							this.searchlist.push(list)
 							this.url=this.getID(this.searchlist)
+							
 						}
 					}
 				}
@@ -212,6 +213,7 @@
 					if(list[j].id){
 						url = this.config.itemNavigation + "?id=" + list[j].id
 					}
+					console.log(url)
 					urlList.push(url)
 				}
 				return urlList

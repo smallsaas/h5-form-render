@@ -19,6 +19,11 @@ export const getNavList = (params) => {
 	return request('GET', url, params)
 }
 
+// 获取搜索信息
+export const getSearchALL = (id) => {
+	const url = `${globalConfig.workflowEP}/api/u/companyInfo/${id}`
+	return request('GET', url, id)
+}
 
 // 获取执法对象类型数据
 export const getNavTypeList = (params) => {
