@@ -3,7 +3,7 @@
 		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
 		</dynamic-page>
 		
-		<DataBase style="background-color: white;" v-if="current===1"></DataBase>
+		<DataBase v-if="current===1"></DataBase>
 		
 		<my :item="query" v-if="current===2"></my>
 		

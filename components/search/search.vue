@@ -11,7 +11,7 @@
 			<!-- 语音输入按钮 -->
 			<view class="talkIcon search_Icons" style="color: #2C405A;" v-if="config.addIcon" @click="additems()">&#xe7fe;</view>
 		</view>
-		<view :class="'search-list '+searchType" @touchstart="touchStart" @touchmove="loadMore">
+		<view :class="'search-list '+searchType" @touchstart="touchStart" @touchend="loadMore">
 			<view v-for="(item,i) in listData" v-if="inputValue===''">
 				<navigator :url="url[i]">
 					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
@@ -97,6 +97,7 @@
 				}
 			}
 		},
+		
 		created() {
 			uni.removeStorage({
 			    key: 'selectName',
@@ -122,10 +123,10 @@
 			getName(e){
 				this.name = e
 				let name = this.name
-				console.log(this.name)
+				// console.log(this.name)
 				uni.navigateBack({
 					success(e){
-						console.log(e)
+						// console.log(e)
 						uni.setStorage({
 							key:"selectName",
 							data:name,
@@ -155,9 +156,10 @@
 			// 加载更多
 			loadMore(e){
 				// 移动
-				
+				// console.log("end",e)
 				const subY = e.changedTouches[0].clientY - this.touchData.clientY
-				if(subY>-50){
+				console.log(subY)
+				if(subY<=-200){
 					uni.showLoading({
 						title:"加载中"
 					})
@@ -190,7 +192,7 @@
 			},
 			getList(){
 				this.searchlist = []
-				console.log(this.searchlist)
+				// console.log(this.searchlist)
 				if(this.inputValue!==""){
 					for(let i=0;i<this.listData.length;i++){
 						let list = this.listData[i]
@@ -208,12 +210,12 @@
 			getID(list){
 				let urlList=[];
 				let url = this.config.itemNavigation;
-				console.log(this.config.itemNavigation)
+				// console.log(this.config.itemNavigation)
 				for(let j=0;j<list.length;j++){
 					if(list[j].id){
 						url = this.config.itemNavigation + "?id=" + list[j].id
 					}
-					console.log(url)
+					// console.log(url)
 					urlList.push(url)
 				}
 				return urlList

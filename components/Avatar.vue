@@ -7,11 +7,11 @@
 			</view>
 			<view class="title_Box" v-if="theme==='enforcement'">
 				<view class="row"><span class="title">姓名:</span>{{list.nickName||list.username||'-'}}</view>
-				<view class="row"><span class="title">证号:</span>{{list.code||'-'}}</view>
+				<view class="row"><span class="title">证号:</span>{{getCode(theme)||'-'}}</view>
 			</view>
 			<view class="title_Box" v-if="theme==='company'">
 				<view class="row"><span class="title">公司名称:</span>{{list.nickName||list.username||'-'}}</view>
-				<view class="row"><span class="title">营业执照号:</span>{{list.code||'-'}}</view>
+				<view class="row"><span class="title">营业执照号:</span>{{getCode(theme)||'-'}}</view>
 			</view>
 		</view>
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
@@ -34,7 +34,8 @@
 		data() {
 			return {
 				icon:{},
-				list:{}
+				list:{},
+				code:''
 			};
 		},
 		components:{
@@ -47,6 +48,37 @@
 			theme:String
 		},
 		methods:{
+			getCode(item){
+				let that = this;
+				if(item==="enforcement"){
+					uni.request({
+						url:`${globalConfig.loginEP}/admin/user/info`,
+						method:"GET",
+						header:{
+								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+						},
+						success(res) {
+							// console.log(res.data.data.sysUser.personNo)
+							that.code = res.data.data.sysUser.personNo
+						}
+					})
+				}else if(item==="company"){
+					uni.request({
+						url:`${globalConfig.loginEP}/admin/user/info`,
+						method:"GET",
+						header:{
+								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+						},
+						success(res) {
+							// console.log(res.data.data.sysUser.personNo)
+							that.code = res.data.data.sysUser.personNo
+						}
+					})
+				}else{
+					
+				}
+				return this.code
+			},
 			unbinding(){
 				uni.request({
 					url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
