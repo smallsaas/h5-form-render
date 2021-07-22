@@ -22,7 +22,7 @@
 			return {
 				api: globalConfig.formHost + '?id=2004',
 				data:null,
-				dataApi:`${globalConfig.workflowEP}/api/u/companyInfo`,
+				dataApi:`${globalConfig.workflowEP}/admin/companyinfo/page`,
 				id:"",
 				method:"GET",
 				reload:false

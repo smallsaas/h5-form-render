@@ -58,8 +58,8 @@
 		data() {
 			return {
 				inputValue:"",
-				listData:null,
-				searchlist:null,
+				listData:[],
+				searchlist:[],
 				url:null,
 				RadioValue:{
 					name:null,
@@ -150,8 +150,7 @@
 				// this.touchData.clientX = e.changeTouches[0].clientX;//X轴滑动
 				// console.log(e)
 				this.touchData.clientY = e.changedTouches[0].clientY;//Y轴滑动
-				this.num=1
-				this.value=this.size+10
+				this.value=this.size
 			},
 			// 加载更多
 			loadMore(e){
@@ -165,15 +164,16 @@
 					})
 						let params;
 						if(this.config.pz&&this.config.pn){
+							this.num=this.num+1
 							params={
 								...this.config.params,
-								"pageSize":this.value,
-								"pageNum":this.num
+								"size":this.value,
+								"current":this.num
 							}
 						}else{
 							params = this.config.params
 						}
-							if(this.size<this.total){
+							if(this.num<=this.total){
 								this.getData(params)
 							}else{
 								this.text = "没有更多数据了"
@@ -184,11 +184,17 @@
 			async getData(params){
 					const res = await this.getSearchList(params);
 					let list;
+					console.log(res)
 					list = res.data.records
-					this.listData=list
+					for(var i in list){
+						console.log(list[i])
+						this.listData.push(list[i])
+					}
+					console.log("listData",this.listData)
 					this.url = this.getID(this.listData)
-					this.total = res.data.total
-					this.size = res.data.records.length
+					this.total = res.data.pages
+					// this.size = res.data.records.length
+					this.num = res.data.current
 			},
 			getList(){
 				this.searchlist = []

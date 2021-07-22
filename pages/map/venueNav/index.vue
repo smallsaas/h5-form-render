@@ -142,7 +142,9 @@
 										searchAll:true
                 })
                 uni.hideLoading()
-				if (res.code === 200) {
+								console.log("加载完成",res)
+				if (res.code === 0) {
+					console.log("地图数据",res)
 					this.list = _.get(res, 'data.records', [])
 					console.log(this.list)
                     const markersList = []

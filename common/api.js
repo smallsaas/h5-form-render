@@ -15,13 +15,13 @@ export const getFormAPIdata = (API,params)=>{
 
 // 获取执法对象数据
 export const getNavList = (params) => {
-	const url = `${globalConfig.workflowEP}/api/u/companyInfo`
+	const url = `${globalConfig.workflowEP}/admin/companyinfo/page`
 	return request('GET', url, params)
 }
 
 // 获取搜索信息
 export const getSearchALL = (id) => {
-	const url = `${globalConfig.workflowEP}/api/u/companyInfo/${id}`
+	const url = `${globalConfig.workflowEP}/admin/companyinfo/${id}`
 	return request('GET', url, id)
 }
 

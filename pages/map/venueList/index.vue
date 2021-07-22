@@ -110,8 +110,8 @@
 			async fetchList (data) {
                 uni.showLoading({ title: 'loading...', mask:true })
 				const res = await getNavList({ 
-                    pageSize: this.listTotalPages, 
-                    pageNum: this.listCurrentPage,
+                    size: this.listTotalPages, 
+                    current: this.listCurrentPage,
                     ...this.currentType !== '全部' ? { type: this.currentType } : {},
                  })
                 uni.hideLoading()		
