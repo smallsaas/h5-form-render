@@ -109,10 +109,11 @@
             
 			async fetchList (data) {
                 uni.showLoading({ title: 'loading...', mask:true })
+								// console.log(this.currentType)
 				const res = await getNavList({ 
                     size: this.listTotalPages, 
                     current: this.listCurrentPage,
-                    ...this.currentType !== '全部' ? { type: this.currentType } : {},
+                    ...this.currentType===undefined?{}:this.currentType !== '全部' ? { type: this.currentType } : {},
                  })
                 uni.hideLoading()		
 				this.list = this.list.concat([..._.get(res, 'data.records', [])])

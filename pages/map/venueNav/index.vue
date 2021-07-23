@@ -23,13 +23,13 @@
                         alignItems: 'center',
                         padding: '10rpx',
 						boxShadow: '0 0 10px 0 #c1c1c1',
-                        backgroundColor: item.colour || '#333',
+                        backgroundColor: 'rgba('+item.colour+')' || '#333',
                     }"
 				>
 					<button 
                         class="map_customCallout"
                         :style="{
-                            backgroundColor: item.colour || '#333'
+                            backgroundColor: 'rgba('+item.colour+')' || '#333'
                         }"
                     >
                       {{item.title}}
@@ -60,7 +60,7 @@
                     :url="item.url" 
                     :title="item.title"
 										:type="item.type"
-                    :imageBg="item.colour||'#333'"
+                    :imageBg="'rgba('+item.colour+')'||'#333'"
                     :selectTitle="currentType"
                 	@onClick="handleClick"
                 />
