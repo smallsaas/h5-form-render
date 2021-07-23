@@ -26,14 +26,14 @@
 				class="list_item"
                 @click.stop="handleToMap(item)"
 			>
-				<view 
-					:style="{backgroundImage: item.houseOwershipImages || `url(${require('../../../static/images/empty.png')})`}"
+				<img
+					:src="(item.houseOwershipImages.toString()===''?undefined:item.houseOwershipImages) || '../../../static/images/empty.png'"
 					class="image"
 				/>
 				<view class="message_content">
 					<view class="title_status">
 						<text class="title">{{item.name}}</text>
-						<view 
+<!-- 						<view 
                             class="status" 
                             :style='{
                                 color: getStatusColor(item.status),
@@ -41,14 +41,14 @@
                             }'
                         >
                             {{item.status}}
-                        </view>
+                        </view> -->
 					</view>
 					<view class="address">
-                        <image src="../../../static/icons/nav/address.svg" class="address_icon" />
+                        <image src="@/static/icons/nav/address.svg" class="address_icon" />
                         <view class="address_text">{{item.address}}</view>
                     </view>
 					<view class="phone">
-                        <image src="../../../static/icons/nav/phone.svg" class="phone_icon"/>
+                        <image src="@/static/icons/nav/phone.svg" class="phone_icon"/>
                         <view class="phone_text" @click.stop="handleCallPhone(item.personPhone)">{{item.personPhone}}</view>
                     </view>
 				</view>
