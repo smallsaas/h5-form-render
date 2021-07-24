@@ -47,7 +47,7 @@
 					title:"识别中"
 				})
 				uni.uploadFile({
-					url: globalConfig.workflowEP + '/executive/companyattachment/ocr/licence',
+					url: globalConfig.YyzzEP + '/executive/companyattachment/ocr/licence',
 					filePath: file.url,
 					name: "file",
 					header: this.header,
