@@ -124,10 +124,10 @@
 										                 // 请求成功后获取openid和session_key
 										 								if(res.data.code===-1){
 										 								uni.showModal({
-										 									title:"请注册",
-										 									content:"您没有注册，是否前往注册？",
+										 									title:"请绑定",
+										 									content:"您没有绑定，是否前往绑定？",
 										 									cancelText:"其他角色",
-										 									confirmText:"立即注册",
+										 									confirmText:"立即绑定",
 										 									success(button) {
 
 										 										let list = {

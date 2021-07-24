@@ -21,13 +21,13 @@
 			<checkbox style="float: right;" color="#2C405A" @click="changeType" :checkout="isCheckout">显示密码</checkbox>
 			</view>
 			<button @click="getToken" class="loginBtn">登录</button>
-			<view class="Select" @click="checkoutSelect">没有用户？去注册</view>
+			<view class="Select" @click="checkoutSelect">没有用户？去绑定</view>
 		</view>
 		<view
 					class="LoginBox"
 					v-if="!checkout"
 				>
-				<view class="header">注册界面</view>
+				<view class="header">绑定界面</view>
 					<view class="inputBox">
 						用户名:
 						<input class="inputText" v-model="registerData.username" placeholder="请输入用户名"/>
@@ -37,7 +37,7 @@
 					<input class="inputText" :type="pType" v-model="registerData.password" placeholder="请输入密码"/>
 					<checkbox style="float: right;" color="#2C405A" @click="changeType" :checkout="isCheckout">显示密码</checkbox>
 					</view>
-					<button @click="register" class="loginBtn">注册</button>
+					<button @click="register" class="loginBtn">绑定</button>
 					<view class="Select" @click="checkoutSelect">已有用户？去登录</view>
 			</view>
 	</view>
@@ -159,7 +159,7 @@
 					      // 请求成功后获取openid和session_key
 					      if(res.data.code===0){
 									uni.showModal({
-										title:"注册成功"
+										title:"绑定成功"
 									})
 								}else{
 									uni.showModal({
@@ -169,7 +169,7 @@
 					  },
 					  fail(err) {
 							uni.showModal({
-								title:"注册失败"
+								title:"绑定失败"
 							})
 					  }
 				})

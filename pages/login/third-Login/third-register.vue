@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<!-- 执法人员注册页面 -->
+		<!-- 执法人员绑定页面 -->
 		<view class="LoginBox enf" v-if="type === '2'">
-			<view class="title">执法人员注册</view>
+			<view class="title">执法人员绑定</view>
 			<view class="inputBox">
 				<image :src="iconList.inputEnforcement" class="e-Icon"></image>
 				<input v-model="username" type="text" class="input enforcement" placeholder="请输入用户名" />
@@ -11,11 +11,11 @@
 				<image :src="iconList.inputPassword" class="e-Icon"></image>
 				<input v-model="password" type="password" class="input enforcement" placeholder="请输入密码" />
 			</view>
-			<button class="loginBtn" @click="register('EXECUTOR')">注册</button>
+			<button class="loginBtn" @click="register('EXECUTOR')">绑定</button>
 		</view>
-		<!-- 企业人员注册页面 -->
+		<!-- 企业人员绑定页面 -->
 		<view class="LoginBox company" v-else-if="type === '4'">
-			<view class="title">企业人员注册</view>
+			<view class="title">企业人员绑定</view>
 			<!-- 自动识别功能接口未接上 -->
 			<!-- <c-lincense @getValue="lincenseValue"></c-lincense> -->
 			<view class="inputBox">
@@ -30,11 +30,11 @@
 				<image :src="iconList.inputPassword" class="e-Icon"></image>
 				<input v-model="password" type="password" class="input company" placeholder="请输入密码" />
 			</view>
-			<button class="loginBtn" @click="register('COMPANY')">注册</button>
+			<button class="loginBtn" @click="register('COMPANY')">绑定</button>
 		</view>
-		<!-- 街镇用户注册页面 -->
+		<!-- 街镇用户绑定页面 -->
 		<view class="LoginBox street" v-else-if="type === '3'">
-			<view class="title">街镇人员注册</view>
+			<view class="title">街镇人员绑定</view>
 			<!-- 自动识别功能接口未接上 -->
 			<!-- <c-lincense @getValue="lincenseValue"></c-lincense> -->
 			<view class="inputBox">
@@ -45,7 +45,7 @@
 				<image :src="iconList.inputPassword" class="e-Icon"></image>
 				<input v-model="password" type="password" class="input company" placeholder="请输入密码" />
 			</view>
-			<button class="loginBtn" @click="register('STREET')">注册</button>
+			<button class="loginBtn" @click="register('STREET')">绑定</button>
 		</view>
 		<view v-else>请检查用户类型是否正确！</view>
 	</view>
@@ -83,9 +83,9 @@
 		methods: {
 			getTitle(e){
 				switch(e){
-					case "2":this.setTitle("执法人员注册");break;
-					case "4":this.setTitle("企业用户注册");break;
-					case "3":this.setTitle("街镇用户注册");break;
+					case "2":this.setTitle("执法人员绑定");break;
+					case "4":this.setTitle("企业用户绑定");break;
+					case "3":this.setTitle("街镇用户绑定");break;
 				}
 			},
 			setTitle(e){
@@ -141,7 +141,7 @@
 						if(data.data.code===0){
 							// if(data.data.data){
 								uni.showLoading({
-									title:"注册成功"
+									title:"绑定成功"
 								})
 								uni.navigateTo({
 									url:"/pages/login/third-Login/IsLogin?id="+that.type,
