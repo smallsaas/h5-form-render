@@ -42,7 +42,7 @@ export const globalConfig = {
   designEP:  _.get(globalConfigStorage, 'designEP', 'https://ai.hdqmjs.com'),
 	loginEP: _.get(globalConfigStorage, 'loginEP', 'https://ai.hdqmjs.com'),
   extraEP: _.get(globalConfigStorage, 'extraEP', 'https://ai.hdqmjs.com'),
-  YyzzEP: _.get(globalConfigStorage, 'YyzzEP', 'https://ai.hdqmjs.com'),
+  YyzzEP: _.get(globalConfigStorage, 'YyzzEP', 'https://api.uat.smallsaas.cn'),
   tokenStorageKey: 'token',//token��
   tencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' ,// 获取地址sdk key
 	// 执法token

@@ -20,8 +20,7 @@
 			return {
 				icon:null,
 				header: { // 请求token
-					Authorization: `Bearer eyJleHBpcmVzX2luIjp7ImRheU9mTW9udGgiOjE5LCJkYXlPZldlZWsiOiJNT05EQVkiLCJkYXlPZlllYXIiOjIwMCwiaG91ciI6MTAsIm1pbnV0ZSI6MjksIm1vbnRoIjoiSlVMWSIsIm1vbnRoVmFsdWUiOjcsIm5hbm8iOjM2NzAwMDAwMCwic2Vjb25kIjoxMCwieWVhciI6MjAyMSwiY2hyb25vbG9neSI6eyJjYWxlbmRhclR5cGUiOiJpc284NjAxIiwiaWQiOiJJU08ifX0sInRva2VuX3R5cGUiOiJCZWFyZXIiLCJzY29wZSI6InNlcnZlciIsImFsZyI6IkhTMjU2In0.eyJhY2Nlc3NfdG9rZW4iOiIyNGM2NTJlZjE4MDI0NTY3OWFiNTI2MjhkNDM1ZWMzZCIsInJlZnJlc2hfdG9rZW4iOiI2OGIxM2I3OTkzZDk0YTRmOGU3OTlhY2NkY2ZiODRhYiIsImV4cGlyZXNfaW4iOjg2NDAwMCwidXNlcl9pZCI6NDAsImRlcHRfaWQiOjEsInVzZXJuYW1lIjoiMTExMTExIiwidG9rZW5fdHlwZSI6IkJlYXJlciIsInNjb3BlIjoic2VydmVyIiwibGljZW5jZSI6InByb2dyZXNzIiwiZnJvbSI6MCwidGltZV9zdGFtcCI6IjE2MjU3OTc3NTAiLCJyb2xlX2NvZGVzIjpbIlJPTEVfQURNSU4iXX0.y9jJ1nK1YCIQWV1PSD0xKTi64dsvrnqDvAuvZsSo5dw`,
-					token: 'eyJleHBpcmVzX2luIjp7ImRheU9mTW9udGgiOjE5LCJkYXlPZldlZWsiOiJNT05EQVkiLCJkYXlPZlllYXIiOjIwMCwiaG91ciI6MTAsIm1pbnV0ZSI6MjksIm1vbnRoIjoiSlVMWSIsIm1vbnRoVmFsdWUiOjcsIm5hbm8iOjM2NzAwMDAwMCwic2Vjb25kIjoxMCwieWVhciI6MjAyMSwiY2hyb25vbG9neSI6eyJjYWxlbmRhclR5cGUiOiJpc284NjAxIiwiaWQiOiJJU08ifX0sInRva2VuX3R5cGUiOiJCZWFyZXIiLCJzY29wZSI6InNlcnZlciIsImFsZyI6IkhTMjU2In0.eyJhY2Nlc3NfdG9rZW4iOiIyNGM2NTJlZjE4MDI0NTY3OWFiNTI2MjhkNDM1ZWMzZCIsInJlZnJlc2hfdG9rZW4iOiI2OGIxM2I3OTkzZDk0YTRmOGU3OTlhY2NkY2ZiODRhYiIsImV4cGlyZXNfaW4iOjg2NDAwMCwidXNlcl9pZCI6NDAsImRlcHRfaWQiOjEsInVzZXJuYW1lIjoiMTExMTExIiwidG9rZW5fdHlwZSI6IkJlYXJlciIsInNjb3BlIjoic2VydmVyIiwibGljZW5jZSI6InByb2dyZXNzIiwiZnJvbSI6MCwidGltZV9zdGFtcCI6IjE2MjU3OTc3NTAiLCJyb2xlX2NvZGVzIjpbIlJPTEVfQURNSU4iXX0.y9jJ1nK1YCIQWV1PSD0xKTi64dsvrnqDvAuvZsSo5dw',
+					Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`,
 					"Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryAFRaG58f2nIb0mPB"
 				},
 			}
@@ -43,6 +42,7 @@
 				const data = {
 					file: file
 				}
+				console.log(data)
 				uni.showLoading({
 					title:"识别中"
 				})

@@ -245,12 +245,20 @@
 								if(_config.__config__.children){
 									let children = _config.__config__.children
 									children.map((c_config,c_index)=>{
-										vModel[c_index]=c_config.__vModel__
-										// console.log(c_config)
+										if(c_config==="establish_date"){
+											vModel[c_index]=this.StrToDate(c_config.__vModel__)
+	
+											// console.log("更改",vModel[c_index])
+										}else{
+											vModel[c_index]=c_config.__vModel__
+										}
+										// console.log("c_config",c_config)
 									})
+									// console.log("vModel",vModel)
 									// config = 
 								}else{
 									vModel[_index] = _config.__vModel__
+									// console.log("111",vModel[_index])
 									// console.log(children)
 									// children.map((c_config,c_index)=>{
 									// 	vModel[c_index]=c_config.__vModel__
@@ -259,11 +267,19 @@
 								}
 								// console.log(_config.__config__)
 							})
-							console.log(vModel)
-							console.log(e)
+							// console.log(vModel)
+							// console.log(e)
 								
 							vModel.map((_Model,_v)=>{
-								this.form[_Model]=e[_Model]
+								// console.log("model",_Model)
+								// console.log("eModel",e[_Model])
+								if(_Model==="establish_date"){
+									this.form[_Model]=this.StrToDate(e[_Model])
+								}else if(_Model==="valid_period"){
+									this.form[_Model]=this.StrToDate(e[_Model])
+								}else{
+									this.form[_Model]=e[_Model]
+								}
 							})
 								// this.config.map((item,key)=>{
 								// 	console.log(item.__vModel__)
@@ -290,6 +306,24 @@
 								newUrl = url
 							}
 							return newUrl
+						},
+						StrToDate(data){
+							let date;
+							// let year = data.slice(0,4)
+							date = data.slice(-4)
+							console.log("data",data)
+							let month = Math.floor(date/100)
+						  let day = date.slice(-2)
+							let year = (data-date)/10000
+							if(month<10){
+								month = "0"+month
+							}
+							console.log("date",date)
+							console.log("year",year)
+							console.log("day",day)
+							console.log("month",month)
+							return year+'-'+month+'-'+day
+							// if(year <10000)
 						},
             // 获取表单数据
             fetchFormData () {
@@ -570,6 +604,7 @@
 							    data: data,
 							    header: this.header,
 							    complete: (res) => {
+										console.log("res",res)
 							        uni.hideLoading()
 							        if (_.get(res, 'data.code') === 200) {
 							            uni.showToast({
@@ -601,7 +636,7 @@
 																	})
 							                }
 							            }, 500)
-							        }else if(_.get(res,'data.code')==="00000"){
+							        }else if(_.get(res,'data.data')===true){
 												let pages = getCurrentPages()
 												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
