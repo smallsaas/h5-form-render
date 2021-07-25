@@ -10,6 +10,7 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:isYyzz="item.isYyzz"
 								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
 								@state="setState"
@@ -20,6 +21,7 @@
 												..._get(config.moduleData, item.key, {}),
 												outStyle: getComponentStyle(item)
 										 }"
+										 :isYyzz="item.isYyzz"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
 										@state="setState"

@@ -64,7 +64,7 @@
 						uni.hideLoading()
 						console.log('操作失败 = ', err)
 						uni.showModal({
-							title:"识别失败！"
+							title:err.errMsg
 						})
 					}
 				})

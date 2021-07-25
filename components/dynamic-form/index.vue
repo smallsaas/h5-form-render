@@ -171,6 +171,7 @@
               }
             },
             ifManualSubmit: Boolean, // 用于自定义提交
+						isYyzz:Boolean
 		},
 		data() {
 			return {
@@ -509,6 +510,7 @@
 									if(_.get(this.config,"workflow")){
 										console.log(this.config)
 										let workflowData;
+										let YyzzData;
 										if(this.userlist){
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
@@ -526,16 +528,124 @@
 												// "comment": "同意"
 											}
 										}
-										if(_.get(this.formConfig,'saveApi','')===''){
-											this.workflowRequest(workflowData)
+										for(var i in submitData){
+												console.log('submitDataItem',submitData[i])
+										}
+										// 营业执照拼接的字段
+										YyzzData = {
+											"address":submitData["address"],
+											"name":submitData["name"],
+											"licenceNo":submitData["reg_num"],
+											"personName":submitData["person"],
+											"capital":submitData["capital"],
+											"businessScope":submitData["business"],
+											"startupDate":submitData["establish_date"],
+											"expireDate":submitData["valid_period"]
+										}
+										// YyzzData = {
+										// 	"address":
+										// }
+										console.log("yyzz",this.isYyzz)
+										if(this.isYyzz){
+											this.YyzzRequest(YyzzData)
 										}else{
-											this.handleSubmitRequest(workflowData)
+											if(_.get(this.formConfig,'saveApi','')===''){
+												this.workflowRequest(workflowData)
+											}else{
+												this.handleSubmitRequest(workflowData)
+											}
 										}
 									}else{
 										this.handleSubmitRequest(submitData)
 									}
                 }
             },
+						//营业执照提交
+						YyzzRequest(data){
+							const url = `${globalConfig.workflowEP}/admin/companyinfo`
+							uni.showLoading({title:'正在识别中...'})
+							uni.request({
+							    url: url,
+							    method:'POST',
+							    data: data,
+							    header: this.header,
+							    complete: (res) => {
+							        uni.hideLoading()
+							        if (_.get(res, 'data.code') === 200) {
+							            uni.showToast({
+							                title:'操作成功'
+							            }),
+							            setTimeout(() => {
+							                if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+																console.log(this.config.submittedNavigation)
+							                    uni.navigateTo({
+							                        url: '/pages' + this.config.submittedNavigation,
+																			success() {
+																					this.$emit("state","success")
+																					 let page = getCurrentPages().pop();  //跳转页面成功之后
+																					 if (!page) return;  
+																					 page.onLoad(); //如果页面存在，则重新刷新页面
+																			},
+																			fail:(a)=>{
+																				console.log(a)
+																			}
+							                    })
+							                } else {
+							                    uni.navigateBack({
+																		success(){
+																			let page = getCurrentPages().pop();  //跳转页面成功之后
+																			if (!page) return;  
+																			page.onLoad(); //如果页面存在，则重新刷新页面
+																		},
+																		delta:10
+																	})
+							                }
+							            }, 500)
+							        }else if(_.get(res,'data.code')==="00000"){
+												let pages = getCurrentPages()
+												let LastPage = pages[0]
+												let pageUrl = LastPage.$page.fullPath
+												console.log(LastPage)
+												
+												setTimeout(() => {
+												    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
+															console.log(this.config.submittedNavigation)
+												        uni.navigateTo({
+												            url: '/pages' + this.config.submittedNavigation,
+																		success() {
+																				this.$emit("state","success")
+																				let page = getCurrentPages().pop();  //跳转页面成功之后
+																				if (!page) return;  
+																				page.onLoad(); //如果页面存在，则重新刷新页面
+																		},
+																		fail:(a)=>{
+																			console.log(a)
+																		}
+												        })
+												    } else {
+												        uni.navigateBack({
+																	success(){
+																		let page = getCurrentPages().pop();  //跳转页面成功之后
+																		if (!page) return;  
+																		page.onLoad(); //如果页面存在，则重新刷新页面
+																	},
+												        	delta:10
+												        })
+												    }
+												}, 500)
+											}else{
+												this.$emit("state","error")
+												// console.log("识别失败")
+												uni.showToast({
+													title:res.msg
+												})
+												setTimeout(()=>{
+													uni.hideToast()
+												},1000)
+											}
+							    }
+							})
+						},
             workflowRequest(data){
 							const url = `${globalConfig.workflowEP}/api.flow.examine/complete`
 							uni.showLoading({ title: '', mask: true })
