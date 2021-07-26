@@ -80,30 +80,57 @@
 				return this.code
 			},
 			unbinding(){
-				uni.request({
-					url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
-					method:"PUT",
-					header:{
-							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
-					},
-					success(e) {
-						console.log(e)
-						if(e.data.data===true){
-							uni.showLoading({
-								content:"解绑成功",
-								showCancel:false
-							})
-							setTimeout(()=>{
-								uni.reLaunch({
-									url:"/pages/login/third-Login/third-Login",
-									success() {
-										uni.hideLoading()
-									}
+				if(theme==="company"){
+					uni.request({
+						url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
+						method:"PUT",
+						header:{
+								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+						},
+						success(e) {
+							console.log(e)
+							if(e.data.data===true){
+								uni.showLoading({
+									content:"解绑成功",
+									showCancel:false
 								})
-							},2000)
+								setTimeout(()=>{
+									uni.reLaunch({
+										url:"/pages/login/third-Login/third-Login",
+										success() {
+											uni.hideLoading()
+										}
+									})
+								},2000)
+							}
 						}
-					}
-				})
+					})
+				}else{
+					uni.request({
+						url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
+						method:"PUT",
+						header:{
+								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+						},
+						success(e) {
+							console.log(e)
+							if(e.data.data===true){
+								uni.showLoading({
+									content:"解绑成功",
+									showCancel:false
+								})
+								setTimeout(()=>{
+									uni.reLaunch({
+										url:"/pages/login/third-Login/third-Login",
+										success() {
+											uni.hideLoading()
+										}
+									})
+								},2000)
+							}
+						}
+					})	
+				}
 			}
 		},
 		created() {
