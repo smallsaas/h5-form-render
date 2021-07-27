@@ -10,6 +10,7 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:workflow="item.workflow"
 									:isYyzz="item.isYyzz"
 								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
@@ -21,6 +22,7 @@
 												..._get(config.moduleData, item.key, {}),
 												outStyle: getComponentStyle(item)
 										 }"
+										 :workflow="item.workflow"
 										 :isYyzz="item.isYyzz"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
@@ -232,7 +234,8 @@
 						},
 						srvFormData:{
 							type:Object
-						}
+						},
+						workflow:false
 		},
 		data () {
 			return {
@@ -252,23 +255,36 @@
 
 		},
 		created() {
-			console.log("srv",this.srvFormData)
 		  if (!this.API) {
 			  return
 		  }
 		  this.fetchConfigData()
 			this.getState()
-			
+			let TFormKey = this.FormKey
+			// console.log(this.FormKey)
+			// this.config.modules.map((item,i)=>{
+			// 	if(_.get(item, 'type') === 'autoform'){
+			// 		let FormKey = _.get(item,'FormKey','')
+			// 		if(FormKey){
+			// 			console.log("FormKey",FormKey)
+			// 			this.getWorkflow(FormKey)	
+			// 		}else if(TFormKey){
+			// 			this.getWorkflow(TFormKey)
+			// 		}else{
+			// 			this.getCodeData(this.codeAPI,this.code)
+			// 		}
+			// 	}
+			// })
 		},
-		//#ifdef MP-WEIXIN
 		mounted(){
-			let TFormKey = this.FormKey
+			console.log("srv",this.srvFormData)
+			// let TFormKey = this.FormKey
 			console.log(this.FormKey)
 			this.config.modules.map((item,i)=>{
 				if(_.get(item, 'type') === 'autoform'){
 					let FormKey = _.get(item,'FormKey','')
 					if(FormKey){
-						console.log(FormKey)
+						console.log("FormKey",FormKey)
 						this.getWorkflow(FormKey)	
 					}else if(TFormKey){
 						this.getWorkflow(TFormKey)
@@ -278,38 +294,37 @@
 				}
 			})
 		},
-		//#endif
-		// #ifdef APP-PLUS
 		updated(){
+			
 			let TFormKey = this.FormKey
-			console.log(this.FormKey)
-			this.config.modules.map((item,i)=>{
-				if(_.get(item, 'type') === 'autoform'){
-					let FormKey = _.get(item,'FormKey','')
-					if(FormKey){
-						console.log(FormKey)
-						this.getWorkflow(FormKey)	
-					}else if(TFormKey){
-						this.getWorkflow(TFormKey)
-					}else{
-						this.getCodeData(this.codeAPI,this.code)
-					}
-				}
-			})
+			// console.log(this.FormKey)
+			// this.config.modules.map((item,i)=>{
+			// 	if(_.get(item, 'type') === 'autoform'){
+			// 		let FormKey = _.get(item,'FormKey','')
+			// 		if(FormKey){
+			// 			// console.log("FormKey",FormKey)
+			// 			this.getWorkflow(FormKey)	
+			// 		}else if(TFormKey){
+			// 			this.getWorkflow(TFormKey)
+			// 		}else{
+			// 			this.getCodeData(this.codeAPI,this.code)
+			// 		}
+			// 	}
+			// })
 		},
-		// #endif
 		methods: {
 			_get (data, field, value) {
 				return _.get(data, field, value)
 			},
 			async getWorkflow(Key){
 				let res = await this.getWorkflowlist(Key)
+				console.log("resCode",res.code)
 				if(res.code==="00000"){
-					console.log(res.data.formEntity.code)
+					console.log("resDataFormEntityCode",res.data.formEntity.code)
 					let api = '/api.page.design.form/loadFormInfo'
 					let code = res.data.formEntity.code
-					console.log(api)
-					console.log(code)
+					// console.log("API",api)
+					// console.log("code",code)
 					
 					this.getCodeData(api,code)
 				}else{
@@ -320,7 +335,7 @@
 				}
 			},
 			// 自查编号
-			getWorkflowlist(Key){
+			async getWorkflowlist(Key){
 				let url = `${globalConfig.workflowEP}/api.flow.examine/toComplete`
 				let data = {
 					processDefineKey:Key
@@ -339,8 +354,9 @@
 					form = _.get(res.data,"form",{}),
 					jsonDefineBase64 = _.get(form,"jsonDefine","")
 					jsonDefine = Base64.decode(jsonDefineBase64)
+					// console.log("jsonDefine",jsonDefine)
 					json = JSON.parse(jsonDefine)
-					console.log(json)
+					// console.log("json",json)
 				}else{
 					// console.log("值为",res)
 					uni.showModal({
@@ -355,7 +371,7 @@
 				this.codeAPI = API
 				this.code = code
 				if(this.codeData){
-					console.log(this.codeData)
+					console.log("codeData",this.codeData)
 				}
 				return this.codeData
 			},

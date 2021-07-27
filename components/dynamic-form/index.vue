@@ -171,7 +171,8 @@
               }
             },
             ifManualSubmit: Boolean, // 用于自定义提交
-						isYyzz:Boolean
+						isYyzz:Boolean,
+						workflow:false
 		},
 		data() {
 			return {
@@ -213,7 +214,7 @@
               },  
         },
 		mounted() {
-			console.log(this.config)
+			console.log("srvFormData",this.srvFormData)
             // 有具体配置信息时
             if (Object.keys(this.config).length > 0) {
                 this.formConfig = _.cloneDeep(this.config)
@@ -542,6 +543,54 @@
                     this.$emit('submit', submitData)
                 } else {
 									if(_.get(this.config,"workflow")){
+										console.log(this.config)
+										let workflowData;
+										let YyzzData;
+										if(this.userlist){
+											workflowData = {
+												"processDefineKey":this.processDefineKey,
+												"userId":this.userlist.id,
+												"userName":this.userlist.firstName,
+												"formData":submitData,
+												"customValues":customData,
+												// "comment": "同意"
+											}
+										}else{
+											workflowData = {
+												"processDefineKey":this.processDefineKey,
+												"formData":submitData,
+												"customValues":customData,
+												// "comment": "同意"
+											}
+										}
+										for(var i in submitData){
+												console.log('submitDataItem',submitData[i])
+										}
+										// 营业执照拼接的字段
+										YyzzData = {
+											"address":submitData["address"],
+											"name":submitData["name"],
+											"licenceNo":submitData["reg_num"],
+											"personName":submitData["person"],
+											"capital":submitData["capital"],
+											"businessScope":submitData["business"],
+											"startupDate":submitData["establish_date"],
+											"expireDate":submitData["valid_period"]
+										}
+										// YyzzData = {
+										// 	"address":
+										// }
+										console.log("yyzz",this.isYyzz)
+										if(this.isYyzz){
+											this.YyzzRequest(YyzzData)
+										}else{
+											if(_.get(this.formConfig,'saveApi','')===''){
+												this.workflowRequest(workflowData)
+											}else{
+												this.handleSubmitRequest(workflowData)
+											}
+										}
+									}else if(this.workflow){
 										console.log(this.config)
 										let workflowData;
 										let YyzzData;

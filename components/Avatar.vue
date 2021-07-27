@@ -10,8 +10,8 @@
 				<view class="row"><span class="title">证号:</span>{{getCode(theme)||'-'}}</view>
 			</view>
 			<view class="title_Box" v-if="theme==='company'">
-				<view class="row"><span class="title">公司名称:</span>{{list.nickName||list.username||'-'}}</view>
-				<view class="row"><span class="title">营业执照号:</span>{{getCode(theme)||'-'}}</view>
+				<view class="row"><span class="title">公司名称:</span>{{companyList.name||'-'}}</view>
+				<view class="row"><span class="title">营业执照号:</span>{{companyList.licenceNo||'-'}}</view>
 			</view>
 		</view>
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
@@ -35,6 +35,7 @@
 			return {
 				icon:{},
 				list:{},
+				companyList:{},
 				code:''
 			};
 		},
@@ -46,6 +47,13 @@
 				type:Object
 			},
 			theme:String
+		},
+		mounted() {
+			console.log(this.theme)
+			if(this.theme==="company"){
+				this.companyList = globalConfig.companyInfo
+				console.log("list",this.list)
+			}
 		},
 		methods:{
 			getCode(item){
@@ -80,7 +88,7 @@
 				return this.code
 			},
 			unbinding(){
-				if(theme==="company"){
+				if(this.theme==="company"){
 					uni.request({
 						url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
 						method:"PUT",

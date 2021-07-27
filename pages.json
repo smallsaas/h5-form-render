@@ -1,5 +1,11 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path": "pages/test/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "测试页"
+		// 	}
+		// },
 		{
 				"path" : "pages/login/third-Login/third-Login",
 				"style" :                                                                                    
@@ -416,43 +422,43 @@
 				"enablePullDownRefresh": false
 			}
 
-		}
+		// }
 
-		, {
-			"path": "pages/enforcement/onSiteLawEnforcement/First",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// , {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/First",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		},
-		{
-			"path": "pages/enforcement/onSiteLawEnforcement/Second",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// },
+		// {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Second",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
-			"path": "pages/enforcement/onSiteLawEnforcement/Third",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// }, {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Third",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
-			"path": "pages/enforcement/onSiteLawEnforcement/Fourth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// }, {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Fourth",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
-			"path": "pages/enforcement/onSiteLawEnforcement/Fifth",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// }, {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Fifth",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
 		}, {
 			"path": "pages/map/venueList/index",
@@ -664,6 +670,15 @@
         }
         ,{
             "path" : "pages/enforcement/otherBook/otherBook",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/enforcement/selectCompany/selectCompany",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

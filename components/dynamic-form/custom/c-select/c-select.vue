@@ -4,16 +4,16 @@
 			<view class="Content_Value"><span v-if="param.required" style="color: #EE0A87;">*</span>{{param.label}}</view>
 			<view class="Content_Box">
 				<span v-show="content" style="float: left;padding: 0 10px;max-width: 12em;overflow: hidden;margin-right: 5px;">{{content}}</span>
-				<image @click="showView()" class="SelectBtn" style="height: 30px;width: 30px;" :src="icon.select"></image>
+				<image @click="showView()" class="SelectBtn" style="height: 30px;width: 30px;" :src="icon.select" ></image>
 			</view>
 		</view>
-		<scroll-view scroll-y="true" show-scrollbar="true" class="windows" v-show="show">
+		<scroll-view @scrolltolower="loadMore" scroll-y="true" show-scrollbar="true" class="windows" v-show="show">
 			<view class="WindowTitle" style="z-index: 30000;background-color: white;">请选择<span class="EXITIcon exit" @click="save()">&#xe642;</span></view>
 			<view class="listBody" style="background-color: white;">
 				<view v-for="(item,i) in list" class="allList" :key="i">
 					<view @click="hide(i),isCheck(i)" class="SelectList" >
-						<view class="title">{{item.firstName}}</view>
-						<view class="subtitle">{{item.orgName}}</view>
+						<view class="title">{{item.name}}</view>
+						<view class="subtitle">{{item.address}}</view>
 						<view class="radio">
 							<radio color="#1A5EB5" :checked="radioSelect===i"></radio>
 						</view>
@@ -35,19 +35,56 @@
 		name:"c-select",
 		data(){
 			return{
-				list:{},
+				list:[],
 				show:false,
 				content:"",
 				radioSelect:null,
 				data:null,
+				pz:10,
+				pn:1,
 				icon:{}
 			}
 		},
+		// onPageScroll(e) {
+		// 	console.log(e)
+		// },
 		created() {
 			this.icon=globalConfig.icon
 			this.getValue()
+			this.pz=10
+			this.pn=1
 		},
 		methods:{
+			loadMore(){
+				this.pn=this.pn+1
+				uni.showLoading({
+					title:"加载中"
+				})
+					uni.request({
+						url:url,
+						data:{
+							"current":this.pn,
+							"size":this.pz
+						},
+						method:"GET",
+						header:{
+								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+						},
+						complete(res) {
+							console.log("records",res.data)
+							if(res.data.code===0){
+								for(var i in res.data.data.records){
+									console.log("this is i",i)
+									_this.list.push(res.data.data.records[i])
+								}
+								console.log("thisList",_this.list)
+							}else{
+								console.log(res.data.data.msg)
+							}
+						}
+					})
+				uni.hideLoading()
+			},
 			async getValue(){
 				if(this.loadAPI===""||this.loadAPI===undefined){
 					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
@@ -55,23 +92,28 @@
 				let url = this.loadAPI
 				console.log(url)
 				let data = this.data||{
-					"processDefineKey":"test",
-					"version":"1"
 				}
 				let _this = this
 				console.log(data)
 				uni.request({
 					url:url,
-					data:data,
-					method:"POST",
+					data:{
+						"current":this.pn,
+						"size":this.pz
+					},
+					method:"GET",
 					header:{
 							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 					},
 					complete(res) {
-						console.log(res.data.data.userList)
-						if(res.data.code==="00000"){
-							_this.list = res.data.data.userList
-							console.log(_this.list)
+						console.log("records",res.data)
+						if(res.data.code===0){
+							for(var i in res.data.data.records){
+								console.log("this is i",i)
+								_this.list.push(res.data.data.records[i])
+								console.log("this is list",_this.list)
+							}
+							console.log("thisList",_this.list)
 						}else{
 							console.log(res.data.data.msg)
 						}
@@ -85,7 +127,7 @@
 				this.show = true
 			},
 			hide(i){
-				this.content = this.list[i].firstName
+				this.content = this.list[i].name
 				this.$emit("change",this.list[i].id)
 				this.$emit("list",this.list[i])
 			},

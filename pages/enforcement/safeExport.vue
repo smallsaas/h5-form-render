@@ -7,9 +7,10 @@
 		   contentPayload="data.formInfo.appDesignData"
 		/> -->
 		<dynamic-page
-			v-if="key&&getPageAapi"
+			v-if="key&&(getPageAapi)"
 		   :API="getPageAapi"
 			 :processDefineKey="key"
+			 :srvFormData="srvFormData"
 		/>
 	</view>
 
@@ -21,35 +22,80 @@
 	import {Base64} from '@/utils/tools.js'
 	export default {
 		components:{ dynamicPage },
-		mounted() {
-
-		},
-		onLoad (e){
+		// mounted(e) {
+		// 	let page = getCurrentPages()
+		// 	console.log("page",page[page.length-1])
+		// 	page[page.length-1].onLoad()
+		// },
+		onLoad(e){
 			uni.showLoading({
 				title:"加载中"
 			})
-			// console.log("e",e)
+			console.log("e",e)
 			let decode = JSON.parse(decodeURIComponent(e.query))
 			console.log("decode",decode)
 			// console.log(e.id)
 			// console.log(e.key)
 			this.getPageAapi = globalConfig.formHost + "?id=" + decode.id
 			this.key = decode.key
+			if(e.selectId){
+				// console.log(111111)
+				this.selectId = e.selectId
+				this.getValue(this.selectId)
+			}
 			uni.hideLoading()
 		},
 		data() {
 			return {
 				key:null,
+				srvFormData:null,
 				// 旧工作流
 				// getPageAapi: 'https://api.mock.smallsaas.cn/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
 				// getPageAapi: 'https://api.uat.smallsaas.cn/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
 				// getPageAapi: globalConfig.formHost + '?id=800',
 				// 外部工作流
 				// getPageAapi: globalConfig.formHost + '?id=10089',
-				getPageAapi:null
+				getPageAapi:null,
+				selectId:null,
 			}
 		},
 		methods:{
+			getValue(id){
+				let _this=this
+				let list
+				let srvFormData={
+					businessLicense:null,
+					companyName:null,
+					companyType:null,
+					companyAddress:null,
+					companyLegalPerson:null,
+					companyPhone:null
+				}; 
+				uni.request({
+					url:`${globalConfig.workflowEP}/executive/companyinfo/${id}`,
+					method:"GET",
+					header:{
+						Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
+					},
+					complete(res) {
+						console.log("listRes",res)
+						list = res.data.data
+						
+						console.log("list",list)
+						srvFormData.businessLicense=list.licenceNo
+						srvFormData.companyName=list.name
+						srvFormData.companyType=list.type
+						srvFormData.companyAddress=list.address
+						srvFormData.companyLegalPerson=list.personName
+						srvFormData.companyPhone=list.personPhone
+						_this.srvFormData = srvFormData
+						console.log("thisListTo",_this.srvFormData)
+						console.log("这里的api",_this.getPageAapi)
+						console.log("这里的key",_this.key)
+						console.log("这里的List",_this.srvFormData)
+					}
+				})
+			}
 		}
 	}
 </script>

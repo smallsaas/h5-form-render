@@ -173,6 +173,18 @@
 										 									code = res.data.bindCode
 																			userid = res.data.user_id
 										 									avatar = JSON.parse(LoginData.rawData).avatarUrl
+																			if(e==="4"){
+																				uni.request({
+																					url:`${globalConfig.workflowEP}/executive/companyinfo/myCompany`,
+																					header:{
+																						Authorization:`Bearer ${token}`
+																					},
+																					success(e) {
+																						console.log(e)
+																						uni.setStorageSync("companyInfo",e.data.data)
+																					}
+																				})
+																			}
 										 									// console.log(avatar)
 										 									let query = {
 										 										"nickName":nickName	,//微信登录的用户名
