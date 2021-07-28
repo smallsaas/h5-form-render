@@ -49,8 +49,9 @@
 			theme:String
 		},
 		mounted() {
-			console.log(this.theme)
+			// console.log(this.theme)
 			if(this.theme==="company"){
+				console.log(this.companyList)
 				this.companyList = globalConfig.companyInfo
 				console.log("list",this.list)
 			}

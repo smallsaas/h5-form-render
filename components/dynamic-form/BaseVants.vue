@@ -249,24 +249,47 @@
         },
         methods: {
            getBaseParam (item) {
-               return {
+						 let config;
+							if(this.Details===true){
+								 config={
+									 // title:_.get(item,'__config__.title'),
+										label: _.get(item, '__config__.label'),
+										required: _.get(item, '__config__.required', false),
+										readonly: true,
+										disabled: _.get(item, 'disabled', false),
+										clearable: _.get(item, 'clearable', false),
+										inputBlock: _.get(item, 'inputBlock', false),
+										value: this.form[item.__vModel__],
+										style: _.get(item, 'style', ''),
+										regList: _.get(item, '__config__.regList', []),
+										..._.has(item, 'placeholder') ? { placeholder: item.placeholder } : {},
+										..._.has(item, 'password') ? { password: item.password } : {},
+										..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
+										..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
+										..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
+										..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
+								 }
+							 }else{
+								 config={
 								 // title:_.get(item,'__config__.title'),
-                  label: _.get(item, '__config__.label'),
-                  required: _.get(item, '__config__.required', false),
-                  readonly: _.get(item, 'readonly', false),
-                  disabled: _.get(item, 'disabled', false),
-                  clearable: _.get(item, 'clearable', false),
-                  inputBlock: _.get(item, 'inputBlock', false),
-                  value: this.form[item.__vModel__],
-                  style: _.get(item, 'style', ''),
-                  regList: _.get(item, '__config__.regList', []),
-                  ..._.has(item, 'placeholder') ? { placeholder: item.placeholder } : {},
-                  ..._.has(item, 'password') ? { password: item.password } : {},
-                  ..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
-                  ..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
-                  ..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
-                  ..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
-               }
+									label: _.get(item, '__config__.label'),
+									required: _.get(item, '__config__.required', false),
+									readonly: _.get(item, 'readonly', false),
+									disabled: _.get(item, 'disabled', false),
+									clearable: _.get(item, 'clearable', false),
+									inputBlock: _.get(item, 'inputBlock', false),
+									value: this.form[item.__vModel__],
+									style: _.get(item, 'style', ''),
+									regList: _.get(item, '__config__.regList', []),
+									..._.has(item, 'placeholder') ? { placeholder: item.placeholder } : {},
+									..._.has(item, 'password') ? { password: item.password } : {},
+									..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
+									..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
+									..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
+									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
+							 }
+							}
+							return config
            },
 		   _has (item = {}, str) {
 			 if (Object.keys(item).length === 0) {

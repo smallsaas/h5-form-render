@@ -1,7 +1,7 @@
 <template>
 	<view class="self-item">
 		<view class="flex">
-			<view>
+			<view style="margin-right: 15px;">
 				<image class="icon" :src="icon.street"></image>
 			</view>
 			<view class="left flex1">
@@ -22,7 +22,7 @@
 					已完成
 				</view>
 				<view v-else-if="item.finishState === '0'" class="status" style="background-color: #F5A623;">
-					未完成
+					待确认
 				</view>
 			</view>
 		</view>
@@ -77,6 +77,7 @@
 					width: 35rpx;
 					height: 35rpx;
 					// padding: 5rpx;
+					mr
 					position: relative;
 					top: 50%;
 					left: 50%;

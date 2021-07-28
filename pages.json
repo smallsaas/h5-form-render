@@ -16,16 +16,16 @@
 				
 		},
 		// 旧登录界面
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"h5": {
-					"titleNView": false
-				}
-			}
-		},
+		// {
+		// 	"path": "pages/login/login",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false,
+		// 		"h5": {
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
 		// {
 		// 	"path": "pages/test/index",
 		// 	"style": {
@@ -68,12 +68,12 @@
 		// 		"navigationBarTitleText": "动态页面"
 		// 	}
 		// },
-		{
-			"path": "pages/articleDetail/index",
-			"style": {
-				"navigationBarTitleText": "列表详情页"
-			}
-		},
+		// {
+		// 	"path": "pages/articleDetail/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "列表详情页"
+		// 	}
+		// },
 		{
 			"path": "pages/company/check",
 			"style": {
@@ -198,12 +198,12 @@
 				"navigationBarTitleText": "执法"
 			}
 		},
-		{
-			"path": "pages/companyHome/getWXInfo",
-			"style": {
-				"navigationBarTitleText": "获取微信用户信息"
-			}
-		},
+		// {
+		// 	"path": "pages/companyHome/getWXInfo",
+		// 	"style": {
+		// 		"navigationBarTitleText": "获取微信用户信息"
+		// 	}
+		// },
 		// {
 		// 	"path": "pages/test/processPage",
 		// 	"style": {
@@ -491,13 +491,13 @@
 		// 	}
 
 		// },
-		{
-			"path": "components/dynamic-form/custom/selectBox/selectBox",
-			"style": {
-				"navigationStyle": "custom"
-			}
+		// {
+		// 	"path": "components/dynamic-form/custom/selectBox/selectBox",
+		// 	"style": {
+		// 		"navigationStyle": "custom"
+		// 	}
 
-		}, 
+		// }, 
 		// {
 		// 	"path": "pages/test/newFormTest/newFormTest",
 		// 	"style": {
@@ -579,15 +579,15 @@
      //        }
             
      //    }
-        ,{
-            "path" : "pages/login/login_register/enforcement_login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+        // ,{
+        //     "path" : "pages/login/login_register/enforcement_login",
+        //     "style" :                                                                                    
+        //     {
+        //         "navigationBarTitleText": "",
+        //         "enablePullDownRefresh": false
+        //     }
             
-        }
+        // }
         ,{
             "path" : "pages/cofirmRefuse/cofirmRefuse",
             "style" :                                                                                    
@@ -596,16 +596,16 @@
                 "enablePullDownRefresh": false
             }
             
-        }
-				,{
-				    "path" : "pages/login/register",
-				    "style" :                                                                                    
-				    {
-				        "navigationBarTitleText": "",
-				        "enablePullDownRefresh": false
-				    }
+        },
+				// ,{
+				//     "path" : "pages/login/register",
+				//     "style" :                                                                                    
+				//     {
+				//         "navigationBarTitleText": "",
+				//         "enablePullDownRefresh": false
+				//     }
 				    
-				},
+				// },
 				{
 				    "path" : "pages/enforcement/enforcement",
 				    "style" :                                                                                    
@@ -679,6 +679,15 @@
         }
         ,{
             "path" : "pages/enforcement/selectCompany/selectCompany",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/workFlow/GetWork/GetWork",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

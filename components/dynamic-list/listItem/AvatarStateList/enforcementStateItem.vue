@@ -6,8 +6,8 @@
 					卷宗号:
 					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.customValues.fileno}}</span>
 					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
-					<span class="enforcementState rectification" v-if="item.finishState==='1'">待整改</span>
-					<span class="enforcementState closeCase" v-if="item.finishState==='0'">已结案</span>
+					<span class="enforcementState rectification" v-if="item.finishState==='0'">待整改</span>
+					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已结案</span>
 				</view>
 				<view class="body">
 					<view class="avatar" v-if="item.pdKey">
@@ -46,6 +46,7 @@
 		},
 		created() {
 			this.iconList = globalConfig.icon
+			// console.log("iconList",this.iconList)
 		},
 		onLoad(){
 			// this.navigationUrl()
@@ -53,6 +54,7 @@
 		},
 		methods:{
 			getVal(string){
+				// console.log(string)
 				string = "type"+string.replace(string[0],string[0].toUpperCase())
 				// console.log(this.iconList[string])
 				return this.iconList[string]

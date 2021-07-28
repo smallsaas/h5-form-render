@@ -78,7 +78,7 @@
 									 desc: "获取你的昵称、头像、地区及性别",
 									 success: res => {
 										 that.GetInfo = true
-										 console.log(res)
+										 // console.log(res)
 										 that.id = e.id
 										 // that.userInfo = res.userInfo;
 										 that.userInfo.iv=res.iv;
@@ -120,7 +120,7 @@
 										             data: LoginData,
 										             method: 'POST',
 										 						success(res){
-										 								console.log(res)
+										 								// console.log(res)
 										                 // 请求成功后获取openid和session_key
 										 								if(res.data.code===-1){
 										 								uni.showModal({
@@ -180,7 +180,7 @@
 																						Authorization:`Bearer ${token}`
 																					},
 																					success(e) {
-																						console.log(e)
+																						// console.log(e)
 																						uni.setStorageSync("companyInfo",e.data.data)
 																					}
 																				})

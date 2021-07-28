@@ -48,7 +48,7 @@
 			}
 		},
 		created() {
-			console.log(this.icon[this.item.svg.icon])
+			// console.log(this.icon[this.item.svg.icon])
 		},
 		methods: {
 			_get (data, field, value) {

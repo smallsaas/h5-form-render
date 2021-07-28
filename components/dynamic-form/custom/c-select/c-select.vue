@@ -71,15 +71,15 @@
 								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 						},
 						complete(res) {
-							console.log("records",res.data)
+							// console.log("records",res.data)
 							if(res.data.code===0){
 								for(var i in res.data.data.records){
-									console.log("this is i",i)
+									// console.log("this is i",i)
 									_this.list.push(res.data.data.records[i])
 								}
-								console.log("thisList",_this.list)
+								// console.log("thisList",_this.list)
 							}else{
-								console.log(res.data.data.msg)
+								// console.log(res.data.data.msg)
 							}
 						}
 					})
@@ -90,11 +90,11 @@
 					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
 				}
 				let url = this.loadAPI
-				console.log(url)
+				// console.log(url)
 				let data = this.data||{
 				}
 				let _this = this
-				console.log(data)
+				// console.log(data)
 				uni.request({
 					url:url,
 					data:{
@@ -109,13 +109,13 @@
 						console.log("records",res.data)
 						if(res.data.code===0){
 							for(var i in res.data.data.records){
-								console.log("this is i",i)
+								// console.log("this is i",i)
 								_this.list.push(res.data.data.records[i])
-								console.log("this is list",_this.list)
+								// console.log("this is list",_this.list)
 							}
-							console.log("thisList",_this.list)
+							// console.log("thisList",_this.list)
 						}else{
-							console.log(res.data.data.msg)
+							// console.log(res.data.data.msg)
 						}
 					}
 				})

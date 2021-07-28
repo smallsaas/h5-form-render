@@ -10,7 +10,8 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
-									:workflow="item.workflow"
+									:user="userlist"
+									:workflow="item.workflow||workflow"
 									:isYyzz="item.isYyzz"
 								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
@@ -22,8 +23,9 @@
 												..._get(config.moduleData, item.key, {}),
 												outStyle: getComponentStyle(item)
 										 }"
-										 :workflow="item.workflow"
+										 :workflow="item.workflow||workflow"
 										 :isYyzz="item.isYyzz"
+										 :user="userlist"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
 										@state="setState"
@@ -159,6 +161,10 @@
 							:config="_get(config.moduleData,item.key,{})"
 							:LastKey="LastKey"
 						 ></confirm>
+						 <get-work-flow
+							:param = "_get(config.moduleData,item.key, {})"
+							v-if="_get(item,'type')==='getWorkFlow'"
+						 ></get-work-flow>
             </view>
           </block>
         </van-skeleton>
@@ -184,6 +190,7 @@
 	import sumbitState from '../other/SumbitState.vue'
 	import cButton from '../other/C-Button.vue'
 	import confirm from '../confirm.vue'
+	import getWorkFlow from '../GetWorkFlow.vue'
     import { globalConfig } from '@/config.js'
 	export default {
 		components: { 
@@ -198,7 +205,8 @@
 			steps,
 			sumbitState,
 			cButton,
-			confirm
+			confirm,
+			getWorkFlow,
 		},
 		props: {
 			API: String,  // 页面数据请求接口
@@ -208,6 +216,7 @@
 					return {}
 				}
 			},
+			userlist:Object,
             contentType: {  //页面数据类型 [base64, json]
                 type: String,
                 default: 'json'
@@ -258,6 +267,7 @@
 		  if (!this.API) {
 			  return
 		  }
+			console.log("userlist",this.userlist)
 		  this.fetchConfigData()
 			this.getState()
 			let TFormKey = this.FormKey

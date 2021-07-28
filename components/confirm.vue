@@ -11,9 +11,9 @@
 			<view class="agree button" @click="GetAgree()">
 				{{config.agreeText}}
 			</view>
-			<view class="refuse button" @click="GetRefuse()">
+<!-- 			<view class="refuse button" @click="GetRefuse()">
 				{{config.refuseText}}
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -59,7 +59,7 @@
 						"fileno":this.LastKey.fileno,
 						"fileseq":this.LastKey.fileseq
 					},
-					"operType":"next",
+					"operType":"resolveDelegate",
 					"comment":this.comment,
 					"taskId":this.LastKey.taskId
 				}
@@ -90,58 +90,58 @@
 					}
 				})
 			},
-			GetRefuse(){
-				// console.log(value);
-				// console.log(this.comment)
-				let pages = getCurrentPages()
-				let page = pages[0]
-				let token = uni.getStorageSync(globalConfig.tokenStorageKey)
-				let header = {
-					Authorization:token
-				}
-				let that = this
-				let url = `${globalConfig.workflowEP}/api.flow.examine/complete`
-				let data = {
-					"processDefineKey":this.LastKey.processDefineKey,
-					"version":"1",
-					"customValues":{
-						"fileno":this.LastKey.fileno,
-						"fileseq":String(Number(this.LastKey.fileseq)+1)
-					},
-					"operType":"backToApply",
-					"comment":this.comment,
-					"taskId":this.LastKey.taskId
-				}
-				// console.log(data)
-				uni.request({
-					header:header,
-					url:url,
-					data:data,
-					method:this.config.method||"POST",
-					complete(res) {
-						console.log(res)
-						if(res.data.code==="00000"){
-							uni.showToast({
-								duration:500,
-								title:"审批成功"
-							})
-							let querydata = {
-								...that.config.query,
-								...data
-							}
-							let backUrl = '/pages'+that.config.failUrl+'?query='+encodeURIComponent(JSON.stringify(querydata))
-							console.log(backUrl)
-							uni.navigateTo({
-								url:backUrl
-							})
-						}else{
-							uni.showModal({
-								content:res.data.msg
-							})
-						}
-					}
-				})
-			}
+		// 	GetRefuse(){
+		// 		// console.log(value);
+		// 		// console.log(this.comment)
+		// 		let pages = getCurrentPages()
+		// 		let page = pages[0]
+		// 		let token = uni.getStorageSync(globalConfig.tokenStorageKey)
+		// 		let header = {
+		// 			Authorization:token
+		// 		}
+		// 		let that = this
+		// 		let url = `${globalConfig.workflowEP}/api.flow.examine/complete`
+		// 		let data = {
+		// 			"processDefineKey":this.LastKey.processDefineKey,
+		// 			"version":"1",
+		// 			"customValues":{
+		// 				"fileno":this.LastKey.fileno,
+		// 				"fileseq":String(Number(this.LastKey.fileseq)+1)
+		// 			},
+		// 			"operType":"backToApply",
+		// 			"comment":this.comment,
+		// 			"taskId":this.LastKey.taskId
+		// 		}
+		// 		// console.log(data)
+		// 		uni.request({
+		// 			header:header,
+		// 			url:url,
+		// 			data:data,
+		// 			method:this.config.method||"POST",
+		// 			complete(res) {
+		// 				console.log(res)
+		// 				if(res.data.code==="00000"){
+		// 					uni.showToast({
+		// 						duration:500,
+		// 						title:"审批成功"
+		// 					})
+		// 					let querydata = {
+		// 						...that.config.query,
+		// 						...data
+		// 					}
+		// 					let backUrl = '/pages'+that.config.failUrl+'?query='+encodeURIComponent(JSON.stringify(querydata))
+		// 					console.log(backUrl)
+		// 					uni.navigateTo({
+		// 						url:backUrl
+		// 					})
+		// 				}else{
+		// 					uni.showModal({
+		// 						content:res.data.msg
+		// 					})
+		// 				}
+		// 			}
+		// 		})
+		// 	}
 		}
 	}
 </script>
@@ -156,8 +156,8 @@
 		padding: 5px;
 	}
 	.ConfirmBox{
-		z-index: 10000;
-		width: 50%;
+		z-index: 2;
+		width: 25%;
 		position: absolute;
 		right: 5px;
 		bottom: 10px;
@@ -184,10 +184,10 @@
 			background-color: #46aa46;
 			color: white;
 		}
-		.refuse{
-			background-color: #e75f5f;
-			color: white;
-		}
+		// .refuse{
+		// 	background-color: #e75f5f;
+		// 	color: white;
+		// }
 	}
 	.comment{
 		z-index: 1;

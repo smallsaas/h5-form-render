@@ -10,6 +10,8 @@
 			v-if="key&&(getPageAapi)"
 		   :API="getPageAapi"
 			 :processDefineKey="key"
+			 :userlist="userlist"
+			 workflow="true"
 			 :srvFormData="srvFormData"
 		/>
 	</view>
@@ -57,12 +59,20 @@
 				// getPageAapi: globalConfig.formHost + '?id=10089',
 				getPageAapi:null,
 				selectId:null,
+				userlist:null
 			}
 		},
 		methods:{
 			getValue(id){
+				uni.showLoading({
+					title:"加载中"
+				})
 				let _this=this
 				let list
+				let userlist={
+					name:null,
+					userId:null
+				}
 				let srvFormData={
 					businessLicense:null,
 					companyName:null,
@@ -89,10 +99,13 @@
 						srvFormData.companyLegalPerson=list.personName
 						srvFormData.companyPhone=list.personPhone
 						_this.srvFormData = srvFormData
-						console.log("thisListTo",_this.srvFormData)
-						console.log("这里的api",_this.getPageAapi)
-						console.log("这里的key",_this.key)
-						console.log("这里的List",_this.srvFormData)
+						userlist.name=list.name
+						userlist.userId=list.userId
+						_this.userlist = userlist
+						// console.log("thisListTo",_this.srvFormData)
+						// console.log("这里的api",_this.getPageAapi)
+						// console.log("这里的key",_this.key)
+						// console.log("这里的List",_this.srvFormData)
 					}
 				})
 			}

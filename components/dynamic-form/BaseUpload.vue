@@ -1,43 +1,56 @@
 <template>
-	<view :class="[`.base_upload_containe ${param.inputBlock ? 'van_field_input_block' : ''}`]">
-		<van-field
-		  name="upload"
-		  :label="param.label"
-		  :required="param.required"
-		  :readonly="param.readonly"
-		  :disabled="param.disabled"
-		  :style="param.style"
-		  :error="param.error"
-		  :error-message="param.error ? param['error-message'] ? param['error-message'] : '' : ''"
-		  label-class="van_field_label"
-		>
-		  <template slot="input">
-		    <van-uploader 
-				:file-list="fileList"
-				:max-count="param['max-count'] || 9007199254740992"
-				:deletable="param.deletable === false ? false : true"
-                :accept="param.accept || 'image'"
-                @after-read="handleAfterRead"
-                @delete="handleDelete"
-                v-if="param.accept !== 'file'"
-			/>
-            <van-uploader 
-                v-else
-                :file-list="fileList"
-                :max-count="param['max-count'] || 9007199254740992"
-                :deletable="param.deletable === false ? false : true"
-                :accept="param.accept || 'image'"
-                @after-read="handleAfterRead"
-            >
-              <van-button size="small" icon="upgrade" type="default">上传文件</van-button>
-            </van-uploader>
-		  </template>
-		</van-field>
-    </view>
+	<view>
+		<view :class="[`.base_upload_containe ${param.inputBlock ? 'van_field_input_block' : ''}`]" v-if="!param.readonly">
+			<van-field
+				name="upload"
+				:label="param.label"
+				:required="param.required"
+				:readonly="param.readonly"
+				:disabled="param.disabled"
+				:style="param.style"
+				:error="param.error"
+				:error-message="param.error ? param['error-message'] ? param['error-message'] : '' : ''"
+				label-class="van_field_label"
+			>
+				<template slot="input">
+					<van-uploader 
+					:file-list="fileList"
+					:max-count="param['max-count'] || 9007199254740992"
+					:deletable="param.deletable === false ? false : true"
+									:accept="param.accept || 'image'"
+									@after-read="handleAfterRead"
+									@delete="handleDelete"
+									v-if="param.accept !== 'file'"
+				/>
+							<van-uploader 
+									v-else
+									:file-list="fileList"
+									:max-count="param['max-count'] || 9007199254740992"
+									:deletable="param.deletable === false ? false : true"
+									:accept="param.accept || 'image'"
+									@after-read="handleAfterRead"
+							>
+								<van-button size="small" icon="upgrade" type="default">上传文件</van-button>
+							</van-uploader>
+				</template>
+			</van-field>
+			</view>
+			<view v-if="param.readonly" class="Detail-Box" >
+				<view class="label"><span style="color: red;" v-if="param.required">*</span>{{param.label}}</view>
+				<view class="image-Box" v-if="param.value">
+					<img :src="item.url||icon.empty" mode="aspectFit" class="Detail-image" v-for="(item,i) in JSON.parse(param.value)" :key="i"/>
+				</view>
+				<view class="image-Box" v-if="!param.value">
+					<img :src="icon.empty" mode="aspectFit" class="Detail-image" :key="i"/>
+				</view>
+			</view>
+		</view>
 </template>
 
 <script>
     import { globalConfig } from '@/config.js'
+		import cImage from './custom/c-image.vue'
+		import _ from 'lodash'
     export default {
         props: {
             param: {
@@ -55,9 +68,13 @@
                 }
             }
         },
+				components:{
+					cImage
+				},
         data() {
           return {
-              fileList: []
+              fileList: [],
+							icon:null,
           }  
         },
         watch: {
@@ -65,7 +82,7 @@
                 handler(val, oldVal) {
                   if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
                     if (_.has(val, 'value')) {
-                        this.fileList = [..._.get(this.param, 'value', [])]
+                        this.fileList = [...JSON.parse(_.get(this.param, 'value', ''))]
                     }
                   }
                 },
@@ -73,8 +90,9 @@
              },
         },
 		mounted() {
+			this.icon = globalConfig.icon
             if (_.get(this.param, 'value', []).length > 0) {
-                this.fileList = [...this.param.value]
+                this.fileList = [...JSON.parse(this.param.value)]
             }
 		},
         methods: {
@@ -90,26 +108,37 @@
                 const { file } = event.detail
                 uni.uploadFile({
                     url: globalConfig.workflowEP + '/api/fs/uploadfile',
+										header:{
+											Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+										},
                     filePath: file.url,
                     name: 'file',
                     success: (res) => {
                         const list = this.fileList
-                        const resUrl = res.data.substr(0, 5).includes('http') ? res.data :  globalConfig.workflowEP + res.data
+												let Resdata = JSON.parse(res.data)
+												let resUrl = Resdata.data
+            //             // const resUrl = res.data.data.substr(0, 5).includes('http') ? res.data.data :  globalConfig.workflowEP + res.data.data
+												// console.log("resUrl",resUrl)
+												// console.log("list",list)
+												// console.log()
                         if (_.has(this.param, 'accept') && this.param.accept === 'file') {
                             const index = resUrl.lastIndexOf('.')
                             const str = resUrl.substr(index + 1)
                             if (['png', 'jpg', 'jpeg', 'bmp', 'gif', 'psd', 'svg'].some(x => resUrl.includes(x))) {
-                                list.push({ url: resUrl })
+                                this.fileList.push({ url: globalConfig.workflowEP+resUrl.url })
                             } else {
-                                list.push({ url: resUrl, name: file.name })
+                                this.fileList.push({ url: globalConfig.workflowEP+resUrl.url, name: resUrl.name })
                             }
                         } else {
-                            list.push({ url: resUrl })
+                            this.fileList.push({ url: globalConfig.workflowEP+resUrl.url })
                         }
-                        
-                        this.fileList = [...list]
-                        this.$emit('change', this.fileList)
-                    }
+                        // this.fileList = [...list]
+												console.log("fileList",this.fileList)
+                        this.$emit('change', JSON.stringify(this.fileList))
+                    },
+										fail(e) {
+											console.log("error",e)
+										}
                 })
             }
         }
@@ -121,4 +150,27 @@
     .base_upload_containe {
 
     }
+		.Detail-Box{
+			margin-top: 10px;
+			margin-bottom: 10px;
+			display: flex;
+			.label{
+				width: 100px;
+				// text-align: ;
+				margin-left: 15px;
+				font-size: 14px;
+				font-weight: bolder;
+			}
+		}
+		.image-Box{
+			// width: 80px;
+			// height: 80px;
+			background-color: #aaa;
+			// padding: 5px;
+		}
+		.Detail-image{
+			width: 80px;
+			height: 80px;
+			padding-top: 5px;
+		}
 </style>

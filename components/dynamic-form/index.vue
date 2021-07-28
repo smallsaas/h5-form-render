@@ -172,7 +172,8 @@
             },
             ifManualSubmit: Boolean, // 用于自定义提交
 						isYyzz:Boolean,
-						workflow:false
+						workflow:false,
+						user:Object
 		},
 		data() {
 			return {
@@ -214,7 +215,7 @@
               },  
         },
 		mounted() {
-			console.log("srvFormData",this.srvFormData)
+			// console.log("表单的user",this.user)s
             // 有具体配置信息时
             if (Object.keys(this.config).length > 0) {
                 this.formConfig = _.cloneDeep(this.config)
@@ -414,7 +415,13 @@
 						
             // 改变值时
             handleChange (e, item) {
-              this.form[item.__vModel__] = e
+							// console.log("子项",item)
+							// if(item.__config__.tag==="el-upload"){
+							// 	// console.log("是上传",JSON.parse(e))
+							// 	this.form[item.__vModel__] = JSON.parse(e)
+							// }else{
+								this.form[item.__vModel__] = e
+							// }
               const checkRequired = (data = []) => {
                   data.map(x => {
                       if (x['__vModel__'] === item['__vModel__']) {
@@ -549,13 +556,23 @@
 										if(this.userlist){
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
-												"userId":this.userlist.id,
-												"userName":this.userlist.firstName,
+												"userId":this.userlist.userId,
+												"userName":this.userlist.name,
 												"formData":submitData,
 												"customValues":customData,
 												// "comment": "同意"
 											}
+										}else if(this.user){
+											// console.log("userId",this.user.userId)
+											workflowData = {
+												"processDefineKey":this.processDefineKey,
+												"userId":this.user.userId,
+												"userName":this.user.name,
+												"formData":submitData,
+												"customValues":customData,
+											}
 										}else{
+											// console.log("没到",this.user)
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
 												"formData":submitData,
@@ -591,17 +608,25 @@
 											}
 										}
 									}else if(this.workflow){
-										console.log(this.config)
+										console.log("工作流",this.config)
 										let workflowData;
 										let YyzzData;
 										if(this.userlist){
 											workflowData = {
 												"processDefineKey":this.processDefineKey,
-												"userId":this.userlist.id,
+												"userId":this.userlist.userId,
 												"userName":this.userlist.firstName,
 												"formData":submitData,
 												"customValues":customData,
 												// "comment": "同意"
+											}
+										}else if(this.user){
+											workflowData = {
+												"processDefineKey":this.processDefineKey,
+												"userId":this.user.userId,
+												"userName":this.user.name,
+												"formData":submitData,
+												"customValues":customData,
 											}
 										}else{
 											workflowData = {
@@ -632,6 +657,7 @@
 										if(this.isYyzz){
 											this.YyzzRequest(YyzzData)
 										}else{
+											// console.log("到这了",this.formConfig,"工作流数据",workflowData)
 											if(_.get(this.formConfig,'saveApi','')===''){
 												this.workflowRequest(workflowData)
 											}else{
@@ -639,6 +665,7 @@
 											}
 										}
 									}else{
+										console.log("啥也不是",this.workflow)
 										this.handleSubmitRequest(submitData)
 									}
                 }

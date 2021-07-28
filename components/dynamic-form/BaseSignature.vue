@@ -13,7 +13,7 @@
         >
           <template slot="input">
               <view class="field_input">
-				  <button size="mini" @click="handleSignture">
+				  <button size="mini" @click="handleSignture" v-if="!param.readonly">
 					  {{param.value ? '修改签名' : '点击签名'}}
 				  </button>
 				  <view 
@@ -24,6 +24,7 @@
 					  v-if="param.value" 
 					  @click="handlePreview" 
 				  />
+					<view v-if="!param.value&&param.readonly">未签名</view>
 			  </view>
           </template>
         </van-field>
@@ -56,6 +57,7 @@
 
 <script>
     import _ from 'lodash'
+		import {globalConfig} from '@/config.js'
 	import { pathToBase64 } from 'image-tools'
     import mask from '../mask/index.vue'
     export default {
@@ -186,15 +188,35 @@
             
             // 生成图片
             handleGenerate () {
+							let that = this
                 uni.canvasToTempFilePath({
                 	x: 0,
                 	y: 0,
                 	canvasId: 'signature_canvas',
                 	success: (resp) => {
-						pathToBase64(resp.tempFilePath).then(url => {
-							this.$emit('change', url)
-							this.showModal = false
-						})
+										// console.log("生成图片",resp)
+										// pathToBase64(resp.tempFilePath).then(url => {
+										// 	this.$emit('change', url)
+										// 	this.showModal = false
+										// })		
+										//上传到服务器
+										// let name = resp.tempFilePath.split("http://tmp/")[1]
+										uni.uploadFile({
+											url:`${globalConfig.workflowEP}/api/fs/uploadfile`,
+											filePath:resp.tempFilePath,
+											name:'file',
+											header:{
+												Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+											},
+											success(res){
+												that.showModal=false
+												let url = JSON.parse(res.data).data.url
+												that.$emit('change',globalConfig.workflowEP+url)
+											},
+											fail(e) {
+												console.log("失败",e)
+											}
+										})
                 		//保存图片到本地
                 		// this.saveImgToLocal(resp.tempFilePath);
                 	},
