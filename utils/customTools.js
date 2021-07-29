@@ -276,8 +276,8 @@
 			          {
 			            __config__: {
 			              label: '记录人',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'signature',
+			              tagIcon: 'signature',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
@@ -287,8 +287,8 @@
 			          {
 			            __config__: {
 			              label: '被检查人',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'signature',
+			              tagIcon: 'signature',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
