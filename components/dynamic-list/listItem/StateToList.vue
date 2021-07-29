@@ -77,7 +77,7 @@
 					width: 35rpx;
 					height: 35rpx;
 					// padding: 5rpx;
-					mr
+					// mr
 					position: relative;
 					top: 50%;
 					left: 50%;

@@ -39,7 +39,6 @@
 				show:false,
 				content:"",
 				radioSelect:null,
-				data:null,
 				pz:10,
 				pn:1,
 				icon:{}
@@ -56,6 +55,10 @@
 		},
 		methods:{
 			loadMore(){
+				if(this.loadAPI===""||this.loadAPI===undefined){
+					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
+				}
+				let url = this.loadAPI
 				this.pn=this.pn+1
 				uni.showLoading({
 					title:"加载中"
@@ -63,10 +66,11 @@
 					uni.request({
 						url:url,
 						data:{
+							...this.data,
 							"current":this.pn,
 							"size":this.pz
 						},
-						method:"GET",
+						method:this.method||"GET",
 						header:{
 								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 						},
@@ -91,17 +95,16 @@
 				}
 				let url = this.loadAPI
 				// console.log(url)
-				let data = this.data||{
-				}
 				let _this = this
 				// console.log(data)
 				uni.request({
 					url:url,
 					data:{
+						...this.data,
 						"current":this.pn,
 						"size":this.pz
 					},
-					method:"GET",
+					method:this.method||"GET",
 					header:{
 							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 					},
@@ -156,6 +159,8 @@
 					return `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
 				}
 			},
+			data:null,
+			method:null,
 			param: {
 			    type: Object,
 			    default: function() {

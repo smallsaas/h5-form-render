@@ -17,13 +17,13 @@
 			<van-tabbar-item>
 			  <image
 				slot="icon"
-				src="/static/tabbar/home.png"
+				:src="icon.tabbarCompanyData"
 				mode="aspectFit"
 				style="width: 30px; height: 18px;"
 			  />
 			  <image
 				slot="icon-active"
-				src="/static/tabbar/home-on.png"
+				:src="icon.tabbarCompanyDataActive"
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
@@ -65,13 +65,13 @@
 			<van-tabbar-item>
 			  <image
 				slot="icon"
-				src="/static/tabbar/my.png"
+				:src="icon.tabbarMy"
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
 			  <image
 				slot="icon-active"
-				src="/static/tabbar/my-on.png"
+				:src="icon.tabbarMyActive"
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
@@ -107,6 +107,7 @@
 		created() {
 			this.icon=globalConfig.icon
 			uni.hideHomeButton()
+			this.getList()
 		},
 		onLoad (e){
 			let query = JSON.parse(decodeURIComponent(e.query))
@@ -120,18 +121,26 @@
 				current: 0,
 				icon:{},
 				query:{},
-				list:[
-					{"icon":"record","title":"自查记录","nav":"/companyHome/my/selfInspectionRecord"},
-					{"icon":"record","title":"执法记录","nav":"/companyHome/my/lawEnforcementRecord"},
-					{"icon":"record","title":"复工记录","nav":"/companyHome/my/returnToWorkRecord"}
-				]
+				list:[]
 			}
 		},
 		methods:{
 			onChange(event) {
-				console.log('event = ', event.detail)
+				// console.log('event = ', event.detail)
 				this.current = event.detail
+				this.getList()
 			},
+			getList(){
+				let that = this
+				uni.request({
+					url:`${globalConfig.dataHost}?id=5555`,
+					method:"GET",
+					success(res) {
+						// console.log("res",res)
+						that.list = res.data.data.list
+					}
+				})
+			}
 		}
 	}
 </script>

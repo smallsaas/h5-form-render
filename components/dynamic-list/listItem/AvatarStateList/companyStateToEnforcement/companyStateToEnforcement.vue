@@ -2,9 +2,9 @@
 	<!-- <navigator :url="navigationUrl" hover-class="navigator-hover"> -->
 		<view class="state_allcontent">
 			<view class="AvatarStateList">
-				<view class="formNumber" v-if="item.customValues.fileno">
-					卷宗号:
-					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.customValues.fileno}}</span>
+				<view class="formNumber" v-if="item.pdKey&&item.actApplyTime&&item.piId">
+					工作名称:
+					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.pdKey+'-'+DateToString(item.actApplyTime)+'-'+item.piId}}</span>
 					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
 					<span class="enforcementState rectification" v-if="item.finishState==='0'">待整改</span>
 					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已结案</span>
@@ -36,14 +36,14 @@
 	import qs from 'qs'
 	import {globalConfig} from '@/config.js'
 	export default {
-		name:"avatar-state-list",
+		name:"companyStateToEnforcement",
 		props:{
 			item:Object,
 			itemNavigation:String
 		},
 		data(){
 			return {
-				iconList:{},
+				iconList:{}
 			}
 		},
 		created() {
@@ -55,6 +55,12 @@
 			// console.log(this.navigationUrl())
 		},
 		methods:{
+			DateToString(val){
+				let Date = val.split(" ")[0]
+				let DateJson = Date.split("-")
+				let DateString = DateJson[0]+DateJson[1]+DateJson[2]
+				return DateString
+			},
 			getVal(string){
 				// console.log(string)
 				string = "type"+string.replace(string[0],string[0].toUpperCase())

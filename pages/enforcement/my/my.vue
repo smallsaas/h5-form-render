@@ -48,7 +48,6 @@
 				type:Array,
 				default(){
 					return [
-						{"icon":"record","title":"我的执法记录","nav":"/enforcement/myEnforcement"}
 						// {"title":"我的执法记录","nav":"/enforcement/myEnforcement"}
 					]
 				}

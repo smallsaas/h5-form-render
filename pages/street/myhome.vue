@@ -18,13 +18,13 @@
 			<van-tabbar-item>
 			  <image
 				slot="icon"
-				src="/static/tabbar/home.png"
+				:src="icon.tabbarCompanyData"
 				mode="aspectFit"
 				style="width: 30px; height: 18px;"
 			  />
 			  <image
 				slot="icon-active"
-				src="/static/tabbar/home-on.png"
+				:src="icon.tabbarCompanyDataActive"
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
@@ -42,13 +42,13 @@
 			<van-tabbar-item>
 			  <image
 				slot="icon"
-				src="/static/tabbar/my.png"
+				:src="icon.tabbarMy"
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
 			  <image
 				slot="icon-active"
-				src="/static/tabbar/my-on.png"
+				:src="icon.tabbarMyActive"
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
@@ -80,6 +80,7 @@
 		created() {
 			this.icon=globalConfig.icon
 			uni.hideHomeButton()
+			this.getList()
 		},
 		onLoad (e){
 			let query = JSON.parse(decodeURIComponent(e.query))
@@ -94,11 +95,7 @@
 				current: 0,
 				icon:{},
 				query:{},
-				list:[
-					{"icon":"record","title":"我的上报","nav":"/street/my/myReport"},
-					{"icon":"record","title":"我的收藏","nav":""},
-					{"icon":"record","title":"设置","nav":""}
-				]
+				list:[]
 			}
 		},
 		
@@ -106,10 +103,22 @@
 		  onChange(event) {
 				// console.log('event = ', event.detail)
 				this.current = event.detail
+				this.getList()
 		  },
 			add(){
 				uni.navigateTo({
 					url:'/pages/street/community/streetUserReport'
+				})
+			},
+			getList(){
+				let that = this
+				uni.request({
+					url:`${globalConfig.dataHost}?id=5556`,
+					method:"GET",
+					success(res) {
+						// console.log("res",res)
+						that.list = res.data.data.list
+					}
 				})
 			}
 		}

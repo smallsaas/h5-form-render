@@ -5,7 +5,7 @@
 		
 		<DataBase v-if="current===1"></DataBase>
 		
-		<my :item="query" v-if="current===2"></my>
+		<my :item="query" :list="list" v-if="current===2"></my>
 		
 		<van-tabbar :active="current" @change="onChange">
 					<van-tabbar-item>
@@ -73,7 +73,8 @@
 				icon:"",
 				current: 0,
 				query:"",
-				loading:false
+				loading:false,
+				list:[]
 			}
 		},
 		// onShow() {
@@ -82,6 +83,7 @@
 		created() {
 			uni.hideHomeButton()
 			this.icon=globalConfig.ico
+			this.getList()
 		},
 		onInit() {
 			uni.hideHomeButton()
@@ -108,7 +110,19 @@
 			onChange(event) {
 				console.log('event = ', event.detail)
 				this.current = event.detail
+				this.getList()
 			},
+			getList(){
+				let that = this
+				uni.request({
+					url:`${globalConfig.dataHost}?id=5557`,
+					method:"GET",
+					success(res) {
+						// console.log("res",res)
+						that.list = res.data.data.list
+					}
+				})
+			}
 		},
 		components:{
 			DynamicPage,

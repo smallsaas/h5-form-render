@@ -162,7 +162,18 @@
 							 @change="(e) => handleSetValue(e, fields[index])"
 										 @list="(e)=>handleList(e)"
 			 ></c-select>
-			 
+			 <c-Map-Mes
+				 v-if="_get(item, '__config__.tag') === 'c-map-mes'"
+				 :param="{
+						...getBaseParam(item),
+						..._get(item, 'error', false) ? { error: item.error } : {},
+						..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+						...item['max-count'] ? { 'max-count': item['max-count'] } : {},
+						..._has(item, 'deletable') ? { deletable: item.deletable } : {},
+						..._has(item, 'accept') ? { accept: item.accept } : {},
+				 }"
+				 @map="(e) => handleMap(e, fields[index])"
+			 ></c-Map-Mes>
 			 <base-single-modal-select
 			 	v-if="['el-single-modal-select', 'el-multiple-modal-select'].includes(_get(item, '__config__.tag'))"
 				:selectType="_get(item, '__config__.tag') === 'el-multiple-modal-select' ? 'checkbox' : 'radio'"
@@ -206,6 +217,7 @@
 	import cVideo from './custom/c-video.vue'
 	// import cSelectList from './custom/c-select-list.vue'
 	import cSelect from './custom/c-select/c-select.vue'
+	import cMapMes from './custom/c-Map-Mes/c-Map-Mes.vue'
 	import BaseSingleModalSelect from './BaseSingleModalSelect.vue'
     import BaseSignature from './BaseSignature.vue'
     export default {
@@ -224,6 +236,7 @@
 		   cVideo,
 		   // cSelectList,
 		   cSelect,
+			 cMapMes,
 		   BaseSingleModalSelect,
            BaseSignature
         },
@@ -250,7 +263,34 @@
         methods: {
            getBaseParam (item) {
 						 let config;
-							if(this.Details===true){
+							// this.form[item.__vModel__]
+							let latitude = this.form["latitude"]
+							let longitude = this.form["longitude"]
+							// console.log("这是form",this.form)
+							// console.log("tag",_.get(item,'__config__.tag'))
+							if(_.get(item,'__config__.tag')==='c-map-mes'){
+								config={
+								 // title:_.get(item,'__config__.title'),
+									label: _.get(item, '__config__.label'),
+									required: _.get(item, '__config__.required', false),
+									readonly: true,
+									disabled: _.get(item, 'disabled', false),
+									clearable: _.get(item, 'clearable', false),
+									inputBlock: _.get(item, 'inputBlock', false),
+									value: {
+										latitude:latitude,
+										longitude:longitude
+									},
+									style: _.get(item, 'style', ''),
+									regList: _.get(item, '__config__.regList', []),
+									..._.has(item, 'placeholder') ? { placeholder: item.placeholder } : {},
+									..._.has(item, 'password') ? { password: item.password } : {},
+									..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
+									..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
+									..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
+									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
+								}
+							}else if(this.Details===true){
 								 config={
 									 // title:_.get(item,'__config__.title'),
 										label: _.get(item, '__config__.label'),
@@ -303,6 +343,9 @@
            handleSetValue (e, item) {
               this.$emit('change', e, item)
            },
+					 handleMap(e, item){
+						 this.$emit('map', e, item)
+					 },
 					 handleList(e){
 						 this.$emit("user",e)
 					 },

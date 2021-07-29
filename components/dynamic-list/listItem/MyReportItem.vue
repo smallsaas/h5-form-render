@@ -1,183 +1,147 @@
 <template>
-	<view class='card'>
-		
-		<view class='topTitle'>
-			<view>{{ item.year }}</view>
-		</view>
-		
-		<block v-if="item.record && item.record.length > 0" v-for="(recordItem, recordIndex) in item.record" :key="recordIndex">
-			<view class="listItem">
-				<view class="flex">
-					<view class="left flex1">
-						<view class='times' style="font-size: 28rpx;">
-							<view>{{ recordItem.month }}</view>
-						</view>
-						
-						<view class='title' style="font-size: 28rpx;">
-							<view>{{ recordItem.title }}</view>
-						</view>
-					</view>
-					
-					<view class="right">
-						<view v-if="recordItem.status === 'toBeVerified'" class="status">
-							待验证
-						</view>
-						<view v-else-if="recordItem.status === 'verified'" class="status" style="background-color: #43CF7C;">
-							已验证
-						</view>
-						<view v-else-if="recordItem.status === 'validationFailed'" class="status" style="background-color: #D43030;">
-							验证失败
-						</view>
-					</view>
+	<view class="self-item">
+		<view class="flex">
+			<view style="margin-right: 15px;">
+				<image class="icon" :src="icon.street"></image>
+			</view>
+			<view class="left flex1">
+				<!-- <view class="title text-line-1">{{ _get(custom,"fileno","") }}</view> -->
+				<view class="title text-line-1">
+					{{ _get(item,"formName","") }}
 				</view>
-				<van-grid column-num="3" border="false">
-				  <van-grid-item use-slot v-for="(imgItem, imgIndex) in recordItem.imgList" :key="imgIndex" >
-					 <van-image width="100" height="100" :src="imgItem.url"/>
-				  </van-grid-item>
-				</van-grid>
-				<divider/>
-				<view class="position">
-					<view style="margin-top: 3rpx;">
-						<van-icon name="location" size="44rpx" color="#D5D5D5" />
-					</view>
-					<view class="address">定位地点：{{ recordItem.address }}</view>
+				<view class="submit-time">提交时间: {{ item.actApplyTime }}</view>
+			</view>
+			<view class="right">
+<!-- 				<view v-if="item.finishState === '3'" class="status">
+					待审核
+				</view>
+				<view v-else-if="item.finishState === '2'" class="status" style="background-color: #F5A623;">
+					审核中
+				</view> -->
+				<view v-if="item.finishState === '1'" class="status" style="background-color: #2dffab;">
+					已完成
+				</view>
+				<view v-else-if="item.finishState === '0'" class="status" style="background-color: #F5A623;">
+					待确认
 				</view>
 			</view>
-		</block>
-
-		
+		</view>
 	</view>
 </template>
 <script>
-	import divider from '@/components/custom-c/divider.vue'
+	import _ from 'lodash'
+	import {Base64} from '../../../utils/tools.js'
+	import {globalConfig} from '@/config.js'
 	export default {
-		name: 'MyReportItem',
-		components: { divider },
+		name: 'stateToList',
 		props: {
 			item: Object,
 			ext: Object
 		},
+		created() {
+			// console.log(this.item)
+			this.getCustomData()
+			this.icon = globalConfig.icon
+			// console.log(this.custom)
+		},
 		data(){
 			return {
-				itemId: '',
-				path: ''
+				custom:null,
+				icon:null
 			}
 		},
-		computed: {
-			setValue(){
-			   // this.itemId = this.item.id;
+		methods:{
+			 _get (item, str, defauleValue = '') {
+					return _.get(item, str, defauleValue)
+			 },
+			getCustomData(){
+				// this.custom=JSON.parse(Base64.decode(this.item.customValues))
+				this.custom=this.item.customValues
 			}
-		},
-		methods: {
-			onItemClick(item){
-				let path = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   path += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route + '?')
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-							path += (i + '=' + item[i])
-				       }
-				   }
-				}
-				uni.navigateTo({
-					url: path
-				})
-			},
-
-		},
-		mounted(){
-			// console.log('this.item = ', this.item)
 		}
 	}
 </script>
 <style lang="less" scoped>
-	
-	.card {
-		padding: 26rpx 16rpx;
-		background-color: #ffffff;
-		border-radius: 16rpx;
-		margin-bottom: 14rpx;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	.topTitle {
-		color: #333;
-		font-weight: 700;
-		font-size: 32rpx;
-		padding-left: 25rpx;
-		margin-bottom: 18rpx;
-	}
-	
-	.listItem{
-		margin-bottom: 18rpx;
-	}
-	
-	.flex {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		padding: 0 24rpx;
-		.left {
-			.times {
-				color: #333;
-				font-weight: 700;
-				font-size: 32rpx;
-			}
-		
-			.title {
-				margin: 10rpx 0;
-				color: #333;
-			}
-		
-		// 	.text-line-1 {
-		// 		text-overflow: ellipsis;
-		// 		white-space: nowrap;
-		// 		overflow: hidden;
-		// 	}
-		
-		// 	.submit-time {
-		// 		color: #a6a6a6;
-		// 	}
-		}
-		
-		.flex1 {
-			flex: 1;
-			max-width: calc(100% - 160rpx);
-		}
-		
-		.right {
-			// width: 164rpx;
-			// height: 128rpx;
-		
-			.status {
-				width: 140rpx;
-				height: 50rpx;
-				line-height: 50rpx;
-				text-align: center;
-				font-size: 24rpx;
-				background-color: #2A82E4;
-				color: #ffffff;
-				border-radius: 12rpx;
-				margin-top: 40rpx;
-			}
-		}
-	}
-	
-	.position{
-		display: flex;
-		flex-direction: row;
-		margin-top: 20rpx;
-		
-		.address{
-			font-size: 26rpx;
-			height: 54rpx;
-			line-height: 54rpx;
-		}
-	}
-	
-	
+	.self-item {
+		padding: 26rpx;
+		background: #fff;
+		border-bottom: 1px solid #eee;
+		font-size: 28rpx;
+		transition: all .4s;
+		margin: 0 4rpx;
 
+		.flex {
+			display: flex;
+			justify-content: space-between;
+				.icon{
+					width: 35rpx;
+					height: 35rpx;
+					padding: 5rpx;
+					position: relative;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%);
+				}
+			.left {
+				.title {
+					color: #333;
+					font-weight: 700;
+					font-size: 32rpx;
+				}
+
+				.times {
+					margin: 10rpx 0;
+					color: #505050;
+				}
+
+				.text-line-1 {
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					overflow: hidden;
+				}
+
+				.submit-time {
+					color: #a6a6a6;
+				}
+			}
+
+			.flex1 {
+				flex: 1;
+				max-width: calc(100% - 200rpx);
+				margin-top: 15rpx;
+				// position: relative;
+				// top: 50%;
+				// left: 50%;
+				// transform: translate(-50%,-50%);
+			}
+
+			.right {
+				width: 164rpx;
+				height: 85rpx;
+
+				.status {
+					width: 170rpx;
+					height: 60rpx;
+					line-height: 60rpx;
+					text-align: center;
+					font-size: 28rpx;
+					background-color: #43CF7C;
+					color: #ffffff;
+					border-radius: 12rpx;
+					font-weight: bolder;
+					// display: flex;
+					// margin-top: 20rpx;
+					// align-items: center;
+					position: relative;
+					top: 50%;
+					transform: translate(0, -50%);
+				}
+			}
+		}
+	}
+
+	.self-item:active {
+		background-color: #f2f2f2;
+		transition: all .4s;
+	}
 </style>

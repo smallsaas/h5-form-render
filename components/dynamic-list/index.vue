@@ -116,6 +116,13 @@
 						...getComponentBindData(item)
 					}"
 					/>
+					<companyStateToEnforcement
+					v-if="getListItemKey() === 'company-state-to-enforcement'"
+					:item="{
+						...item,
+						...getComponentBindData(item)
+					}"
+					/>
 					<state-to-item
 					 	v-if="getListItemKey() === 'stateToItem'"
 					 	:item="{
@@ -166,6 +173,7 @@
 	import AvatarItem from './listItem/DefaultAvatarItem.vue'
 	import StateToItem from './listItem/StateToList.vue'
 	import ToDoListItem from './listItem/todoListItem.vue'
+	import CompanyStateToEnforcement from './listItem/AvatarStateList/companyStateToEnforcement/companyStateToEnforcement.vue'
     import { globalConfig } from '@/config.js'
     
 	export default {
@@ -186,7 +194,8 @@
 			enforcementStateItem,
 			AvatarItem,
 			StateToItem,
-			ToDoListItem
+			ToDoListItem,
+			CompanyStateToEnforcement
 		},
 		props: {
 			config: {

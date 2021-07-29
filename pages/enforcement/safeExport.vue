@@ -12,6 +12,7 @@
 			 :processDefineKey="key"
 			 :userlist="userlist"
 			 workflow="true"
+			 :customValues="customValues"
 			 :srvFormData="srvFormData"
 		/>
 	</view>
@@ -59,7 +60,11 @@
 				// getPageAapi: globalConfig.formHost + '?id=10089',
 				getPageAapi:null,
 				selectId:null,
-				userlist:null
+				userlist:null,
+				customValues:{
+					companyName:null,
+					companyId:null
+				}
 			}
 		},
 		methods:{
@@ -99,6 +104,8 @@
 						srvFormData.companyLegalPerson=list.personName
 						srvFormData.companyPhone=list.personPhone
 						_this.srvFormData = srvFormData
+						_this.customValues.companyName = list.name
+						_this.customValues.companyId = list.userId
 						userlist.name=list.name
 						userlist.userId=list.userId
 						_this.userlist = userlist

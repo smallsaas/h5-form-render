@@ -6,6 +6,18 @@
 	export default {
 		onLaunch: async function() {
             console.log('App Launch')
+						const res = await getGolobalConfig()
+						if (_.get(res, 'code') === 200) {
+						    uni.setStorageSync('globalConfigStorage', _.get(res, 'data.globalConfig', {}))
+						}
+						
+						const icon = await getIcon()
+						if(_.get(icon,'code')===200){
+							
+							uni.setStorageSync('iconList',_.get(icon,'data',{}))
+						}
+						globalConfig.icon = uni.getStorageSync('iconList')
+						if(globalConfig.icon){
 						uni.showLoading({
 							title:"小程序初始化中"
 						})
@@ -39,17 +51,9 @@
 						// uni.setStorageSync(globalConfig.tokenStorageKey,'eyJleHBpcmVzX2luIjp7ImRheU9mTW9udGgiOjE3LCJkYXlPZldlZWsiOiJTQVRVUkRBWSIsImRheU9mWWVhciI6MTk4LCJob3VyIjoxOSwibWludXRlIjoxMCwibW9udGgiOiJKVUxZIiwibW9udGhWYWx1ZSI6NywibmFubyI6Njk2MDAwMDAwLCJzZWNvbmQiOjQsInllYXIiOjIwMjEsImNocm9ub2xvZ3kiOnsiY2FsZW5kYXJUeXBlIjoiaXNvODYwMSIsImlkIjoiSVNPIn19LCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwic2NvcGUiOiJzZXJ2ZXIiLCJhbGciOiJIUzI1NiJ9.eyJhY2Nlc3NfdG9rZW4iOiI5ODg5NTE4OTI4Mjk0ODM1OTQ3YzJkNmU4Yzg4N2FmYiIsInJlZnJlc2hfdG9rZW4iOiI3MDUwZGVlZDUzMmY0NjJjOTdiMmY4ZWZlNzllZGE3YiIsImV4cGlyZXNfaW4iOjg2NDAwMCwidXNlcl9pZCI6MjIsImRlcHRfaWQiOjMsInVzZXJuYW1lIjoiemYwMSIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJzY29wZSI6InNlcnZlciIsImxpY2VuY2UiOiJwcm9ncmVzcyIsImZyb20iOjAsInRpbWVfc3RhbXAiOiIxNjI1NjU2MjA0Iiwicm9sZV9jb2RlcyI6WyJBU1MiXX0.L_By2r_yoDFDQ-bNZze2I1qY5Uanp1xXP_t_mS1MUTU')
 						// uni.setStorageSync(globalConfig.tokenStorageKey,'eyJleHBpcmVzX2luIjp7ImRheU9mTW9udGgiOjIzLCJkYXlPZldlZWsiOiJGUklEQVkiLCJkYXlPZlllYXIiOjIwNCwiaG91ciI6MTAsIm1pbnV0ZSI6MjAsIm1vbnRoIjoiSlVMWSIsIm1vbnRoVmFsdWUiOjcsIm5hbm8iOjgxMDAwMDAwLCJzZWNvbmQiOjQ2LCJ5ZWFyIjoyMDIxLCJjaHJvbm9sb2d5Ijp7ImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEiLCJpZCI6IklTTyJ9fSwidG9rZW5fdHlwZSI6IkJlYXJlciIsInNjb3BlIjoic2VydmVyIiwiYWxnIjoiSFMyNTYifQ.eyJhY2Nlc3NfdG9rZW4iOiIzYmJkYTA3NmRlMDQ0NGMzYWY2NWZiZWU3YjhkY2U0ZiIsInJlZnJlc2hfdG9rZW4iOiJiNTY3MzcyNGJlNTA0MWQwYjRiYzlmN2IzMjNmMjVhNCIsImV4cGlyZXNfaW4iOjg2NDAwMCwidXNlcl9pZCI6MjgsImRlcHRfaWQiOjMsInVzZXJuYW1lIjoiemYwOSIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJzY29wZSI6InNlcnZlciIsImxpY2VuY2UiOiJwcm9ncmVzcyIsImZyb20iOjAsInRpbWVfc3RhbXAiOiIxNjI2MTQyODQ2Iiwicm9sZV9jb2RlcyI6WyJBU1MiXX0.GhzsavncIgoP-cW4MPbcBO0-ABwT_gTxW6V49lkxXYw')
             // 获取全局配置数据						
-            const res = await getGolobalConfig()
-            if (_.get(res, 'code') === 200) {
-                uni.setStorageSync('globalConfigStorage', _.get(res, 'data.globalConfig', {}))
-            }
-						
-						const icon = await getIcon()
-						if(_.get(icon,'code')===200){
-							
-							uni.setStorageSync('iconList',_.get(icon,'data',{}))
-						}
+
 						uni.hideLoading()
+						}
 		},
 		onShow: function() {
 			console.log('App Show')

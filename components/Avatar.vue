@@ -2,7 +2,7 @@
 	<view>
 		<view class="AvatarCard" v-if="theme==='enforcement'||theme==='company'">
 			<view class="avatar_Box">
-				<image :src="list.avatar||icon.avatarMy" class="avatar"></image>
+				<image :src="list.avatar||icon.avatarMy" v-if="list.avatar||icon.avatarMy" class="avatar"></image>
 				<view class="unBind" @click="unbinding">解绑</view>
 			</view>
 			<view class="title_Box" v-if="theme==='enforcement'">
@@ -16,7 +16,7 @@
 		</view>
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
 			<view class="avatar_Box">
-				<image :src="list.avatar||icon.avatarMy" class="avatar"></image>
+				<image :src="list.avatar||icon.avatarMy" v-if="list.avatar||icon.avatarMy" class="avatar"></image>
 				<view class="unBind" @click="unbinding">解绑</view>
 			</view>
 			<view class="title_Box">

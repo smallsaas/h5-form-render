@@ -7,9 +7,9 @@
 	:style="[_get(item, 'container', {})]"
 	>
 	<view class="card">
-		<view class="imageBox" v-if="item.svg!==undefined||item.img!=undefined">
-				<view :class="'cardIcon icon-'+item.svg" v-if="item.svg!==undefined&&item.img===undefined" mode="aspectFit"></view>
-				<image :src="getIcon(item.cIcon)||item.img" class="image" mode="aspectFit" v-if="item.svg===undefined&&(item.img!==undefined||item.cIcon!==undefined)"></image>
+		<view class="imageBox" v-if="item.svg">
+				<!-- <view :class="'cardIcon icon-'+item.svg" v-if="item.svg!==undefined&&item.img===undefined" mode="aspectFit"></view> -->
+				<image :src="getIcon(item.svg)" class="image" mode="aspectFit"></image>
 			</view>
 			<view
 				class="titleBox"

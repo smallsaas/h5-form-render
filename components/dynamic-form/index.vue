@@ -14,6 +14,7 @@
 										:Details="Details"
                     @change="handleChange"
 										@user="handleUser"
+										@map="handleMap"
                     @clear="handleClear"
                 />
                 <view v-if="_get(item, '__config__.layout') === 'rowFormItem'">
@@ -37,6 +38,7 @@
 														:Details="Details"
                             @change="handleChange"
 														@user="handleUser"
+														@map="handleMap"
                             @clear="handleClear"
                         />
                         <view v-else>
@@ -49,6 +51,7 @@
 																:Details="Details"
                                 @change="handleChange"
 																@user="handleUser"
+																@map="handleMap"
                                 @clear="handleClear"
                             />
                         </view>
@@ -173,7 +176,10 @@
             ifManualSubmit: Boolean, // 用于自定义提交
 						isYyzz:Boolean,
 						workflow:false,
-						user:Object
+						user:Object,
+						taskId:String,
+						debug:Boolean,
+						isCompany:Boolean
 		},
 		data() {
 			return {
@@ -215,7 +221,8 @@
               },  
         },
 		mounted() {
-			// console.log("表单的user",this.user)s
+			// console.log("表单isCompany",this.isCompany)
+			// console.log("表单的user",this.user)
             // 有具体配置信息时
             if (Object.keys(this.config).length > 0) {
                 this.formConfig = _.cloneDeep(this.config)
@@ -395,7 +402,7 @@
 					data.map(x => {
 						const value = this.form[x.__vModel__] || _.get(this.srvFormData, x.__vModel__) || _.get(x, '__config__.defaultValue')
                         if (_.has(x, '__vModel__')) {
-                            this.form[x.__vModel__] = value
+														this.form[x.__vModel__] = value
                         }
 						if (_.get(x, '__config__.children', []).length > 0) {
 						    x.__config__.children = [...renderChild(x.__config__.children)]
@@ -412,7 +419,13 @@
 						handlecheck(){
 							this.checks = !this.checks
 						},
-						
+						handleMap(e,item){
+							console.log("地图的e",e)
+							console.log("地图的item",item)
+							this.form["latitude"]=e.latitude
+							this.form["longitude"]=e.longitude
+							console.log("srvData",this.srvFormData)
+						},
             // 改变值时
             handleChange (e, item) {
 							// console.log("子项",item)
@@ -508,7 +521,46 @@
 								url: '/pages' + this.config.NextNavigation
 							})
 						},
-						
+						handleChangeCompany(){
+							let data = {
+								...this.formInfo,
+								..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
+								...this.form
+							}
+							uni.request({
+								url:`${globalConfig.workflowEP}/executive/companyinfo`,
+								method:"PUT",
+								header:{
+									Authorization:`${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+								},
+								data:data,
+								success(res){
+									if(res.data.data===true){
+										uni.showModal({
+											title:"提交成功",
+											showCancel:false,
+											success(button){
+												if(button.confirm){
+													uni.navigateBack({
+														delta:10
+													})
+												}
+											}
+										})
+									}else{
+										uni.showModal({
+											title:res.data.msg
+										})
+									}
+								},
+								fail(res){
+									// console.log(res)
+									uni.showModal({
+										title:"网络波动，提交失败"
+									})
+								}
+							})
+						},
             // 提交
             handleSubmit () {
                 const list = this.fields
@@ -534,9 +586,12 @@
                     ...this.form
                 }
 								// 工作流自定义数据接口
+								
 								let custom = {
 									"fileno":this.config.fileno||guid(),
-									"fileseq":this.config.fileseq||0
+									"fileseq":this.config.fileseq||0,
+									"companyName":this.config.companyName,
+									"companyId":this.config.companyId
 								}
 								// let customData = Base64.encode(JSON.stringify(custom))	//
 								let customData = custom	//
@@ -570,6 +625,8 @@
 												"userName":this.user.name,
 												"formData":submitData,
 												"customValues":customData,
+												"taskId":this.taskId,
+												"ignoreNotPersistent":this.debug
 											}
 										}else{
 											// console.log("没到",this.user)
@@ -597,9 +654,12 @@
 										// YyzzData = {
 										// 	"address":
 										// }
-										console.log("yyzz",this.isYyzz)
+										// console.log("yyzz",this.isYyzz)
+										// console.log("到提交",this.isCompany)
 										if(this.isYyzz){
 											this.YyzzRequest(YyzzData)
+										}else if(this.isCompany){
+											this.handleChangeCompany()
 										}else{
 											if(_.get(this.formConfig,'saveApi','')===''){
 												this.workflowRequest(workflowData)
@@ -627,6 +687,8 @@
 												"userName":this.user.name,
 												"formData":submitData,
 												"customValues":customData,
+												"taskId":this.taskId,
+												"ignoreNotPersistent":this.debug
 											}
 										}else{
 											workflowData = {
@@ -653,9 +715,11 @@
 										// YyzzData = {
 										// 	"address":
 										// }
-										console.log("yyzz",this.isYyzz)
+										// console.log("yyzz",this.isYyzz)
 										if(this.isYyzz){
 											this.YyzzRequest(YyzzData)
+										}else if(this.isCompany){
+											this.handleChangeCompany()
 										}else{
 											// console.log("到这了",this.formConfig,"工作流数据",workflowData)
 											if(_.get(this.formConfig,'saveApi','')===''){
@@ -665,8 +729,12 @@
 											}
 										}
 									}else{
-										console.log("啥也不是",this.workflow)
-										this.handleSubmitRequest(submitData)
+										if(this.isCompany){
+											this.handleChangeCompany()
+										}else{
+											this.handleSubmitRequest(submitData)
+										}
+										// console.log("啥也不是",this.workflow)
 									}
                 }
             },

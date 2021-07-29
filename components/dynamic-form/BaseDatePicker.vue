@@ -48,7 +48,7 @@
 	    },
 		data () {
 			return {
-				showPicker: false
+				showPicker: false,
 			}
 		},
 	    methods: {

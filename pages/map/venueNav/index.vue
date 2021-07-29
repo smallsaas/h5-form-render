@@ -102,6 +102,29 @@
                 currentType: ''
 			}
 		},
+		created() {
+			uni.getLocation({
+				type: 'gcj02',
+				success: (res) => {
+					getAddress(
+						{
+							latitude:  _.get(res, 'latitude'), 
+							longitude: _.get(res, 'longitude')
+						},
+						(res) => {
+							console.log('localcurrent', res)
+							this.myAddress = _.get(res, 'address')
+						}
+					)
+					this.latitude = _.get(res, 'latitude')
+					this.longitude = _.get(res, 'longitude')
+					this.myLatitude = _.get(res, 'latitude')
+					this.myLongitude= _.get(res, 'longitude')
+				}
+			})
+			      this.fetchTypeList()
+			      this.fetchList()
+		},
 		async mounted() {
 			uni.getLocation({
 				type: 'gcj02',
@@ -123,7 +146,7 @@
 				}
 			})
             this.fetchTypeList()
-            await this.fetchList()
+            this.fetchList()
 		},
 		methods: {
             // 获取类别数据
@@ -171,7 +194,7 @@
 			    if (this.typeList.some(x => x.type === title)) {
 						// console.log('typeList',this.typeList)s
 				   const item = this.typeList.find(x => x.type === title)
-					 // console.log(item)s
+					 console.log("item",item)
 				   color = item.colour
 			    }
 				return color

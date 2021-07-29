@@ -182,6 +182,7 @@
 																					success(e) {
 																						// console.log(e)
 																						uni.setStorageSync("companyInfo",e.data.data)
+																						globalConfig.companyInfo = uni.getStorageSync("companyInfo")
 																					}
 																				})
 																			}

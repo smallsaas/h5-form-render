@@ -10,6 +10,7 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:isCompany="isCompany"
 									:user="userlist"
 									:workflow="item.workflow||workflow"
 									:isYyzz="item.isYyzz"
@@ -26,6 +27,7 @@
 										 :workflow="item.workflow||workflow"
 										 :isYyzz="item.isYyzz"
 										 :user="userlist"
+										 :isCompany="isCompany"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
 										@state="setState"
@@ -244,7 +246,8 @@
 						srvFormData:{
 							type:Object
 						},
-						workflow:false
+						workflow:false,
+						isCompany:Boolean
 		},
 		data () {
 			return {
@@ -264,6 +267,7 @@
 
 		},
 		created() {
+			// console.log("iscompany",this.isCompany)
 		  if (!this.API) {
 			  return
 		  }

@@ -3,7 +3,12 @@
 		<dynamic-form
 			:config="config"
 			:srvFormData="formData"
-			:Details="true"
+			workflow="true"
+			:processDefineKey="key"
+			:user="userList"
+			:taskId="taskId"
+			:Details="false"
+			:debug="true"
 		></dynamic-form>
 <!-- 		<dynamic-page
 			 :API="api"
@@ -13,12 +18,12 @@
 </template>
 
 <script>
-	import {Base64} from '../../utils/tools.js'
+	import {Base64} from '@/utils/tools.js'
 	import {globalConfig} from '@/config.js'
 	import {convert} from '@/utils/customTools.js'
-	import dynamicForm from '../../components/dynamic-form/index.vue'
+	import dynamicForm from '../../../components/dynamic-form/index.vue'
 	// import confirm from '../../components/confirm.vue'
-	import dynamicPage from '../../components/dynamic-page/index.vue'
+	import dynamicPage from '../../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
 			console.log(e)
@@ -41,12 +46,18 @@
 				method:"POST",
 				data:{
 				},
+				userList:{
+					userId:null,
+					name:null
+				},
 				formData:null,
 				header:{
 					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
-				api: globalConfig.formHost + '?id=2002',
-				processDefineKey:{}
+				key:null,
+				api: globalConfig.formHost + '?id=66000',
+				processDefineKey:{},
+				// id:""
 			}
 		},
 		methods: {
@@ -54,6 +65,10 @@
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
+				this.userList.userId=decode.preUserId
+				this.userList.name=decode.preUserName
+				this.key=decode.processDefineKey
+				console.log(decode)
 				console.log(this.taskId)
 				this.data = {
 					"processInstanceId": this.piId
@@ -104,10 +119,12 @@
 									"taskId":that.taskId
 								}
 							}
+
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
-							// console.log(that.processDefineKey)
-							console.log(that.config)
+							// console.log("config",that.config)
+							console.log(that.processDefineKey)
+							// console.log(that.config)
 						}
 					}
 				})
