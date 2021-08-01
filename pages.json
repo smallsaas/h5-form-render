@@ -732,7 +732,7 @@
             
         }
         ,{
-            "path" : "components/dynamic-form/custom/c-Map-Mes/c-Map-Mes",
+            "path" : "pages/enforcement/ReSetting",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -741,7 +741,7 @@
             
         }
         ,{
-            "path" : "pages/enforcement/ReSetting",
+            "path" : "pages/street/getCompany",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

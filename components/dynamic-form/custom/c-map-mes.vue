@@ -2,14 +2,14 @@
 	<view class="c-Map">
 		<view class="c-Map-label"><span style="color: red;margin-right: 2px;" v-if="param.required">*</span>{{param.label}}</view>
 		<map
+		v-show="!showButton"
 			id="mapMes"
 			:latitude="latitude" 
 			:longitude="longitude" 
 			:markers="markers"
 			:show-location="true"
-			:style="{width:width,height:height,position:position,top:0,left:0,'z-index':zIndex}"
+			:style="{width:'200px',height:'100px','z-index':zIndex}"
 			@click="Bigsize()"
-			@tap="tap"
 		>
 <!-- 		<cover-view slot="callout">
 			<cover-image
@@ -36,10 +36,47 @@
 			</cover-image>
 		</cover-view>
 		</map>
+		<map
+		v-show="showButton"
+					id="mapMes"
+					:latitude="latitude" 
+					:longitude="longitude" 
+					:markers="markers"
+					:show-location="true"
+					:style="{width:width,height:height,position:position,top:0,left:0,'z-index':zIndex}"
+					@tap="tap"
+					@controltap="Bigsize()"
+				>
+		<!-- 		<cover-view slot="callout">
+					<cover-image
+						:marker-id="markers[0].id"
+						:style="{
+						            width: '116rpx',
+						            height: '116rpx',
+						            borderRadius: '50%',
+						            display: 'flex',
+						            justifyContent: 'center',
+						            alignItems: 'center',
+						            padding: '10rpx',
+						boxShadow: '0 0 10px 0 #c1c1c1',
+						            backgroundColor: 'rgba('+item.colour+')' || '#333',
+												"z-index":10001
+						        }"
+						:src="icon.MapCompany"
+					></cover-image>
+				</cover-view> -->
+				<cover-view v-show="showButton" class="c-Map-buttonbox">
+					<cover-image class="c-Map-button" :src="icon.MapMy" @click="moveMy()">
+					</cover-image>
+					<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
+					</cover-image>
+				</cover-view>
+				</map>
 	</view>
 </template>
 
 <script>
+	import _ from 'lodash'
 	import { getAddress } from '@/utils/mapTools.js'
 	import { globalConfig } from '@/config.js'
 	export default {
@@ -70,20 +107,10 @@
 			this.icon = globalConfig.icon
 		},
 		async mounted(){
-			console.log("value",this.param.value)
-			console.log("param",this.param)
-			this.value = {
-				...this.param.value,
-				id:1,
-				scale:5,
-				iconPath:this.icon.MapCompany,
-				width:"50px",
-				height:"50px",
-				title:"公司所在地"
-			}
 			uni.getLocation({
 				type: 'gcj02',
 				success: (res) => {
+					// console.log("res",res)
 					getAddress(
 						{
 							latitude:  _.get(res, 'latitude'), 
@@ -98,29 +125,44 @@
 					this.longitude = _.get(res, 'longitude')
 					this.myLatitude = _.get(res, 'latitude')
 					this.myLongitude= _.get(res, 'longitude')
+				},
+				fail(res){
+					console.log("err",res)
 				}
 			})
-			this.markers.push(this.value)
+			console.log("value",this.param.value)
+			console.log("param",this.param)
+			this.value = {
+				...this.param.value,
+				id:1,
+				scale:5,
+				iconPath:this.icon.MapCompany,
+				width:"50px",
+				height:"50px",
+				title:"公司所在地"
+			}
+
 			uni.createMapContext("mapMes",this).moveToLocation({
 				longitude:this.param.value.longitude,
 				latitude:this.param.value.latitude
 			})
+			this.markers.push(this.value)
+
 		},
 		methods: {
 			Bigsize(){ 
-				this.width=uni.getSystemInfoSync().windowWidth+'px'
-				this.height=uni.getSystemInfoSync().windowHeight+'px'
+				this.width=uni.getSystemInfoSync().windowWidth+'px',
+				this.height=uni.getSystemInfoSync().windowHeight+'px',
 				this.position="fixed"
 				this.showButton=true
 				this.zIndex=10000
 			},
 			
 			smallsize(){
-				this.width='200px'
-				this.height='100px'
-				this.position="static"
+				this.width='200px',
+				this.height='100px',
+				this.position=""
 				this.showButton=false
-				this.zIndex=5
 			},
 			//点击地图触发
 			tap(e){
@@ -174,6 +216,7 @@
 <style lang="less">
 	.c-Map{
 		display: flex;
+		margin-top: 10px;
 		.c-Map-label{
 			font-weight: bolder;
 			font-size: 14px;

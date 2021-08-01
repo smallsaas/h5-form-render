@@ -59,6 +59,7 @@
 			return {
 				inputValue:"",
 				listData:[],
+				allListData:[],
 				searchlist:[],
 				url:null,
 				RadioValue:{
@@ -105,7 +106,13 @@
 			        console.log("清除缓存成功");
 			    }
 			});
+			console.log(this.config.params)
 			this.getData(this.config.params)
+			this.getAllData({
+				...this.config.params,
+				searchAll:true
+			})
+			
 			// console.log(this.searchlist)
 		},
 		methods:{
@@ -196,12 +203,27 @@
 					// this.size = res.data.records.length
 					this.num = res.data.current
 			},
+			async getAllData(params){
+					const res = await this.getSearchList(params);
+					let list;
+					console.log(res)
+					list = res.data.records
+					for(var i in list){
+						console.log(list[i])
+						this.allListData.push(list[i])
+					}
+					console.log("allListData",this.allListData)
+					// this.url = this.getID(this.allListData)
+					// this.total = res.data.pages
+					// this.size = res.data.records.length
+					// this.num = res.data.current
+			},
 			getList(){
 				this.searchlist = []
 				// console.log(this.searchlist)
 				if(this.inputValue!==""){
-					for(let i=0;i<this.listData.length;i++){
-						let list = this.listData[i]
+					for(let i=0;i<this.allListData.length;i++){
+						let list = this.allListData[i]
 						if(list[this.config.field||'name'].indexOf(this.inputValue)!==-1){
 							// console.log(this.searchlist)
 							this.searchlist.push(list)

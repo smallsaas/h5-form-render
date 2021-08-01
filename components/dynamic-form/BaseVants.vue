@@ -215,9 +215,10 @@
 	import BaseUpload from './BaseUpload.vue'
 	import cImage from './custom/c-image.vue'
 	import cVideo from './custom/c-video.vue'
+	// import cMapMes from 
 	// import cSelectList from './custom/c-select-list.vue'
 	import cSelect from './custom/c-select/c-select.vue'
-	import cMapMes from './custom/c-Map-Mes/c-Map-Mes.vue'
+	import cMapMes from './custom/c-map-mes.vue'
 	import BaseSingleModalSelect from './BaseSingleModalSelect.vue'
     import BaseSignature from './BaseSignature.vue'
     export default {

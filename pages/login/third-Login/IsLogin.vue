@@ -166,12 +166,14 @@
 										 									let avatar;
 										 									let code;
 																			let userid;
+																			let deptId;
 																			// console.log(res.data)
 										 									token = res.data.encryptedData
 										 									nickName = res.data.nickname
 																			username = res.data.username
 										 									code = res.data.bindCode
 																			userid = res.data.user_id
+																			deptId = res.data.dept_id
 										 									avatar = JSON.parse(LoginData.rawData).avatarUrl
 																			if(e==="4"){
 																				uni.request({
@@ -192,8 +194,10 @@
 										 										"avatar":avatar, //微信登录头像
 										 										"code":code,
 																				"username":username,
-																				"userId":userid
+																				"userId":userid,
+																				"deptId":deptId
 										 									}
+																			console.log("登录获取的用户信息",query)
 										 									uni.showModal({
 										 										title:"登录成功",
 										 										position:'center',

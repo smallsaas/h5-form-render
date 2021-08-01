@@ -18,7 +18,8 @@
 				},
 				config:{
 					type:"jump",
-					url:""
+					url:"",
+					content:"确定"
 				},
 				selectId:null
 			}
