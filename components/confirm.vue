@@ -59,7 +59,7 @@
 						"fileno":this.LastKey.fileno,
 						"fileseq":this.LastKey.fileseq
 					},
-					"operType":"resolveDelegate",
+					"operType":"forceEnd",
 					"comment":this.comment,
 					"taskId":this.LastKey.taskId
 				}
@@ -76,11 +76,8 @@
 								title:"审批成功"
 							})
 							console.log(page)
-							uni.reLaunch({
-								url:page.$page.fullPath,
-								fail(e) {
-									console.log(e)
-								}
+							uni.navigateBack({
+								delta:10
 							})
 						}else{
 							uni.showModal({

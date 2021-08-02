@@ -7,7 +7,7 @@
 		   contentPayload="data.formInfo.appDesignData"
 		/> -->
 		<dynamic-page
-			v-if="key&&(getPageAapi)"
+			v-if="key&&getPageAapi"
 		   :API="getPageAapi"
 			 :processDefineKey="key"
 			 :userlist="userlist"
@@ -46,6 +46,8 @@
 				this.selectId = e.selectId
 				this.getValue(this.selectId)
 			}
+		},
+		onReady() {
 			uni.hideLoading()
 		},
 		data() {

@@ -14,7 +14,7 @@
 			return {
 				API:`${globalConfig.workflowEP}/executive/companyinfo/page`,
 				param:{
-					label:"选择执法公司"
+					label:"执法对象"
 				},
 				config:{
 					type:"jump",

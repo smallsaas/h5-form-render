@@ -159,6 +159,8 @@
 								..._has(item, 'accept') ? { accept: item.accept } : {},
 			 				 }"
 							 :loadAPI="_get(item,'loadApi','')"
+							 :data="_get(item,'data')"
+							 :method="_get(item,'method')"
 							 @change="(e) => handleSetValue(e, fields[index])"
 										 @list="(e)=>handleList(e)"
 			 ></c-select>
