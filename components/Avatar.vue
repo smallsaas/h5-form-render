@@ -13,6 +13,7 @@
 				<view class="row"><span class="title">公司名称:</span>{{companyList.name||'-'}}</view>
 				<view class="row"><span class="title">营业执照号:</span>{{companyList.licenceNo||'-'}}</view>
 			</view>
+			<image :src="icon.notice" @click="getNotice()" mode="aspectFit" class="notice"></image>
 		</view>
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
 			<view class="avatar_Box">
@@ -22,6 +23,7 @@
 			<view class="title_Box">
 				<view class="row"><span class="title">{{list.nickName||list.username||'-'}}</span></view>
 			</view>
+			<image :src="icon.notice" @click="getNotice()" mode="aspectFit" class="notice"></image>
 		</view>
 	</view>
 </template>
@@ -57,6 +59,11 @@
 			}
 		},
 		methods:{
+			getNotice(){
+				uni.navigateTo({
+					url:"/pages/notice"
+				})
+			},
 			getCode(item){
 				let that = this;
 				if(item==="enforcement"){
@@ -151,7 +158,7 @@
 				console.log(this.list)
 			}
 			this.icon = globalConfig.icon
-			console.log("userInfo",globalConfig.userInfo)
+			console.log("userInfo",uni.getStorageSync(globalConfig.userInfo))
 		}
 	}
 </script>
@@ -162,6 +169,14 @@
 		display: flex;
 		padding: 50px 10px;
 		margin: 10px;
+		position: relative;
+		.notice{
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			width: 25px;
+			height: 25px;
+		}
 		// box-shadow: 0px 0px 5px #aaa;
 		.avatar_Box{
 			padding: 5px;

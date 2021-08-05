@@ -20,6 +20,11 @@
 					:item="item"
 					>
 					</card-list-item>
+					<box-item
+					v-if="_get(config, 'itemModule.name') === 'boxItem'"
+					:item="item"
+					>
+					</box-item>
 					<sub-title-card-item
 					v-if="_get(config, 'itemModule.name') === 'subTitleCardItem'"
 					:item="item"
@@ -33,6 +38,7 @@
 <script>
 	import magicItem from './navItem/MagicItem.vue'
 	import cardListItem from './navItem/cardListItem.vue'
+	import boxItem from './navItem/boxItem.vue'
 	import subTitleCardItem from './navItem/SubTitleCardItem.vue'
 	// import card from '../other/Card.vue'
 	import _ from 'lodash'
@@ -40,7 +46,8 @@
 		components: {
 			magicItem,
 			cardListItem,
-			subTitleCardItem
+			subTitleCardItem,
+			boxItem
 		},
         props: {
 						title:String,
@@ -63,7 +70,7 @@
     .nav_list_container {
 				width: 100%;
 				background-color: white;
-				padding-bottom: 10px;
+				// padding-bottom: 10px;
 		display: grid;
 		font-weight: bolder;
 		font-size: 14px;

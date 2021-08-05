@@ -8,7 +8,7 @@
 			:longitude="longitude" 
 			:markers="markers"
 			:show-location="true"
-			:style="{width:'200px',height:'100px','z-index':zIndex}"
+			:style="{width:'200px',height:'100px','z-index':zIndex,'background-color':'white'}"
 			@click="Bigsize()"
 		>
 <!-- 		<cover-view slot="callout">
@@ -43,7 +43,7 @@
 					:longitude="longitude" 
 					:markers="markers"
 					:show-location="true"
-					:style="{width:width,height:height,position:position,top:0,left:0,'z-index':zIndex}"
+					:style="{width:width,height:height,position:position,top:0,left:0,'z-index':zIndex,'background-color':'white'}"
 					@tap="tap"
 					@controltap="Bigsize()"
 				>
@@ -163,6 +163,7 @@
 				this.height='100px',
 				this.position=""
 				this.showButton=false
+				this.zIndex=1
 			},
 			//点击地图触发
 			tap(e){
@@ -216,7 +217,8 @@
 <style lang="less">
 	.c-Map{
 		display: flex;
-		margin-top: 10px;
+		background-color: white;
+		padding: 10px 0;
 		.c-Map-label{
 			font-weight: bolder;
 			font-size: 14px;

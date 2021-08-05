@@ -48,12 +48,12 @@
 	import { request } from '../../common/request.js'
 	import { globalConfig } from '@/config.js'
 	import stateSearchItem from './item/stateSearch.vue'
-	import RadioSelect from './item/RadioSelect.vue'
+	// import RadioSelect from './item/RadioSelect.vue'
 	export default {
 		name:"search",
 		components:{
 			stateSearchItem,
-			RadioSelect
+			// RadioSelect
 		},
 		data() {
 			return {
@@ -103,10 +103,10 @@
 			uni.removeStorage({
 			    key: 'selectName',
 			    success: function (res) {
-			        console.log("清除缓存成功");
+			        // console.log("清除缓存成功");
 			    }
 			});
-			console.log(this.config.params)
+			// console.log(this.config.params)
 			this.getData(this.config.params)
 			this.getAllData({
 				...this.config.params,
@@ -164,7 +164,7 @@
 				// 移动
 				// console.log("end",e)
 				const subY = e.changedTouches[0].clientY - this.touchData.clientY
-				console.log(subY)
+				// console.log(subY)
 				if(subY<=-200){
 					uni.showLoading({
 						title:"加载中"
@@ -191,13 +191,13 @@
 			async getData(params){
 					const res = await this.getSearchList(params);
 					let list;
-					console.log(res)
+					// console.log(res)
 					list = res.data.records
 					for(var i in list){
-						console.log(list[i])
+						// console.log(list[i])
 						this.listData.push(list[i])
 					}
-					console.log("listData",this.listData)
+					// console.log("listData",this.listData)
 					this.url = this.getID(this.listData)
 					this.total = res.data.pages
 					// this.size = res.data.records.length
@@ -206,13 +206,13 @@
 			async getAllData(params){
 					const res = await this.getSearchList(params);
 					let list;
-					console.log(res)
+					// console.log(res)
 					list = res.data.records
 					for(var i in list){
-						console.log(list[i])
+						// console.log(list[i])
 						this.allListData.push(list[i])
 					}
-					console.log("allListData",this.allListData)
+					// console.log("allListData",this.allListData)
 					// this.url = this.getID(this.allListData)
 					// this.total = res.data.pages
 					// this.size = res.data.records.length

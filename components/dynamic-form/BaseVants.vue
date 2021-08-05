@@ -199,12 +199,22 @@
                 }"
 				@change="(e) => handleSetValue(e, fields[index])"
             />
+						<c-rich-text
+							v-if="_get(item, '__config__.tag') === 'tinymce'"
+							        :param="{
+							        	...getBaseParam(item),
+								..._get(item, 'error', false) ? { error: item.error } : {},
+								..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请输入${_get(item, '__config__.label')}` } : {},
+							        }"
+							@change="(e) => handleSetValue(e, fields[index])"
+						></c-rich-text>
        </block>
     </view>
 </template>
 
 <script>
     import _ from 'lodash'
+		import {isDisabled} from '@/utils/customTools.js'
     import BaseField from './BaseField.vue'
     import BaseInputNumber from './BaseInputNumber.vue'
     import BaseSelect from './BaseSelect.vue'
@@ -217,6 +227,7 @@
 	import BaseUpload from './BaseUpload.vue'
 	import cImage from './custom/c-image.vue'
 	import cVideo from './custom/c-video.vue'
+	import CRichText from './custom/c-rich-text.vue'
 	// import cMapMes from 
 	// import cSelectList from './custom/c-select-list.vue'
 	import cSelect from './custom/c-select/c-select.vue'
@@ -241,7 +252,8 @@
 		   cSelect,
 			 cMapMes,
 		   BaseSingleModalSelect,
-           BaseSignature
+           BaseSignature,
+					 CRichText
         },
         props: {
           fields: {
@@ -269,6 +281,7 @@
 							// this.form[item.__vModel__]
 							let latitude = this.form["latitude"]
 							let longitude = this.form["longitude"]
+							// console.log("获取到的item",isDisabled(item),"fields",this.fields)
 							// console.log("这是form",this.form)
 							// console.log("tag",_.get(item,'__config__.tag'))
 							if(_.get(item,'__config__.tag')==='c-map-mes'){
@@ -332,6 +345,7 @@
 									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
 							 }
 							}
+							console.log("传到里面的配置",config)
 							return config
            },
 		   _has (item = {}, str) {

@@ -55,6 +55,7 @@
 		},
 		methods:{
 			loadMore(){
+				let _this=this
 				if(this.loadAPI===""||this.loadAPI===undefined){
 					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
 				}
@@ -114,7 +115,7 @@
 							for(var i in res.data.data.records){
 								// console.log("this is i",i)
 								_this.list.push(res.data.data.records[i])
-								// console.log("this is list",_this.list)
+								console.log("this is list",_this.list)
 							}
 							// console.log("thisList",_this.list)
 						}else{
@@ -280,10 +281,12 @@
 				padding: 15px;
 				z-index: initial;
 				.title{
+					max-width: 80%;
 					font-size: 15px;
 					font-weight: bolder;
 				}
 				.subtitle{
+					max-width: 80%;
 					font-size: 12px;
 					color: #666;
 				}

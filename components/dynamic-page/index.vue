@@ -4,12 +4,14 @@
           <block v-if="_get(config, 'modules', []).length > 0">
             <view v-for="(item, index) in config.modules" :key="index">
 								<dynamic-form
+								:Details="Details"
 									v-if="_get(item, 'type') === 'autoform'&&(item.code||item.FormKey||FormKey)"
 									:config="{
 										 ...getCode(item.API,item.code),
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:company="company"
 									:isCompany="isCompany"
 									:user="userlist"
 									:workflow="item.workflow||workflow"
@@ -17,8 +19,10 @@
 								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
 								@state="setState"
+								@getFormData="getFormData"
 									 />
 									<dynamic-form
+									:Details="Details"
 										 v-if="_get(item, 'type') === 'autoform'&&!item.code"
 										 :config="{
 												..._get(config.moduleData, item.key, {}),
@@ -27,10 +31,12 @@
 										 :workflow="item.workflow||workflow"
 										 :isYyzz="item.isYyzz"
 										 :user="userlist"
+										 :company="company"
 										 :isCompany="isCompany"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
 										@state="setState"
+										@getFormData="getFormData"
 									/>
 		<!-- @state:获取工作流提交后状态 -->
 										<view
@@ -162,6 +168,7 @@
 							v-if="_get(item,'type')==='confirm'"
 							:config="_get(config.moduleData,item.key,{})"
 							:LastKey="LastKey"
+							:formData="srvFormData"
 						 ></confirm>
 						 <get-work-flow
 							:param = "_get(config.moduleData,item.key, {})"
@@ -218,6 +225,7 @@
 					return {}
 				}
 			},
+			company:Boolean,
 			userlist:Object,
             contentType: {  //页面数据类型 [base64, json]
                 type: String,
@@ -247,11 +255,12 @@
 							type:Object
 						},
 						workflow:false,
+						Details:Boolean,
 						isCompany:Boolean
 		},
 		data () {
 			return {
-				config: {}, //页面配置信息
+				config: null, //页面配置信息
 				pageData: {}, // 页面数据
 				skeletonLoading: true,
 				
@@ -259,7 +268,7 @@
 						Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
 						token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
 				},
-				codeData:{},
+				codeData:null,
 				codeAPI:"",
 				code:"",
 				state:null,
@@ -268,12 +277,15 @@
 		},
 		created() {
 			// console.log("iscompany",this.isCompany)
-		  if (!this.API) {
-			  return
-		  }
+		  // if (!this.API) {
+			 //  return
+		  // }
 			console.log("userlist",this.userlist)
 		  this.fetchConfigData()
 			this.getState()
+			if(this.processDefineKey){
+				this.FormKey=this.processDefineKey
+			}
 			let TFormKey = this.FormKey
 			// console.log(this.FormKey)
 			// this.config.modules.map((item,i)=>{
@@ -290,26 +302,57 @@
 			// 	}
 			// })
 		},
-		mounted(){
-			console.log("srv",this.srvFormData)
-			// let TFormKey = this.FormKey
-			console.log(this.FormKey)
-			this.config.modules.map((item,i)=>{
-				if(_.get(item, 'type') === 'autoform'){
-					let FormKey = _.get(item,'FormKey','')
-					if(FormKey){
-						console.log("FormKey",FormKey)
-						this.getWorkflow(FormKey)	
-					}else if(TFormKey){
-						this.getWorkflow(TFormKey)
-					}else{
-						this.getCodeData(this.codeAPI,this.code)
+		watch:{
+			config:{
+				handler(newval,oldval){
+					// console.log("config",newval,oldval)
+					if(this.config){
+						this.config.modules.map((item,i)=>{
+							if(_.get(item, 'type') === 'autoform'){
+								let FormKey = _.get(item,'FormKey','')
+								let TFormKey = this.FormKey
+								// console.log("能到这")
+								if(FormKey){
+									// console.log("FormKey",FormKey)
+									this.getWorkflow(FormKey)	
+								}else if(TFormKey){
+									this.getWorkflow(TFormKey)
+								}else{
+									this.getCodeData(this.codeAPI,this.code)
+								}
+							}
+						})
 					}
-				}
-			})
+				},
+				immediate:true,
+				deep:true
+			}
+		},
+		mounted(){
+			this.fetchConfigData()
+			// console.log("srv",this.srvFormData)
+			let TFormKey = this.FormKey
+			// console.log(this.FormKey)
+			// console.log("modules",this.config.modules)
+			if(this.config){
+				this.config.modules.map((item,i)=>{
+					if(_.get(item, 'type') === 'autoform'){
+						let FormKey = _.get(item,'FormKey','')
+						// console.log("能到这")
+						if(FormKey){
+							// console.log("FormKey",FormKey)
+							this.getWorkflow(FormKey)	
+						}else if(TFormKey){
+							this.getWorkflow(TFormKey)
+						}else{
+							this.getCodeData(this.codeAPI,this.code)
+						}
+					}
+				})
+			}
+			// console.log("执行完了")
 		},
 		updated(){
-			
 			let TFormKey = this.FormKey
 			// console.log(this.FormKey)
 			// this.config.modules.map((item,i)=>{
@@ -348,6 +391,10 @@
 					})
 				}
 			},
+			getFormData(e){
+				// console.log("page-formData",e)
+				this.$emit('getFormData',e)
+			},
 			// 自查编号
 			async getWorkflowlist(Key){
 				let url = `${globalConfig.workflowEP}/api.flow.examine/toComplete`
@@ -365,6 +412,7 @@
 				let json;
 				let fields
 				if(res.code = 200){
+					// console.log("res",res)
 					form = _.get(res.data,"form",{}),
 					jsonDefineBase64 = _.get(form,"jsonDefine","")
 					jsonDefine = Base64.decode(jsonDefineBase64)
@@ -379,13 +427,19 @@
 					})
 				}
 				this.codeData = convert(json)
+				
+				// 决定是否可用
+				// this.codeData = isDisabled(convertData,this.FormKey)
+				// console.log("__DISDATA__",__DisData__)
+				// this.codeData =__DisData__
+				// console.log("CODEDATA",this.codeData)
 			},
 			
 			getCode(API,code){
 				this.codeAPI = API
 				this.code = code
 				if(this.codeData){
-					console.log("codeData",this.codeData)
+					console.log("codeData",this.codeData,"MODULES",this.config.modules,"FORM",this.FormKey)
 				}
 				return this.codeData
 			},
@@ -404,7 +458,7 @@
 			},
 			getState(){
 				const state = uni.getStorageSync('state')
-				console.log(state)
+				// console.log(state)
 				this.state = state
 			},
 			// 获取页面请求数据接口 

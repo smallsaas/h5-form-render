@@ -1,7 +1,8 @@
 <!-- 由于uniapp小程序对jsx很不友好，所以config.fields的children只支持到第一层 -->
 <template>
 	<view class="base_vants_container" :style="[_get(config, 'outStyle', {})]">
-        <van-skeleton row="20" :loading="skeletonLoading">
+        <van-skeleton row="20" :loading="skeletonLoading"
+				>
             <block v-for="(item, index) in fields" :key="index">
 							<c-lincense
 							v-if="_get(item,'__config__.tag')==='c-lincense'"
@@ -12,20 +13,29 @@
                     :fields="[{...item}]"
                     :form="form"
 										:Details="Details"
+										:processDefineKey="processDefineKey"
                     @change="handleChange"
 										@user="handleUser"
 										@map="handleMap"
                     @clear="handleClear"
                 />
-                <view v-if="_get(item, '__config__.layout') === 'rowFormItem'">
-									<card :title="_get(item, '__config__.componentName')" 	
+                <view v-if="_get(item, '__config__.layout') === 'rowFormItem'"
+								style="padding: 10px;border-radius: 5px;"
+								>
+									<card :title="_get(item, '__config__.componentName')" 
+										:Style="{
+											title:{
+												'font':'30px',
+												'textAlign':'center',
+												'padding':'10px 0',
+											}
+										}"
 									:jump="_get(item,'__config__.jump',false)"
 									:url="config.NextNavigation||config.submittedNavigation"
 									>
 									<!-- 以上card为标题容器 -->
 										<!-- <view class="line"></view> -->
 										<!-- <view>{{_get(item, '__config__.componentName')}}</view> -->
-									</card>
                     <block v-for="(k, i) in _get(item, '__config__.children', [])" :key="i">
 											<c-lincense
 											v-if="_get(k,'__config__.tag')==='c-lincense'"
@@ -36,6 +46,7 @@
                             :fields="[{...k}]"
                             :form="form"
 														:Details="Details"
+														:processDefineKey="processDefineKey"
                             @change="handleChange"
 														@user="handleUser"
 														@map="handleMap"
@@ -49,6 +60,7 @@
                                 :fields="_get(k, '__config__.children', [])"
                                 :form="form"
 																:Details="Details"
+																:processDefineKey="processDefineKey"
                                 @change="handleChange"
 																@user="handleUser"
 																@map="handleMap"
@@ -56,6 +68,7 @@
                             />
                         </view>
                     </block>
+									</card>
                 </view>
             </block>
 						<!-- 旧button,无法对齐样式 -->
@@ -81,7 +94,7 @@
 								  >下一步</van-button> -->
 									
 						<!-- 新button -->
-						<view class="button-box" v-if="!Details">
+						<view class="button-box" v-if="!Details&&!hideButton">
 							<button
 							class="button"
 							v-if="_get(config, 'LastBtns', false) && fields.length > 0"
@@ -166,6 +179,7 @@
 			    return {}
 			  }
 			},
+			hideButton:Boolean,
             // 默认的提交数据
             formInfo: {
               type: Object,
@@ -175,6 +189,7 @@
             },
             ifManualSubmit: Boolean, // 用于自定义提交
 						isYyzz:Boolean,
+						company:Boolean,
 						workflow:false,
 						user:Object,
 						taskId:String,
@@ -219,6 +234,16 @@
                  },
                  deep: true
               },  
+							taskId: {
+							    handler(val, oldVal) {
+							      if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
+							         if (_.get(val, 'fields')) {
+							              this.handleInitFormData()
+							         }
+							      }
+							    },
+							    deep: true
+							 },  
         },
 		mounted() {
 			// console.log("表单isCompany",this.isCompany)
@@ -297,7 +322,7 @@
 								// 	this.form[i] = e[i]
 								// }
 							
-							console.log(this.form)
+							// console.log(this.form)
 							this.skeletonLoading = false
 						},
 						// 校检loadAPI
@@ -307,7 +332,7 @@
 							let options = currentPage.options
 							let urlList;
 							let newUrl;
-							console.log(options)
+							// console.log(options)
 							if(url.indexOf("$$id")!==-1){
 								urlList=url.split("$$")
 								newUrl = urlList[0]+options.id
@@ -320,17 +345,17 @@
 							let date;
 							// let year = data.slice(0,4)
 							date = data.slice(-4)
-							console.log("data",data)
+							// console.log("data",data)
 							let month = Math.floor(date/100)
 						  let day = date.slice(-2)
 							let year = (data-date)/10000
 							if(month<10){
 								month = "0"+month
 							}
-							console.log("date",date)
-							console.log("year",year)
-							console.log("day",day)
-							console.log("month",month)
+							// console.log("date",date)
+							// console.log("year",year)
+							// console.log("day",day)
+							// console.log("month",month)
 							return year+'-'+month+'-'+day
 							// if(year <10000)
 						},
@@ -343,14 +368,14 @@
 							let enfToken = globalConfig.enforcementKey
 							if(loadApi.indexOf("/admin/companyinfo/")!==-1){
 								head = {
-									Authorization: `Bearer ${enfToken || ''}`,
+									Authorization: `Bearer ${`${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}` || ''}`,
 								}
-								console.log(this.header)
+								// console.log(this.header)
 							}else{
 								head = this.header
 							}
 							let a = this.$emit('getForm')
-							console.log(a)
+							// console.log(a)
 								uni.request({
 								    url: newAPI || LOAD_API,
 								    method: 'GET',
@@ -366,10 +391,10 @@
 												 let resData = _.cloneDeep(_.get(res, 'data.data', {}))
 												 if (_.isFunction(_.get(this.$parent, 'formatLoadData'))) {
 												     resData = this.$parent.formatLoadData(resData)
-														 console.log(resData)
+														 // console.log(resData)
 												 }
 												 this.form = { ...this.form, ...resData}
-												 console.log(this.form)
+												 // console.log(this.form)
 											 }
 								    }
 								})
@@ -420,11 +445,11 @@
 							this.checks = !this.checks
 						},
 						handleMap(e,item){
-							console.log("地图的e",e)
-							console.log("地图的item",item)
+							// console.log("地图的e",e)
+							// console.log("地图的item",item)
 							this.form["latitude"]=e.latitude
 							this.form["longitude"]=e.longitude
-							console.log("srvData",this.srvFormData)
+							// console.log("srvData",this.srvFormData)
 						},
             // 改变值时
             handleChange (e, item) {
@@ -452,6 +477,7 @@
                   return data
               }
               this.fields = [...checkRequired(this.fields)]
+							this.getFormData()
             },
 						handleUser(e){
 							this.userlist=e
@@ -507,19 +533,28 @@
 						},
 						// 下一步,数据传递未完成，仅跳转功能
 						handleNext(){
-							console.log('formInfo',this.formInfo)
-							console.log('id',_.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {})
-							console.log('form',this.form)
+							// console.log('formInfo',this.formInfo)
+							// console.log('id',_.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {})
+							// console.log('form',this.form)
 							let NextData = {
 							    ...this.formInfo,
 							    ..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
 							    ...this.form
 							}
 							// 获取当前页提交数据
-							console.log(NextData)
+							// console.log(NextData)
 							uni.navigateTo({
 								url: '/pages' + this.config.NextNavigation
 							})
+						},
+						getFormData(){
+							let data = {
+								...this.formInfo,
+								..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
+								...this.form
+							}
+							// console.log("FormData",data)
+							this.$emit('getData',data)
 						},
 						handleChangeCompany(){
 							let data = {
@@ -587,12 +622,31 @@
                 }
 								// 工作流自定义数据接口
 								
-								let custom = {
-									"fileno":this.config.fileno||guid(),
-									"fileseq":this.config.fileseq||0,
-									"companyName":this.config.companyName,
-									"companyId":this.config.companyId
+								let custom;
+								if(!this.company){
+									custom= {
+										"fileno":this.config.fileno||guid(),
+										"fileseq":this.config.fileseq||0,
+										"companyName":this.config.companyName,
+										"companyId":this.config.companyId
+									}
+								}else{
+									// console.log("companyInfo",globalConfig.companyInfo)
+									custom= {
+										"fileno":this.config.fileno||guid(),
+										"fileseq":this.config.fileseq||0,
+										"streetId":globalConfig.companyInfo.streetId,
+										"streetName":globalConfig.companyInfo.streetName,
+										"companyName":globalConfig.companyInfo.name,
+										"companyId":globalConfig.companyInfo.id,
+										"companyType":globalConfig.companyInfo.type,
+										"companyAddress":globalConfig.companyInfo.address,
+										"companyLegalPerson":globalConfig.companyInfo.legalRepresentative||globalConfig.companyInfo.personName,
+										"companyPhone":globalConfig.companyInfo.personPhone,
+										"businessLicense":globalConfig.companyInfo.licenceNo
+									}
 								}
+
 								// let customData = Base64.encode(JSON.stringify(custom))	//
 								let customData = custom	//
 								
@@ -605,7 +659,7 @@
                     this.$emit('submit', submitData)
                 } else {
 									if(_.get(this.config,"workflow")){
-										console.log(this.config)
+										// console.log(this.config)
 										let workflowData;
 										let YyzzData;
 										if(this.userlist){
@@ -615,6 +669,7 @@
 												"userName":this.userlist.name,
 												"formData":submitData,
 												"customValues":customData,
+												"ignoreNotPersistent":this.debug
 												// "comment": "同意"
 											}
 										}else if(this.user){
@@ -634,11 +689,13 @@
 												"processDefineKey":this.processDefineKey,
 												"formData":submitData,
 												"customValues":customData,
+												"taskId":this.taskId,
+												"ignoreNotPersistent":this.debug
 												// "comment": "同意"
 											}
 										}
 										for(var i in submitData){
-												console.log('submitDataItem',submitData[i])
+												// console.log('submitDataItem',submitData[i])
 										}
 										// 营业执照拼接的字段
 										YyzzData = {
@@ -668,7 +725,7 @@
 											}
 										}
 									}else if(this.workflow){
-										console.log("工作流",this.config)
+										// console.log("工作流",this.config)
 										let workflowData;
 										let YyzzData;
 										if(this.userlist){
@@ -678,6 +735,7 @@
 												"userName":this.userlist.firstName,
 												"formData":submitData,
 												"customValues":customData,
+												"ignoreNotPersistent":this.debug
 												// "comment": "同意"
 											}
 										}else if(this.user){
@@ -695,11 +753,13 @@
 												"processDefineKey":this.processDefineKey,
 												"formData":submitData,
 												"customValues":customData,
+												"taskId":this.taskId,
+												"ignoreNotPersistent":this.debug
 												// "comment": "同意"
 											}
 										}
 										for(var i in submitData){
-												console.log('submitDataItem',submitData[i])
+												// console.log('submitDataItem',submitData[i])
 										}
 										// 营业执照拼接的字段
 										YyzzData = {
@@ -748,7 +808,7 @@
 							    data: data,
 							    header: this.header,
 							    complete: (res) => {
-										console.log("res",res)
+										// console.log("res",res)
 							        uni.hideLoading()
 							        if (_.get(res, 'data.code') === 200) {
 							            uni.showToast({
@@ -756,7 +816,7 @@
 							            }),
 							            setTimeout(() => {
 							                if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
-																console.log(this.config.submittedNavigation)
+																// console.log(this.config.submittedNavigation)
 							                    uni.navigateTo({
 							                        url: '/pages' + this.config.submittedNavigation,
 																			success() {
@@ -766,7 +826,7 @@
 																					 page.onLoad(); //如果页面存在，则重新刷新页面
 																			},
 																			fail:(a)=>{
-																				console.log(a)
+																				// console.log(a)
 																			}
 							                    })
 							                } else {
@@ -784,11 +844,11 @@
 												let pages = getCurrentPages()
 												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
-												console.log(LastPage)
+												// console.log(LastPage)
 												
 												setTimeout(() => {
 												    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
-															console.log(this.config.submittedNavigation)
+															// console.log(this.config.submittedNavigation)
 												        uni.navigateTo({
 												            url: '/pages' + this.config.submittedNavigation,
 																		success() {
@@ -798,7 +858,7 @@
 																				page.onLoad(); //如果页面存在，则重新刷新页面
 																		},
 																		fail:(a)=>{
-																			console.log(a)
+																			// console.log(a)
 																		}
 												        })
 												    } else {
@@ -841,7 +901,7 @@
 							            }),
 							            setTimeout(() => {
 							                if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
-																console.log(this.config.submittedNavigation)
+																// console.log(this.config.submittedNavigation)
 							                    uni.navigateTo({
 							                        url: '/pages' + this.config.submittedNavigation,
 																			success() {
@@ -851,7 +911,7 @@
 																					 page.onLoad(); //如果页面存在，则重新刷新页面
 																			},
 																			fail:(a)=>{
-																				console.log(a)
+																				// console.log(a)
 																			}
 							                    })
 							                } else {
@@ -869,11 +929,11 @@
 												let pages = getCurrentPages()
 												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
-												console.log(LastPage)
+												// console.log(LastPage)
 												
 												setTimeout(() => {
 												    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
-															console.log(this.config.submittedNavigation)
+															// console.log(this.config.submittedNavigation)
 												        uni.navigateTo({
 												            url: '/pages' + this.config.submittedNavigation,
 																		success() {
@@ -883,7 +943,7 @@
 																				page.onLoad(); //如果页面存在，则重新刷新页面
 																		},
 																		fail:(a)=>{
-																			console.log(a)
+																			// console.log(a)
 																		}
 												        })
 												    } else {
@@ -926,7 +986,7 @@
                             }),
                             setTimeout(() => {
                                 if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
-																	console.log(this.config.submittedNavigation)
+																	// console.log(this.config.submittedNavigation)
                                     uni.navigateTo({
                                         url: '/pages' + this.config.submittedNavigation,
 																				success() {
@@ -936,7 +996,7 @@
 																						page.onLoad(); //如果页面存在，则重新刷新页面
 																				},
 																				fail:(a)=>{
-																					console.log(a)
+																					// console.log(a)
 																				}
                                     })
                                 } else {
@@ -947,7 +1007,7 @@
 													let pages = getCurrentPages()
 													let LastPage = pages[pages.length-2]
 													let pageUrl = LastPage.$page.fullPath
-													console.log(pageUrl)
+													// console.log(pageUrl)
 													setTimeout(() => {
 													    if (_.has(this.config, 'submittedNavigation') && this.config.submittedNavigation) {
 																console.log(this.config.submittedNavigation)
@@ -960,7 +1020,7 @@
 																					page.onLoad(); //如果页面存在，则重新刷新页面
 																			},
 																			fail:(a)=>{
-																				console.log(a)
+																				// console.log(a)
 																			}
 													        })
 													    } else {
@@ -987,6 +1047,7 @@
 
 <style lang="less">
     .base_vants_container {
+			background-color: #EEEEED;
         .form_row_title {
             color: rgba(80, 80, 80, 1);
             font-size: 30rpx;
@@ -1011,7 +1072,8 @@
 		
 		.button-box{
 			display: flex;
-			margin-top: 20px;
+			// background-color: white;
+			// margin-top: 20px;
 			width: 100%;
 			.button{
 				flex: 1;

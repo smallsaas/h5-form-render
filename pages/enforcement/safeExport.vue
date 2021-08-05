@@ -45,6 +45,11 @@
 				// console.log(111111)
 				this.selectId = e.selectId
 				this.getValue(this.selectId)
+				// console.log("有执行到这",this.getPageAapi,this.key)
+			}
+			if(!this.getPageAapi||!this.key){
+				console.log("加载失败")
+				return ;
 			}
 		},
 		onReady() {

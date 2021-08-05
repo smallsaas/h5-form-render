@@ -137,6 +137,13 @@
 						...getComponentBindData(item)
 					}"
 					/>
+					<notice-item
+					v-if="getListItemKey() === 'noticeItem'"
+					:item="{
+						...item,
+						...getComponentBindData(item)
+					}"
+					/>
 					<to-do-list-item
 						v-if="getListItemKey() === 'toDoListItem'"
 						:item="{
@@ -173,6 +180,7 @@
 	import AvatarItem from './listItem/DefaultAvatarItem.vue'
 	import StateToItem from './listItem/StateToList.vue'
 	import ToDoListItem from './listItem/todoListItem.vue'
+	import noticeItem from './listItem/NoticeItem.vue'
 	import CompanyStateToEnforcement from './listItem/AvatarStateList/companyStateToEnforcement/companyStateToEnforcement.vue'
     import { globalConfig } from '@/config.js'
     
@@ -195,7 +203,8 @@
 			AvatarItem,
 			StateToItem,
 			ToDoListItem,
-			CompanyStateToEnforcement
+			CompanyStateToEnforcement,
+			noticeItem
 		},
 		props: {
 			config: {
@@ -357,7 +366,7 @@
                         const data = _.get(res, 'data.data')
                         const listField = _.get(this.config, 'response.list', '')
                         const totolField = _.get(this.config, 'response.total', 0)
-                        
+                        console.log(data,"data")
                         const prevList = _.get(searchData, 'refresh') ? [] : this.list
                         this.list = prevList.concat(listField ? _.get(data, listField, []) : _.get(res, 'list', []))
                         const total = _.get(data, totolField, 0)
@@ -369,7 +378,7 @@
 											const data = _.get(res, 'data.data')
 											const listField = _.get(this.config, 'response.list', '')
 											const totolField = _.get(this.config, 'response.total', 0)
-											
+											console.log(data,"data")
 											const prevList = _.get(searchData, 'refresh') ? [] : this.list
 											this.list = prevList.concat(listField ? _.get(data, listField, []) : _.get(res, 'list', []))
 											const total = _.get(data, totolField, 0)

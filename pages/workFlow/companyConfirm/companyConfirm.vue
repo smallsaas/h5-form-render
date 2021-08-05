@@ -1,11 +1,22 @@
 <template>
 	<view>
 		<dynamic-form
+		v-if="userList.userId"
 			:config="config"
 			:srvFormData="formData"
 			workflow="true"
 			:processDefineKey="key"
 			:user="userList"
+			:taskId="taskId"
+			:Details="false"
+			:debug="true"
+		></dynamic-form>
+		<dynamic-form
+			v-if="!userList.userId"
+			:config="config"
+			:srvFormData="formData"
+			workflow="true"
+			:processDefineKey="key"
 			:taskId="taskId"
 			:Details="false"
 			:debug="true"
@@ -26,7 +37,7 @@
 	import dynamicPage from '../../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
-			console.log(e)
+			console.log("e",e)
 			this.getPiId(e.query)
 			this.getConfig()
 		},
@@ -65,8 +76,16 @@
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				this.userList.userId=decode.preUserId
-				this.userList.name=decode.preUserName
+				console.log("decode",decode)
+				console.log("userInfo",uni.getStorageSync(globalConfig.userInfo))
+				let userInfo = uni.getStorageSync(globalConfig.userInfo)
+				let userId = userInfo.userId.toString()
+				console.log(userId)
+				if(userId!==decode.preUserId){
+					console.log("还是进来了")
+					this.userList.userId=decode.preUserId
+					this.userList.name=decode.preUserName
+				}
 				this.key=decode.processDefineKey
 				console.log(decode)
 				console.log(this.taskId)

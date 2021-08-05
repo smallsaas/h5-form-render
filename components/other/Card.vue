@@ -11,12 +11,15 @@
 			'font':Style===undefined?'':Style.font,
 			'textAlign':Style===undefined?'':Style.justify}">
 			<view class="Card-Layout-Title" :style="{
+				'width':Style===undefined?'':Style.title.width,
 			'color':Style===undefined?'':Style.title.color,
 			'background':Style===undefined?'':Style.title.fill,
 			'padding':Style===undefined?'':Style.title.padding===undefined?'':Style.title.padding,
 			'margin':Style===undefined?'':Style.title.margin===undefined?'':Style.title.margin,
 			'textAlign':Style===undefined?'':Style.title.align,
 			'font':Style===undefined?'':Style.title.font,
+			'text-align':Style===undefined?'':Style.title.textAlign,
+			'border-bottom': Style===undefined?'2px solid #EEEEEE':Style.title.line
 			}"
 			>{{title}}
 			<span v-if="jump" @click="jumpUrl()" style="position: absolute;right: 5px;color: #1A5EB5;font-size: 14px;">{{jumpText}}</span>
@@ -55,6 +58,7 @@ export default {
 					return "跳过"
 				}
 			},
+			
       Style:{
 				title:{
 					color:{
@@ -138,9 +142,10 @@ export default {
     padding: 0;
 }
 .Card-Layout-Title{
-    width: 100%;
+    width: auto;
+		margin: 0 auto;
     padding:10px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bolder;
 		border-bottom: 2px solid #EEEEEE;
 }

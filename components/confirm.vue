@@ -1,19 +1,30 @@
 <template>
-	<view class="Confirm" style="position: relative;">
+	<view class="Confirm" style="position: relative;" >
 		<view class="comment">
-			<view class="title" v-if="config.placeholder">{{config.placeholder}}</view>
+			<view class="title" v-if="config.placeholder">{{config.placeholder}}
+			</view>
+<!-- 			<view>
+				<button @click="">模板测试</button>
+			</view> -->
 			<textarea adjust-position="true" v-model:value="comment" class="comment_input"
 			:placeholder="'请输入'+(config.placeholder||'...')"
 			maxlength="-1"
 			></textarea>
 		</view>
 		<view class="ConfirmBox">
-			<view class="agree button" @click="GetAgree()">
+			<view class="agree button" @click="GetAgree('backToPrev')">
+				{{config.lastText}}
+			</view>
+			<view class="agree button" @click="GetAgree('next')">
 				{{config.agreeText}}
+			</view>
+			<view class="agree button" @click="exit()">
+				关闭
 			</view>
 <!-- 			<view class="refuse button" @click="GetRefuse()">
 				{{config.refuseText}}
 			</view> -->
+			<!-- <button @click="getFormData()">测试</button> -->
 		</view>
 	</view>
 </template>
@@ -24,7 +35,8 @@
 		name:"confirm",
 		data() {
 			return {
-				comment:""
+				comment:"",
+				username:""
 			};
 		},
 		props:{
@@ -33,18 +45,34 @@
 				default(){
 					return {
 						agreeText:"同意",
+						lastText:"回退给上一步发起人",
 						refuseText:"拒绝",
 						placeholder:"请输入..."
 					}
 				}
 			},
+			formData:Object,
 			LastKey:Object
 		},
+		mounted() {
+			// console.log("confimKey",this.LastKey)
+			// console.log("FormDATA",this.formData)
+			// console.log("userInfo",globalConfig.userInfo)
+			this.username=uni.getStorageSync(globalConfig.userInfo).username
+		},
 		methods:{
-			GetAgree(){
+			// getFormData(){
+			// 	console.log("FormDATA",this.formData)
+			// },
+			exit(){
+				uni.navigateBack({
+					delta:10
+				})
+			},
+			GetAgree(openType){
 				// console.log(value);
 				// console.log(this.comment)
-				console.log(this.LastKey)
+				console.log("KEY",this.LastKey.applyUserName)
 				let pages = getCurrentPages()
 				let page = pages[0]
 				let token = uni.getStorageSync(globalConfig.tokenStorageKey)
@@ -59,7 +87,9 @@
 						"fileno":this.LastKey.fileno,
 						"fileseq":this.LastKey.fileseq
 					},
-					"operType":"forceEnd",
+					"ignoreNotPersistent":true,
+					"formData":this.formData,
+					"operType":openType,
 					"comment":this.comment,
 					"taskId":this.LastKey.taskId
 				}
@@ -73,9 +103,15 @@
 						if(res.data.code==="00000"){
 							uni.showToast({
 								duration:500,
-								title:"审批成功"
+								title:"办理成功"
 							})
 							console.log(page)
+							// uni.reLaunch({
+							// 	url:page.$page.fullPath,
+							// 	fail(e) {
+							// 		console.log(e)
+							// 	}
+							// })
 							uni.navigateBack({
 								delta:10
 							})
@@ -154,20 +190,23 @@
 	}
 	.ConfirmBox{
 		z-index: 2;
-		width: 25%;
+		min-width: 97%;
 		position: absolute;
 		right: 5px;
 		bottom: 10px;
 		height: 40px;
+		padding: 0px;
 		margin-top: 20px;
 		display: flex;
 		border-radius: 10px;
 		.button{
 			flex: 1;
 			// box-shadow: 0px 0px 5px #999;
+			min-width: 20%;
 			height: 40px;
 			line-height: 40px;
-			margin: 0 5%;
+			// padding: 0 10%;
+			margin: 0 10px;
 			text-align: center;
 			font-size: 14px;
 			font-weight: bolder;

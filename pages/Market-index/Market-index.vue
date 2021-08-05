@@ -1,7 +1,20 @@
 <template>
 	<view>
-		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
-		</dynamic-page>
+<!-- 		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
+		</dynamic-page> -->
+		<view v-if="current===0">
+			<view class="title-box">
+				<view class="title">
+					<image :src="query.avatar" class="avatar"></image>
+					<view class="title-name">欢迎您,{{query.nickName}}</view>
+				</view>
+				<view class="circle"></view>
+			</view>
+			<dynamic-page :API="newAPI" v-if="loading===false">
+				
+			</dynamic-page>
+		</view>
+
 		
 		<DataBase v-if="current===1"></DataBase>
 		
@@ -74,7 +87,8 @@
 				current: 0,
 				query:"",
 				loading:false,
-				list:[]
+				list:[],
+				newAPI: globalConfig.formHost + '?id=333333'
 			}
 		},
 		// onShow() {
@@ -82,7 +96,7 @@
 		// },
 		created() {
 			uni.hideHomeButton()
-			this.icon=globalConfig.ico
+			this.icon=globalConfig.icon
 			this.getList()
 		},
 		onInit() {
@@ -132,6 +146,41 @@
 	}
 </script>
 
-<style>
-
+<style lang="less">
+	.title-box{
+		height: 250rpx;
+		width: 100%;
+		background: linear-gradient(#1A5EB5,#7091b5);
+		.title{
+			display: flex;
+			align-items: center;
+			height: 250rpx;
+			line-height: 250rpx;
+			width: 90%;
+			margin: 0 auto;
+			.avatar{
+				width: 50px;
+				height: 50px;
+				// line-height: 250rpx;
+				border-radius: 10px;
+			}
+			.title-name{
+				margin-left: 20px;
+				// height: 50px;
+				color: white;
+				// font-weight: bolder;
+				// line-height: 250rpx;
+				// line-height: 50px;
+				text-align: center;
+			}
+		}
+		.circle{
+			position: relative;
+			bottom: 50rpx;
+			background-color: white;
+			height: 50rpx;
+			border-top-left-radius: 25rpx;
+			border-top-right-radius: 25rpx;
+		}
+	}
 </style>

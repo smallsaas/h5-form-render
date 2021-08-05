@@ -4,7 +4,7 @@
 		:style="[_get(item, 'container', {})]"
 	>
 	  <navigator :url="getNavigationUrl(item.nav || item.url)" hover-class="navigator-hover">
-	      <view class="magic_item">
+	      <view class="magic_item" :style="{background: item.background||'#fff'}">
 					<image :src="item.img" v-if="item.img!==undefined&&item.svg===undefined" mode="aspectFit" class="image" ></image>
 					
 					<block v-if="item.svg!=undefined">
@@ -23,7 +23,7 @@
 						<image :src="icon[item.svg.icon]" v-if="icon[item.svg.icon]" mode="aspectFit" class="image"/> -->
 						<!-- <image :src="icon[item.svg.icon]" mode="widthFix" class="swiper_image" /> -->
 					</block>
-					<view class="title"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
+					<view class="title" :style="{color:item.textColor}"><span v-if="item.required===true" style="color: #F62D2D;margin-right: 2px;font-weight: bolder;">●</span>{{item.title}}</view>
 	      </view>
 	  </navigator>
 	</view>
@@ -34,6 +34,7 @@
 	import _ from 'lodash'
 	import qs from 'qs'
 	export default {
+		name:'boxItem',
 		props: {
 			item: {
 				type: Object,
@@ -48,7 +49,6 @@
 			}
 		},
 		created() {
-			// console.log("item",this.item)
 			// console.log(this.icon[this.item.svg.icon])
 		},
 		methods: {
@@ -105,12 +105,13 @@
 		transition: all .2s;
 		// background-color: white;
 		.magic_item {
+			margin: 10rpx;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			font-size: 28rpx;
 			border-radius: 6rpx;
-			padding: 10rpx;
+			padding: 50rpx 0;
 			.image {
 			    width: 60rpx;
 			    height: 60rpx;
@@ -124,7 +125,7 @@
 			>.title {
 			    white-space: wrap;
 					// width: 5em;
-					// height: 3em;
+					height: 2em;
 					text-align: center;
 			    text-overflow: ellipsis;
 			    overflow: hidden;
@@ -132,7 +133,10 @@
 		}
 	}
 	.magic_item_container:active {
-		background-color: #f2f2f2;
-		transition: all .2s;
+		// background-color: #f2f2f2;
+		.magic_item{
+			opacity: .7;
+			transition: all .2s;
+		}
 	}
 </style>

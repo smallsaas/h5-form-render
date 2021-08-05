@@ -37,7 +37,7 @@
 				})
 			},
 			getParam(){
-				let userInfo = globalConfig.userInfo
+				let userInfo = uni.getStorageSync(globalConfig.userInfo)
 				let that = this
 				console.log("userInfo",userInfo)
 				let id = userInfo.deptId

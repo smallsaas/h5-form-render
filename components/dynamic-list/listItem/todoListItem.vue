@@ -3,7 +3,7 @@
 		<image :src="getVal(item.processDefineKey)" mode="aspectFit" v-if="item.processDefineKey" style="margin:auto 15px;min-width:40px;min-height: 40px;width: 40px;height: 50px;"></image>
 		<view class="ToDoBody">
 			<view class='taskName'>
-				<span class="Title">待办事项：</span>{{item.businessName}}
+				<span class="Title">工作名称：</span>{{item.instanceEntityVo.workName}}
 			</view>
 			<view class='createTime'>
 				<span class="Title">发起时间：</span>{{item.createTime||item.startTime}}
@@ -31,7 +31,13 @@
 				string = "type"+string.replace(string[0],string[0].toUpperCase())
 				// console.log(this.iconList[string])
 				return this.iconList[string]
-			}
+			},
+			DateToString(val){
+				let Date = val.split(" ")[0]
+				let DateJson = Date.split("-")
+				let DateString = DateJson[1]+DateJson[2]
+				return DateString
+			},
 		}
 	}
 </script>

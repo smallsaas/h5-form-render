@@ -5,7 +5,7 @@ const globalConfigStorage = uni.getStorageSync('globalConfigStorage')
 // 获取图标库
 const iconList = uni.getStorageSync('iconList')
 
-const userInfo = uni.getStorageSync("userInfo")
+// const userInfo = uni.getStorage("userInfo")
 const companyInfo = uni.getStorageSync("companyInfo")
 // const userInfo = uni.getStorageSync('userInfo')
 const token = uni.getStorageSync('token')
@@ -51,5 +51,5 @@ export const globalConfig = {
 	// enforcementKey:"",
 	icon:iconList,
 	companyInfo:companyInfo,
-	userInfo:userInfo
+	userInfo:'userInfo'
 }

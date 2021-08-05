@@ -7,6 +7,10 @@ export const getSearchPage = (params)=>{
 	return request('GET', url, params)
 }
 
+export const LoadComplete = (params) =>{
+	const url = `${globalConfig.workflowEP}/api.flow.examine/toComplete`
+	return request('POST', url, params)
+}
 
 export const getFormAPIdata = (API,params)=>{
 	const url = `${globalConfig.workflowEP}${API}`

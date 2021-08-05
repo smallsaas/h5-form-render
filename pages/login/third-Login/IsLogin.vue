@@ -197,6 +197,7 @@
 																				"userId":userid,
 																				"deptId":deptId
 										 									}
+																			uni.removeStorage("userInfo")
 																			console.log("登录获取的用户信息",query)
 										 									uni.showModal({
 										 										title:"登录成功",

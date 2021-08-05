@@ -9,6 +9,8 @@
 		<dynamic-page
 		   :API="getPageAapi"
 			 processDefineKey="zc"
+			 workflow="true"
+			 company="true"
 		/>
 	</view>
 

@@ -3,11 +3,16 @@
 		<dynamic-form
 			:config="config"
 			:srvFormData="formData"
-			:Details="true"
+			:Details="false"
+			:hideButton="true"
+			:taskId="taskId"
+			:processDefineKey="Key"
+			@getFormData="getFormData"
 		></dynamic-form>
 		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
+			 :srvFormData="formData"
 		></dynamic-page>
 	</view>
 </template>
@@ -46,16 +51,25 @@
 					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
 				api: globalConfig.formHost + '?id=66000',
-				processDefineKey:{}
+				processDefineKey:{},
+				applyUserName:"",
+				Key:"",
+				formData:null
 			}
 		},
 		methods: {
+			getFormData(e){
+				console.log('真实获取数据',e)
+				this.formData=e
+			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
 				console.log(decode)
 				console.log(this.taskId)
+				this.applyUserName = decode.instanceEntityVo.actApplyUserName
+				this.Key = decode.processDefineKey
 				this.data = {
 					"processInstanceId": this.piId
 				}
@@ -81,6 +95,7 @@
 							if(res.data.data.customValues){
 								if(res.data.data.customValues.fileno){
 									that.processDefineKey ={
+										"applyUserName":that.applyUserName,
 										"processDefineKey":res.data.data.processDefineKey,
 										"fileno":res.data.data.customValues.fileno,
 										"fileseq":res.data.data.customValues.fileseq||0,

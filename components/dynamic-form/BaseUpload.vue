@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="background-color: white;">
 		<view :class="[`.base_upload_containe ${param.inputBlock ? 'van_field_input_block' : ''}`]" v-if="!param.readonly">
 			<van-field
 				name="upload"
@@ -174,7 +174,7 @@
 
     }
 		.Detail-Box{
-			margin-top: 10px;
+			padding-top: 10px;
 			margin-bottom: 10px;
 			display: flex;
 			.label{

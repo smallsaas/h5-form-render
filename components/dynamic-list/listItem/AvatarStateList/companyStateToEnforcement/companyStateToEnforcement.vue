@@ -2,9 +2,9 @@
 	<!-- <navigator :url="navigationUrl" hover-class="navigator-hover"> -->
 		<view class="state_allcontent">
 			<view class="AvatarStateList">
-				<view class="formNumber" v-if="item.pdKey&&item.actApplyTime&&item.piId">
+				<view class="formNumber" >
 					工作名称:
-					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.pdKey+'-'+DateToString(item.actApplyTime)+'-'+item.piId}}</span>
+					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.instanceEntityVo.workName}}</span>
 					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
 					<span class="enforcementState rectification" v-if="item.finishState==='0'">待整改</span>
 					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已结案</span>
@@ -58,7 +58,7 @@
 			DateToString(val){
 				let Date = val.split(" ")[0]
 				let DateJson = Date.split("-")
-				let DateString = DateJson[0]+DateJson[1]+DateJson[2]
+				let DateString =DateJson[1]+DateJson[2]
 				return DateString
 			},
 			getVal(string){

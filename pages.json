@@ -1,20 +1,12 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	// 不用的页面
 		// {
 		// 	"path": "pages/test/index",
 		// 	"style": {
 		// 		"navigationBarTitleText": "测试页"
 		// 	}
 		// },
-		{
-				"path" : "pages/login/third-Login/third-Login",
-				"style" :                                                                                    
-				{
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": false
-				}
-				
-		},
 		// 旧登录界面
 		// {
 		// 	"path": "pages/login/login",
@@ -74,42 +66,18 @@
 		// 		"navigationBarTitleText": "列表详情页"
 		// 	}
 		// },
-		{
-			"path": "pages/company/check",
-			"style": {
-				"navigationBarTitleText": "企业自查"
-			}
-		},
-		{
-			"path": "pages/company/checkComfirm",
-			"style": {
-				"navigationBarTitleText": "企业自查"
-			}
-		},
-		{
-			"path": "pages/companyHome/my/index",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		},
-		{
-			"path": "pages/companyHome/selfCheck/index",
-			"style": {
-				"navigationBarTitleText": "企业自查"
-			}
-		},
-		{
-			"path": "pages/companyHome/selfCheck/selfCheckComfirm",
-			"style": {
-				"navigationBarTitleText": "企业自查"
-			}
-		},
-		{
-			"path": "pages/companyHome/my/returnToWork",
-			"style": {
-				"navigationBarTitleText": "复工"
-			}
-		},
+		// {
+		// 	"path": "pages/company/check",
+		// 	"style": {
+		// 		"navigationBarTitleText": "企业自查"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/company/checkComfirm",
+		// 	"style": {
+		// 		"navigationBarTitleText": "企业自查"
+		// 	}
+		// },
 		// {
 		// 	"path": "pages/companyHome/test",
 		// 	"style": {
@@ -130,74 +98,24 @@
 		// 		"enablePullDownRefresh": false
 		// 	}
 		// },
-		{
-			"path": "pages/companyHome/my/selfInspectionRecord",
-			"style": {
-				"navigationBarTitleText": "自查记录"
-			}
-		},
-		{
-			"path": "pages/Market-index/Market-index",
-			"style": {
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "市场监督"
-			}
-		},
-		{
-			"path": "pages/companyHome/my/selfInspectionDetail",
-			"style": {
-				"navigationBarTitleText": "自查详情"
-			}
-		},
 		// {
 		// 	"path": "pages/test/signature",
 		// 	"style": {
 		// 		"navigationBarTitleText": "签名"
 		// 	}
 		// },
-		{
-			"path": "pages/companyHome/my/returnToWorkRecord",
-			"style": {
-				"navigationBarTitleText": "复工记录"
-			}
-		},
-		{
-			"path": "pages/companyHome/my/returnToWorkDetail",
-			"style": {
-				"navigationBarTitleText": "复工详情"
-			}
-		},
-		{
-			"path": "pages/companyHome/my/lawEnforcementRecord",
-			"style": {
-				"navigationBarTitleText": "执法记录"
-			}
-		},
-		{
-			"path": "pages/companyHome/my/lawEnforcementDetail",
-			"style": {
-				"navigationBarTitleText": "执法详情"
-			}
-		},
-		{
-			"path": "pages/companyHome/index",
-			"style": {
-				"navigationBarTitleText": "企业页面入口"
-			}
-		},
-		{
-			"path": "pages/companyHome/home",
-			"style": {
-				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/companyHome/lawEnforcement/index",
-			"style": {
-				"navigationBarTitleText": "执法"
-			}
-		},
+		// {
+		// 	"path": "pages/companyHome/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "企业页面入口"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/companyHome/lawEnforcement/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "执法"
+		// 	}
+		// },
 		// {
 		// 	"path": "pages/companyHome/getWXInfo",
 		// 	"style": {
@@ -210,44 +128,19 @@
 		// 		"navigationBarTitleText": "流程测试页"
 		// 	}
 		// },
-
-		{
-			"path": "pages/street/index",
-			"style": {
-				"navigationBarTitleText": "街道页面入口"
-			}
-		},
 		// {
 		// 	"path": "pages/street/test",
 		// 	"style": {
 		// 		"navigationBarTitleText": "街道页面测试"
 		// 	}
 		// },
-		{
-			"path": "pages/street/my/index",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		},
-		{
-			"path": "pages/street/my/myReport",
-			"style": {
-				"navigationBarTitleText": "我的上报"
-			}
-		},
-		{
-			"path": "pages/street/community/streetUserReport",
-			"style": {
-				"navigationBarTitleText": "街道用户信息上报"
-			}
-		}, 
 		//{
 		// 	"path": "pages/test/list/articleItem",
 		// 	"style": {
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// },
 		// {
 		// 	"path": "pages/test/list/stateItem",
@@ -255,7 +148,7 @@
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// },
 		// {
 		// 	"path": "pages/test/list/selfInspectionRecordItem",
@@ -263,7 +156,7 @@
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// },
 		// {
 		// 	"path": "pages/test/list/page",
@@ -271,14 +164,14 @@
 		// 		"navigationBarTitleText": "列表子项展示",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// }, {
 		// 	"path": "pages/test/pages/pages",
 		// 	"style": {
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// },
 		// {
 		// 	"path": "pages/test/pages/autoform",
@@ -286,14 +179,14 @@
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// }, {
 		// 	"path": "pages/test/pages/autolist",
 		// 	"style": {
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// },
 		// {
 		// 	"path": "pages/test/pages/banner",
@@ -314,7 +207,7 @@
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// },
 		// {
 		// 	"path": "pages/test/pages/autopage",
@@ -328,28 +221,175 @@
 		// 		"navigationBarTitleText": "",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// }, {
 		// 	"path": "pages/test/testImgParser",
 		// 	"style": {
 		// 		"navigationBarTitleText": "营业证书识别",
 		// 		"enablePullDownRefresh": false
 		// 	}
-
+		
 		// }, 
+		// }
+		
+		// , {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/First",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// },
+		// {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Second",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// }, {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Third",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// }, {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Fourth",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// }, {
+		// 	"path": "pages/enforcement/onSiteLawEnforcement/Fifth",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		//{
+		// 	"path": "pages/test/search/search",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// }, {
+		// 	"path": "pages/test/testsearch",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// },
+		// {
+		// 	"path": "components/dynamic-form/custom/selectBox/selectBox",
+		// 	"style": {
+		// 		"navigationStyle": "custom"
+		// 	}
+		
+		// }, 
+		// {
+		// 	"path": "pages/test/newFormTest/newFormTest",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		
+		// }, 
+		// ,{
+		//        "path" : "pages/test/BusinessLicensePage/BusinessLicensePage",
+		//        "style" :                                                                                    
+		//        {
+		//            "navigationBarTitleText": "",
+		//            "enablePullDownRefresh": false
+		//        }
+		       
+		//    }
+		   // ,{
+		   //     "path" : "pages/login/login_register/enforcement_login",
+		   //     "style" :                                                                                    
+		   //     {
+		   //         "navigationBarTitleText": "",
+		   //         "enablePullDownRefresh": false
+		   //     }
+		       
+		   // }
+			 // ,{
+			 //     "path" : "pages/login/register",
+			 //     "style" :                                                                                    
+			 //     {
+			 //         "navigationBarTitleText": "",
+			 //         "enablePullDownRefresh": false
+			 //     }
+			     
+			 // },
+			 // 还在使用的页面
 		{
-			"path": "pages/enforcement/myEnforcement",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+			"path" : "pages/login/third-Login/third-Login",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
 			}
-
+				
 		},
 		{
-			"path": "pages/enforcement/enforcementBook",
+			"path" : "pages/login/third-Login/IsLogin",
+			"style" :                                                                                    
+			{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+			}
+		},
+		{
+		    "path" : "pages/login/third-Login/third-register",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/defaultPage/defaultPage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/map/venueList/index",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "执法对象",
 				"enablePullDownRefresh": false
+			}
+		
+		},
+		{
+			"path": "pages/map/venueNav/index",
+			"style": {
+				"navigationBarTitleText": "执法导航",
+				"enablePullDownRefresh": false
+			}
+		
+		 }, 
+		{
+		    "path" : "pages/enforcement/enforcement",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/Market-index/Market-index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "市场监督"
 			}
 		},
 		{
@@ -365,28 +405,275 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-		}, {
-			"path": "pages/enforcement/more/MySearch",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/enforcement/more/MySearchTime/MySearchTime",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/enforcement/more/MySearchTime/selfSearchDetail",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
 		},
+		{
+		    "path" : "pages/login/addCompany",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/enforcement/selectCompany/selectCompany",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/enforcement/safeExport",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		
+		},
+		{
+			"path": "pages/enforcement/enforcementStateBook",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		
+		}, 
+		{
+		    "path" : "pages/enforcement/otherBook/otherBook",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/enforcement/book/moreBook",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/enforcement/ReSetting",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/enforcement/myEnforcement",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		
+		},
+		{
+		    "path" : "pages/enforcement/my/my",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/notice",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/NoticeDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/companyHome/home",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/companyHome/selfCheck/index",
+			"style": {
+				"navigationBarTitleText": "企业自查"
+			}
+		},
+		{
+		    "path" : "pages/workFlow/companyConfirm/companyConfirm",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/companyHome/my/selfInspectionRecord",
+			"style": {
+				"navigationBarTitleText": "自查记录"
+			}
+		},
+		
+		{
+			"path": "pages/companyHome/my/selfInspectionDetail",
+			"style": {
+				"navigationBarTitleText": "自查详情"
+			}
+		},
+		{
+			"path": "pages/companyHome/my/returnToWork",
+			"style": {
+				"navigationBarTitleText": "复工"
+			}
+		},
+		{
+			"path": "pages/companyHome/More",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/companyHome/my/lawEnforcementRecord",
+			"style": {
+				"navigationBarTitleText": "执法记录"
+			}
+		},
+		{
+			"path": "pages/companyHome/my/returnToWorkRecord",
+			"style": {
+				"navigationBarTitleText": "复工记录"
+			}
+		},
+
+		{
+			"path": "pages/companyHome/my/lawEnforcementDetail",
+			"style": {
+				"navigationBarTitleText": "执法详情"
+			}
+		},
+		{
+		    "path" : "pages/companyHome/my/reCompanyMes",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/street/myhome",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/street/my/myReport",
+			"style": {
+				"navigationBarTitleText": "我的上报"
+			}
+		},
+		{
+		    "path" : "pages/street/getCompany",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+			"path": "pages/street/community/streetUserReport",
+			"style": {
+				"navigationBarTitleText": "街道用户信息上报"
+			}
+		}, 
+		{
+			"path": "pages/companyHome/my/returnToWorkDetail",
+			"style": {
+				"navigationBarTitleText": "复工详情"
+			}
+		},
+		
+		
+		
+		
+		// {
+		// 	"path": "pages/companyHome/my/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "我的"
+		// 	}
+		// },
+
+		// {
+		// 	"path": "pages/companyHome/selfCheck/selfCheckComfirm",
+		// 	"style": {
+		// 		"navigationBarTitleText": "企业自查"
+		// 	}
+		// },
+
+		// {
+		// 	"path": "pages/street/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "街道页面入口"
+		// 	}
+		// },
+
+		// {
+		// 	"path": "pages/street/my/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "我的"
+		// 	}
+		// },
+
+
+		// {
+		// 	"path": "pages/enforcement/enforcementBook",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/enforcement/more/MySearch",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// }, {
+		// 	"path": "pages/enforcement/more/MySearchTime/MySearchTime",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// }, {
+		// 	"path": "pages/enforcement/more/MySearchTime/selfSearchDetail",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+
+		// },
 		{
 			"path": "pages/enforcement/more/enforcementRecord",
 			"style": {
@@ -415,105 +702,8 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
-			"path": "pages/enforcement/enforcementStateBook",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		// }
-
-		// , {
-		// 	"path": "pages/enforcement/onSiteLawEnforcement/First",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// },
-		// {
-		// 	"path": "pages/enforcement/onSiteLawEnforcement/Second",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// }, {
-		// 	"path": "pages/enforcement/onSiteLawEnforcement/Third",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// }, {
-		// 	"path": "pages/enforcement/onSiteLawEnforcement/Fourth",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// }, {
-		// 	"path": "pages/enforcement/onSiteLawEnforcement/Fifth",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		}, {
-			"path": "pages/map/venueList/index",
-			"style": {
-				"navigationBarTitleText": "执法对象",
-				"enablePullDownRefresh": false
-			}
-
-		},
+		}, 
 		{
-			"path": "pages/map/venueNav/index",
-			"style": {
-				"navigationBarTitleText": "执法导航",
-				"enablePullDownRefresh": false
-			}
-
-		 }, 
-		 //{
-		// 	"path": "pages/test/search/search",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// }, {
-		// 	"path": "pages/test/testsearch",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// },
-		// {
-		// 	"path": "components/dynamic-form/custom/selectBox/selectBox",
-		// 	"style": {
-		// 		"navigationStyle": "custom"
-		// 	}
-
-		// }, 
-		// {
-		// 	"path": "pages/test/newFormTest/newFormTest",
-		// 	"style": {
-		// 		"navigationBarTitleText": "",
-		// 		"enablePullDownRefresh": false
-		// 	}
-
-		// }, 
-		{
-			"path": "pages/enforcement/safeExport",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
 			"path": "pages/enforcement/onSiteLawEnforcement/toSumbit",
 			"style": {
 				"navigationBarTitleText": "",
@@ -548,14 +738,7 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
-			"path": "pages/companyHome/More",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
+		},  {
 			"path": "pages/workFlow/ReturnWork",
 			"style": {
 				"navigationBarTitleText": "",
@@ -570,24 +753,6 @@
 			}
 
 		}
-	    // ,{
-     //        "path" : "pages/test/BusinessLicensePage/BusinessLicensePage",
-     //        "style" :                                                                                    
-     //        {
-     //            "navigationBarTitleText": "",
-     //            "enablePullDownRefresh": false
-     //        }
-            
-     //    }
-        // ,{
-        //     "path" : "pages/login/login_register/enforcement_login",
-        //     "style" :                                                                                    
-        //     {
-        //         "navigationBarTitleText": "",
-        //         "enablePullDownRefresh": false
-        //     }
-            
-        // }
         ,{
             "path" : "pages/cofirmRefuse/cofirmRefuse",
             "style" :                                                                                    
@@ -596,107 +761,10 @@
                 "enablePullDownRefresh": false
             }
             
-        },
-				// ,{
-				//     "path" : "pages/login/register",
-				//     "style" :                                                                                    
-				//     {
-				//         "navigationBarTitleText": "",
-				//         "enablePullDownRefresh": false
-				//     }
-				    
-				// },
+        }
+        ,
 				{
-				    "path" : "pages/enforcement/enforcement",
-				    "style" :                                                                                    
-				    {
-				        "navigationBarTitleText": "",
-				        "enablePullDownRefresh": false
-				    }
-				    
-				}
-        ,{
-            "path" : "pages/login/addCompany",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/enforcement/my/my",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-            "path" : "pages/login/third-Login/IsLogin",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/login/third-Login/third-register",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-				{
-					"path": "pages/street/myhome",
-					"style": {
-						"navigationBarTitleText": "首页",
-						"enablePullDownRefresh": true
-					}
-				}
-        ,{
-            "path" : "pages/enforcement/book/moreBook",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/enforcement/otherBook/otherBook",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/enforcement/selectCompany/selectCompany",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/workFlow/GetWork/GetWork",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/workFlow/companyConfirm/companyConfirm",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -713,42 +781,7 @@
             }
             
         }
-        ,{
-            "path" : "components/dynamic-list/listItem/AvatarStateList/companyStateToEnforcement/companyStateToEnforcement",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/companyHome/my/reCompanyMes",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/enforcement/ReSetting",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/street/getCompany",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
@@ -821,5 +854,6 @@
 			"van-share-sheet": "/wxcomponents/vant/share-sheet/index",
 			"van-empty": "/wxcomponents/vant/empty/index"
 		}
+		
 	}
 }

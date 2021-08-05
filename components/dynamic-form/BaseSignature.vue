@@ -22,6 +22,7 @@
 					  }"
 					  class="image"
 					  v-if="param.value" 
+						style="transform: rotate(-90deg);"
 					  @click="handlePreview" 
 				  />
 					<view v-if="!param.value&&param.readonly">未签名</view>
@@ -39,6 +40,7 @@
                     	@touchmove="handleTouchmove" 
                         @touchend="handleTouchend"
                     />
+										<view class="Tips">请使用横屏签字</view>
                     <view class="buttons">
 						<view class="but" @click="handleClear">重绘</view>
 						<view class="but" @click="handleBack">返回</view>
@@ -49,7 +51,7 @@
         </mask>
 		<mask v-if="preViewModal">
 			<view class="preview_image_content" @click="handleClosePreviewModal">
-				<image mode="heightFix" :src="param.value" />
+				<image mode="aspectFit" :src="param.value" />
 			</view>
 		</mask>
 	</view>
@@ -284,7 +286,7 @@
 				height: 170rpx;
 				background-position: center;
 				background-repeat: no-repeat;
-				background-size: cover;
+				background-size: contain;
 				border: 1px solid #f2f2f2;
 			}
 		}
@@ -292,21 +294,43 @@
     .signature_content {
         width: 100vw;
         height: 100vh;
-        background-color: rbga(0, 0, 0, 0.6);
+        background-color: white;
         .content-box {
             background-color: #fff;
             .mycanvas {
-            	width: 100%;
-            	height: calc(100vh - 162rpx);
+            	width: 75%;
+							position: fixed;
+							right: 0;
+            	height: 100vh;
             	background-color: aliceblue;
             }
+						.Tips{
+							position: fixed;
+							right: -20%;
+							color: #aaa;
+							font-weight: bolder;
+							top: 10%;
+							width: 50%;
+							text-align: center;
+							transform: rotate(90deg);
+						}
             .buttons {
+								transform: rotate(90deg);
+								position: fixed;
+								bottom: 10%;
+								width: 50%;
+								left: -10%;
+								// transform: translate(-50%);
+								// bottom: 0;
+								// right: 0;
                 display: flex;
                 justify-content: center;
                 text-align: center;
                 padding: 40rpx 0;
+								z-index: 10000;
                 .but {
-                    width: 20%;
+                    width: 100%;
+										// height: 10%;
                     border: 1px solid #f2f2f2;
                     padding: 20rpx 0;
                     border-radius: 12rpx;
@@ -325,12 +349,12 @@
         }
     }
 	.preview_image_content {
-		background-color: #fff;
+		background-color: #aaa;
 		height: 100vh;
 		width: 100%;
 		image {
 			width: 100%;
-			height: calc(100vh - 162rpx);
+			height: 100vh;
 		}
 	}
 </style>
