@@ -3,7 +3,10 @@
 	<view>
 		<dynamic-page
 		   :API="getPageAapi"
+			 workflow="true"
+			 :ConfirmConfig="ConfirmConfig"
 			 processDefineKey="jdsb"
+			 :hideLast="true"
 		/>
 	</view>
 
@@ -17,13 +20,43 @@
 		components:{ dynamicPage },
 		onLoad (e){
 		},
+		created() {
+			this.getConfirmConfig(this.api)
+		},
 		data() {
 			return {
 				// getPageAapi: globalConfig.formHost + '?id=510',
 				getPageAapi: globalConfig.formHost + '?id=5600',
+				api: globalConfig.formHost + '?id=66001',
+				ConfirmConfig:{
+					
+				}
 			}
 		},
 		methods:{
+			getConfirmConfig(api){
+				let that = this
+				uni.request({
+					url:api,
+					method:"GET",
+					success(res) {
+						let data = res.data.data
+						console.log("RES",data)
+						let moduleData = data.moduleData
+						console.log(moduleData)
+						let modules = res.data.data.modules
+						let key
+						modules.map((item,i)=>{
+							if(item.type==="confirm"){
+								key = item.key
+								console.log(key)
+							}
+						})
+						that.ConfirmConfig = _.get(moduleData,key,"")
+						console.log(key,moduleData,that.ConfirmConfig)
+					}
+				})
+			},
 		}
 	}
 </script>

@@ -67,13 +67,6 @@
 							...getComponentBindData(item)
 						}"
 					/>
-					<venue-list-item
-						v-if="getListItemKey() === 'VenueListItem'"
-						:item="{
-							...item,
-							...getComponentBindData(item)
-						}"
-					/>
 					<my-report-item
 						v-if="getListItemKey() === 'MyReportItem'"
 						:item="{
@@ -170,7 +163,6 @@
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
 	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
-	import VenueListItem from './listItem/VenueListItem.vue'
 	import MyReportItem from './listItem/MyReportItem.vue'
 	import StreetUserReportItem from './listItem/StreetUserReportItem.vue'
 	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
@@ -193,7 +185,6 @@
 			SelfInspectionRecordItem,
 			RecordStepsItem,
 			ReturnToWorkRecordItem,
-			VenueListItem,
 			MyReportItem,
 			StreetUserReportItem,
 			AvatarStateItem,

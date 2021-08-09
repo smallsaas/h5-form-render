@@ -5,6 +5,7 @@
 		   :API="getPageAapi"
 			 processDefineKey="yyzz"
 			 FormKey="yyzz"
+				:hideConfirm="true"
 		/>
 	</view>
 

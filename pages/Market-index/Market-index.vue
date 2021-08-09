@@ -1,8 +1,8 @@
 <template>
 	<view>
-<!-- 		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
-		</dynamic-page> -->
-		<view v-if="current===0">
+		<dynamic-page style="margin-bottom: 50px;" :API="api" v-if="current===0&&loading===false">
+		</dynamic-page>
+<!-- 		<view v-if="current===0">
 			<view class="title-box">
 				<view class="title">
 					<image :src="query.avatar" class="avatar"></image>
@@ -13,7 +13,7 @@
 			<dynamic-page :API="newAPI" v-if="loading===false">
 				
 			</dynamic-page>
-		</view>
+		</view> -->
 
 		
 		<DataBase v-if="current===1"></DataBase>
@@ -82,7 +82,8 @@
 	export default {
 		data() {
 			return {
-				api: globalConfig.formHost + '?id=2000',
+				// api: globalConfig.formHost + '?id=2000',
+				api: globalConfig.formHost + '?id=3456789',
 				icon:"",
 				current: 0,
 				query:"",

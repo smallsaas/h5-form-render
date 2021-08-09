@@ -1,5 +1,5 @@
 			import {globalConfig} from '@/config.js'
-			import {LoadComplete} from '@/common/api.js'
+			// import {LoadComplete} from '@/common/api.js'
 			export const convert=(argConfig)=> {
 			  if (!argConfig.isLawForm) {
 			    return argConfig
@@ -350,38 +350,38 @@
 			
 			  return result
 			}
-			//确定表单是否可用工具（流程重要工具)
-			export async function isDisabled(config,key,taskId){
-				let newField;
-				let newConfig;
+			//确定表单是否可用工具（流程重要工具)(废弃)
+			// export async function isDisabled(config,key,taskId){
+			// 	let newField;
+			// 	let newConfig;
 				
-				let res = await LoadComplete({"processDefineKey":key,"taskId":taskId})
-				if(res.code==="00000"){
-					// console.log("获取到的数据res",res)
-					let list = res.data.nodeSettingEntity.formFiledEntityList
-					// console.log("list",list)
-					for(var i in list){
-						// console.log("name",list[i].name)
-						let status = list[i].status
-						let fields = config
-						// console.log("config",config)
-								let __model__ = fields.__vModel__
-								if(__model__===list[i].name){
-									let __newConfig__ = fields
-									if(status===0){
-										newConfig={...__newConfig__,"readonly":true}
-										// console.log("NewConfig",newConfig)
-									}else{
-										newConfig={...__newConfig__,"readonly":false}
-									}
-									newField=newConfig
-									// console.log("NEWFIELD",newField)
-									return newField
-						}
-						// if(config.fields)
-					}
-				}
-				// console.log("完成之后的配置",newField)
-				return newField
-			}
+			// 	let res = await LoadComplete({"processDefineKey":key,"taskId":taskId})
+			// 	if(res.code==="00000"){
+			// 		// console.log("获取到的数据res",res)
+			// 		let list = res.data.nodeSettingEntity.formFiledEntityList
+			// 		// console.log("list",list)
+			// 		for(var i in list){
+			// 			// console.log("name",list[i].name)
+			// 			let status = list[i].status
+			// 			let fields = config
+			// 			// console.log("config",config)
+			// 					let __model__ = fields.__vModel__
+			// 					if(__model__===list[i].name){
+			// 						let __newConfig__ = fields
+			// 						if(status===0){
+			// 							newConfig={...__newConfig__,"readonly":true}
+			// 							// console.log("NewConfig",newConfig)
+			// 						}else{
+			// 							newConfig={...__newConfig__,"readonly":false}
+			// 						}
+			// 						newField=newConfig
+			// 						// console.log("NEWFIELD",newField)
+			// 						return newField
+			// 			}
+			// 			// if(config.fields)
+			// 		}
+			// 	}
+			// 	// console.log("完成之后的配置",newField)
+			// 	return newField
+			// }
 			

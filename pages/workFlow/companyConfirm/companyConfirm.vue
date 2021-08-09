@@ -1,26 +1,48 @@
 <template>
 	<view>
+		<!-- <view style="width: 100%;text-align: center;font-weight: bolder;font-size: 16px;background-color: #1A5EB5;color: white;padding: 10px 0;">请确认表单内容</view> -->
 		<dynamic-form
-		v-if="userList.userId"
+		v-if="userList.userId&&piId"
 			:config="config"
 			:srvFormData="formData"
+			
 			workflow="true"
+			hideLast="true"
+			:ConfirmConfig="ConfirmConfig"
+			:piId="piId"
+			:LastKey="processDefineKey"
+			
+			:hideButton="true"
 			:processDefineKey="key"
 			:user="userList"
 			:taskId="taskId"
 			:Details="false"
 			:debug="true"
+			@getData="getFormData"
 		></dynamic-form>
 		<dynamic-form
-			v-if="!userList.userId"
+			v-if="!userList.userId&&piId"
 			:config="config"
 			:srvFormData="formData"
 			workflow="true"
+			hideLast="true"
+			:ConfirmConfig="ConfirmConfig"
+			:piId="piId"
+			:LastKey="processDefineKey"
+			:hideButton="true"
 			:processDefineKey="key"
 			:taskId="taskId"
 			:Details="false"
 			:debug="true"
+			@getData="getFormData"
 		></dynamic-form>
+		<!-- <view style="position: relative;top: 5px;right: 5px;transform: translate(-50%);" @click="isShow()"><img style="width: 30px;height: 30px;" :src="icon.navCf_blue"></img></view> -->
+<!-- 		<dynamic-page
+			 :API="api"
+			 hideLast="true"
+			 :LastKey="processDefineKey"
+			 :srvFormData="formData"
+		></dynamic-page> -->
 <!-- 		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
@@ -29,6 +51,7 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	import {Base64} from '@/utils/tools.js'
 	import {globalConfig} from '@/config.js'
 	import {convert} from '@/utils/customTools.js'
@@ -41,6 +64,10 @@
 			this.getPiId(e.query)
 			this.getConfig()
 		},
+		created() {
+			this.icon = globalConfig.icon
+			this.getConfirmConfig(this.api)
+		},
 		components:{
 			dynamicForm,
 			dynamicPage
@@ -52,11 +79,13 @@
 			return {
 				loadApi:`${globalConfig.workflowEP}/api.flow.examine/processDetail`,
 				piId:"",
+				api: globalConfig.formHost + '?id=66001',
 				taskId:"",
 				config:null,
 				method:"POST",
 				data:{
 				},
+				icon:null,
 				userList:{
 					userId:null,
 					name:null
@@ -66,12 +95,47 @@
 					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
 				key:null,
-				api: globalConfig.formHost + '?id=66000',
 				processDefineKey:{},
+				confirmList:[],
+				ConfirmConfig:{
+					
+				}
+				// show:false
 				// id:""
 			}
 		},
 		methods: {
+			getConfirmConfig(api){
+				let that = this
+				uni.request({
+					url:api,
+					method:"GET",
+					success(res) {
+						let data = res.data.data
+						console.log("RES",data)
+						let moduleData = data.moduleData
+						console.log(moduleData)
+						let modules = res.data.data.modules
+						let key
+						modules.map((item,i)=>{
+							if(item.type==="confirm"){
+								key = item.key
+								console.log(key)
+							}
+						})
+						that.ConfirmConfig = _.get(moduleData,key,"")
+						console.log(key,moduleData,that.ConfirmConfig)
+					}
+				})
+			},
+			// isShow(){
+			// 	this.show=!this.show
+			// 	console.log(this.show)
+			// },
+			getFormData(e){
+				console.log('真实获取数据',e)
+				this.formData=e
+			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
@@ -93,6 +157,7 @@
 					"processInstanceId": this.piId
 				}
 			},
+
 			getConfig(){
 				// console.log(this.data)
 				// console.log(this.method)
@@ -153,5 +218,8 @@
 </script>
 
 <style>
-
+	.MessageBox{
+		border: 2px double #1A5EB5;
+		padding: 10px;
+	}
 </style>

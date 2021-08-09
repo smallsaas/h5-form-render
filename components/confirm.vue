@@ -1,30 +1,40 @@
 <template>
-	<view class="Confirm" style="position: relative;" >
-		<view class="comment">
-			<view class="title" v-if="config.placeholder">{{config.placeholder}}
+	<view>
+		<view style="background-color: white;width: 90%;margin: 10px auto;padding: 5px;text-align: left;" v-if="confirmList.length>0">
+			<view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录<span style="float: right;" @click="isShowList()">{{text}}</span></view>
+			<view class="MessageBox" v-for="(item,i) in confirmList"  v-show="!showList">
+				<view style="font-weight: bold;margin-right:5px">发起时间:<span style="font-weight:normal;">{{item.time}}</span></view>
+				<view style="font-weight: bold;margin-right:5px">办理步骤: <span style="font-weight:normal;">{{item.taskName}}</span></view>
+				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
 			</view>
-<!-- 			<view>
-				<button @click="">模板测试</button>
-			</view> -->
-			<textarea adjust-position="true" v-model:value="comment" class="comment_input"
-			:placeholder="'请输入'+(config.placeholder||'...')"
-			maxlength="-1"
-			></textarea>
 		</view>
-		<view class="ConfirmBox">
-			<view class="agree button" @click="GetAgree('backToPrev')">
-				{{config.lastText}}
+		<view class="Confirm" style="position: relative;" >
+			<view class="comment">
+				<view class="title">{{config.placeholder||"办理意见"}}
+				</view>
+	<!-- 			<view>
+					<button @click="">模板测试</button>
+				</view> -->
+				<textarea adjust-position="true" v-model:value="comment" class="comment_input"
+				:placeholder="'请输入'+(config.placeholder||'办理意见')"
+				maxlength="-1"
+				></textarea>
 			</view>
-			<view class="agree button" @click="GetAgree('next')">
-				{{config.agreeText}}
+			<view class="ConfirmBox">
+				<view class="agree button" @click="GetAgree('backToPrev')" v-if="!hideLast">
+					{{config.lastText||"回退"}}
+				</view>
+				<view class="agree button" @click="GetAgree()">
+					{{config.agreeText||"提交"}}
+				</view>
+				<view class="agree button" @click="exit()">
+					关闭
+				</view>
+	<!-- 			<view class="refuse button" @click="GetRefuse()">
+					{{config.refuseText}}
+				</view> -->
+				<!-- <button @click="getFormData()">测试</button> -->
 			</view>
-			<view class="agree button" @click="exit()">
-				关闭
-			</view>
-<!-- 			<view class="refuse button" @click="GetRefuse()">
-				{{config.refuseText}}
-			</view> -->
-			<!-- <button @click="getFormData()">测试</button> -->
 		</view>
 	</view>
 </template>
@@ -36,40 +46,89 @@
 		data() {
 			return {
 				comment:"",
-				username:""
+				username:"",
+				confirmList:[],
+				showList:false,
+				text:"收起"
 			};
 		},
 		props:{
+			hideLast:false,
 			config:{
 				type:Object,
 				default(){
 					return {
 						agreeText:"同意",
-						lastText:"回退给上一步发起人",
+						lastText:"回退",
 						refuseText:"拒绝",
 						placeholder:"请输入..."
 					}
 				}
 			},
 			formData:Object,
-			LastKey:Object
+			LastKey:Object,
+			piId:String,
+			userlist:Object,
+			jumpUrl:String,
+			processDefineKey:String
+		},
+		watch:{
+			piId:{
+				handler(value,oldValue){
+					console.log("VALUE",value,oldValue)
+				},
+				deep:true
+			}
+		},
+		created(){
+			console.log("PIID",this.piId)
+			this.getConfim(this.piId)
 		},
 		mounted() {
-			// console.log("confimKey",this.LastKey)
+			console.log("confimKey",this.LastKey)
 			// console.log("FormDATA",this.formData)
 			// console.log("userInfo",globalConfig.userInfo)
 			this.username=uni.getStorageSync(globalConfig.userInfo).username
+			console.log("PIID",this.piId)
 		},
 		methods:{
 			// getFormData(){
 			// 	console.log("FormDATA",this.formData)
 			// },
+			isShowList(){
+				// console.log("SHOWLIST",this.showList)
+				if(this.showList===true){
+					this.text="收起"
+				}else{
+					this.text="展开"
+				}
+				this.showList=!this.showList
+			},
+			getConfim(key,taskId){
+				let pkey = key
+				let that = this
+				uni.request({
+					url:`${globalConfig.workflowEP}/api.flow.examine/getComments`,
+					method:"POST",
+					data:{
+						"processInstanceId":pkey
+					},
+					header:{
+						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+					},
+					success(res){
+						console.log("res",res)
+						that.confirmList=res.data.data
+					}
+				})
+			},
 			exit(){
 				uni.navigateBack({
 					delta:10
 				})
 			},
 			GetAgree(openType){
+				
 				// console.log(value);
 				// console.log(this.comment)
 				console.log("KEY",this.LastKey.applyUserName)
@@ -80,19 +139,38 @@
 					Authorization:token
 				}
 				let url = `${globalConfig.workflowEP}/api.flow.examine/complete`
-				let data = {
-					"processDefineKey":this.LastKey.processDefineKey,
-					"version":"1",
-					"customValues":{
-						"fileno":this.LastKey.fileno,
-						"fileseq":this.LastKey.fileseq
-					},
-					"ignoreNotPersistent":true,
-					"formData":this.formData,
-					"operType":openType,
-					"comment":this.comment,
-					"taskId":this.LastKey.taskId
+				let data;
+				if(this.userlist){
+					data = {
+						"processDefineKey":this.LastKey.processDefineKey||this.processDefineKey,
+						"customValues":{
+							"fileno":this.LastKey.fileno||1,
+							"fileseq":this.LastKey.fileseq||10,
+						},
+						"userId":this.userlist.userId,
+						"userName":this.userlist.name,
+						"ignoreNotPersistent":true,
+						"formData":this.formData,
+						"operType":openType,
+						"comment":this.comment,
+						"taskId":this.LastKey.taskId
+					}
+				}else{
+					data = {
+						"processDefineKey":this.LastKey.processDefineKey||this.processDefineKey,
+						"customValues":{
+							"fileno":this.LastKey.fileno||1,
+							"fileseq":this.LastKey.fileseq||10,
+						},
+						"ignoreNotPersistent":true,
+						"formData":this.formData,
+						"operType":openType,
+						"comment":this.comment,
+						"taskId":this.LastKey.taskId
+					}
 				}
+				let that = this
+				console.log("JUMP",this.jumpUrl)
 				// console.log(data)
 				uni.request({
 					header:header,
@@ -112,9 +190,15 @@
 							// 		console.log(e)
 							// 	}
 							// })
-							uni.navigateBack({
-								delta:10
-							})
+							if(that.jumpUrl){
+								uni.navigateTo({
+									url:"/pages"+that.jumpUrl
+								})
+							}else{
+								uni.navigateBack({
+									delta:10
+								})
+							}
 						}else{
 							uni.showModal({
 								content:res.data.msg
@@ -226,7 +310,7 @@
 		// }
 	}
 	.comment{
-		z-index: 1;
+		// z-index: 1;
 		width: 100%;
 		.comment_input{
 			width: 90%;
@@ -243,5 +327,9 @@
 			font-size: 14px;
 			// border-bottom: 1px solid #999;
 		}
+	}
+	.MessageBox{
+		border: 2px double #1A5EB5;
+		padding: 10px;
 	}
 </style>

@@ -2,7 +2,7 @@
 	<view style="background-color: white;" v-if="param.readonly">
 		<view class="c-rich-text-label"><span style="color: red;margin-right: 2px;" v-if="param.required">*</span>{{param.label}}</view>
 	<!-- <rich-text :nodes="param.value"></rich-text> -->
-		<view class="c-rich-text-box" v-html="param.value" ></view>
+		<view class="c-rich-text-box" v-html="Debug(param.value)" ></view>
 	</view>
 </template>
 
@@ -23,6 +23,12 @@
 			param:{
 				type:Object
 			}
+		},
+		methods:{
+			Debug(item){
+				item = item.replace(/https:\/\/jimangmensso.oss-cn-shenzhen.aliyuncs.com/g, 'https://images.weserv.nl/?url=https://jimangmensso.oss-cn-shenzhen.aliyuncs.com')
+				return 
+			}
 		}
 	}
 </script>
@@ -36,12 +42,16 @@
 		margin-left: 10px;
 		color: #333;
 	}
+	img{
+		max-width: 50px;
+	}
 	.c-rich-text-box{
 		width: 90%;
 		min-height: 900rpx;
 		margin: 30rpx auto;
-		box-shadow: 0px 0px 4px 2px #aaa;
-		border-radius: 20rpx;
+		border: 5px double #666;
+		// box-shadow: 0px 0px 4px 2px #aaa;
+		// border-radius: 20rpx;
 		padding: 20rpx;
 	}
 </style>

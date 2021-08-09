@@ -164,6 +164,23 @@
 							 @change="(e) => handleSetValue(e, fields[index])"
 										 @list="(e)=>handleList(e)"
 			 ></c-select>
+			 <c-select-street
+			 				 v-if="_get(item, '__config__.tag') === 'c-select-street'&&!Details"
+			 				 :param="{
+			 					...getBaseParam(item),
+			 					..._get(item, 'error', false) ? { error: item.error } : {},
+			 					..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+			 					...item['max-count'] ? { 'max-count': item['max-count'] } : {},
+			 					..._has(item, 'deletable') ? { deletable: item.deletable } : {},
+			 								..._has(item, 'accept') ? { accept: item.accept } : {},
+			 				 }"
+			 							 :loadAPI="_get(item,'loadApi','')"
+			 							 :data="_get(item,'data')"
+			 							 :method="_get(item,'method')"
+										 :response="_get(item,'response')"
+			 							 @change="(e) => handleSetValue(e, fields[index])"
+			 										 @list="(e)=>handleStreet(e)"
+			 ></c-select-street>
 			 <c-Map-Mes
 				 v-if="_get(item, '__config__.tag') === 'c-map-mes'"
 				 :param="{
@@ -231,6 +248,7 @@
 	// import cMapMes from 
 	// import cSelectList from './custom/c-select-list.vue'
 	import cSelect from './custom/c-select/c-select.vue'
+	import cSelectStreet from './custom/selectBox/selectBox.vue'
 	import cMapMes from './custom/c-map-mes.vue'
 	import BaseSingleModalSelect from './BaseSingleModalSelect.vue'
     import BaseSignature from './BaseSignature.vue'
@@ -253,6 +271,7 @@
 			 cMapMes,
 		   BaseSingleModalSelect,
            BaseSignature,
+					 cSelectStreet,
 					 CRichText
         },
         props: {
@@ -281,10 +300,34 @@
 							// this.form[item.__vModel__]
 							let latitude = this.form["latitude"]
 							let longitude = this.form["longitude"]
+							let streetName = this.form["streetName"]
+							let streetId = this.form["streetId"]
 							// console.log("获取到的item",isDisabled(item),"fields",this.fields)
 							// console.log("这是form",this.form)
 							// console.log("tag",_.get(item,'__config__.tag'))
-							if(_.get(item,'__config__.tag')==='c-map-mes'){
+							if(_.get(item,'__config__.tag')==='c-select-street'){
+								config={
+								 // title:_.get(item,'__config__.title'),
+									label: _.get(item, '__config__.label'),
+									required: _.get(item, '__config__.required', false),
+									readonly: true,
+									disabled: _.get(item, 'disabled', false),
+									clearable: _.get(item, 'clearable', false),
+									inputBlock: _.get(item, 'inputBlock', false),
+									value: {
+										name:streetName,
+										id:streetId
+									},
+									style: _.get(item, 'style', ''),
+									regList: _.get(item, '__config__.regList', []),
+									..._.has(item, 'placeholder') ? { placeholder: item.placeholder } : {},
+									..._.has(item, 'password') ? { password: item.password } : {},
+									..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
+									..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
+									..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
+									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
+								}
+							}else if(_.get(item,'__config__.tag')==='c-map-mes'){
 								config={
 								 // title:_.get(item,'__config__.title'),
 									label: _.get(item, '__config__.label'),
@@ -345,7 +388,7 @@
 									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
 							 }
 							}
-							console.log("传到里面的配置",config)
+							// console.log("传到里面的配置",config)
 							return config
            },
 		   _has (item = {}, str) {
@@ -365,6 +408,10 @@
 					 },
 					 handleList(e){
 						 this.$emit("user",e)
+					 },
+					 handleStreet(e){
+						 console.log(e)
+						 this.$emit("street",e)
 					 },
            handleClear (e, item) {
                this.$emit('clear', e, item)

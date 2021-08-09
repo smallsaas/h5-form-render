@@ -17,7 +17,10 @@
         >
             <swiper-item v-for="(item, index) in list" :key="index">
                 <navigator :url="getNavigationUrl(item.itemNavigation)" hover-class="navigator-hover">
-                    <image :src="item.img" mode="widthFix" class="swiper_image" />
+                    <image :src="item.img" mode="scaleToFill" class="swiper_image"             
+										:style="{
+											height: `${swiperHeight * 2}rpx`
+										}"/>
                 </navigator>
             </swiper-item>
         </swiper>

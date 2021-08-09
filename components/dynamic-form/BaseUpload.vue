@@ -175,7 +175,7 @@
     }
 		.Detail-Box{
 			padding-top: 10px;
-			margin-bottom: 10px;
+			padding-bottom: 10px;
 			display: flex;
 			.label{
 				width: 100px;

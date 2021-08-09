@@ -3,8 +3,16 @@
 		<dynamic-form
 			:config="config"
 			:srvFormData="formData"
+			:hideConfirm="true"
 			:Details="true"
 		></dynamic-form>
+		<view style=" width: 90%;margin: 10px auto;padding: 5px;text-align: left;"><view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录</view>
+			<view class="ConfirmBox" v-for="(item,i) in confirmList" v-if="confirmList.length>0">
+				<view style="font-weight: bold;margin-right:5px">发起时间:<span style="font-weight:normal;">{{item.time}}</span></view>
+				<view style="font-weight: bold;margin-right:5px">办理步骤: <span style="font-weight:normal;">{{item.taskName}}</span></view>
+				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
+			</view>
+		</view>
 <!-- 		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
@@ -45,6 +53,7 @@
 				header:{
 					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
+				confirmList:[]
 				// api: globalConfig.formHost + '?id=66000',
 				// processDefineKey:{}
 			}
@@ -59,6 +68,24 @@
 				this.data = {
 					"processInstanceId": this.piId
 				}
+			},
+			getConfim(key,taskId){
+				let pkey = key
+				let that = this
+				uni.request({
+					url:`${globalConfig.workflowEP}/api.flow.examine/getComments`,
+					method:"POST",
+					data:{
+						"processInstanceId":pkey
+					},
+					header:{
+						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+					},
+					success(res){
+						console.log("res",res)
+						that.confirmList=res.data.data
+					}
+				})
 			},
 			getConfig(){
 				// console.log(this.data)
@@ -109,6 +136,7 @@
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
 							console.log(that.processDefineKey)
+							that.getConfim(that.piId)
 							// console.log(that.config)
 						}
 					}
@@ -119,5 +147,8 @@
 </script>
 
 <style>
-
+	.ConfirmBox{
+		border: 2px double #1A5EB5;
+		padding: 10px;
+	}
 </style>

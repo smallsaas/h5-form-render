@@ -18,6 +18,7 @@
 										@user="handleUser"
 										@map="handleMap"
                     @clear="handleClear"
+										@street="handleStreet"
                 />
                 <view v-if="_get(item, '__config__.layout') === 'rowFormItem'"
 								style="padding: 10px;border-radius: 5px;"
@@ -51,6 +52,7 @@
 														@user="handleUser"
 														@map="handleMap"
                             @clear="handleClear"
+														@street="handleStreet"
                         />
                         <view v-else>
                             <view class="form_row_title">
@@ -65,6 +67,7 @@
 																@user="handleUser"
 																@map="handleMap"
                                 @clear="handleClear"
+																@street="handleStreet"
                             />
                         </view>
                     </block>
@@ -94,6 +97,19 @@
 								  >下一步</van-button> -->
 									
 						<!-- 新button -->
+						<view v-if="(workflow||_get(this.config,'workflow'))&& fields.length > 0">
+							<confirm 
+							:hideLast="hideLast" 
+							:config="ConfirmConfig" 
+							v-if="!hideConfirm"
+							:formData="__FORM_DATA__"
+							:piId="piId"
+							:LastKey="LastKey"
+							:userlist="userlist||user"
+							:jumpUrl="jumpUrl"
+							:processDefineKey="processDefineKey"
+							></confirm>
+						</view>
 						<view class="button-box" v-if="!Details&&!hideButton">
 							<button
 							class="button"
@@ -143,6 +159,8 @@
 		import {Base64,guid} from '../../utils/tools.js'
     import { globalConfig } from '@/config.js'
 		import cLincense from './custom/c-lincense.vue'
+		import {LoadComplete} from '@/common/api.js'
+		import confirm from '@/components/confirm.vue'
 		import card from '../other/Card.vue'
     const SUNMIT_API =  globalConfig.formHost + '/custom'
     const LOAD_API = globalConfig.formHost + '/userinfos'  // 默认获取数据
@@ -152,7 +170,8 @@
         components: { 
           BaseVants,
 					card,
-					cLincense
+					cLincense,
+					confirm
         },
 		props: {
 			config: {
@@ -180,6 +199,7 @@
 			  }
 			},
 			hideButton:Boolean,
+			hideConfirm:Boolean,
             // 默认的提交数据
             formInfo: {
               type: Object,
@@ -194,7 +214,29 @@
 						user:Object,
 						taskId:String,
 						debug:Boolean,
-						isCompany:Boolean
+						isCompany:Boolean,
+						jumpUrl:String, //流程生效
+						piId:{
+							type:String
+						},
+						hideLast:{
+							type:Boolean,
+							default(){
+								return false
+							}
+						},
+						LastKey:{
+							type:Object,
+							default:()=>{
+								return {}
+							}
+						},
+						ConfirmConfig:{
+							type:Object,
+							default(){
+								return {}
+							}
+						}
 		},
 		data() {
 			return {
@@ -209,7 +251,8 @@
                     token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
                 },
 				lincense:null,
-				userlist:null
+				userlist:null,
+				__FORM_DATA__:null
 			}
 		},
         watch: {
@@ -218,7 +261,11 @@
                   if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
                     this.formConfig = { ...val }
                     if (_.get(val, 'fields')) {
+												this.skeletonLoading===true
+												this.getKeyFormConfig()
                         this.handleInitFormData()
+												this.skeletonLoading===false
+												
                     }
                   }
                 },
@@ -228,7 +275,10 @@
                  handler(val, oldVal) {
                    if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
                       if (_.get(val, 'fields')) {
+												this.skeletonLoading===true
+												this.getKeyFormConfig()
                            this.handleInitFormData()
+													 this.skeletonLoading===false
                       }
                    }
                  },
@@ -238,20 +288,41 @@
 							    handler(val, oldVal) {
 							      if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
 							         if (_.get(val, 'fields')) {
+												 this.skeletonLoading===true
+												 this.getKeyFormConfig()
 							              this.handleInitFormData()
+														this.skeletonLoading===false
 							         }
 							      }
 							    },
 							    deep: true
 							 },  
+							piId:{
+								handler(value,oldValue){
+									console.log("VALUE",value,oldValue)
+								},
+								deep:true
+							}
         },
+				created(){
+					console.log("PiID",this.piId,this.workflow)
+					if(_.get(this.config,"workflow")||this.workflow){
+						this.hideButton=true
+					}
+				},
 		mounted() {
 			// console.log("表单isCompany",this.isCompany)
 			// console.log("表单的user",this.user)
             // 有具体配置信息时
-            if (Object.keys(this.config).length > 0) {
-                this.formConfig = _.cloneDeep(this.config)
-            }
+						if(this.processDefineKey&&this.config){
+							// console.log("进来了")
+							this.getKeyFormConfig()
+							// console.log("执行完了")
+						}else{
+							if (Object.keys(this.config).length > 0) {
+									this.formConfig = _.cloneDeep(this.config)
+							}
+						}
             if (_.has(this.formConfig, 'fields')) {
                 this.handleInitFormData()
 								this.skeletonLoading = false
@@ -271,6 +342,68 @@
             _get (item, str, defauleValue = '') {
               return _.get(item, str, defauleValue)
             },
+						async getKeyFormConfig(){
+							let conf = this.config
+							let Conf_RES = await LoadComplete({"processDefineKey":this.processDefineKey,"taskId":this.taskId})
+							if(Conf_RES.code==="00000"){
+								let list = Conf_RES.data.nodeSettingEntity.formFiledEntityList
+								for(var i in list){
+									let isEditable = list[i].isEditable
+									// console.log("CONF",conf)
+									let fields = conf.fields
+										for(var a in fields){
+											if(fields[a].__config__){
+											// console.log("FIELDS",fields,"config",fields[a].__config__,"a",a)
+											// console.log("CHILDREN",fields[a].__config__.children)
+											if(fields[a].__config__.children){
+												let __children__ = fields[a].__config__.children
+												// console.log("测试",__children__)
+												for(var b in __children__){
+													// console.log("STATUS",status)
+													if(isEditable===0||isEditable==="0"){
+														if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
+															conf.fields[a].__config__.children[b].readonly = true
+															this.formConfig = conf
+															// console.log("thatCodeData",this.formConfig,conf)
+														}
+														// console.log("里面的conf",conf)
+													}else{
+														if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
+															conf.fields[a].__config__.children[b].readonly = false
+															this.formConfig = conf
+															// console.log("thatCodeData",this.formConfig)
+														}
+													}
+												}
+											}else{
+													if(isEditable===0||isEditable==="0"){
+														if(conf.fields[a].__vModel__===list[i].name){
+															conf.fields[a].readonly = true
+															this.formConfig = conf
+															// console.log("thatCodeData",this.formConfig)
+														}
+													}else{
+														if(conf.fields[a].__vModel__===list[i].name){
+															conf.fields[a].readonly = false
+															this.formConfig = conf
+															// console.log("thatCodeData",this.formConfig)
+														}
+													}
+											}
+										}
+									}
+								}	
+								
+							}
+							// conf.fields[0].__config__.children[1].readonly = true
+							// this.codeData = this.conf
+							// console.log("DEBUG",this.formConfig)
+							// 决定是否可用
+							// this.codeData = isDisabled(convertData,this.FormKey)
+							// console.log("__DISDATA__",__DisData__)
+							// this.codeData =__DisData__
+							// console.log("CODEDATA",this.codeData)
+						},
 						lincenseValue(e){
 							this.skeletonLoading = true
 							let fields = this.config.fields
@@ -436,7 +569,7 @@
 					})
 					return data
 				}
-            	this.fields = [...renderChild(_.cloneDeep(_.get(this.formConfig, 'fields', [])))]
+            	this.fields = [...renderChild(_.get(this.formConfig, 'fields', []))]
 				this.skeletonLoading = false
             },
 						
@@ -450,6 +583,12 @@
 							this.form["latitude"]=e.latitude
 							this.form["longitude"]=e.longitude
 							// console.log("srvData",this.srvFormData)
+						},
+						handleStreet(e){
+							console.log("选择街道的e",e)
+							this.form["streetId"]=e.id
+							this.form["streetName"]=e.name
+							console.log("form",this.form)
 						},
             // 改变值时
             handleChange (e, item) {
@@ -472,6 +611,7 @@
                       if (_.get(x, '__config__.children', []).length > 0) {
                           x.__config__.children = [...checkRequired(x.__config__.children)]
                       }
+											
                       return x
                   })
                   return data
@@ -482,6 +622,7 @@
 						handleUser(e){
 							this.userlist=e
 						},
+						
             // 清空时
             handleClear (e, item) {
                 this.form[item.__vModel__] = ''
@@ -554,6 +695,7 @@
 								...this.form
 							}
 							// console.log("FormData",data)
+							this.__FORM_DATA__ = data
 							this.$emit('getData',data)
 						},
 						handleChangeCompany(){
@@ -698,15 +840,22 @@
 												// console.log('submitDataItem',submitData[i])
 										}
 										// 营业执照拼接的字段
+										console.log("SUBMITDATA",submitData)
 										YyzzData = {
 											"address":submitData["address"],
 											"name":submitData["name"],
 											"licenceNo":submitData["reg_num"],
 											"personName":submitData["person"],
-											"capital":submitData["capital"],
+											"personPhone":submitData["phone"],
 											"businessScope":submitData["business"],
 											"startupDate":submitData["establish_date"],
-											"expireDate":submitData["valid_period"]
+											"expireDate":submitData["valid_period"],
+											"streetId":submitData["streetId"],
+											"streetName":submitData["streetName"],
+											"captial":submitData["captial"],
+											"latitude":submitData["latitude"],
+											"longitude":submitData["longitude"],
+											"type":submitData["type"]
 										}
 										// YyzzData = {
 										// 	"address":
@@ -767,10 +916,15 @@
 											"name":submitData["name"],
 											"licenceNo":submitData["reg_num"],
 											"personName":submitData["person"],
-											"capital":submitData["capital"],
 											"businessScope":submitData["business"],
 											"startupDate":submitData["establish_date"],
-											"expireDate":submitData["valid_period"]
+											"expireDate":submitData["valid_period"],
+											"streetId":submitData["streetId"],
+											"streetName":submitData["streetName"],
+											"captial":submitData["captial"],
+											"latitude":submitData["latitude"],
+											"longitude":submitData["longitude"],
+											"type":submitData["type"]
 										}
 										// YyzzData = {
 										// 	"address":
@@ -926,6 +1080,8 @@
 							                }
 							            }, 500)
 							        }else if(_.get(res,'data.code')==="00000"){
+												console.log("RES",res)
+												let taskId = res.data.data.taskId
 												let pages = getCurrentPages()
 												let LastPage = pages[0]
 												let pageUrl = LastPage.$page.fullPath
@@ -946,7 +1102,12 @@
 																			// console.log(a)
 																		}
 												        })
-												    } else {
+												    }else if(this.jumpUrl){
+																console.log(`/pages${this.jumpUrl}&taskId=${taskId}`)
+																uni.navigateTo({
+																	url:`/pages${this.jumpUrl}&taskId=${taskId}`
+																})
+														} else {
 												        uni.navigateBack({
 																	success(){
 																		let page = getCurrentPages().pop();  //跳转页面成功之后

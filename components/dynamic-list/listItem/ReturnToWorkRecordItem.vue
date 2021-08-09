@@ -1,136 +1,177 @@
 <template>
 	<!-- <navigator :url="navigationUrl" hover-class="navigator-hover"> -->
-		<view class='card'>
-			<view class='title'>
-				<view>{{ item.year }}</view>
-			</view>
-			<view class='title' style="font-size: 28rpx;">
-				<view>{{ item.startTime}} - {{ item.endTime }}</view>
-			</view>
-			<!-- <view class='date-info'>
-				
-			</view> -->
-			<view v-for="(cItem,cIndex) in item.cellList" :key="cIndex">
-				<dynamic-cell :param="{
-					title: cItem.title
-				}" 
-				@handleClick="onItemClick(cItem)"
-				/>
-			</view>
-			<view class="footer">
-				<view @click="onGoToFormClick">去填写</view>
+		<view class="state_allcontent">
+			<view class="AvatarStateList">
+				<view class="formNumber" v-if="item.customValues.fileno">
+					卷宗号:
+					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.customValues.fileno}}</span>
+					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
+					<span class="enforcementState rectification" v-if="item.finishState==='0'">待整改</span>
+					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已结案</span>
+				</view>
+				<view class="body">
+					<view class="avatar" v-if="item.pdKey">
+						<image :src="iconList.file" mode="widthFix" class="avatar-img" />
+					</view>
+					<view class="content">
+						<view class="titleBox">
+							<view class="time" v-if="item.actApplyTime"><span class="content-title">开始时间:</span>{{item.actApplyTime}}</view>
+							<view class="object" v-if="item.actApplyUserName"><span class="content-title">执法人员:</span>{{item.actApplyUserName}}</view>
+							<view class="company" v-if="item.actCurrDualUserName"><span class="content-title">下一步执行人:</span>{{item.actCurrDualUserName}}</view>
+							<!-- <view class="department" v-if="item.department"><span class="content-title">执法科室:</span>{{item.department}}</view> -->
+							<view class="remarks" v-if="item.formName"><span class="content-title">执法单名:</span>{{item.formName}}</view>
+						</view>
+					</view>
+<!-- 					<view class="state" v-if="item.state">
+							<view v-if="item.state.modify" class="modify">修改</view>
+							<view v-if="item.state.approval" class="approval">审批</view>
+					</view> -->
+				</view>
 			</view>
 		</view>
 	<!-- </navigator> -->
 </template>
+
 <script>
 	import qs from 'qs'
-	import dynamicCell from "@/components/custom-c/cell.vue";
+	import {globalConfig} from '@/config.js'
 	export default {
-		name: 'ReturnToWorkRecordItem',
-		components: { dynamicCell },
-		props: {
-			item: Object,
-			ext: Object,
-			itemNavigation: String
+		name:"avatar-state-list",
+		props:{
+			item:Object,
+			itemNavigation:String
 		},
 		data(){
 			return {
-				itemId: '',
-				path: ''
+				iconList:{},
 			}
 		},
-		computed: {
-			navigationUrl() {
-				let text = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   text += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route)
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-				           if (query[i] === '') {
-				               query[i] = this.item[i] || ''
-				           }
-				       }
-				       text += '?query=' + encodeURIComponent(JSON.stringify(query))
-				   }
-				}
-				return text
-			},
-			setValue(){
-			   this.itemId = this.item.id;
-			}
+		created() {
+			this.iconList = globalConfig.icon
+			// console.log("iconList",this.iconList)
 		},
-		methods: {
-			onItemClick(item){
-				let path = ''
-				if (this.itemNavigation) {
-				   const route = this.itemNavigation.split('?')[0]
-				   const query = this.itemNavigation.split('?')[1] ? qs.parse(this.itemNavigation.split('?')[1]) : {}
-				   path += (`/pages${route.charAt(0) !== '/' ? '/' : ''}` + route + '?')
-				   if (Object.keys(query).length > 0) {
-				       for (const i in query) {
-							path += (i + '=' + item[i])
-				       }
-				   }
-				}
-				uni.navigateTo({
-					url: path
-				})
-			},
-			onGoToFormClick(e){
-				console.log('this.itemId = ', this.itemId)
-				uni.navigateTo({
-					url: '/pages/companyHome/my/returnToWork?id=' + this.itemId
-				})
-			}
+		onLoad(){
+			// this.navigationUrl()
+			// console.log(this.navigationUrl())
 		},
-		mounted(){
-			// console.log('this.item = ', this.item)
+		methods:{
+			getVal(string){
+				// console.log(string)
+				string = "type"+string.replace(string[0],string[0].toUpperCase())
+				// console.log(this.iconList[string])
+				return this.iconList[string]
+			}
 		}
 	}
 </script>
-<style lang="less" scoped>
-	
-	.card {
-		padding: 26rpx 16rpx;
-		background-color: #ffffff;
-		border-radius: 16rpx;
-		margin-bottom: 14rpx;
+
+<style lang="less">
+	.state_allcontent{
+		background-color: #F4F4F4;
+		padding: 2px 0 5px 0;
 	}
-	
-	.title{
-		color: #505050;
-		font-size: 32rpx;
-		line-height: 150%;
-		text-align: left;
-		font-weight: bold;
-		padding-left: 20rpx;
-		margin-bottom: 10rpx;
-	}
-	
-	.date-info{
-		margin-top: 16rpx;
-		padding: 0 0rpx 0rpx 38rpx;
-	}
-	
-	.footer{
-		height: 90rpx;
-		display: flex;
-		justify-content: flex-end;
-		justify-items: center;
-		padding-right: 20rpx;
-		
-		>view{
-			width: 120rpx;
-			height: 72rpx;
-			line-height: 72rpx;
-			font-size: 24rpx;
-			text-align: center;
-			color: #2a82e4;
-			margin-top: 16rpx;
+	.AvatarStateList{
+		background-color: white;
+		width: 98%;
+		margin: 0 auto;
+		padding: 5px 0px 20px 0px;
+		.formNumber{
+			width: auto;
+			text-align: left;
+			font-size: 14px;
+			border-bottom: 1px solid #EBEBEB;
+			padding: 5px 0px;
+			margin: 5px 10px 10px 10px;
+			.enforcementState{
+				padding: 5px 10px;
+				font-weight: bolder;
+				font-size: 10px;
+				float: right;
+				margin-top: -5px;
+				border-radius: 5px;
+				&.enforcement{
+					color: #77DCA0;
+					border: 1px solid #77DCA0;
+				}
+				&.enforcement:hover{
+					background-color: #77DCA0;
+					color: white;
+				}
+				&.rectification{
+					color: #E06969;
+					border: 1px solid #E06969;
+				}
+				&.rectification:hover{
+					color: white;
+					background-color: #E06969;
+				}
+				&.closeCase{
+					color: #A1A1A1;
+					border: 1px solid #A1A1A1;
+				}
+				&.closeCase:hover{
+					color: white;
+					background-color: #A1A1A1;
+				}
+			}
+		}
+		.body{
+			display: flex;
+			width: 100%;
+			.avatar{
+				width: 70px;
+				.avatar-img{
+					// border-radius: 50%;
+					width: 40px;
+					height: 40px;
+					position: relative;
+					left: 50%;
+					transform: translate(-50%);
+				}
+			}
+			.content{
+				width: 58%;
+				.titleBox{
+					margin-bottom: 10px;
+					font-size: 14px;
+				}
+				.content-title{
+					color: #666;
+					font-weight: bolder;
+					margin-right: 3px;
+				}
+			}
+			.state{
+				font-size: 10px;
+				.modify{
+					color: #5FA1EB;
+					border: 1px solid #5FA1EB;
+					border-radius: 2px;
+					padding: 3px 8px;
+					float: left;
+					margin-right: 5px;
+					&:hover{
+						color: #fff;
+						background-color: #5FA1EB;
+					}
+				}
+				.approval{
+					color: #D18FDD;
+					border: 1px solid #D18FDD;
+					border-radius: 2px;
+					padding: 3px 8px;
+					float: left;
+					&:hover{
+						color: #fff;
+						background-color: #D18FDD;
+					}
+				}
+			}
 		}
 	}
-
+	.formNumber{
+		width: 80%;
+		margin: 0 auto;
+		border-bottom: 1px solid #FEFEFE;
+	}
 </style>

@@ -3,21 +3,35 @@
 		<dynamic-form
 			:config="config"
 			:srvFormData="formData"
+			
+			workflow="true"
+			:ConfirmConfig="ConfirmConfig"
+			:piId="piId"
+			:LastKey="processDefineKey"
+			
 			:Details="false"
 			:hideButton="true"
 			:taskId="taskId"
 			:processDefineKey="Key"
 			@getFormData="getFormData"
 		></dynamic-form>
-		<dynamic-page
+<!-- 		<view style=" width: 90%;margin: 10px auto;padding: 5px;text-align: left;"><view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录</view>
+			<view class="MessageBox" v-for="(item,i) in confirmList" v-if="confirmList.length>0">
+				<view style="font-weight: bold;margin-right:5px">发起时间:<span style="font-weight:normal;">{{item.time}}</span></view>
+				<view style="font-weight: bold;margin-right:5px">办理步骤: <span style="font-weight:normal;">{{item.taskName}}</span></view>
+				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
+			</view>
+		</view> -->
+<!-- 		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
 			 :srvFormData="formData"
-		></dynamic-page>
+		></dynamic-page> -->
 	</view>
 </template>
 
 <script>
+	import _ from 'lodash'
 	import {Base64} from '../../utils/tools.js'
 	import {globalConfig} from '@/config.js'
 	import {convert} from '@/utils/customTools.js'
@@ -29,6 +43,12 @@
 			console.log(e)
 			this.getPiId(e.query)
 			this.getConfig()
+			uni.showLoading({
+				title:"加载中"
+			})
+		},
+		created() {
+			this.getConfirmConfig(this.api)
 		},
 		components:{
 			dynamicForm,
@@ -39,6 +59,7 @@
 		},
 		data() {
 			return {
+				pageAPi:`${globalConfig.formHost}?id=19013`,
 				loadApi:`${globalConfig.workflowEP}/api.flow.examine/processDetail`,
 				piId:"",
 				taskId:"",
@@ -54,13 +75,58 @@
 				processDefineKey:{},
 				applyUserName:"",
 				Key:"",
-				formData:null
+				formData:null,
+				confirmList:[],
+				ConfirmConfig:{
+					
+				}
 			}
 		},
 		methods: {
 			getFormData(e){
 				console.log('真实获取数据',e)
 				this.formData=e
+			},
+			getConfirmConfig(api){
+				let that = this
+				uni.request({
+					url:api,
+					method:"GET",
+					success(res) {
+						let data = res.data.data
+						console.log("RES",data)
+						let moduleData = data.moduleData
+						console.log(moduleData)
+						let modules = res.data.data.modules
+						let key
+						modules.map((item,i)=>{
+							if(item.type==="confirm"){
+								key = item.key
+								console.log(key)
+							}
+						})
+						that.ConfirmConfig = _.get(moduleData,key,"")
+						console.log(key,moduleData,that.ConfirmConfig)
+					}
+				})
+			},
+			getConfim(key,taskId){
+				let pkey = key
+				let that = this
+				uni.request({
+					url:`${globalConfig.workflowEP}/api.flow.examine/getComments`,
+					method:"POST",
+					data:{
+						"processInstanceId":pkey
+					},
+					header:{
+						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+					},
+					success(res){
+						console.log("res",res)
+						that.confirmList=res.data.data
+					}
+				})
 			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
@@ -126,6 +192,8 @@
 							// console.log("config",that.config)
 							console.log(that.processDefineKey)
 							// console.log(that.config)
+							that.getConfim(that.piId)
+							uni.hideLoading()
 						}
 					}
 				})
@@ -135,5 +203,8 @@
 </script>
 
 <style>
-
+	.MessageBox{
+		border: 2px double #1A5EB5;
+		padding: 10px;
+	}
 </style>

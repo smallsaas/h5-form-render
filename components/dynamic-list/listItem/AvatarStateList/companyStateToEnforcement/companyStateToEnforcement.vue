@@ -4,10 +4,10 @@
 			<view class="AvatarStateList">
 				<view class="formNumber" >
 					工作名称:
-					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.instanceEntityVo.workName}}</span>
+					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.workName}}</span>
 					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
-					<span class="enforcementState rectification" v-if="item.finishState==='0'">待整改</span>
-					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已结案</span>
+					<span class="enforcementState rectification" v-if="item.finishState==='0'">未完成</span>
+					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已完成</span>
 				</view>
 				<view class="body">
 					<view class="avatar" v-if="item.pdKey">

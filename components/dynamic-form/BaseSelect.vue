@@ -3,7 +3,7 @@
         <van-field
           readonly
           :required="param.required"
-          :disabled="param.disabled"
+          :disabled="param.disabled||param.readonly"
           :style="param.style"
           :placeholder="param.placeholder"
           clickable

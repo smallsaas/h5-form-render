@@ -3,7 +3,12 @@
 		<dynamic-form
 			:config="config"
 			:srvFormData="formData"
+			workflow="true"
+			:ConfirmConfig="ConfirmConfig"
+			:piId="piId"
+			:LastKey="processDefineKey"
 			:Details="true"
+			:hideLast="true"
 		></dynamic-form>
 <!-- 		<dynamic-page
 			 :API="api"
@@ -13,6 +18,7 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	import {Base64} from '@/utils/tools.js'
 	import {globalConfig} from '@/config.js'
 	import {convert} from '@/utils/customTools.js'
@@ -46,7 +52,11 @@
 					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
 				api: globalConfig.formHost + '?id=66000',
-				processDefineKey:{}
+				processDefineKey:{},
+				confirmList:[],
+				ConfirmConfig:{
+					
+				}
 			}
 		},
 		methods: {
@@ -58,6 +68,29 @@
 				this.data = {
 					"processInstanceId": this.piId
 				}
+			},
+			getConfirmConfig(api){
+				let that = this
+				uni.request({
+					url:api,
+					method:"GET",
+					success(res) {
+						let data = res.data.data
+						console.log("RES",data)
+						let moduleData = data.moduleData
+						console.log(moduleData)
+						let modules = res.data.data.modules
+						let key
+						modules.map((item,i)=>{
+							if(item.type==="confirm"){
+								key = item.key
+								console.log(key)
+							}
+						})
+						that.ConfirmConfig = _.get(moduleData,key,"")
+						console.log(key,moduleData,that.ConfirmConfig)
+					}
+				})
 			},
 			getConfig(){
 				// console.log(this.data)
@@ -115,6 +148,7 @@
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
 							console.log(that.processDefineKey)
 							// console.log(that.config)
+							that.getConfim(that.piId)
 						}
 					}
 				})

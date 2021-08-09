@@ -9,6 +9,8 @@
 		<dynamic-page
 		   :API="getPageAapi"
 			 processDefineKey="zc"
+			 hideLast="true"
+			 :ConfirmConfig="ConfirmConfig"
 			 workflow="true"
 			 company="true"
 		/>
@@ -32,9 +34,39 @@
 				// getPageAapi: globalConfig.formHost + '?id=800',
 				// 外部工作流
 				getPageAapi: globalConfig.formHost + '?id=10086',
+				api: globalConfig.formHost + '?id=66000',
+				ConfirmConfig:{
+					
+				}
 			}
 		},
+		created() {
+			this.getConfirmConfig(this.api)
+		},
 		methods:{
+			getConfirmConfig(api){
+				let that = this
+				uni.request({
+					url:api,
+					method:"GET",
+					success(res) {
+						let data = res.data.data
+						console.log("RES",data)
+						let moduleData = data.moduleData
+						console.log(moduleData)
+						let modules = res.data.data.modules
+						let key
+						modules.map((item,i)=>{
+							if(item.type==="confirm"){
+								key = item.key
+								console.log(key)
+							}
+						})
+						that.ConfirmConfig = _.get(moduleData,key,"")
+						console.log(key,moduleData,that.ConfirmConfig)
+					}
+				})
+			},
 		}
 	}
 </script>

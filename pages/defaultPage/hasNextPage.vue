@@ -10,21 +10,20 @@
 			v-if="key&&getPageAapi"
 		   :API="getPageAapi"
 			 :processDefineKey="key"
-			 
 			 :userlist="userlist"
-			 hideLast="true"
 			 :ConfirmConfig="ConfirmConfig"
-			 
 			 workflow="true"
+			 hideLast="true"
+			 :debug="true"
 			 :customValues="customValues"
 			 :srvFormData="srvFormData"
+			 :jumpUrl="jumpUrl"
 		/>
 	</view>
 
 </template>
 
 <script>
-	import _ from 'lodash'
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { globalConfig } from '@/config.js'
 	import {Base64} from '@/utils/tools.js'
@@ -44,6 +43,7 @@
 			console.log("decode",decode)
 			// console.log(e.id)
 			// console.log(e.key)
+			this.jumpUrl="/defaultPage/NextPage?query="+e.query+"&selectId="+e.selectId
 			this.getPageAapi = globalConfig.formHost + "?id=" + decode.id
 			this.key = decode.key
 			if(e.selectId){
@@ -56,9 +56,6 @@
 				console.log("加载失败")
 				return ;
 			}
-		},
-		created() {
-			this.getConfirmConfig(this.api)
 		},
 		onReady() {
 			uni.hideLoading()
@@ -73,7 +70,6 @@
 				// getPageAapi: globalConfig.formHost + '?id=800',
 				// 外部工作流
 				// getPageAapi: globalConfig.formHost + '?id=10089',
-				api: globalConfig.formHost + '?id=66001',
 				getPageAapi:null,
 				selectId:null,
 				userlist:null,
@@ -81,8 +77,15 @@
 					companyName:null,
 					companyId:null
 				},
-				ConfirmConfig:{}
+				jumpUrl:null,
+				api: globalConfig.formHost + '?id=66000',
+				ConfirmConfig:{
+					
+				}
 			}
+		},
+		created() {
+			this.getConfirmConfig(this.api)
 		},
 		methods:{
 			getConfirmConfig(api){

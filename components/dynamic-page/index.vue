@@ -11,11 +11,18 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:jumpUrl="jumpUrl"
+									:taskId="taskId"
+									:hideButton="hideButton"
 									:company="company"
 									:isCompany="isCompany"
 									:user="userlist"
 									:workflow="item.workflow||workflow"
 									:isYyzz="item.isYyzz"
+									:debug="debug"
+									:hideLast="hideLast"
+									:hideConfirm="hideConfirm"
+									:ConfirmConfig="ConfirmConfig"
 								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
 								@state="setState"
@@ -28,11 +35,16 @@
 												..._get(config.moduleData, item.key, {}),
 												outStyle: getComponentStyle(item)
 										 }"
-										 :workflow="item.workflow||workflow"
-										 :isYyzz="item.isYyzz"
-										 :user="userlist"
-										 :company="company"
-										 :isCompany="isCompany"
+										 :debug="debug"
+										 :jumpUrl="jumpUrl"
+											:taskId="taskId"
+											:hideButton="hideButton"
+											:company="company"
+											:isCompany="isCompany"
+											:user="userlist"
+											:hideConfirm="hideConfirm"
+											:workflow="item.workflow||workflow"
+											:isYyzz="item.isYyzz"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
 										@state="setState"
@@ -169,6 +181,7 @@
 							:config="_get(config.moduleData,item.key,{})"
 							:LastKey="LastKey"
 							:formData="srvFormData"
+							:hideLast="hideLast"
 						 ></confirm>
 						 <get-work-flow
 							:param = "_get(config.moduleData,item.key, {})"
@@ -201,6 +214,7 @@
 	import confirm from '../confirm.vue'
 	import getWorkFlow from '../GetWorkFlow.vue'
     import { globalConfig } from '@/config.js'
+		import {LoadComplete} from '@/common/api.js'
 	export default {
 		components: { 
 			dynamicList, 
@@ -218,6 +232,7 @@
 			getWorkFlow,
 		},
 		props: {
+			hideLast:Boolean,
 			API: String,  // 页面数据请求接口
             requsetParam: {  // 页面数据请求参数
 				type: Object,
@@ -254,9 +269,24 @@
 						srvFormData:{
 							type:Object
 						},
+						FormConfig:{
+							type:Object
+						},
 						workflow:false,
 						Details:Boolean,
-						isCompany:Boolean
+						isCompany:Boolean,
+						hideButton:Boolean,
+						taskId:{
+							type:String,
+							default(){
+								return null
+							}
+						},
+						jumpUrl:String,
+						debug:Boolean,
+						hideLast:Boolean,
+						ConfirmConfig:Object,
+						hideConfirm:Boolean
 		},
 		data () {
 			return {
@@ -272,6 +302,7 @@
 				codeAPI:"",
 				code:"",
 				state:null,
+				conf:null
 			}
 
 		},
@@ -418,6 +449,9 @@
 					jsonDefine = Base64.decode(jsonDefineBase64)
 					// console.log("jsonDefine",jsonDefine)
 					json = JSON.parse(jsonDefine)
+					uni.setNavigationBarTitle({
+						title:form.name
+					})
 					// console.log("json",json)
 				}else{
 					// console.log("值为",res)
@@ -426,14 +460,75 @@
 						showCancel:false
 					})
 				}
-				this.codeData = convert(json)
-				
-				// 决定是否可用
-				// this.codeData = isDisabled(convertData,this.FormKey)
-				// console.log("__DISDATA__",__DisData__)
-				// this.codeData =__DisData__
-				// console.log("CODEDATA",this.codeData)
+				let conf = convert(json)
+				// let that = this
+				// this.conf = conf
+				// if(this.processDefineKey){
+				// 	let Conf_RES = await LoadComplete({"processDefineKey":this.processDefineKey,"taskId":this.taskId})
+				// 	if(Conf_RES.code==="00000"){
+				// 		let list = Conf_RES.data.nodeSettingEntity.formFiledEntityList
+				// 		for(var i in list){
+				// 			let isEditable = list[i].isEditable
+				// 			let fields = conf.fields
+				// 				for(var a in fields){
+				// 					if(fields[a].__config__){
+				// 					// console.log("FIELDS",fields,"config",fields[a].__config__,"a",a)
+				// 					// console.log("CHILDREN",fields[a].__config__.children)
+				// 					if(fields[a].__config__.children){
+				// 						let __children__ = fields[a].__config__.children
+				// 						// console.log("测试",__children__)
+				// 						for(var b in __children__){
+				// 							// console.log("STATUS",status)
+				// 							if(isEditable===0||isEditable==="0"){
+				// 								if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
+				// 									conf.fields[a].__config__.children[b].readonly = true
+				// 									this.codeData = conf
+				// 									// console.log("thatCodeData",this.codeData,conf)
+				// 								}
+				// 								// console.log("里面的conf",conf)
+				// 							}else{
+				// 								if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
+				// 									conf.fields[a].__config__.children[b].readonly = false
+				// 									this.codeData = conf
+				// 									// console.log("thatCodeData",this.codeData)
+				// 								}
+				// 							}
+				// 						}
+				// 					}else{
+				// 							if(isEditable===0||isEditable==="0"){
+				// 								if(conf.fields[a].__vModel__===list[i].name){
+				// 									conf.fields[a].readonly = true
+				// 									this.codeData = conf
+				// 									// console.log("thatCodeData",this.codeData)
+				// 								}
+				// 							}else{
+				// 								if(conf.fields[a].__vModel__===list[i].name){
+				// 									conf.fields[a].readonly = false
+				// 									this.codeData = conf
+				// 									// console.log("thatCodeData",this.codeData)
+				// 								}
+				// 							}
+				// 					}
+				// 				}
+				// 			}
+				// 		}	
+						
+				// 	}
+				// 	// conf.fields[0].__config__.children[1].readonly = true
+				// 	// this.codeData = this.conf
+				// 	// console.log("DEBUG",this.codeData)
+				// 	// 决定是否可用
+				// 	// this.codeData = isDisabled(convertData,this.FormKey)
+				// 	// console.log("__DISDATA__",__DisData__)
+				// 	// this.codeData =__DisData__
+				// 	// console.log("CODEDATA",this.codeData)
+				// }else{
+					this.codeData = conf
+				// }
+
 			},
+			
+			
 			
 			getCode(API,code){
 				this.codeAPI = API

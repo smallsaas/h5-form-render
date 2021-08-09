@@ -4,6 +4,7 @@
 			:config="config"
 			:srvFormData="formData"
 			:Details="true"
+			:hideConfirm="true"
 		></dynamic-form>
 <!-- 		<dynamic-page
 			 :API="api"

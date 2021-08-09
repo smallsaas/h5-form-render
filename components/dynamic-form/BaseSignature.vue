@@ -51,7 +51,7 @@
         </mask>
 		<mask v-if="preViewModal">
 			<view class="preview_image_content" @click="handleClosePreviewModal">
-				<image mode="aspectFit" :src="param.value" />
+				<image mode="aspectFit" :src="param.value" style="background-color: #fff;" />
 			</view>
 		</mask>
 	</view>
