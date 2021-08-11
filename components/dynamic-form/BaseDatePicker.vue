@@ -9,7 +9,7 @@
 			:disabled="param.disabled"
 			:placeholder="param.placeholder"
 			:style="param.style"
-			:value="param.value"
+			:value="param.value||date"
 			:error="param.error === true"
 			:error-message="param['error-message'] || ''"
 			label-class="van_field_label"
@@ -18,7 +18,7 @@
 		<van-popup :show="showPicker" position="bottom" @click-overlay="handleShowPicker(false)" custom-style="background-color: #fff;z-index: 999">
 			<van-datetime-picker
 			  :type="param.tagIcon"
-			  :value="showTime()"
+			  :value="showTime()||time"
 			  @confirm="handleComfirm"
 			  @cancel="handleShowPicker(false)"
 			/>
@@ -49,9 +49,42 @@
 		data () {
 			return {
 				showPicker: false,
+				time:'0',
+				date:'0000-00-00'
 			}
 		},
+		created() {
+			this.time = new Date(this.convertToLateDate()).getTime()
+			this.date = this.convertToLateDate()
+			console.log("TIME",this.time)
+		},
 	    methods: {
+			convertToLateDate() {
+				var data = new Date();
+					// var Da = new Date(data.getTime() + 24 * 60 * 60 * 1000 * 30);
+					// 以上两行代码为关键代码，若想要返回一天后的时间，则可以将第二行代码更换为下面代码
+					// var Da = new Date(data.getTime() + 24 * 60 * 60 * 1000);
+					// 若是想要返回值为当前时间，则上面两行代码可以直接修改为下面代码即可。
+					var Da = new Date()
+					var y = Da.getFullYear();
+					var m = Da.getMonth() + 1;
+					var d = Da.getDate();
+					var H = Da.getHours();
+					var mm = Da.getMinutes();
+					m = m < 10 ? "0" + m : m;
+					d = d < 10 ? "0" + d : d;
+					H = H < 10 ? "0" + H : H;
+					let time;
+					if(_.get(this.param,"tagIcon")==='datetime'){
+						time = y + "-" + m + "-" + d + " " + H + ":" + mm
+					}else if(_.get(this.param,"tagIcon"==='year-month')){
+						time = y + "-" + m
+					}else{
+						time = y + "-" + m + "-" + d
+					}
+					// console.log()
+					return time;
+			},
 			showTime () {
 				let time = _.get(this.param, 'value')
 				if (!time) {

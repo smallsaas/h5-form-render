@@ -64,12 +64,12 @@ VantComponent({
     },
     minDate: {
       type: Number,
-      value: new Date(currentYear - 10, 0, 1).getTime(),
+      value: new Date(currentYear - 1000, 0, 1).getTime(),
       observer: 'updateValue',
     },
     maxDate: {
       type: Number,
-      value: new Date(currentYear + 10, 11, 31).getTime(),
+      value: new Date(currentYear + 1000, 11, 31).getTime(),
       observer: 'updateValue',
     },
     minHour: {

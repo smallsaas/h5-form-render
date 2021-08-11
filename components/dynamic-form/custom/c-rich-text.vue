@@ -26,8 +26,9 @@
 		},
 		methods:{
 			Debug(item){
-				item = item.replace(/https:\/\/jimangmensso.oss-cn-shenzhen.aliyuncs.com/g, 'https://images.weserv.nl/?url=https://jimangmensso.oss-cn-shenzhen.aliyuncs.com')
-				return 
+				// console.log()
+				item = item.replace(/src="/g, 'src="https://images.weserv.nl/?url=')
+				return item
 			}
 		}
 	}

@@ -9,6 +9,12 @@
 		</view>
 		<scroll-view scroll-y="true" show-scrollbar="true" class="windows" v-show="show">
 			<view class="WindowTitle" style="z-index: 30000;background-color: white;">请选择<span class="EXITIcon exit" @click="save()">&#xe642;</span></view>
+			<!-- 搜索框 -->
+<!-- 			<view :class="'search '+activeClass" @click="addClass()">
+				<img :src="icon.search" style="width: 30px;height: 30px;float: left;"/>
+				<input type="text" class="search-input" v-show="showInput" v-model="SearchData" @input="getSearchData()" @blur="removeClass()" @confirm="removeClass()"/>
+			</view> -->
+			<!-- 列表 -->
 			<view class="listBody" style="background-color: white;">
 				<view v-for="(item,i) in list" class="allList" :key="i">
 					<view @click="hide(i),isCheck(i)" class="SelectList" >
@@ -44,7 +50,10 @@
 				pz:10,
 				pn:1,
 				icon:{},
-				name:""
+				name:"",
+				SearchData:"", //搜索栏输入内容
+				activeClass:null,
+				showInput:false
 			}
 		},
 		// onPageScroll(e) {
@@ -60,6 +69,59 @@
 			this.$emit("list",this.defaultList)
 		},
 		methods:{
+			// 获取搜索数据
+			getSearchData(){
+				let data = {
+					name:this.SearchData
+				}
+				let _this=this
+				if(this.loadAPI===""||this.loadAPI===undefined){
+					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
+				}
+				let url = this.loadAPI
+				this.pn = 1
+				uni.showLoading({
+					title:"加载中"
+				})
+				uni.request({
+					url:url,
+					data:{
+						...data,
+						...this.data,
+						"current":this.pn,
+						"size":this.pz
+					},
+					method:this.method||"GET",
+					header:{
+							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+					},
+					complete(res) {
+						console.log("records",res.data)
+						// console.log("response",this.response)
+						let data = res.data
+						let response = _.get(data,_this.response,_.get(data,"data.records",[]))
+						// console.log(response)
+						if(res.data.code===0){
+							for(var i in response){
+								// console.log("this is i",i)
+									let responseData = response
+									_this.list.push(responseData[i])
+								// console.log("this is list",_this.list)
+							}
+						}
+						uni.hideLoading()
+							// console.log("thisList",_this.list)
+					}
+				})
+			},
+			addClass(){
+				this.activeClass="active"
+				this.showInput=true
+			},
+			removeClass(){
+				this.activeClass=null
+				this.showInput=false
+			},
 			getName(id){
 				let that = this
 				uni.request({
@@ -82,6 +144,16 @@
 			},
 			loadMore(){
 				let _this=this
+				let data;
+				if(this.SearchData!==""){
+					data = {
+						name:this.SearchData
+					}
+				}else{
+					data = {
+						
+					}
+				}		
 				if(this.loadAPI===""||this.loadAPI===undefined){
 					this.loadAPI = `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
 				}
@@ -93,6 +165,7 @@
 					uni.request({
 						url:url,
 						data:{
+							...data,
 							...this.data,
 							"current":this.pn,
 							"size":this.pz
@@ -305,6 +378,36 @@
 			font-weight: bolder;
 			padding: 10px auto;
 			z-index: 20001;
+		}
+		.search{
+			// margin-top: 50px;
+		width: 30px;
+		z-index: 20002;
+		height: 30px;
+		overflow: hidden;
+		padding: 5px;
+		// overflow: ;
+		position: fixed;
+		top: 20%;
+		left: 0;
+		float: left;
+		box-shadow: 0px 0px 5px #aaa;
+		/* border: 1px solid #000000; */
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+		background-color: #fff;
+			&.active{
+				transition: all 2s ease;
+				width: 50%;
+			}
+			// background-color: #000000;
+		}
+		.search-input{
+			float: left;
+			text-indent: 1em;
+			line-height: 30px;
+			height: 30px;
+			// padding-left: 5px;
 		}
 		.listBody{
 			margin-top: 50px;

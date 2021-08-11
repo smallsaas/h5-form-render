@@ -6,8 +6,7 @@
 					工作名称:
 					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.workName}}</span>
 					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
-					<span class="enforcementState rectification" v-if="item.finishState==='0'">未完成</span>
-					<span class="enforcementState closeCase" v-if="item.finishState==='1'">已完成</span>
+
 				</view>
 				<view class="body">
 					<view class="avatar" v-if="item.pdKey">
@@ -17,10 +16,14 @@
 						<view class="titleBox">
 							<view class="time" v-if="item.actApplyTime"><span class="content-title">开始时间:</span>{{item.actApplyTime}}</view>
 							<view class="object" v-if="item.actApplyUserName"><span class="content-title">执法人员:</span>{{item.actApplyUserName}}</view>
-							<view class="company" v-if="item.actCurrDualUserName"><span class="content-title">下一步执行人:</span>{{item.actCurrDualUserName}}</view>
+							<view class="company" v-if="item.actCurrDualUserName"><span class="content-title">下一步办理人:</span>{{item.actCurrDualUserName}}</view>
 							<!-- <view class="department" v-if="item.department"><span class="content-title">执法科室:</span>{{item.department}}</view> -->
-							<view class="remarks" v-if="item.formName"><span class="content-title">执法单名:</span>{{item.formName}}</view>
+							<view class="remarks" v-if="item.formName"><span class="content-title">表单名:</span>{{item.formName}}</view>
 						</view>
+					</view>
+					<view style="position: relative;width: 90px;">
+						<span class="enforcementState rectification" v-if="item.finishState==='0'">未完成</span>
+						<span class="enforcementState closeCase" v-if="item.finishState==='1'">已完成</span>
 					</view>
 <!-- 					<view class="state" v-if="item.state">
 							<view v-if="item.state.modify" class="modify">修改</view>
@@ -76,6 +79,40 @@
 		background-color: #F4F4F4;
 		padding: 2px 0 5px 0;
 	}
+	.enforcementState{
+    padding: 5px 10px;
+    position: absolute;
+    bottom: 0px;
+    /* width: 100%; */
+    right: 0px;
+    font-weight: bolder;
+    font-size: 10px;
+    border-radius: 5px;
+		&.enforcement{
+			color: #77DCA0;
+			border: 1px solid #77DCA0;
+		}
+		&.enforcement:hover{
+			background-color: #77DCA0;
+			color: white;
+		}
+		&.rectification{
+			color: #E06969;
+			border: 1px solid #E06969;
+		}
+		&.rectification:hover{
+			color: white;
+			background-color: #E06969;
+		}
+		&.closeCase{
+			color: #A1A1A1;
+			border: 1px solid #A1A1A1;
+		}
+		&.closeCase:hover{
+			color: white;
+			background-color: #A1A1A1;
+		}
+	}
 	.AvatarStateList{
 		background-color: white;
 		width: 98%;
@@ -88,38 +125,6 @@
 			border-bottom: 1px solid #EBEBEB;
 			padding: 5px 0px;
 			margin: 5px 10px 10px 10px;
-			.enforcementState{
-				padding: 5px 10px;
-				font-weight: bolder;
-				font-size: 10px;
-				float: right;
-				margin-top: -5px;
-				border-radius: 5px;
-				&.enforcement{
-					color: #77DCA0;
-					border: 1px solid #77DCA0;
-				}
-				&.enforcement:hover{
-					background-color: #77DCA0;
-					color: white;
-				}
-				&.rectification{
-					color: #E06969;
-					border: 1px solid #E06969;
-				}
-				&.rectification:hover{
-					color: white;
-					background-color: #E06969;
-				}
-				&.closeCase{
-					color: #A1A1A1;
-					border: 1px solid #A1A1A1;
-				}
-				&.closeCase:hover{
-					color: white;
-					background-color: #A1A1A1;
-				}
-			}
 		}
 		.body{
 			display: flex;

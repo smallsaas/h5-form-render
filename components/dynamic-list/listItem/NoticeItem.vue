@@ -2,9 +2,9 @@
 	<view class="noticeItem">
 		<image mode="aspectFit" :src="icon.notice" class="image"></image>
 		<view class="content">
-			<view><span style="font-weight:bolder;margin-right:5px">通知人:</span>{{item.author}}</view>
-			<view><span style="font-weight:bolder;margin-right:5px">通知标题:</span>{{item.title}}</view>
-			<view><span style="font-weight:bolder;margin-right:5px">发布时间:</span>{{item.create_time}}</view>
+			<view><span style="margin-right:5px">发布人:</span>{{item.author}}</view>
+			<view><span style="margin-right:5px">发布标题:</span>{{item.title}}</view>
+			<view><span style="margin-right:5px">发布时间:</span>{{item.create_time}}</view>
 		</view>
 		<image mode="aspectFit" :src="icon.arrowRight" class="image"></image>
 	</view>
@@ -31,7 +31,7 @@
 
 <style lang="less">
 	.noticeItem{
-		height: 100px;
+		min-height: 100px;
 		display: flex;
 		align-items: center;
 		.image{
