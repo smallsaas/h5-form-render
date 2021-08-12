@@ -1,77 +1,91 @@
 <template>
-	<view class="c-Map">
-		<view class="c-Map-label"><span style="color: red;margin-right: 2px;" v-if="param.required">*</span>{{param.label}}</view>
-		<map
-		v-show="!showButton"
-			id="mapMes"
-			:latitude="latitude" 
-			:longitude="longitude" 
-			:markers="markers"
-			:show-location="true"
-			:style="{width:'200px',height:'100px','z-index':zIndex,'background-color':'white'}"
-			@click="Bigsize()"
-		>
-<!-- 		<cover-view slot="callout">
-			<cover-image
-				:marker-id="markers[0].id"
-				:style="{
-				            width: '116rpx',
-				            height: '116rpx',
-				            borderRadius: '50%',
-				            display: 'flex',
-				            justifyContent: 'center',
-				            alignItems: 'center',
-				            padding: '10rpx',
-				boxShadow: '0 0 10px 0 #c1c1c1',
-				            backgroundColor: 'rgba('+item.colour+')' || '#333',
-										"z-index":10001
-				        }"
-				:src="icon.MapCompany"
-			></cover-image>
-		</cover-view> -->
-		<cover-view v-show="showButton" class="c-Map-buttonbox">
-			<cover-image class="c-Map-button" :src="icon.MapMy" @click="moveMy()">
-			</cover-image>
-			<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
-			</cover-image>
-		</cover-view>
-		</map>
-		<map
-		v-show="showButton"
+	<view>
+		<view class="c-Map" v-if="param.disabled">
+				<view class="c-Map-label"><span style="color: red;margin-right: 2px;" v-if="param.required">*</span>{{param.label}}</view>
+				<map
 					id="mapMes"
 					:latitude="latitude" 
 					:longitude="longitude" 
 					:markers="markers"
 					:show-location="true"
-					:style="{width:width,height:height,position:position,top:0,left:0,'z-index':zIndex,'background-color':'white'}"
-					@tap="tap"
-					@controltap="Bigsize()"
-				>
-		<!-- 		<cover-view slot="callout">
-					<cover-image
-						:marker-id="markers[0].id"
-						:style="{
-						            width: '116rpx',
-						            height: '116rpx',
-						            borderRadius: '50%',
-						            display: 'flex',
-						            justifyContent: 'center',
-						            alignItems: 'center',
-						            padding: '10rpx',
-						boxShadow: '0 0 10px 0 #c1c1c1',
-						            backgroundColor: 'rgba('+item.colour+')' || '#333',
-												"z-index":10001
-						        }"
-						:src="icon.MapCompany"
-					></cover-image>
-				</cover-view> -->
-				<cover-view v-show="showButton" class="c-Map-buttonbox">
-					<cover-image class="c-Map-button" :src="icon.MapMy" @click="moveMy()">
-					</cover-image>
-					<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
-					</cover-image>
-				</cover-view>
-				</map>
+					:style="{width:'200px',height:'100px','z-index':zIndex,'background-color':'white'}"
+				/>
+		</view>
+
+		<view class="c-Map" v-if="!param.disabled">
+			<view class="c-Map-label"><span style="color: red;margin-right: 2px;" v-if="param.required">*</span>{{param.label}}</view>
+			<map
+			v-show="!showButton"
+				id="mapMes"
+				:latitude="latitude" 
+				:longitude="longitude" 
+				:markers="markers"
+				:show-location="true"
+				:style="{width:'200px',height:'100px','z-index':zIndex,'background-color':'white'}"
+				@click="Bigsize()"
+			>
+	<!-- 		<cover-view slot="callout">
+				<cover-image
+					:marker-id="markers[0].id"
+					:style="{
+											width: '116rpx',
+											height: '116rpx',
+											borderRadius: '50%',
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center',
+											padding: '10rpx',
+					boxShadow: '0 0 10px 0 #c1c1c1',
+											backgroundColor: 'rgba('+item.colour+')' || '#333',
+											"z-index":10001
+									}"
+					:src="icon.MapCompany"
+				></cover-image>
+			</cover-view> -->
+			<cover-view v-show="showButton" class="c-Map-buttonbox">
+				<cover-image class="c-Map-button" :src="icon.MapMy" @click="moveMy()">
+				</cover-image>
+				<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
+				</cover-image>
+			</cover-view>
+			</map>
+			<map
+			v-show="showButton"
+						id="mapMes"
+						:latitude="latitude" 
+						:longitude="longitude" 
+						:markers="markers"
+						:show-location="true"
+						:style="{width:width,height:height,position:position,top:0,left:0,'z-index':zIndex,'background-color':'white'}"
+						@tap="tap"
+						@controltap="Bigsize()"
+					>
+			<!-- 		<cover-view slot="callout">
+						<cover-image
+							:marker-id="markers[0].id"
+							:style="{
+													width: '116rpx',
+													height: '116rpx',
+													borderRadius: '50%',
+													display: 'flex',
+													justifyContent: 'center',
+													alignItems: 'center',
+													padding: '10rpx',
+							boxShadow: '0 0 10px 0 #c1c1c1',
+													backgroundColor: 'rgba('+item.colour+')' || '#333',
+													"z-index":10001
+											}"
+							:src="icon.MapCompany"
+						></cover-image>
+					</cover-view> -->
+					<cover-view v-show="showButton" class="c-Map-buttonbox">
+						<cover-image class="c-Map-button" :src="icon.MapMy" @click="moveMy()">
+						</cover-image>
+						<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
+						</cover-image>
+					</cover-view>
+					</map>
+		</view>
 	</view>
 </template>
 

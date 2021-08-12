@@ -9,7 +9,7 @@
 			:disabled="param.disabled"
 			:placeholder="param.placeholder"
 			:style="param.style"
-			:value="param.value||date"
+			:value="param.value"
 			:error="param.error === true"
 			:error-message="param['error-message'] || ''"
 			label-class="van_field_label"

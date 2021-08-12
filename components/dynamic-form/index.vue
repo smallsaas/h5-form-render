@@ -414,7 +414,7 @@
 									children.map((c_config,c_index)=>{
 										if(c_config==="establish_date"){
 											vModel[c_index]=this.StrToDate(c_config.__vModel__)
-	
+										
 											// console.log("更改",vModel[c_index])
 										}else{
 											vModel[c_index]=c_config.__vModel__
@@ -435,7 +435,7 @@
 								// console.log(_config.__config__)
 							})
 							// console.log(vModel)
-							// console.log(e)
+							console.log("E",e)
 								
 							vModel.map((_Model,_v)=>{
 								// console.log("model",_Model)
@@ -852,10 +852,11 @@
 											"expireDate":submitData["valid_period"],
 											"streetId":submitData["streetId"],
 											"streetName":submitData["streetName"],
-											"captial":submitData["captial"],
+											"capital":submitData["captial"],
 											"latitude":submitData["latitude"],
 											"longitude":submitData["longitude"],
-											"type":submitData["type"]
+											"type":submitData["type"],
+											"companyType":submitData["companyType"]
 										}
 										// YyzzData = {
 										// 	"address":

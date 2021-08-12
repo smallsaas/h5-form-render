@@ -7,9 +7,10 @@
 		/>
 		
 <!-- 		<law-enforcement v-if="current == 1" />
-		
+		<
 		<return-to-work v-if="current == 2"/> -->
-		<my theme="company" :item="query" :list="list" v-if="current == 1"></my>
+		<notice v-if="current == 1"/>
+		<my theme="company" :item="query" :list="list" v-if="current == 2"></my>
 		
 		<!-- <my-page v-if="current == 1"/> -->
 		
@@ -61,7 +62,21 @@
 			  />
 			  复工
 			</van-tabbar-item> -->
-			
+			<van-tabbar-item>
+			  <image
+				slot="icon"
+				:src="icon.tabbarPolicy"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  <image
+				slot="icon-active"
+				:src="icon.tabbarPolicyActive"
+				mode="aspectFit"
+				style="width: 44rpx; height: 44rpx;"
+			  />
+			  政策推送
+			</van-tabbar-item>
 			<van-tabbar-item>
 			  <image
 				slot="icon"
@@ -85,6 +100,7 @@
 
 <script>
 	import dynamicPage from '@/components/dynamic-page/index.vue'
+	import notice from '@/pages/notice.vue'
 	import my from '../enforcement/my/my.vue'
 	import myPage from '@/pages/companyHome/my/index.vue'
 	import returnToWork from '@/pages/companyHome/my/returnToWork.vue'
@@ -98,7 +114,8 @@
 			myPage,
 			returnToWork,
 			lawEnforcement,
-			my
+			my,
+			notice
 		},
 		onInit() {
 			this.icon=globalConfig.icon

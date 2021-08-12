@@ -23,6 +23,7 @@
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import {globalConfig} from '@/config.js'
 	export default {
+		name:"notice",
 		created() {
 			this.api=`${globalConfig.formHost}?id=66666666`
 		},

@@ -4,7 +4,7 @@
 			<view class="Content_Value"><span v-if="param.required" style="color: #EE0A87;">*</span>{{param.label}}</view>
 			<view class="Content_Box">
 				<span v-show="content" style="float: left;padding: 0 10px;max-width: 12em;overflow: hidden;margin-right: 5px;">{{content}}</span>
-				<image @click="showView()" class="SelectBtn" style="height: 30px;width: 30px;" :src="icon.select" ></image>
+				<image @click="showView()" class="SelectBtn" style="height: 30px;width: 30px;" :src="icon.select" v-if="!param.disabled"></image>
 			</view>
 		</view>
 		<scroll-view scroll-y="true" show-scrollbar="true" class="windows" v-show="show">

@@ -674,14 +674,15 @@
 		// 	}
 
 		// },
-		{
-			"path": "pages/enforcement/more/enforcementRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+		// {
+		// 	"path": "pages/enforcement/more/enforcementRecord",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
 
-		}, {
+		// }, 
+		{
 			"path": "pages/enforcement/more/companySearchDetail/companySearchDetail",
 			"style": {
 				"navigationBarTitleText": "",
