@@ -14,6 +14,6 @@
 		background-color: rgba(0, 0, 0, 0.6);
 		overflow: hidden;
 		transition: all .2s;
-		z-index: 9999;
+		z-index: 9999998;
 	}
 </style>

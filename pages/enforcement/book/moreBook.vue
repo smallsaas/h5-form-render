@@ -13,6 +13,7 @@
 				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
 			</view>
 		</view>
+		<button class="got_form_button" @click="jump()" v-if="piId">前往打印页</button>
 <!-- 		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
@@ -43,7 +44,7 @@
 		data() {
 			return {
 				loadApi:`${globalConfig.workflowEP}/api.flow.examine/processDetail`,
-				piId:"",
+				piId:null,
 				taskId:"",
 				config:null,
 				method:"POST",
@@ -59,6 +60,14 @@
 			}
 		},
 		methods: {
+			jump(){
+				uni.redirectTo({
+					url:`/pages/print?processInstanceId=${this.piId}`,
+					success(e) {
+						console.log(e)
+					}
+				})
+			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
@@ -147,6 +156,15 @@
 </script>
 
 <style>
+	page{
+		background-color: #EEEEED;
+	}
+	.got_form_button{
+		width:80%;
+		margin: 5px auto;
+		background-color: #1A5EB5;
+		color: white;
+	}
 	.ConfirmBox{
 		border: 2px double #1A5EB5;
 		padding: 10px;

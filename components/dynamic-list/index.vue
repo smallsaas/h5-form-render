@@ -60,20 +60,6 @@
 						  ...getComponentBindData(item)
 					  }"
 					/>
-					<return-to-work-record-item
-						v-if="getListItemKey() === 'ReturnToWorkRecordItem'"
-						:item="{
-							...item,
-							...getComponentBindData(item)
-						}"
-					/>
-					<my-report-item
-						v-if="getListItemKey() === 'MyReportItem'"
-						:item="{
-							...item,
-							...getComponentBindData(item)
-						}"
-					/>
 					<street-user-report-item
 						v-if="getListItemKey() === 'StreetUserReportItem'"
 						:item="{
@@ -159,11 +145,8 @@
     import msTab from '../ms-tabs/ms-tabs.vue'
     import ArticleItem from './listItem/ArticleItem.vue'
     import StateItem from './listItem/state-list/state-list.vue'
-
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
-	import ReturnToWorkRecordItem from './listItem/ReturnToWorkRecordItem.vue'
-	import MyReportItem from './listItem/MyReportItem.vue'
 	import StreetUserReportItem from './listItem/StreetUserReportItem.vue'
 	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
 	import record from './listItem/record/record.vue'
@@ -184,8 +167,6 @@
 			StateItem,
 			SelfInspectionRecordItem,
 			RecordStepsItem,
-			ReturnToWorkRecordItem,
-			MyReportItem,
 			StreetUserReportItem,
 			AvatarStateItem,
 			record,

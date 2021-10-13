@@ -6,6 +6,7 @@
 			:Details="true"
 			:hideConfirm="true"
 		></dynamic-form>
+		<button class="got_form_button" @click="jump()" v-if="piId">前往打印页</button>
 <!-- 		<dynamic-page
 			 :API="api"
 			 :LastKey="processDefineKey"
@@ -19,7 +20,7 @@
 	import {convert} from '@/utils/customTools.js'
 	import dynamicForm from '../../components/dynamic-form/index.vue'
 	// import confirm from '../../components/confirm.vue'
-	import dynamicPage from '../../components/dynamic-page/index.vue'
+	// import dynamicPage from '../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
 			console.log(e)
@@ -27,8 +28,8 @@
 			this.getConfig()
 		},
 		components:{
-			dynamicForm,
-			dynamicPage
+			dynamicForm
+			// dynamicPage
 		},
 		onReady() {
 			console.log(this.config)
@@ -36,7 +37,7 @@
 		data() {
 			return {
 				loadApi:`${globalConfig.workflowEP}/api.flow.examine/processDetail`,
-				piId:"",
+				piId:null,
 				taskId:"",
 				config:null,
 				method:"POST",
@@ -47,15 +48,23 @@
 					Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 				},
 				api: globalConfig.formHost + '?id=2002',
-				processDefineKey:{}
+				processDefineKey:{},
 			}
 		},
 		methods: {
+			jump(){
+				uni.redirectTo({
+					url:`/pages/print?processInstanceId=${this.piId}`,
+					success(e) {
+						console.log(e)
+					}
+				})
+			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				console.log(this.taskId)
+				// console.log(this.taskId)
 				this.data = {
 					"processInstanceId": this.piId
 				}
@@ -118,5 +127,13 @@
 </script>
 
 <style>
-
+	page{
+		background-color: #EEEEED;
+	}
+	.got_form_button{
+		width:80%;
+		margin: 5px auto;
+		background-color: #1A5EB5;
+		color: white;
+	}
 </style>

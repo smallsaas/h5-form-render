@@ -20,7 +20,7 @@
 			<!-- <c-lincense @getValue="lincenseValue"></c-lincense> -->
 			<view class="inputBox">
 				<image :src="iconList.inputCompany" class="e-Icon"></image>
-				<input v-model="lincenseNo" type="number" class="input company" placeholder="请输入营业执照号" />
+				<input v-model="lincenseNo" type="text" class="input company" placeholder="请输入营业执照号" />
 			</view>
 			<view class="inputBox">
 				<image :src="iconList.inputStreet" class="e-Icon"></image>

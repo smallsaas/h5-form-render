@@ -11,16 +11,8 @@
 			 :srvFormData="list"
 			 processDefineKey="fg"
 			 hideLast="true"
-			 hideConfirm="true"
 			 :ConfirmConfig="ConfirmConfig"
 		/>
-		<view style=" width: 90%;margin: 10px auto;padding: 5px;text-align: left;"><view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录</view>
-			<view class="ConfirmBox" v-for="(item,i) in confirmList" v-if="confirmList.length>0">
-				<view style="font-weight: bold;margin-right:5px">发起时间:<span style="font-weight:normal;">{{item.time}}</span></view>
-				<view style="font-weight: bold;margin-right:5px">办理步骤: <span style="font-weight:normal;">{{item.taskName}}</span></view>
-				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
-			</view>
-		</view>
 	</view>
 
 </template>

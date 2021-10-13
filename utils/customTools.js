@@ -134,12 +134,30 @@
 			          {
 			            __config__: {
 			              label: '类型',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'el-select',
+			              tagIcon: 'select',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
-			            placeholder: '请输入类型',
+			            placeholder: '请选择类型',
+									__slot__: {
+										options: [{
+												"label": "健身",
+												"value": "BBD"
+										}, {
+												"label": "游泳",
+												"value": "SW"
+										}, {
+												"label": "攀岩",
+												"value": "RC"
+										}, {
+												"label": "滑雪",
+												"value": "SKI"
+										}, {
+												"label": "滑冰",
+												"value": "SKA"
+										}]
+									},
 			            __vModel__: 'companyType'
 			          },
 			          {
@@ -233,8 +251,8 @@
 			          {
 			            __config__: {
 			              label: '执法人员1',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'signature',
+			              tagIcon: 'signature',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
@@ -244,8 +262,8 @@
 			          {
 			            __config__: {
 			              label: '证件号1',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'signature',
+			              tagIcon: 'signature',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
@@ -255,8 +273,8 @@
 			          {
 			            __config__: {
 			              label: '执法人员2',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'signature',
+			              tagIcon: 'signature',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
@@ -266,8 +284,8 @@
 			          {
 			            __config__: {
 			              label: '证件号2',
-			              tag: 'el-input',
-			              tagIcon: 'input',
+			              tag: 'signature',
+			              tagIcon: 'signature',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
@@ -304,6 +322,7 @@
 			              tagIcon: 'input',
 			              layout: 'colFormItem',
 			              required: false,
+										defaultValue:"/",
 			            },
 			            placeholder: '请输入备注',
 			            __vModel__: 'remark'

@@ -183,16 +183,17 @@
 								duration:500,
 								title:"办理成功"
 							})
-							console.log(page)
+							// console.log(page)
 							// uni.reLaunch({
 							// 	url:page.$page.fullPath,
 							// 	fail(e) {
 							// 		console.log(e)
 							// 	}
 							// })
+							let pId = res.data.data.processInstanceId
 							if(that.jumpUrl){
 								uni.navigateTo({
-									url:"/pages"+that.jumpUrl
+									url:"/pages"+that.jumpUrl+"?processInstanceId="+pId
 								})
 							}else{
 								uni.navigateBack({

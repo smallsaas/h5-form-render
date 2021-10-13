@@ -14,7 +14,7 @@
           <template slot="input">
               <view class="field_input">
 				  <button size="mini" @click="handleSignture" v-if="!param.readonly">
-					  {{param.value ? '修改签名' : '点击签名'}}
+					  {{param.value ? '修改' : '填写'}}
 				  </button>
 				  <view 
 					  :style="{
@@ -327,7 +327,7 @@
                 justify-content: center;
                 text-align: center;
                 padding: 40rpx 0;
-								z-index: 10000;
+								z-index: 9999999;
                 .but {
                     width: 100%;
 										// height: 10%;
