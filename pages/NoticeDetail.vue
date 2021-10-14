@@ -19,7 +19,7 @@
 		},
 		onLoad(e) {
 			let decode
-			decode = JSON.parse(decodeURIComponent(e.query))
+			decode = e.query?JSON.parse(decodeURIComponent(e.query)):e
 			console.log(decode)
 			this.api=`${globalConfig.formHost}?id=66661`
 			// this.id=decode.id

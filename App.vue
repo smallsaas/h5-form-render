@@ -8,7 +8,7 @@
             console.log('App Launch')
 						const res = await getGolobalConfig()
 						if (_.get(res, 'code') === 200) {
-							console.log(_.get(res, 'data.globalConfig', {}),"GLOBALCONFIG")
+							// console.log(_.get(res, 'data.globalConfig', {}),"GLOBALCONFIG")
 						    uni.setStorageSync('globalConfigStorage', _.get(res, 'data.globalConfig', {}))
 						}
 						
@@ -97,6 +97,7 @@
 								console.log(res.data)
 								token = res.data.encryptedData
 								uni.setStorageSync(globalConfig.tokenStorageKey,token)
+								uni.getStorageSync(globalConfig.tokenStorageKey)
 					  },
 				})
 			}
