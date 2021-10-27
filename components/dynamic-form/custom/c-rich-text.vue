@@ -17,7 +17,7 @@
 		components:{
 		},
 		created() {
-			console.log("param",this.param)
+			// console.log("param",this.param)
 		},
 		props:{
 			param:{
@@ -26,7 +26,7 @@
 		},
 		methods:{
 			Debug(item){
-				// console.log()
+				// // console.log()
 				item = item.replace(/src="/g, 'src="https://images.weserv.nl/?url=')
 				return item
 			}

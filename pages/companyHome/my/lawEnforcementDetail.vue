@@ -20,7 +20,7 @@
 			if (e.query) {
 				query = { ...JSON.parse(decodeURIComponent(e.query)) }
 				this.requsetParam = query
-			console.log('e.query = ',query)
+			// console.log('e.query = ',query)
 			}else {
 				console.error('获取请求参数异常')
 			}

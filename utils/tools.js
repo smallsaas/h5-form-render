@@ -1,3 +1,4 @@
+import {globalConfig} from '@/config.js'
 export const Base64 = {
     // private property
     _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
@@ -135,4 +136,151 @@ export const guid = () => {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
     }
     return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+}
+// 设置缓存 获取缓存
+export const cache=(key,value,seconds = 3600 *24)=>{
+		let nowTime = Date.parse(new Date()) / 1000;
+		if (key && value) {
+			let expire = nowTime + Number(seconds);
+			uni.setStorageSync(key,JSON.stringify(value) + '|' +expire)
+			console.log('已经把' + key + '存入缓存,过期时间为' + expire)
+		} else if (key && !value) {
+			let val = uni.getStorageSync(key);
+			if (val) {
+				// 缓存存在，判断是否过期
+				let temp = val.split('|')
+				if (!temp[1] || temp[1] <= nowTime) {
+					uni.removeStorageSync(key)
+					console.log(key + '缓存已失效')
+					return '';
+				} else {
+					return JSON.parse(temp[0]);
+				}
+			}
+		}
+}
+// 获取默认登录用户信息
+export  async function getDefaultUser(){
+	let userMessage =await new Promise((resolve,reject)=>{
+		uni.request({
+			url:`${globalConfig.formHost}?id=2`,
+			method:"GET",
+			success(res) {
+				let User = JSON.parse(Base64.decode(res.data.data.defaultUser))
+				resolve(User)
+			}
+		})
+	})
+	return userMessage
+}
+// 登录默认用户
+export async function LoginDefault(){
+	let user = await getDefaultUser()
+	uni.request({
+		url: `${globalConfig.loginEP}/api/sys/oauth/app/login`,
+		data:user,
+		method:"POST",
+		success(res) {
+			let token;
+			token = res.data.encryptedData
+			uni.setStorageSync(globalConfig.tokenStorageKey,token)
+			console.log("设置token成功!")
+		}
+	})
+}
+
+export function login(){
+	let auth;
+	let authCache = cache("auth")
+	console.log(authCache,"cache_auth")
+	if(authCache!=null&&authCache!=undefined&&authCache!=""){
+		auth = authCache
+		console.log(auth)
+	}else{
+		uni.login({
+			success(res) {
+				auth = res.code
+				cache("auth",auth,5*60)//设置登录许可为5*60
+			},
+			fail(){
+				uni.showModal({
+					title:"登录失败",
+					showCancel:false,
+					confirmColor:"red",
+					success() {
+						uni.navigateBack({
+							delta:10
+						})
+					}
+				})
+			}
+		})
+	}
+	return auth
+}
+// 获取用户信息
+export function getUserProfile(){
+	let iv;
+	let encryptedData;
+	let rawData;
+	let userProfile;
+	let profile = cache("profile")
+	if(profile!=null&&profile.iv!=null){
+		userProfile = profile
+		console.log(profile)
+	}else{
+		uni.showModal({
+			title:"申请",
+			content:"正在请求您的个人信息",
+			success(User) {
+				if(User.confirm){
+					uni.getUserProfile({
+						desc:"获取您的昵称、头像、地区及性别",
+						success(userProfile) {
+							console.log(userProfile)
+							iv = userProfile.iv	
+							encryptedData = userProfile.encryptedData
+							let newRawData;
+							let jsonRaw = JSON.parse(userProfile.rawData)
+							for(let i in jsonRaw){
+								if(i==="nickName"){
+									jsonRaw.nickname=jsonRaw.nickName
+									delete jsonRaw["nickName"]
+								}
+							}
+							newRawData = JSON.stringify(jsonRaw)
+							rawData = newRawData
+							let newProfile = {
+								"iv":iv,
+								"encryptedData":encryptedData,
+								"rawData":newRawData
+							}
+							// userProfile = newProfile
+							cache("profile",newProfile,5*60)//设置缓存为五分钟
+							uni.navigateBack({
+								delta:10,
+								success(){
+									uni.showToast({
+										icon:"success",
+										title:"请重新选择角色",
+										duration:5000
+									})
+								}
+							})
+						}
+					})
+				}
+			}
+		})
+		userProfile = cache("profile")
+	}
+	return userProfile
+}
+// 重新加载当前页面 (带onload参数)
+export function reload(){
+	let pages = getCurrentPages()
+	let nowPage = pages[pages.length-1];
+	uni.redirectTo({
+		url:nowPage.$page.fullPath
+	})
 }

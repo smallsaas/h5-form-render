@@ -3,7 +3,7 @@
         <van-field
           readonly
           :required="param.required"
-          :disabled="param.disabled||param.readonly"
+          :disabled="param.disabled"
           :style="param.style"
           :placeholder="param.placeholder"
           clickable
@@ -15,7 +15,7 @@
           label-class="van_field_label"
           @click-input="handleClick"
         />
-        <van-popup :show="showPick" position="bottom" @click-overlay="handlePickerCancel" custom-style="background-color: #fff;z-index: 999">
+        <van-popup v-if="isBuild()" :show="showPick" position="bottom" @click-overlay="handlePickerCancel" custom-style="background-color: #fff;z-index: 999">
           <van-picker
             show-toolbar
             :columns="param.columns"
@@ -51,22 +51,34 @@
           } 
         },
         mounted() {
-					console.log(this.param)
+					// console.log(this.param)
           this.handleInitData()
         },
         methods: {
+					// 是否存在
+					isBuild(){
+						let isShow 
+						if(this.param.readonly){
+							isShow = false
+						}else if(this.param.disabled){
+							isShow = false
+						}else{
+							isShow = true
+						}
+						return isShow
+					},
             handleParseValue (value) {
-              if (value) {
+              if (value||value===0) {
                   const list =  _.get(this.param, 'columns', [])
-                  return _.get(list.find(x => x.value === value), 'label', '')
-              }  
+                  return _.get(list.find(x => x.value == value), 'label', '')
+              }
               return ''
             },
             handleInitData () {
                 if (_.has(this.param, 'columns') && _.get(this.param, 'columns', []).length > 0) {
                     this.param.columns.map(x => {
                         if (!_.has(x, 'text')) {
-                            x.text = _.get(x, 'label', '')
+                            x.text = _.get(x, 'label')
                         }
                     })
                 }

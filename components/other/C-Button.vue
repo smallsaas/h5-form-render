@@ -42,14 +42,14 @@
 				}
 			},
 			back(value){
-				console.log("back")
-				console.log(this.config)
+				// console.log("back")
+				// console.log(this.config)
 				uni.navigateBack({
 					delta:this.config.value
 				})
 			},
 			exitThis(url){
-				console.log("exitThis")
+				// console.log("exitThis")
 				uni.redirectTo({
 					url:this.config.url
 				})
@@ -59,18 +59,18 @@
 					url:this.config.url,
 					events:this.config.value,
 					fail(e) {
-						console.log(e)
+						// console.log(e)
 					}
 				})
 			},
 			reLaunch(url){
-				console.log("reLanch")
+				// console.log("reLanch")
 				uni.reLaunch({
 					url:this.config.url
 				})
 			},
 			tab(url){
-				console.log("tab")
+				// console.log("tab")
 				uni.switchTab({
 					url:this.config.url
 				})

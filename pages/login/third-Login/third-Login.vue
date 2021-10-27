@@ -13,36 +13,51 @@
 	export default {
 		data() {
 			return {
-				api: globalConfig.formHost + '?id=888',
+				api: globalConfig.formHost + '?id=888'
 			}
 		},
 		methods: {
-			jumpOld(){
-				uni.reLaunch({
-					url:"/pages/login/login"
-				})
-			},
-			MoreIndex(){
-				uni.showActionSheet({
-						itemList: ['执法首页', '企业首页', '街镇首页'],
-						success: function (res) {
-								switch(res.tapIndex){
-									case 0:uni.navigateTo({
-										url:"/pages/Market-index/Market-index"
-									});break;
-									case 1:uni.navigateTo({
-										url:"/pages/companyHome/home"
-									});break;
-									case 2:uni.navigateTo({
-										url:"/pages/street/myhome"
-									});break;
-								}
-						},
-						fail: function (res) {
-								console.log(res.errMsg);
-						}
-				});
+			// jumpOld(){
+			// 	uni.reLaunch({
+			// 		url:"/pages/login/login"
+			// 	})
+			// },
+			
+			// MoreIndex(){
+			// 	uni.showActionSheet({
+			// 			itemList: ['执法首页', '企业首页', '街镇首页'],
+			// 			success: function (res) {
+			// 					switch(res.tapIndex){
+			// 						case 0:uni.navigateTo({
+			// 							url:"/pages/Market-index/Market-index"
+			// 						});break;
+			// 						case 1:uni.navigateTo({
+			// 							url:"/pages/companyHome/home"
+			// 						});break;
+			// 						case 2:uni.navigateTo({
+			// 							url:"/pages/street/myhome"
+			// 						});break;
+			// 					}
+			// 			},
+			// 			fail: function (res) {
+			// 					// console.log(res.errMsg);
+			// 			}
+			// 	});
+			// },
+			getUser(){
+				this.$wxlogin()
+				this.$userProfile()
 			}
+		},
+		// created() {
+		// 	this.getUser()
+		// },
+		created() {
+			// uni.clearStorage("loginData")
+			// this.getUser()
+		},
+		onBackPress() {
+			// this.getUser()
 		},
 		components:{
 			dynamicPage

@@ -124,7 +124,7 @@
                const index = e.detail.index
                this.fileList.splice(index, 1)
                this.fileList = [...this.fileList.splice(index, 1)]
-               console.log('change', e, this.fileList)
+               // console.log('change', e, this.fileList)
                this.$emit('change', this.fileList)
             },
             handleAfterRead (event) {
@@ -141,9 +141,9 @@
 												let Resdata = JSON.parse(res.data)
 												let resUrl = Resdata.data
             //             // const resUrl = res.data.data.substr(0, 5).includes('http') ? res.data.data :  globalConfig.workflowEP + res.data.data
-												// console.log("resUrl",resUrl)
-												// console.log("list",list)
-												// console.log()
+												// // console.log("resUrl",resUrl)
+												// // console.log("list",list)
+												// // console.log()
                         if (_.has(this.param, 'accept') && this.param.accept === 'file') {
                             const index = resUrl.lastIndexOf('.')
                             const str = resUrl.substr(index + 1)
@@ -156,11 +156,11 @@
                             this.fileList.push({ url: globalConfig.workflowEP+resUrl.url })
                         }
                         // this.fileList = [...list]
-												console.log("fileList",this.fileList)
+												// console.log("fileList",this.fileList)
                         this.$emit('change', JSON.stringify(this.fileList))
                     },
 										fail(e) {
-											console.log("error",e)
+											// console.log("error",e)
 										}
                 })
             }

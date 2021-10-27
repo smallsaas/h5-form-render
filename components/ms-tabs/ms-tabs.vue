@@ -77,7 +77,7 @@
 			if(!this.lineAnimated) {
 				this.duration = 0
 			}
-			console.log(this.$scopedSlots)
+			// console.log(this.$scopedSlots)
 		},
 		methods: {
 			select(item, index) {

@@ -72,7 +72,7 @@
 			dynamicCell,
 		},
 		onLoad (e){
-			console.log('on onLoad')
+			// console.log('on onLoad')
 			this.initData("100");
 		},
 		data() {
@@ -96,12 +96,12 @@
 			},
 			onItemClick(path){
 				if(path){
-					console.log('点击 = ', path)
+					// console.log('点击 = ', path)
 				   uni.navigateTo({
 						url: path
 				   }) 
 				}else{
-					console.log('path 不存在 ')
+					// console.log('path 不存在 ')
 				}
 			},
 		},

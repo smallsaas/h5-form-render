@@ -42,7 +42,8 @@ export const globalConfig = {
   designEP:  _.get(globalConfigStorage, 'designEP', 'https://ai.hdqmjs.com'),
 	loginEP: _.get(globalConfigStorage, 'loginEP', 'https://ai.hdqmjs.com'),
   extraEP: _.get(globalConfigStorage, 'extraEP', 'https://ai.hdqmjs.com'),
-  YyzzEP: _.get(globalConfigStorage, 'YyzzEP', 'https://desk.hdqmjs.com'),
+  YyzzEP: _.get(globalConfigStorage, 'YyzzEP', 'https://ai.hdqmjs.com'),
+	testEP: _.get(globalConfigStorage,'testEP','https://api.mock.smallsaas.cn'),
   // zfEP: _.get(globalConfigStorage, 'zfEP', 'https://zf.hdqmjs.com'),
   tokenStorageKey: 'token',//token��
   tencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' ,// 获取地址sdk key

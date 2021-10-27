@@ -17,7 +17,7 @@
 			}
 		},
 		mounted() {
-			console.log(this.selectValue)
+			// console.log(this.selectValue)
 			this.getValue()
 		},
 		onReady(){
@@ -34,10 +34,10 @@
 						animationDuration:300,
 						success() {
 							this.getValue()
-							console.log(this.selectValue)
+							// console.log(this.selectValue)
 						},
 						fail(e) {
-							console.log(e)
+							// console.log(e)
 						}
 					})
 			},
@@ -50,11 +50,11 @@
 				let va = uni.getStorage({
 					key:"selectName",
 					success(e) {
-						console.log(e.data)
+						// console.log(e.data)
 						that.selectValue = e.data
 					}
 				})
-				// console.log(va.data)
+				// // console.log(va.data)
 			}
 		}
 	}

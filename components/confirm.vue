@@ -1,14 +1,14 @@
 <template>
 	<view>
-		<view style="background-color: white;width: 90%;margin: 10px auto;padding: 5px;text-align: left;" v-if="confirmList.length>0">
-			<view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录<span style="float: right;" @click="isShowList()">{{text}}</span></view>
+		<view style="background-color: white;width: 90%;margin: 10px auto;padding: 5px;text-align: left;" v-if="confirmList.length>0&&!config.hideConfirm">
+			<view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">{{config.groupText||"审批记录"}}<span style="float: right;" @click="isShowList()">{{text}}</span></view>
 			<view class="MessageBox" v-for="(item,i) in confirmList"  v-show="!showList">
 				<view style="font-weight: bold;margin-right:5px">发起时间:<span style="font-weight:normal;">{{item.time}}</span></view>
 				<view style="font-weight: bold;margin-right:5px">办理步骤: <span style="font-weight:normal;">{{item.taskName}}</span></view>
 				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
 			</view>
 		</view>
-		<view class="Confirm" style="position: relative;" >
+		<view class="Confirm" style="position: relative;"  v-if="!noCommit">
 			<view class="comment">
 				<view class="title">{{config.placeholder||"办理意见"}}
 				</view>
@@ -36,7 +36,25 @@
 				<!-- <button @click="getFormData()">测试</button> -->
 			</view>
 		</view>
-	</view>
+		<view style="position: relative;height: 50px;"  v-if="noCommit">
+			<view class="ConfirmBox">
+							<view class="agree button" @click="GetAgree('backToPrev')" v-if="!hideLast">
+								{{config.lastText||"回退"}}
+							</view>
+							<view class="agree button" @click="GetAgree()">
+								{{config.agreeText||"提交"}}
+							</view>
+							<view class="agree button" @click="exit()">
+								关闭
+							</view>
+				<!-- 			<view class="refuse button" @click="GetRefuse()">
+								{{config.refuseText}}
+							</view> -->
+							<!-- <button @click="getFormData()">测试</button> -->
+						</view>
+			</view>
+		</view>
+
 </template>
 
 <script>
@@ -70,33 +88,47 @@
 			piId:String,
 			userlist:Object,
 			jumpUrl:String,
-			processDefineKey:String
+			processDefineKey:String,
+			noCommit:{
+				type:Boolean,
+				default(){
+					return false
+				}
+			},
+			customValues:{
+				type:Object
+			}
 		},
 		watch:{
 			piId:{
 				handler(value,oldValue){
-					console.log("VALUE",value,oldValue)
+					// console.log("VALUE",value,oldValue)
 				},
 				deep:true
+			},
+			noCommit:{
+				handler(value,oldValue){
+					// console.log("noCommit?",value,"oldNotCommit",oldValue)
+				}
 			}
 		},
 		created(){
-			console.log("PIID",this.piId)
 			this.getConfim(this.piId)
 		},
 		mounted() {
-			console.log("confimKey",this.LastKey)
-			// console.log("FormDATA",this.formData)
-			// console.log("userInfo",globalConfig.userInfo)
+			// console.log("noCommit",this.noCommit)
+			// // console.log("confimKey",this.LastKey)
+			// // console.log("FormDATA",this.formData)
+			// // console.log("userInfo",globalConfig.userInfo)
 			this.username=uni.getStorageSync(globalConfig.userInfo).username
-			console.log("PIID",this.piId)
+			// // console.log("PIID",this.piId)
 		},
 		methods:{
 			// getFormData(){
-			// 	console.log("FormDATA",this.formData)
+			// 	// console.log("FormDATA",this.formData)
 			// },
 			isShowList(){
-				// console.log("SHOWLIST",this.showList)
+				// // console.log("SHOWLIST",this.showList)
 				if(this.showList===true){
 					this.text="收起"
 				}else{
@@ -117,7 +149,7 @@
 						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
 					},
 					success(res){
-						console.log("res",res)
+						// console.log("res",res)
 						that.confirmList=res.data.data
 					}
 				})
@@ -128,10 +160,12 @@
 				})
 			},
 			GetAgree(openType){
-				
-				// console.log(value);
-				// console.log(this.comment)
-				console.log("KEY",this.LastKey.applyUserName)
+				uni.showLoading({
+					title:"提交中"
+				})
+				// // console.log(value);
+				// // console.log(this.comment)
+				// console.log("KEY",this.LastKey.applyUserName)
 				let pages = getCurrentPages()
 				let page = pages[0]
 				let token = uni.getStorageSync(globalConfig.tokenStorageKey)
@@ -146,6 +180,7 @@
 						"customValues":{
 							"fileno":this.LastKey.fileno||1,
 							"fileseq":this.LastKey.fileseq||10,
+							...this.customValues
 						},
 						"userId":this.userlist.userId,
 						"userName":this.userlist.name,
@@ -161,6 +196,7 @@
 						"customValues":{
 							"fileno":this.LastKey.fileno||1,
 							"fileseq":this.LastKey.fileseq||10,
+							...this.customValues
 						},
 						"ignoreNotPersistent":true,
 						"formData":this.formData,
@@ -170,8 +206,8 @@
 					}
 				}
 				let that = this
-				console.log("JUMP",this.jumpUrl)
-				// console.log(data)
+				// console.log("JUMP",this.jumpUrl)
+				// // console.log(data)
 				uni.request({
 					header:header,
 					url:url,
@@ -179,25 +215,34 @@
 					method:this.config.method||"POST",
 					complete(res) {
 						if(res.data.code==="00000"){
-							uni.showToast({
-								duration:500,
-								title:"办理成功"
-							})
-							// console.log(page)
+							// // console.log(page)
 							// uni.reLaunch({
 							// 	url:page.$page.fullPath,
 							// 	fail(e) {
-							// 		console.log(e)
+							// 		// console.log(e)
 							// 	}
 							// })
+							uni.hideLoading()
 							let pId = res.data.data.processInstanceId
 							if(that.jumpUrl){
 								uni.navigateTo({
-									url:"/pages"+that.jumpUrl+"?processInstanceId="+pId
+									url:"/pages"+that.jumpUrl+"?processInstanceId="+pId,
+									success(){
+										uni.showToast({
+											// duration:500,
+											title:"提交成功"
+										})
+									}
 								})
 							}else{
 								uni.navigateBack({
-									delta:10
+									delta:10,
+									success(){
+										uni.showToast({
+											// duration:500,
+											title:"提交成功"
+										})
+									}
 								})
 							}
 						}else{
@@ -209,8 +254,8 @@
 				})
 			},
 		// 	GetRefuse(){
-		// 		// console.log(value);
-		// 		// console.log(this.comment)
+		// 		// // console.log(value);
+		// 		// // console.log(this.comment)
 		// 		let pages = getCurrentPages()
 		// 		let page = pages[0]
 		// 		let token = uni.getStorageSync(globalConfig.tokenStorageKey)
@@ -230,14 +275,14 @@
 		// 			"comment":this.comment,
 		// 			"taskId":this.LastKey.taskId
 		// 		}
-		// 		// console.log(data)
+		// 		// // console.log(data)
 		// 		uni.request({
 		// 			header:header,
 		// 			url:url,
 		// 			data:data,
 		// 			method:this.config.method||"POST",
 		// 			complete(res) {
-		// 				console.log(res)
+		// 				// console.log(res)
 		// 				if(res.data.code==="00000"){
 		// 					uni.showToast({
 		// 						duration:500,
@@ -248,7 +293,7 @@
 		// 						...data
 		// 					}
 		// 					let backUrl = '/pages'+that.config.failUrl+'?query='+encodeURIComponent(JSON.stringify(querydata))
-		// 					console.log(backUrl)
+		// 					// console.log(backUrl)
 		// 					uni.navigateTo({
 		// 						url:backUrl
 		// 					})

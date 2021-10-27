@@ -212,8 +212,9 @@
                 :param="{
                 	...getBaseParam(item),
 					..._get(item, 'error', false) ? { error: item.error } : {},
-					..._get(item, 'error') ? { 'error-message' : item['error-message'] || '请签名' } : {},
+					..._get(item, 'error') ? { 'error-message' : item['error-message'] || '请签章' } : {},
                 }"
+								:hideSelect = "_get(item,'hideSelect')"
 				@change="(e) => handleSetValue(e, fields[index])"
             />
 						<c-rich-text
@@ -225,6 +226,18 @@
 							        }"
 							@change="(e) => handleSetValue(e, fields[index])"
 						></c-rich-text>
+						<c-view-upload
+						v-if="_get(item, '__config__.tag') === 'c-view-upload'"
+						:param="{
+							...getBaseParam(item),
+							..._get(item, 'error', false) ? { error: item.error } : {},
+							..._get(item, 'error') ? { 'error-message' : item['error-message'] || `请选择${_get(item, '__config__.label')}` } : {},
+							...item['max-count'] ? { 'max-count': item['max-count'] } : {},
+							..._has(item, 'deletable') ? { deletable: item.deletable } : {},
+						          ..._has(item, 'accept') ? { accept: item.accept } : {},
+						}"
+						      @change="(e) => handleSetValue(e, fields[index])"
+						 />
        </block>
     </view>
 </template>
@@ -252,6 +265,8 @@
 	import cMapMes from './custom/c-map-mes.vue'
 	import BaseSingleModalSelect from './BaseSingleModalSelect.vue'
     import BaseSignature from './BaseSignature.vue'
+		// 附件显示
+		import cViewUpload from './custom/c-View-Upload/c-View-Upload.vue'
     export default {
         components: {
            BaseField,
@@ -272,7 +287,8 @@
 		   BaseSingleModalSelect,
            BaseSignature,
 					 cSelectStreet,
-					 CRichText
+					 CRichText,
+					 cViewUpload
         },
         props: {
           fields: {
@@ -302,9 +318,9 @@
 							let longitude = this.form["longitude"]
 							let streetName = this.form["streetName"]
 							let streetId = this.form["streetId"]
-							// console.log("获取到的item",isDisabled(item),"fields",this.fields)
-							// console.log("这是form",this.form)
-							// console.log("tag",_.get(item,'__config__.tag'))
+							// // console.log("获取到的item",isDisabled(item),"fields",this.fields)
+							// // console.log("这是form",this.form)
+							// // console.log("tag",_.get(item,'__config__.tag'))
 							if(_.get(item,'__config__.tag')==='c-select-street'){
 								config={
 								 // title:_.get(item,'__config__.title'),
@@ -369,6 +385,7 @@
 										..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
 								 }
 							 }else{
+								 // console.log(this.form,"FORM")
 								 config={
 								 // title:_.get(item,'__config__.title'),
 									label: _.get(item, '__config__.label'),
@@ -388,7 +405,7 @@
 									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
 							 }
 							}
-							// console.log("传到里面的配置",config)
+							// // console.log("传到里面的配置",config)
 							return config
            },
 		   _has (item = {}, str) {
@@ -410,7 +427,7 @@
 						 this.$emit("user",e)
 					 },
 					 handleStreet(e){
-						 console.log(e)
+						 // console.log(e)
 						 this.$emit("street",e)
 					 },
            handleClear (e, item) {

@@ -207,7 +207,7 @@
 					canvasId: that.qrcode_id,
 					success: function(res) {
 						var tempFilePath = res.tempFilePath;
-						console.log(tempFilePath);
+						// console.log(tempFilePath);
 						that.imagePath = tempFilePath;
 						
 						//保存到相册
@@ -236,7 +236,7 @@
 						});
 					},
 					fail: function(res) {
-						console.log(res);
+						// console.log(res);
 					}
 				}, that);
 			},

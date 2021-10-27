@@ -8,7 +8,7 @@
 			:ConfirmConfig="ConfirmConfig"
 			:piId="piId"
 			:LastKey="processDefineKey"
-			
+			noCommit="true"
 			:Details="false"
 			:hideButton="true"
 			:taskId="taskId"
@@ -27,6 +27,7 @@
 			 :LastKey="processDefineKey"
 			 :srvFormData="formData"
 		></dynamic-page> -->
+		<button class="showCompany" @click="showCompanyInfo" v-if="companyId">企业详情</button>
 	</view>
 </template>
 
@@ -40,7 +41,7 @@
 	import dynamicPage from '../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
-			console.log(e)
+			// console.log(e)
 			this.getPiId(e.query)
 			this.getConfig()
 			uni.showLoading({
@@ -55,7 +56,7 @@
 			dynamicPage
 		},
 		onReady() {
-			console.log(this.config)
+			// console.log(this.config)
 		},
 		data() {
 			return {
@@ -78,13 +79,20 @@
 				formData:null,
 				confirmList:[],
 				ConfirmConfig:{
-					
-				}
+				
+				},
+				companyId:null
 			}
 		},
 		methods: {
+			// 查看企业详情
+			showCompanyInfo(){
+				uni.navigateTo({
+					url:`/pages/enforcement/enforcementDetails?id=${this.companyId}`
+				})
+			},
 			getFormData(e){
-				console.log('真实获取数据',e)
+				// console.log('真实获取数据',e)
 				this.formData=e
 			},
 			getConfirmConfig(api){
@@ -94,19 +102,19 @@
 					method:"GET",
 					success(res) {
 						let data = res.data.data
-						console.log("RES",data)
+						// console.log("RES",data)
 						let moduleData = data.moduleData
-						console.log(moduleData)
+						// console.log(moduleData)
 						let modules = res.data.data.modules
 						let key
 						modules.map((item,i)=>{
 							if(item.type==="confirm"){
 								key = item.key
-								console.log(key)
+								// console.log(key)
 							}
 						})
 						that.ConfirmConfig = _.get(moduleData,key,"")
-						console.log(key,moduleData,that.ConfirmConfig)
+						// console.log(key,moduleData,that.ConfirmConfig)
 					}
 				})
 			},
@@ -123,7 +131,7 @@
 						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
 					},
 					success(res){
-						console.log("res",res)
+						// console.log("res",res)
 						that.confirmList=res.data.data
 					}
 				})
@@ -132,8 +140,8 @@
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				console.log(decode)
-				console.log(this.taskId)
+				// console.log(decode)
+				// console.log(this.taskId)
 				this.applyUserName = decode.instanceEntityVo.actApplyUserName
 				this.Key = decode.processDefineKey
 				this.data = {
@@ -141,8 +149,8 @@
 				}
 			},
 			getConfig(){
-				// console.log(this.data)
-				// console.log(this.method)
+				// // console.log(this.data)
+				// // console.log(this.method)
 				let that = this
 				uni.request({
 					url:this.loadApi,
@@ -150,15 +158,23 @@
 					data:this.data,
 					header:this.header,
 					complete(res) {
-						// console.log(res)
+						// // console.log(res)
 						if(res.data.code === "00000"){
-							// console.log(res)
+							// // console.log(res)
 							let form = res.data.data.form
 							let data = res.data.data.formData
 							that.formData = data
-							// console.log(form)
-							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							// // console.log(form)
+							// // console.log("enforcementSeq",res.data.data.customValues.fileseq)
 							if(res.data.data.customValues){
+								if(res.data.data.customValues.companyName){
+									uni.setNavigationBarTitle({
+										title:res.data.data.customValues.companyName
+									})
+								}
+								if(res.data.data.customValues.companyId){
+									that.companyId = res.data.data.customValues.companyId
+								}
 								if(res.data.data.customValues.fileno){
 									that.processDefineKey ={
 										"applyUserName":that.applyUserName,
@@ -189,9 +205,9 @@
 
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
-							// console.log("config",that.config)
-							console.log(that.processDefineKey)
-							// console.log(that.config)
+							// // console.log("config",that.config)
+							// console.log(that.processDefineKey)
+							// // console.log(that.config)
 							that.getConfim(that.piId)
 							uni.hideLoading()
 						}
@@ -203,8 +219,24 @@
 </script>
 
 <style>
+	@keyframes show{
+		from{opacity: 0;}
+		to{opacity: 1;}
+	}
 	.MessageBox{
 		border: 2px double #1A5EB5;
 		padding: 10px;
+	}
+	.showCompany{
+		position: fixed;
+		top: 20%;
+		right: 0;
+		background-color: #46AA46;
+		border-top-left-radius: 50px;
+		border-bottom-left-radius: 50px;
+		margin-left: 10px;
+		color: white;
+		font-weight: bolder;
+		animation: show 2s linear 0s forwards;
 	}
 </style>

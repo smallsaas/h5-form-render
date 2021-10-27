@@ -51,7 +51,7 @@
 			// 			Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
 			// 		},
 			// 		complete(res) {
-			// 			console.log("list",res)
+			// 			// console.log("list",res)
 			// 			that.Noticelist = res.data.data.formDataPage.list
 			// 		}
 			// 	})

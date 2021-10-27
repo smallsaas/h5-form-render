@@ -24,7 +24,7 @@
 		components:{ dynamicPage },
 		onLoad (e){
 			let decode = JSON.parse(decodeURIComponent(e.query))
-			console.log("decode",decode)
+			// console.log("decode",decode)
 			this.key=decode.key
 			this.custom=decode.customValues
 		},

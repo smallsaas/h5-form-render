@@ -15,7 +15,7 @@
 			label-class="van_field_label"
 			@click-input="handleShowPicker(true)"
 		  />
-		<van-popup :show="showPicker" position="bottom" @click-overlay="handleShowPicker(false)" custom-style="background-color: #fff;z-index: 999">
+		<van-popup v-if="isBuild()" :show="showPicker" position="bottom" @click-overlay="handleShowPicker(false)" custom-style="background-color: #fff;z-index: 999">
 			<van-datetime-picker
 			  :type="param.tagIcon"
 			  :value="showTime()||time"
@@ -56,9 +56,21 @@
 		created() {
 			this.time = new Date(this.convertToLateDate()).getTime()
 			this.date = this.convertToLateDate()
-			console.log("TIME",this.time)
+			// console.log("TIME",this.time)
 		},
 	    methods: {
+				// 是否存在
+				isBuild(){
+					let isShow 
+					if(this.param.readonly){
+						isShow = false
+					}else if(this.param.disabled){
+						isShow = false
+					}else{
+						isShow = true
+					}
+					return isShow
+				},
 			convertToLateDate() {
 				var data = new Date();
 					// var Da = new Date(data.getTime() + 24 * 60 * 60 * 1000 * 30);
@@ -82,7 +94,7 @@
 					}else{
 						time = y + "-" + m + "-" + d
 					}
-					// console.log()
+					// // console.log()
 					return time;
 			},
 			showTime () {

@@ -26,10 +26,10 @@
 		},
 		methods: {
 			isSelect(e){
-				console.log("select!",e)
+				// console.log("select!",e)
 				this.selectId=e
 				this.config.url=this.config.url+"&selectId="+this.selectId
-				console.log("url",this.config.url)
+				// console.log("url",this.config.url)
 			}
 		},
 		onLoad(e) {

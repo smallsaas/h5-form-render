@@ -6,13 +6,13 @@
 			:hideConfirm="true"
 			:Details="true"
 		></dynamic-form>
-		<view style=" width: 90%;margin: 10px auto;padding: 5px;text-align: left;"><view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录</view>
+<!-- 		<view style=" width: 90%;margin: 10px auto;padding: 5px;text-align: left;"><view style="font-weight: bolder;border-bottom: 1px solid #aaa;background-color: #1A5EB5;color: white;padding: 10px;">审批记录</view>
 			<view class="ConfirmBox" v-for="(item,i) in confirmList" v-if="confirmList.length>0">
 				<view style="font-weight: bold;margin-right:5px">发起时间:<span style="font-weight:normal;">{{item.time}}</span></view>
 				<view style="font-weight: bold;margin-right:5px">办理步骤: <span style="font-weight:normal;">{{item.taskName}}</span></view>
 				<view style="font-weight: bold;margin-right:5px">意见: <span style="font-weight:normal;">{{item.fullMessage}}</span></view>
 			</view>
-		</view>
+		</view> -->
 		<button class="got_form_button" @click="jump()" v-if="piId">前往打印页</button>
 <!-- 		<dynamic-page
 			 :API="api"
@@ -30,7 +30,7 @@
 	import dynamicPage from '../../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
-			console.log(e)
+			// console.log(e)
 			this.getPiId(e.query)
 			this.getConfig()
 		},
@@ -39,7 +39,7 @@
 			dynamicPage
 		},
 		onReady() {
-			console.log(this.config)
+			// console.log(this.config)
 		},
 		data() {
 			return {
@@ -64,7 +64,7 @@
 				uni.redirectTo({
 					url:`/pages/print?processInstanceId=${this.piId}`,
 					success(e) {
-						console.log(e)
+						// console.log(e)
 					}
 				})
 			},
@@ -72,8 +72,8 @@
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				console.log(decode)
-				console.log(this.taskId)
+				// console.log(decode)
+				// console.log(this.taskId)
 				this.data = {
 					"processInstanceId": this.piId
 				}
@@ -91,14 +91,14 @@
 						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
 					},
 					success(res){
-						console.log("res",res)
+						// console.log("res",res)
 						that.confirmList=res.data.data
 					}
 				})
 			},
 			getConfig(){
-				// console.log(this.data)
-				// console.log(this.method)
+				// // console.log(this.data)
+				// // console.log(this.method)
 				let that = this
 				uni.request({
 					url:this.loadApi,
@@ -106,14 +106,14 @@
 					data:this.data,
 					header:this.header,
 					complete(res) {
-						// console.log(res)
+						// // console.log(res)
 						if(res.data.code === "00000"){
-							// console.log(res)
+							// // console.log(res)
 							let form = res.data.data.form
 							let data = res.data.data.formData
 							that.formData = data
-							// console.log(form)
-							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							// // console.log(form)
+							// // console.log("enforcementSeq",res.data.data.customValues.fileseq)
 							if(res.data.data.customValues){
 								if(res.data.data.customValues.fileno){
 									that.processDefineKey ={
@@ -144,9 +144,9 @@
 
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
-							console.log(that.processDefineKey)
+							// console.log(that.processDefineKey)
 							that.getConfim(that.piId)
-							// console.log(that.config)
+							// // console.log(that.config)
 						}
 					}
 				})

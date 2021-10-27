@@ -11,6 +11,7 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:code="item.code"
 									:jumpUrl="jumpUrl"
 									:taskId="taskId"
 									:hideButton="hideButton"
@@ -20,22 +21,26 @@
 									:workflow="item.workflow||workflow"
 									:isYyzz="item.isYyzz"
 									:debug="debug"
-									:hideLast="hideLast"
+									:hideLast="hideLast||_get(item,'hideLast')"
 									:hideConfirm="hideConfirm"
+									:customValues="custom"
 									:ConfirmConfig="ConfirmConfig"
 								:srvFormData="getComponentsData(item) || (srvFormData||{})"
 								:processDefineKey="processDefineKey"
+								:noCommit="_get(item,'noCommit')||noCommit"
+								:otherSumbitData="otherSumbitData"
 								@state="setState"
 								@getFormData="getFormData"
 									 />
 									<dynamic-form
 									:Details="Details"
-										 v-if="_get(item, 'type') === 'autoform'&&!item.code"
+										 v-if="_get(item, 'type') === 'autoform'&&!(item.code||item.FormKey||FormKey)"
 										 :config="{
 												..._get(config.moduleData, item.key, {}),
 												outStyle: getComponentStyle(item)
 										 }"
 										 :debug="debug"
+										 :code="item.code"
 										 :jumpUrl="jumpUrl"
 											:taskId="taskId"
 											:hideButton="hideButton"
@@ -45,8 +50,10 @@
 											:hideConfirm="hideConfirm"
 											:workflow="item.workflow||workflow"
 											:isYyzz="item.isYyzz"
+											:noCommit="_get(item,'noCommit')||noCommit"
 										:srvFormData="getComponentsData(item) || (srvFormData||{})"
 										:processDefineKey="processDefineKey"
+										:otherSumbitData="otherSumbitData"
 										@state="setState"
 										@getFormData="getFormData"
 									/>
@@ -62,11 +69,11 @@
 															'fill':'#FFFFFF'
 														}
 													}"
-													:title="_get(item,'name','')"
+													:title="_get(item,'name','')||listName"
 													:jump="_get(_get(config.moduleData,item.key,{}),'jump',false)"
 													:jumpText="_get(_get(config.moduleData,item.key,{}),'jumpText','')"
 													:url="_get(_get(config.moduleData,item.key,{}),'jumpUrl','')"
-													v-if="_get(item,'name')!==undefined&&_get(item,'name')!==''"
+													v-if="_get(item,'name')||listName"
 													>
 									    <dynamic-list
 											:unloading="_get(_get(config.moduleData,item.key,{}),'unloading',false)"
@@ -75,6 +82,7 @@
 									...getComponentsData(item) ? { list: getComponentsData(item) } : {},
 									          outStyle: getComponentStyle(item)
 									      }"
+												:otherSearch="otherSearch"
 												:fileno = "customValues.fileno"
 									    />
 											</card>
@@ -85,7 +93,8 @@
 												...getComponentsData(item) ? { list: getComponentsData(item) } : {},
 																	outStyle: getComponentStyle(item)
 												}"
-												v-if="_get(item,'name')===undefined||_get(item,'name')===''"
+												v-if="!_get(item,'name')&&!listName"
+												:otherSearch="otherSearch"
 												:fileno = "customValues.fileno"
 											></dynamic-list>
 										</view>
@@ -266,6 +275,9 @@
 						customValues:{
 							type:Object
 						},
+						custom:{
+							type:Object
+						},
 						srvFormData:{
 							type:Object
 						},
@@ -285,8 +297,36 @@
 						jumpUrl:String,
 						debug:Boolean,
 						hideLast:Boolean,
-						ConfirmConfig:Object,
-						hideConfirm:Boolean
+						ConfirmConfig:{
+							type:Object,
+							default(){
+								return {
+									"method":"POST"
+								}
+							}
+						},
+						hideConfirm:Boolean,
+						noCommit:{
+							type:Boolean,
+							default(){
+								return false
+							}
+						},
+						otherSearch:{
+							type:Object,
+							default(){
+								return {}
+							}
+						},
+						listName:{
+							type:String,
+							default(){
+								return ""
+							}
+						},
+						otherSumbitData:{
+							type:Object
+						}
 		},
 		data () {
 			return {
@@ -307,23 +347,23 @@
 
 		},
 		created() {
-			// console.log("iscompany",this.isCompany)
+			// // console.log("iscompany",this.isCompany)
 		  // if (!this.API) {
 			 //  return
 		  // }
-			console.log("userlist",this.userlist)
+			// console.log("userlist",this.userlist)
 		  this.fetchConfigData()
 			this.getState()
 			if(this.processDefineKey){
 				this.FormKey=this.processDefineKey
 			}
 			let TFormKey = this.FormKey
-			// console.log(this.FormKey)
+			// // console.log(this.FormKey)
 			// this.config.modules.map((item,i)=>{
 			// 	if(_.get(item, 'type') === 'autoform'){
 			// 		let FormKey = _.get(item,'FormKey','')
 			// 		if(FormKey){
-			// 			console.log("FormKey",FormKey)
+			// 			// console.log("FormKey",FormKey)
 			// 			this.getWorkflow(FormKey)	
 			// 		}else if(TFormKey){
 			// 			this.getWorkflow(TFormKey)
@@ -336,15 +376,15 @@
 		watch:{
 			config:{
 				handler(newval,oldval){
-					// console.log("config",newval,oldval)
+					// // console.log("config",newval,oldval)
 					if(this.config){
 						this.config.modules.map((item,i)=>{
 							if(_.get(item, 'type') === 'autoform'){
 								let FormKey = _.get(item,'FormKey','')
 								let TFormKey = this.FormKey
-								// console.log("能到这")
+								// // console.log("能到这")
 								if(FormKey){
-									// console.log("FormKey",FormKey)
+									// // console.log("FormKey",FormKey)
 									this.getWorkflow(FormKey)	
 								}else if(TFormKey){
 									this.getWorkflow(TFormKey)
@@ -361,17 +401,17 @@
 		},
 		mounted(){
 			this.fetchConfigData()
-			// console.log("srv",this.srvFormData)
+			// // console.log("srv",this.srvFormData)
 			let TFormKey = this.FormKey
-			// console.log(this.FormKey)
-			// console.log("modules",this.config.modules)
+			// // console.log(this.FormKey)
+			// // console.log("modules",this.config.modules)
 			if(this.config){
 				this.config.modules.map((item,i)=>{
 					if(_.get(item, 'type') === 'autoform'){
 						let FormKey = _.get(item,'FormKey','')
-						// console.log("能到这")
+						// // console.log("能到这")
 						if(FormKey){
-							// console.log("FormKey",FormKey)
+							// // console.log("FormKey",FormKey)
 							this.getWorkflow(FormKey)	
 						}else if(TFormKey){
 							this.getWorkflow(TFormKey)
@@ -381,16 +421,16 @@
 					}
 				})
 			}
-			// console.log("执行完了")
+			// // console.log("执行完了")
 		},
 		updated(){
 			let TFormKey = this.FormKey
-			// console.log(this.FormKey)
+			// // console.log(this.FormKey)
 			// this.config.modules.map((item,i)=>{
 			// 	if(_.get(item, 'type') === 'autoform'){
 			// 		let FormKey = _.get(item,'FormKey','')
 			// 		if(FormKey){
-			// 			// console.log("FormKey",FormKey)
+			// 			// // console.log("FormKey",FormKey)
 			// 			this.getWorkflow(FormKey)	
 			// 		}else if(TFormKey){
 			// 			this.getWorkflow(TFormKey)
@@ -406,13 +446,13 @@
 			},
 			async getWorkflow(Key){
 				let res = await this.getWorkflowlist(Key)
-				console.log("resCode",res.code)
+				// console.log("resCode",res.code)
 				if(res.code==="00000"){
-					console.log("resDataFormEntityCode",res.data.formEntity.code)
+					// console.log("resDataFormEntityCode",res.data.formEntity.code)
 					let api = '/api.page.design.form/loadFormInfo'
 					let code = res.data.formEntity.code
-					// console.log("API",api)
-					// console.log("code",code)
+					// // console.log("API",api)
+					// // console.log("code",code)
 					
 					this.getCodeData(api,code)
 				}else{
@@ -423,7 +463,7 @@
 				}
 			},
 			getFormData(e){
-				// console.log("page-formData",e)
+				// // console.log("page-formData",e)
 				this.$emit('getFormData',e)
 			},
 			// 自查编号
@@ -443,18 +483,18 @@
 				let json;
 				let fields
 				if(res.code = 200){
-					// console.log("res",res)
+					// // console.log("res",res)
 					form = _.get(res.data,"form",{}),
 					jsonDefineBase64 = _.get(form,"jsonDefine","")
 					jsonDefine = Base64.decode(jsonDefineBase64)
-					// console.log("jsonDefine",jsonDefine)
+					// // console.log("jsonDefine",jsonDefine)
 					json = JSON.parse(jsonDefine)
 					uni.setNavigationBarTitle({
 						title:form.name
 					})
-					// console.log("json",json)
+					// // console.log("json",json)
 				}else{
-					// console.log("值为",res)
+					// // console.log("值为",res)
 					uni.showModal({
 						title:res.msg,
 						showCancel:false
@@ -472,25 +512,25 @@
 				// 			let fields = conf.fields
 				// 				for(var a in fields){
 				// 					if(fields[a].__config__){
-				// 					// console.log("FIELDS",fields,"config",fields[a].__config__,"a",a)
-				// 					// console.log("CHILDREN",fields[a].__config__.children)
+				// 					// // console.log("FIELDS",fields,"config",fields[a].__config__,"a",a)
+				// 					// // console.log("CHILDREN",fields[a].__config__.children)
 				// 					if(fields[a].__config__.children){
 				// 						let __children__ = fields[a].__config__.children
-				// 						// console.log("测试",__children__)
+				// 						// // console.log("测试",__children__)
 				// 						for(var b in __children__){
-				// 							// console.log("STATUS",status)
+				// 							// // console.log("STATUS",status)
 				// 							if(isEditable===0||isEditable==="0"){
 				// 								if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
 				// 									conf.fields[a].__config__.children[b].readonly = true
 				// 									this.codeData = conf
-				// 									// console.log("thatCodeData",this.codeData,conf)
+				// 									// // console.log("thatCodeData",this.codeData,conf)
 				// 								}
-				// 								// console.log("里面的conf",conf)
+				// 								// // console.log("里面的conf",conf)
 				// 							}else{
 				// 								if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
 				// 									conf.fields[a].__config__.children[b].readonly = false
 				// 									this.codeData = conf
-				// 									// console.log("thatCodeData",this.codeData)
+				// 									// // console.log("thatCodeData",this.codeData)
 				// 								}
 				// 							}
 				// 						}
@@ -499,13 +539,13 @@
 				// 								if(conf.fields[a].__vModel__===list[i].name){
 				// 									conf.fields[a].readonly = true
 				// 									this.codeData = conf
-				// 									// console.log("thatCodeData",this.codeData)
+				// 									// // console.log("thatCodeData",this.codeData)
 				// 								}
 				// 							}else{
 				// 								if(conf.fields[a].__vModel__===list[i].name){
 				// 									conf.fields[a].readonly = false
 				// 									this.codeData = conf
-				// 									// console.log("thatCodeData",this.codeData)
+				// 									// // console.log("thatCodeData",this.codeData)
 				// 								}
 				// 							}
 				// 					}
@@ -516,12 +556,12 @@
 				// 	}
 				// 	// conf.fields[0].__config__.children[1].readonly = true
 				// 	// this.codeData = this.conf
-				// 	// console.log("DEBUG",this.codeData)
+				// 	// // console.log("DEBUG",this.codeData)
 				// 	// 决定是否可用
 				// 	// this.codeData = isDisabled(convertData,this.FormKey)
-				// 	// console.log("__DISDATA__",__DisData__)
+				// 	// // console.log("__DISDATA__",__DisData__)
 				// 	// this.codeData =__DisData__
-				// 	// console.log("CODEDATA",this.codeData)
+				// 	// // console.log("CODEDATA",this.codeData)
 				// }else{
 					this.codeData = conf
 				// }
@@ -534,7 +574,7 @@
 				this.codeAPI = API
 				this.code = code
 				if(this.codeData){
-					console.log("codeData",this.codeData,"MODULES",this.config.modules,"FORM",this.FormKey)
+					// console.log("codeData",this.codeData,"MODULES",this.config.modules,"FORM",this.FormKey)
 				}
 				return this.codeData
 			},
@@ -547,13 +587,13 @@
 				    key: 'state',
 				    data: e,
 				    success: function () {
-				        console.log('success');
+				        // console.log('success');
 				    }
 				});
 			},
 			getState(){
 				const state = uni.getStorageSync('state')
-				// console.log(state)
+				// // console.log(state)
 				this.state = state
 			},
 			// 获取页面请求数据接口 
@@ -667,7 +707,7 @@
 				for (const i in item.binding) {
 					comonentScouce[item.binding[i]] = _.get(this.pageData, i, '')
 				}
-				console.log(comonentScouce)
+				// console.log(comonentScouce)
 				let value
 				switch (item.type) {
 					case 'autoform':

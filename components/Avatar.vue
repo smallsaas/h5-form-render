@@ -11,7 +11,7 @@
 			</view>
 			<view class="title_Box" v-if="theme==='company'">
 				<view class="row"><span class="title">公司名称:</span>{{companyList.name||'-'}}</view>
-				<view class="row"><span class="title">营业执照号:</span>{{companyList.licenceNo||'-'}}</view>
+				<view class="row"><span class="title">企业信用代码:</span>{{companyList.licenceNo||'-'}}</view>
 			</view>
 			<image :src="icon.notice" @click="getNotice()" mode="aspectFit" class="notice"></image>
 		</view>
@@ -51,11 +51,11 @@
 			theme:String
 		},
 		mounted() {
-			// console.log(this.theme)
+			// // console.log(this.theme)
 			if(this.theme==="company"){
-				console.log(this.companyList)
+				// console.log(this.companyList)
 				this.companyList = globalConfig.companyInfo
-				console.log("list",this.list)
+				// console.log("list",this.list)
 			}
 		},
 		methods:{
@@ -74,7 +74,7 @@
 								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 						},
 						success(res) {
-							// console.log(res.data.data.sysUser.personNo)
+							// // console.log(res.data.data.sysUser.personNo)
 							that.code = res.data.data.sysUser.personNo
 						}
 					})
@@ -86,7 +86,7 @@
 								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 						},
 						success(res) {
-							// console.log(res.data.data.sysUser.personNo)
+							// // console.log(res.data.data.sysUser.personNo)
 							that.code = res.data.data.sysUser.personNo
 						}
 					})
@@ -96,6 +96,7 @@
 				return this.code
 			},
 			unbinding(){
+				let that = this
 				if(this.theme==="company"){
 					uni.request({
 						url:`${globalConfig.loginEP}/admin/systhirdpartyuser/unbindUser`,
@@ -104,7 +105,7 @@
 								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 						},
 						success(e) {
-							console.log(e)
+							// console.log(e)
 							if(e.data.data===true){
 								uni.showLoading({
 									content:"解绑成功",
@@ -115,6 +116,7 @@
 										url:"/pages/login/third-Login/third-Login",
 										success() {
 											uni.hideLoading()
+											that.$loginDefault()//登录默认用户
 										}
 									})
 								},2000)
@@ -129,7 +131,7 @@
 								Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 						},
 						success(e) {
-							console.log(e)
+							// console.log(e)
 							if(e.data.data===true){
 								uni.showLoading({
 									content:"解绑成功",
@@ -140,6 +142,7 @@
 										url:"/pages/login/third-Login/third-Login",
 										success() {
 											uni.hideLoading()
+											that.$loginDefault()//登录默认用户
 										}
 									})
 								},2000)
@@ -155,10 +158,10 @@
 				this.list=this.item
 			}else{
 				this.list = uni.getStorageSync(globalConfig.userInfo)
-				console.log(this.list)
+				// console.log(this.list)
 			}
 			this.icon = globalConfig.icon
-			console.log("userInfo",uni.getStorageSync(globalConfig.userInfo))
+			// console.log("userInfo",uni.getStorageSync(globalConfig.userInfo))
 		}
 	}
 </script>

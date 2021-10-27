@@ -112,7 +112,7 @@
 							longitude: _.get(res, 'longitude')
 						},
 						(res) => {
-							console.log('localcurrent', res)
+							// console.log('localcurrent', res)
 							this.myAddress = _.get(res, 'address')
 						}
 					)
@@ -135,7 +135,7 @@
 							longitude: _.get(res, 'longitude')
 						},
 						(res) => {
-							console.log('localcurrent', res)
+							// console.log('localcurrent', res)
 							this.myAddress = _.get(res, 'address')
 						}
 					)
@@ -152,7 +152,7 @@
             // 获取类别数据
             async fetchTypeList () {
                 const res = await getNavTypeList()
-								console.log(res)
+								// console.log(res)
                 if (res.code === 200) {
                     this.typeList = _.cloneDeep(_.get(res, 'data.records', []))
                 }
@@ -165,11 +165,11 @@
 										searchAll:true
                 })
                 uni.hideLoading()
-								console.log("加载完成",res)
+								// console.log("加载完成",res)
 				if (res.code === 0) {
-					console.log("地图数据",res)
+					// console.log("地图数据",res)
 					this.list = _.get(res, 'data.records', [])
-					console.log(this.list)
+					// console.log(this.list)
                     const markersList = []
 					this.list.map((item, index) => {
                         markersList.push({
@@ -192,16 +192,16 @@
 			getCustomCalloutBgColor (title) {
 				let color = '#333'
 			    if (this.typeList.some(x => x.type === title)) {
-						// console.log('typeList',this.typeList)s
+						// // console.log('typeList',this.typeList)s
 				   const item = this.typeList.find(x => x.type === title)
-					 console.log("item",item)
+					 // console.log("item",item)
 				   color = item.colour
 			    }
 				return color
 			},
 			handleClick (title) {
-				console.log(this.latitude,'lat')
-				console.log(this.longitude,'long')
+				// console.log(this.latitude,'lat')
+				// console.log(this.longitude,'long')
                 this.currentType = title
                 this.markers = this.allmarkers.filter(x => x.type === title)
 				if (this.markers.length > 0) {
@@ -235,7 +235,7 @@
 						longitude: _.get(item, 'longitude')
 					},
 					(res) => {
-						console.log('localcurrent', res)
+						// console.log('localcurrent', res)
 						uni.hideLoading()
 						uni.openLocation({
 						    latitude: item.latitude,

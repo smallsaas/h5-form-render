@@ -16,7 +16,7 @@
 			<!-- <c-lincense @getValue="lincenseValue"></c-lincense> -->
 			<view class="inputBox">
 				<image :src="iconList.inputCompany" class="e-Icon"></image>
-				<input v-model="lincenseNo" type="number" class="input company" placeholder="请输入营业执照号" />
+				<input v-model="lincenseNo" type="number" class="input company" placeholder="请输入企业信用代码" />
 			</view>
 			<button class="loginBtn" @click="register('COMPANY')">绑定</button>
 		</view>
@@ -42,7 +42,7 @@
 	export default {
 		onLoad(e) {
 			this.iconList = globalConfig.icon
-			console.log(this.iconList)
+			// console.log(this.iconList)
 			let query = JSON.parse(decodeURIComponent(e.query))
 			this.type = query.type
 			this.userId = query.userId
@@ -69,13 +69,13 @@
 				}
 			},
 			setTitle(e){
-				// console.log(e)
+				// // console.log(e)
 				uni.setNavigationBarTitle({
 					title:e
 				})
 			},
 			lincenseValue(e){
-				console.log(e)
+				// console.log(e)
 			},
 			register(Type){
 				let that = this;
@@ -115,7 +115,7 @@
 										uni.hideLoading()
 									},
 									fail(err) {
-										console.log(err)
+										// console.log(err)
 									}
 								})
 								// switch(that.type){

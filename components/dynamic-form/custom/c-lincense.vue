@@ -1,10 +1,15 @@
 <template>
-	<view class="content">
-		<label class="title">请扫描企业营业执照</label>
-		<van-uploader @after-read="handleAfterRead">
-			<!-- <van-button plain hairline type="primary"></van-button> -->
-			<image :src="icon.picture" class="icon" style="height: 50rpx;width: 50rpx;float: right;"/>
-		</van-uploader>
+	<view>
+		<view class="content">
+			<label class="title">请扫描企业营业执照</label>
+			<van-uploader @after-read="handleAfterRead">
+				<!-- <van-button plain hairline type="primary"></van-button> -->
+				<image :src="icon.picture" class="icon" style="height: 50rpx;width: 50rpx;float: right;"/>
+			</van-uploader>
+		</view>
+		<view v-if="str!==''" class="message">
+			<span style="color: red;">关键词：</span>{{str}}
+		</view>
 	</view>
 
 </template>
@@ -23,6 +28,7 @@
 					Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`,
 					"Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryAFRaG58f2nIb0mPB"
 				},
+				str:""
 			}
 		},
 		created() {
@@ -37,12 +43,40 @@
 				//识别图片
 				this.handleGetLicence(file)
 			},
+			// 查询JSON中是否有某个字段
+			hasField(json,field){
+				let keyword = "";
+				let that = this
+				if(typeof json === "object"){
+					Object.values(json).map((item,i)=>{
+						if(typeof item === "string"){
+							if(item.indexOf(field)!=-1){
+								// // console.log(item,"ITEM")
+								keyword = field
+								if(keyword !== ""){
+									if(that.str.indexOf(keyword)===-1){
+										if(that.str !== ""){
+											that.str = that.str + "," + keyword
+										}else{
+											that.str = keyword
+										}
+									}
+								}
+							}else{
+								keyword = ""
+							}
+						}
+					})
+				}
 
+				// console.log(this.str,"STR")
+			},
 			handleGetLicence(file) {
+				let that = this
 				const data = {
 					file: file
 				}
-				console.log(data)
+				// console.log(data)
 				uni.showLoading({
 					title:"识别中"
 				})
@@ -55,14 +89,26 @@
 					success: (res) => {
 						if(res.statusCode == 200){
 							const jsonObject = this.strToJson(res.data)
-							console.log('返回数据 = ', jsonObject)
+							// console.log('返回数据 = ', jsonObject)
+							// uni.request({
+							// 	url: globalConfig.
+							// })
+							uni.request({
+								url:globalConfig.formHost + "?id=96623",
+								success(res){
+									let keywordGroup = res.data.data.keyWordGroup
+									keywordGroup.map((keyword,key)=>{
+										that.hasField(jsonObject.data,keyword)
+									})
+								}
+							})
 							this.$emit('getValue',jsonObject.data)
 							uni.hideLoading()
 						}
 					},
 					fail:(err) =>{
 						uni.hideLoading()
-						console.log('操作失败 = ', err)
+						// console.log('操作失败 = ', err)
 						uni.showModal({
 							title:err.errMsg
 						})
@@ -103,5 +149,14 @@
 			// right: 5px;
 			// top: 5px;
 		}
+	}
+	.message{
+		font-weight: bolder;
+		font-size: 14px;
+		width:100%;
+		height: 50rpx;
+		line-height: 50rpx;
+		text-align: center;
+		color:#888;
 	}
 </style>

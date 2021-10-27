@@ -46,11 +46,11 @@
 					success: (res) => {
 						if(res.statusCode == 200){
 							const jsonObject = this.strToJson(res.data)
-							console.log('返回数据 = ', jsonObject)
+							// console.log('返回数据 = ', jsonObject)
 						}
 					},
 					fail:(err) =>{
-						console.log('操作失败 = ', err)
+						// console.log('操作失败 = ', err)
 					}
 				})
 			},

@@ -13,7 +13,8 @@
         >
           <template slot="input">
               <view class="field_input">
-				  <button size="mini" @click="handleSignture" v-if="!param.readonly">
+					<button size="mini" type="primary" @click="getSignuteList" v-if="!param.readonly&&(userType == 2&&!hideSelect)" style="margin-right: 5px;">{{param.value ? '重新选择' : '选择常用签章'}}</button>
+				  <button size="mini" type="primary" @click="handleSignture" v-if="!param.readonly">
 					  {{param.value ? '修改' : '填写'}}
 				  </button>
 				  <view 
@@ -25,10 +26,61 @@
 						style="transform: rotate(-90deg);"
 					  @click="handlePreview" 
 				  />
-					<view v-if="!param.value&&param.readonly">未签名</view>
+					<view v-if="!param.value&&param.readonly">未签章</view>
 			  </view>
           </template>
         </van-field>
+				<!-- 获取 -->
+				<mask v-show="showHistory">
+					<view class="history-imageBox" @touchstart="listTouchStart" @touchend="listTouchEnd" @touchmove="listTouchMove">
+						<view v-for="(item,i) in signlist">
+							<image :src="item.url" style="background-color: white;border: 1px dotted #555;transform: rotate(-90deg);transform-origin: center center;" mode="aspectFit" class="history-image" @click="handleImage(i)"></image>
+							<view class="history-name">{{item.name}}</view>
+							<view v-show="isImage===i" class="bigImage">
+								<image style="width: 100vw;height: 100vw;background-color: white;border: 1px solid #555;transform: rotate(-90deg);transform-origin: center center;" :src="item.url" mode="aspectFit"></image>
+								<view class="buttonGroup">
+									<button class="bigImage_button" @click="selectReturn">重新选择</button>
+									<button class="bigImage_button" @click="selectSucess(item.id)">确定</button>
+								</view>
+							</view>
+						</view>
+						<view class="ListbuttonGroup" style="background-color: white;">
+							<button @click="hideHistory" size="mini" type="primary">返回</button>
+						</view>
+					</view>
+				</mask>
+				<!-- 校检密码 -->
+				<mask v-if="isRight">
+					<view class="signature_passwordBox">
+						<view class="labeltitle">请输入签章密码:</view>
+						<input type="password" v-model="password" class="password"/>
+						<view class="buttonBox">
+							<button @click="handlePassword">确定</button>
+							<button @click="hideRight">关闭</button>
+						</view>
+					</view>
+				</mask>
+				<!-- 写入 -->
+				<mask v-show="showWriteHistory">
+					<view class="signature_passwordBox" style="height: 60%;">
+						<view class="labeltitle">请输入签章名称:</view>
+						<input type="text" v-model="name" class="password"/>
+						<view class="labeltitle">请输入签章密码:</view>
+						<input type="password" v-model="password" class="password"/>
+						<view class="buttonBox">
+							<button @click="handleHistory(url)">确定</button>
+							<button @click="hideWriteHistory">关闭</button>
+						</view>
+					</view>
+				</mask>
+				<!-- 旋转提示 -->
+				<view v-if="showTips" class="signature_tips">
+					<view class="signature_tipsContent">
+						<image :src="icon.rotatePhone" mode="aspectFit" class="signature_tipsImage"></image>
+						<view class="signature_tipsText">旋转手机</view>
+					</view>
+				</view>
+				<!-- 显示签章 -->
         <mask v-if="showModal">
         	<view class="signature_content">
         		<view class="content-box">
@@ -51,7 +103,7 @@
         </mask>
 		<mask v-if="preViewModal">
 			<view class="preview_image_content" @click="handleClosePreviewModal">
-				<image mode="aspectFit" :src="param.value" style="background-color: #fff;" />
+				<image mode="aspectFit" :src="param.value" style="width: 100vw;height: 100vw;background-color: white;border: 1px solid #555;transform: rotate(-90deg);transform-origin: center center;background-color: white;" />
 			</view>
 		</mask>
 	</view>
@@ -69,13 +121,36 @@
         data () {
             return {
                 showModal: false,
-                
+                icon:null,
                 canvasContext: "",
                 points: [], //路径点集合 
                 image: "",
-				preViewModal: false
+								selectId:"",//选择的id
+								preViewModal: false,
+								showHistory:false,
+								showWriteHistory:false,
+								showTips:false,
+								signlist:[],
+								password:"",
+								isImage:null,
+								url:null,
+								isRight:false,
+								userInfo:null,
+								name:"",
+								startX:"",
+								endX:"",
+								size:10,
+								current:1,
+								total:0,
+								userType:null
             } 
         },
+				created() {
+					this.userType = uni.getStorageSync("userType")
+					this.icon = globalConfig.icon
+					this.userInfo = uni.getStorageSync(globalConfig.userInfo)
+					console.log(this.userInfo)
+				},
         props: {
             param: {
                 type: Object,
@@ -90,9 +165,156 @@
                         style: ""
                     }
                 }
-            }
+            },
+						hideSelect:{
+							default(){
+								return true
+							}
+						}
         },
         methods: {
+					/* 列表滑动模块逻辑 */
+					// 滑动列表动作开始
+					listTouchStart(touch){
+						// console.log(touch,"start")
+						this.startX = touch.changedTouches[0].clientX
+					},
+					// 滑动列表动作中
+					listTouchMove(touch){
+						// console.log(touch,"move")
+					},
+					// 胡丹列表动作结束
+					listTouchEnd(touch){
+						this.endX = touch.changedTouches[0].clientX
+						if(this.startX-this.endX>100){
+							if(this.current*this.size<this.total){
+								this.current = this.current+1
+								this.getSignuteList()
+							}
+						}
+						// console.log(touch,"end")
+					},
+					
+					/* 其他逻辑 */ 
+					selectReturn(){
+						this.isImage = null
+					},
+					selectSucess(id){
+						this.isImage = null
+						this.hideHistory()
+						this.showRight()
+						this.selectId = id
+						// this.$emit("change",url)
+					},
+					/* 历史签章模块 */
+					// 选择历史签章
+					selectSignture(){
+						this.showHistory = true
+					},	
+					// 显示校检密码框
+					showRight(){
+						this.isRight = true
+					},
+					// 隐藏校检密码框
+					hideRight(){
+						this.isRight = false
+					},
+					handleHistory(url){
+						let that = this
+						uni.request({
+							url:`${globalConfig.workflowEP}/admin/userseal?url=${url}&name=${this.name}&password=${this.password}&userId=${this.userInfo.userId}`,
+							header:{
+								Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+							},
+							method:"POST",
+							success(res) {
+								console.log("成功",res)
+								that.hideWriteHistory()
+								that.password = null
+							}
+						})
+					},
+					// 校检密码
+					handlePassword(){
+						let that = this
+						// if(this.selectPassword === this.password){
+						// 	this.hideRight()
+						// 	this.$emit("change",this.selectUrl)
+						// }else{
+						// 	uni.showModal({
+						// 		title:"选择的签章对应的密码错误，请重新输入！",
+						// 		showCancel:false,
+						// 		confirmColor:"red"
+						// 	})
+						// }
+						uni.request({
+							url:`${globalConfig.workflowEP}/admin/userseal/use?id=${this.selectId}&password=${this.password}`,
+							header:{
+								Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+							},
+							method:"POST",
+							success(res){
+								console.log(res)
+								if(res.data.code == 0){
+									that.isRight = null
+									that.$emit("change",res.data.data.url)
+								}else{
+									uni.showModal({
+										title:res.data.msg,
+										showCancel:false,
+										confirmColor:"red"
+									})
+								}
+							}
+						})
+					},
+					handleImage(i){
+						this.isImage = i
+					},
+					hideHistory(){
+						this.showHistory = false
+					},
+					hideWriteHistory(){
+						this.showWriteHistory = false
+					},
+					getSignuteList(){
+						uni.showLoading({
+							title:"获取列表中"
+						})
+						let that = this
+						let data = {};
+						data = {
+							"size":this.size,
+							"current":this.current
+						}
+						// this.showHistory = false
+						uni.request({
+							url:`${globalConfig.workflowEP}/admin/userseal/valid`,
+							data:data,
+							header:{
+								Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
+							},
+							method:"GET",
+							success(res) {
+								uni.hideLoading()
+								console.log(res)
+								if(res.data.code===0){
+										// console.log(res.data.data.records)
+										that.signlist.push(...res.data.data.records)
+										console.log(that.signlist)
+										that.showHistory = true
+										that.total = res.data.data.total
+								}else{
+									uni.showModal({
+										title:res.data.msg,
+										confirmColor:"red"
+									})
+								}
+							}
+						})
+					},
+					
+					//签章组件原模块
 			handlePreview () {
 				if (!_.get(this.param, 'value')) {
 					return
@@ -100,8 +322,12 @@
 				this.preViewModal = true
 			},
             handleSignture () {
-                this.showModal = true
-                this.initCanvas()
+								this.showTips = true
+								setTimeout(()=>{
+									this.showTips = false
+									this.showModal = true
+									this.initCanvas()
+								},3000)
             },
             initCanvas() {
             	this.canvasContext = uni.createCanvasContext('signature_canvas', this);
@@ -172,14 +398,14 @@
             finish() {
                 if (_.get(this.canvasContext, 'subpath', []).length === 0) {
                     uni.showToast({
-                        title: '请先签名',
+                        title: '请先写入签章',
                         icon: 'none'
                     })
                     return
                 }
             	uni.showModal({
             		title: '温馨提示',
-            		content: '确定保存签名吗？',
+            		content: '确定保存签章吗？',
             		success: (response) => {
                         if (response.confirm) {
                             this.handleGenerate()
@@ -196,7 +422,7 @@
                 	y: 0,
                 	canvasId: 'signature_canvas',
                 	success: (resp) => {
-										// console.log("生成图片",resp)
+										// // console.log("生成图片",resp)
 										// pathToBase64(resp.tempFilePath).then(url => {
 										// 	this.$emit('change', url)
 										// 	this.showModal = false
@@ -213,17 +439,29 @@
 											success(res){
 												that.showModal=false
 												let url = JSON.parse(res.data).data.url
+												that.url = globalConfig.workflowEP+url
 												that.$emit('change',globalConfig.workflowEP+url)
+												if(that.userType === "2"&&!that.hideSelect){
+													uni.showModal({
+														title:"是否保存为常用签章？",
+														success(button) {
+															if(button.confirm){
+																that.showWriteHistory = true
+																that.password = null
+															}
+														}
+													})
+												}
 											},
 											fail(e) {
-												console.log("失败",e)
+												// console.log("失败",e)
 											}
 										})
                 		//保存图片到本地
                 		// this.saveImgToLocal(resp.tempFilePath);
                 	},
                 	fail: (response) => {
-                		console.log('签名失败 = ', response);
+                		// console.log('签章失败 = ', response);
                 	}
                 }, this)
             },
@@ -279,6 +517,13 @@
 
 <style lang="less">
     @import './common.less';
+		@keyframes rotatePhone{
+			from {
+				transform:rotate(0deg),
+			}to{
+				transform:rotate(90deg),
+			}
+		}
     .base_signature_container {
         .field_input {
 			.image {
@@ -291,6 +536,118 @@
 			}
 		}
     }
+		.history-imageBox{
+			display: flex;
+			// flex-wrap: wrap;
+			align-items: center;
+			overflow: scroll;
+			width: 100%;
+			height: 90%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #EEE;
+		}
+		.history-name{
+			text-align: center;
+			font-size: 16px;
+			font-weight: bolder;
+		}
+		.ListbuttonGroup{
+			display: flex;
+			width: 100%;
+			position: fixed;
+			bottom: 0px;
+			align-items: center;
+			height: 10%;
+			&>button{
+				height: 30px;
+			}
+		}
+		.buttonGroup{
+			display: flex;
+			width: 100%;
+			position: fixed;
+			bottom: 50px;
+			&>.bigImage_button{
+				background-color: #1A5EB5;
+				color: white;
+			}
+		}
+		.history-image{
+			width: 100px;
+			height: 100px;
+			&:first-child{
+				margin-left: 5px;
+			}
+			margin-right: 5px;
+			margin-top: 5px;
+			// border-radius: 5px;
+		}
+		.bigImage{
+			position: fixed;
+			top:0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 100000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #EEE;
+		}
+		.signature_passwordBox{
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 30%;
+			background-color: white;
+			border-top-left-radius: 15px;
+			border-top-right-radius: 15px;
+			font-size: 18px;
+			font-weight: bolder;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			&>.labeltitle{
+				width: 100%;
+				height: 0px;
+				padding: 20px;
+				text-align: center;
+			}
+			&>.password{
+				background-color: #ccc;
+				margin: 0 auto;
+				width: 80%;
+				height: 50px;
+				padding: 10px;
+				border-radius: 10px;
+				text-align: center;
+			}
+			&>.buttonBox{
+				/* position: absolute; */
+				/* bottom: 0; */
+				height: 50px;
+				width: 90%;
+				/* margin: 0 auto; */
+				// background-color: #1A5EB5;
+				color: white;
+				display: flex;
+				&>button{
+					margin: 5px;
+					background: #1A5EB5;
+					color: white;
+					flex: 1;
+					line-height: 40px;
+					height: 40px;
+				}
+			}
+		}
     .signature_content {
         width: 100vw;
         height: 100vh;
@@ -329,7 +686,7 @@
                 padding: 40rpx 0;
 								z-index: 9999999;
                 .but {
-                    width: 100%;
+                    width: 80px;
 										// height: 10%;
                     border: 1px solid #f2f2f2;
                     padding: 20rpx 0;
@@ -348,10 +705,41 @@
             }
         }
     }
+	.signature_tips{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 50000000;
+		background-color: #eee;
+		flex-direction: row;
+		flex-wrap: wrap;
+		.signature_tipsContent{
+			
+			.signature_tipsImage{
+					width: 80px;
+					animation: rotatePhone 1.5s linear 0s infinite;
+			}
+			.signature_tipsText{
+				width: 100%;
+				text-align: center;
+				font-weight: bolder;
+				font-size: 20px;
+				flex: 1;
+			}
+		}
+	}
 	.preview_image_content {
 		background-color: #aaa;
 		height: 100vh;
 		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		image {
 			width: 100%;
 			height: 100vh;

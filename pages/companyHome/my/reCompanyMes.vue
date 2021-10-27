@@ -36,10 +36,10 @@
 						Authorization:`Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`)}`
 					},
 					complete(res) {
-						console.log("res",res)
+						// console.log("res",res)
 						if(res.statusCode===200){
 							that.list=res.data.data
-							console.log(that.list)
+							// console.log(that.list)
 						}
 					}
 				})

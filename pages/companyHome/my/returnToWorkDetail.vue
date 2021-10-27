@@ -27,7 +27,7 @@
 	import dynamicPage from '../../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
-			console.log(e)
+			// console.log(e)
 			this.getPiId(e.query)
 			this.getConfig()
 		},
@@ -36,7 +36,7 @@
 			dynamicPage
 		},
 		onReady() {
-			console.log(this.config)
+			// console.log(this.config)
 		},
 		data() {
 			return {
@@ -64,7 +64,7 @@
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				console.log(this.taskId)
+				// console.log(this.taskId)
 				this.data = {
 					"processInstanceId": this.piId
 				}
@@ -76,25 +76,25 @@
 					method:"GET",
 					success(res) {
 						let data = res.data.data
-						console.log("RES",data)
+						// console.log("RES",data)
 						let moduleData = data.moduleData
-						console.log(moduleData)
+						// console.log(moduleData)
 						let modules = res.data.data.modules
 						let key
 						modules.map((item,i)=>{
 							if(item.type==="confirm"){
 								key = item.key
-								console.log(key)
+								// console.log(key)
 							}
 						})
 						that.ConfirmConfig = _.get(moduleData,key,"")
-						console.log(key,moduleData,that.ConfirmConfig)
+						// console.log(key,moduleData,that.ConfirmConfig)
 					}
 				})
 			},
 			getConfig(){
-				// console.log(this.data)
-				// console.log(this.method)
+				// // console.log(this.data)
+				// // console.log(this.method)
 				let that = this
 				uni.request({
 					url:this.loadApi,
@@ -102,9 +102,9 @@
 					data:this.data,
 					header:this.header,
 					complete(res) {
-						// console.log(res)
+						// // console.log(res)
 						if(res.data.code === "00000"){
-							// console.log(res)
+							// // console.log(res)
 							let form = res.data.data.form
 							let data = res.data.data.formData
 							that.formData = data
@@ -135,8 +135,8 @@
 									"taskId":that.taskId
 								}
 							}
-							// console.log(form)
-							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							// // console.log(form)
+							// // console.log("enforcementSeq",res.data.data.customValues.fileseq)
 							// that.processDefineKey ={
 							// 	"processDefineKey":res.data.data.processDefineKey,
 							// 	"fileno":res.data.data.customValues.fileno,
@@ -146,8 +146,8 @@
 							// }
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
-							console.log(that.processDefineKey)
-							// console.log(that.config)
+							// console.log(that.processDefineKey)
+							// // console.log(that.config)
 							that.getConfim(that.piId)
 						}
 					}

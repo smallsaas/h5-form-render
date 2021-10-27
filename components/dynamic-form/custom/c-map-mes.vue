@@ -48,6 +48,7 @@
 				<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
 				</cover-image>
 			</cover-view>
+			<cover-view></cover-view>
 			</map>
 			<map
 			v-show="showButton"
@@ -83,6 +84,9 @@
 						</cover-image>
 						<cover-image class="c-Map-button" :src="icon.MapSuccess" @click="smallsize()">
 						</cover-image>
+						<cover-view class="c-Map-text">
+							请在地图上点击选择企业地址
+						</cover-view>
 					</cover-view>
 					</map>
 		</view>
@@ -101,7 +105,8 @@
 				longitude:0,
 				myLatitude:0,
 				myLongitude:0,
-				markers:[],
+				markers:[
+				],
 				icon:null,
 				width:"200px",
 				height:"100px",
@@ -124,14 +129,14 @@
 			uni.getLocation({
 				type: 'gcj02',
 				success: (res) => {
-					// console.log("res",res)
+					// // console.log("res",res)
 					getAddress(
 						{
 							latitude:  _.get(res, 'latitude'), 
 							longitude: _.get(res, 'longitude')
 						},
 						(res) => {
-							console.log('localcurrent', res)
+							// console.log('localcurrent', res)
 							this.myAddress = _.get(res, 'address')
 						}
 					)
@@ -141,11 +146,11 @@
 					this.myLongitude= _.get(res, 'longitude')
 				},
 				fail(res){
-					console.log("err",res)
+					// console.log("err",res)
 				}
 			})
-			console.log("value",this.param.value)
-			console.log("param",this.param)
+			// console.log("value",this.param.value)
+			// console.log("param",this.param)
 			this.value = {
 				...this.param.value,
 				id:1,
@@ -155,7 +160,16 @@
 				height:"50px",
 				title:"公司所在地"
 			}
-
+			let defaultValue = {
+				latitude:0,
+				
+				id:1,
+				scale:5,
+				iconPath:this.icon.MapCompany,
+				width:"50px",
+				height:"50px",
+				title:"公司所在地"
+			}
 			uni.createMapContext("mapMes",this).moveToLocation({
 				longitude:this.param.value.longitude,
 				latitude:this.param.value.latitude
@@ -185,7 +199,7 @@
 				let detail = e.detail
 				this.latitude = detail.latitude
 				this.longitude = detail.longitude
-				console.log(e.detail)
+				// console.log(e.detail)
 				this.value = {
 					id:1,
 					scale:5,
@@ -196,13 +210,25 @@
 					height:"50px",
 					title:"公司所在地"
 				}
-				this.markers.push(this.value)
-				uni.createMapContext("mapMes",this).moveToLocation({
-					longitude:this.longitude,
-					latitude:this.latitude
+				let that = this
+				uni.showModal({
+					title:"是否确定选择该地点为公司地址？",
+					confirmText:"确定",
+					confirmColor:"red",
+					success(button) {
+						// console.log(button)
+						if(button.confirm){
+							that.markers.push(that.value)
+							uni.createMapContext("mapMes",that).moveToLocation({
+								longitude:that.longitude,
+								latitude:that.latitude
+							})
+							that.$emit("map",that.value)
+						}
+					}
 				})
-				this.$emit("map",this.value)
-				console.log("Marker",this.markers)
+
+				// console.log("Marker",this.markers)
 			},
 			moveMy(){
 				uni.createMapContext("mapMes",this).moveToLocation({
@@ -215,14 +241,14 @@
 			// 	let detail = e.detail
 			// 	this.latitude = detail.latitude
 			// 	this.longitude = detail.longitude
-			// 	console.log(e.detail)
+			// 	// console.log(e.detail)
 			// 	let value = {
 			// 		id:1,
 			// 		latitude:this.latitude,
 			// 		longitude:this.longitude
 			// 	}
 			// 	this.markers.push(value)
-			// 	console.log("Marker",this.markers)
+			// 	// console.log("Marker",this.markers)
 			// }
 		}
 	}
@@ -247,6 +273,13 @@
 			border-radius: 50%;
 			padding: 10px;
 			margin: 10px;
+		}
+		.c-Map-text{
+			position: absolute;
+			right: 5px;
+			bottom: 5px;
+			color: #777;
+			font-weight: bolder;
 		}
 	}
 </style>

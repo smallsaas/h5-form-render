@@ -21,7 +21,7 @@
 		},
 		methods:{
 			getParam(){
-				console.log(this.param)
+				// console.log(this.param)
 			}
 		},
 		data(){

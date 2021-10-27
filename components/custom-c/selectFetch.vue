@@ -54,11 +54,11 @@
           } 
         },
         mounted() {
-				console.log('param = ', this.param)
+				// console.log('param = ', this.param)
 			if(_.has(this.param, 'api') && _.get(this.param, 'api', "").length > 0){
 				this.initData()
 			}else{
-				console.log('本地数据')
+				// console.log('本地数据')
 				this.handleInitData()
 			}
         },
@@ -95,7 +95,7 @@
 				if (_.get(res, 'code') === 200) {
 					// this.userInfo = { ..._.get(res, 'data', {}) };
 					const data = _.get(res, 'data', {})
-					console.log('data = ', data)
+					// console.log('data = ', data)
 				}
 			},
         }

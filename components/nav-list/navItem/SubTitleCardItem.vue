@@ -49,8 +49,8 @@
 				return _.get(data, field, value)
 			},
 			getIcon(value){
-				console.log(value)
-				console.log(this.icon[value])
+				// console.log(value)
+				// console.log(this.icon[value])
 				return this.icon[value]
 			}
 		}

@@ -2,12 +2,12 @@
 	<view class="self-item">
 		<view class="flex">
 			<view style="margin-right: 15px;">
-				<image class="icon" :src="icon.street"></image>
+				<image class="icon" :src="getIcon(item.formCode)||icon.street"></image>
 			</view>
 			<view class="left flex1">
 				<!-- <view class="title text-line-1">{{ _get(custom,"fileno","") }}</view> -->
 				<view class="title text-line-1">
-					{{ _get(item,"formName","") }}
+					{{ item[options.formName]||item.workName }}
 				</view>
 				<view class="submit-time">提交时间: {{ item.actApplyTime }}</view>
 			</view>
@@ -19,10 +19,10 @@
 					审核中
 				</view> -->
 				<view v-if="item.finishState === '1'" class="status" style="background-color: #2dffab;">
-					已完成
+					{{options.finishText||"已完成"}}
 				</view>
 				<view v-else-if="item.finishState === '0'" class="status" style="background-color: #F5A623;">
-					待确认
+					{{options.waitText||"进行中"}}
 				</view>
 			</view>
 		</view>
@@ -36,13 +36,14 @@
 		name: 'stateToList',
 		props: {
 			item: Object,
-			ext: Object
+			ext: Object,
+			options:Object
 		},
 		created() {
-			// console.log(this.item)
+			// // console.log(this.item)
 			this.getCustomData()
 			this.icon = globalConfig.icon
-			// console.log(this.custom)
+			// // console.log(this.custom)
 		},
 		data(){
 			return {
@@ -57,6 +58,10 @@
 			getCustomData(){
 				// this.custom=JSON.parse(Base64.decode(this.item.customValues))
 				this.custom=this.item.customValues
+			},
+			getIcon(code){
+				let value = "type"+code.slice(0,1).toUpperCase()+code.slice(1)
+				return this.icon[value]
 			}
 		}
 	}
@@ -74,8 +79,8 @@
 			display: flex;
 			justify-content: space-between;
 				.icon{
-					width: 35rpx;
-					height: 35rpx;
+					width: 25px;
+					height: 25px;
 					// padding: 5rpx;
 					// mr
 					position: relative;

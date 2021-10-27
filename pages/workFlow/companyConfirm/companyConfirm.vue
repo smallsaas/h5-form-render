@@ -11,7 +11,7 @@
 			:ConfirmConfig="ConfirmConfig"
 			:piId="piId"
 			:LastKey="processDefineKey"
-			
+			noCommit="true"
 			:hideButton="true"
 			:processDefineKey="key"
 			:user="userList"
@@ -29,6 +29,7 @@
 			:ConfirmConfig="ConfirmConfig"
 			:piId="piId"
 			:LastKey="processDefineKey"
+			noCommit="true"
 			:hideButton="true"
 			:processDefineKey="key"
 			:taskId="taskId"
@@ -60,7 +61,7 @@
 	import dynamicPage from '../../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
-			console.log("e",e)
+			// console.log("e",e)
 			this.getPiId(e.query)
 			this.getConfig()
 		},
@@ -73,7 +74,7 @@
 			dynamicPage
 		},
 		onReady() {
-			console.log(this.config)
+			// console.log(this.config)
 		},
 		data() {
 			return {
@@ -112,55 +113,55 @@
 					method:"GET",
 					success(res) {
 						let data = res.data.data
-						console.log("RES",data)
+						// console.log("RES",data)
 						let moduleData = data.moduleData
-						console.log(moduleData)
+						// console.log(moduleData)
 						let modules = res.data.data.modules
 						let key
 						modules.map((item,i)=>{
 							if(item.type==="confirm"){
 								key = item.key
-								console.log(key)
+								// console.log(key)
 							}
 						})
 						that.ConfirmConfig = _.get(moduleData,key,"")
-						console.log(key,moduleData,that.ConfirmConfig)
+						// console.log(key,moduleData,that.ConfirmConfig)
 					}
 				})
 			},
 			// isShow(){
 			// 	this.show=!this.show
-			// 	console.log(this.show)
+			// 	// console.log(this.show)
 			// },
 			getFormData(e){
-				console.log('真实获取数据',e)
+				// console.log('真实获取数据',e)
 				this.formData=e
 			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				console.log("decode",decode)
-				console.log("userInfo",uni.getStorageSync(globalConfig.userInfo))
+				// console.log("decode",decode)
+				// console.log("userInfo",uni.getStorageSync(globalConfig.userInfo))
 				let userInfo = uni.getStorageSync(globalConfig.userInfo)
 				let userId = userInfo.userId.toString()
-				console.log(userId)
+				// console.log(userId)
 				if(userId!==decode.preUserId){
-					console.log("还是进来了")
+					// console.log("还是进来了")
 					this.userList.userId=decode.preUserId
 					this.userList.name=decode.preUserName
 				}
 				this.key=decode.processDefineKey
-				console.log(decode)
-				console.log(this.taskId)
+				// console.log(decode)
+				// console.log(this.taskId)
 				this.data = {
 					"processInstanceId": this.piId
 				}
 			},
 
 			getConfig(){
-				// console.log(this.data)
-				// console.log(this.method)
+				// // console.log(this.data)
+				// // console.log(this.method)
 				let that = this
 				uni.request({
 					url:this.loadApi,
@@ -168,14 +169,14 @@
 					data:this.data,
 					header:this.header,
 					complete(res) {
-						// console.log(res)
+						// // console.log(res)
 						if(res.data.code === "00000"){
-							// console.log(res)
+							// // console.log(res)
 							let form = res.data.data.form
 							let data = res.data.data.formData
 							that.formData = data
-							// console.log(form)
-							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							// // console.log(form)
+							// // console.log("enforcementSeq",res.data.data.customValues.fileseq)
 							if(res.data.data.customValues){
 								if(res.data.data.customValues.fileno){
 									that.processDefineKey ={
@@ -206,9 +207,9 @@
 
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
-							// console.log("config",that.config)
-							console.log(that.processDefineKey)
-							// console.log(that.config)
+							// // console.log("config",that.config)
+							// console.log(that.processDefineKey)
+							// // console.log(that.config)
 						}
 					}
 				})

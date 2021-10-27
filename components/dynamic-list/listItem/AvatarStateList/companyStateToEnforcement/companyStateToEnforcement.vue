@@ -1,10 +1,32 @@
+<!-- options值：
+hideTime:true 隐藏时间字段
+hideUser:true 隐藏user字段
+hideNext:true 隐藏下一步字段
+hideForm:true 隐藏表单字段
+
+timeText: 时间文本
+userText: 用户文本
+nextText: 下一步文本
+formText: 表单文本
+workText
+
+timeField: 时间字段
+userField: 用户字段
+nextField: 下一步字段
+formField: 表单字段
+
+hideState: 隐藏状态
+noSuccess: 未完成文本
+success: 完成文本
+wait: 待完成文本
+ -->
 <template>
 	<!-- <navigator :url="navigationUrl" hover-class="navigator-hover"> -->
 		<view class="state_allcontent">
 			<view class="AvatarStateList">
 				<view class="formNumber" >
-					工作名称:
-					<span style="font-weight: bolder;font-size: 12px;margin-left: 5px;">{{item.workName}}</span>
+					{{options.workText||"工作名称"}}:
+					<span>{{item[options.workField]||item.workName}}</span>
 					<!-- <span class="enforcementState enforcement" v-if="item.finishState==='enforcement'">执法中</span> -->
 
 				</view>
@@ -14,16 +36,17 @@
 					</view>
 					<view class="content">
 						<view class="titleBox">
-							<view class="time" v-if="item.actApplyTime"><span class="content-title">开始时间:</span>{{item.actApplyTime}}</view>
-							<view class="object" v-if="item.actApplyUserName"><span class="content-title">执法人员:</span>{{item.actApplyUserName}}</view>
-							<view class="company" v-if="item.actCurrDualUserName"><span class="content-title">下一步办理人:</span>{{item.actCurrDualUserName}}</view>
+							<view class="time" v-if="item.actApplyTime&&!options.hideTime"><span class="content-title">{{options.timeText||"开始时间"}}:</span>{{item[options.timeField]||item.actApplyTime}}</view>
+							<view class="object" v-if="item.actApplyUserName&&!options.hideUser"><span class="content-title">{{options.userText||"执法人员"}}:</span>{{item[options.userField]||item.actApplyUserName}}</view>
+							<view class="company" v-if="item.actCurrDualUserName&&!options.hideNext"><span class="content-title">{{options.nextText||"下一步办理人"}}:</span>{{item[options.nextField]||item.actCurrDualUserName}}</view>
 							<!-- <view class="department" v-if="item.department"><span class="content-title">执法科室:</span>{{item.department}}</view> -->
-							<view class="remarks" v-if="item.formName"><span class="content-title">表单名:</span>{{item.formName}}</view>
+							<!-- <view class="remarks" v-if="item.formName&&!hideForm"><span class="content-title">{{optons.formText||"表单名"}}:</span>{{item[options.formField]||item.formName}}</view> -->
 						</view>
 					</view>
-					<view style="position: relative;width: 90px;">
-						<span class="enforcementState rectification" v-if="item.finishState==='0'">未完成</span>
-						<span class="enforcementState closeCase" v-if="item.finishState==='1'">已完成</span>
+					<view style="position: relative;width: 90px;" v-if="!options.hideState">
+						<span class="enforcementState rectification" v-if="item.finishState==='0'">{{options.noSuccess||"未完成"}}</span>
+						<span class="enforcementState closeCase" v-if="item.finishState==='1'">{{options.success||"已完成"}}</span>
+						<span class="enforcementState closeCase" v-if="item.finishState==='2'">{{options.wait||"待完成"}}</span>
 					</view>
 <!-- 					<view class="state" v-if="item.state">
 							<view v-if="item.state.modify" class="modify">修改</view>
@@ -42,7 +65,13 @@
 		name:"companyStateToEnforcement",
 		props:{
 			item:Object,
-			itemNavigation:String
+			itemNavigation:String,
+			options:{
+				type:Object,
+				default(){
+					return {}
+				}
+			}
 		},
 		data(){
 			return {
@@ -51,11 +80,11 @@
 		},
 		created() {
 			this.iconList = globalConfig.icon
-			// console.log("iconList",this.iconList)
+			// // console.log("iconList",this.iconList)
 		},
 		onLoad(){
 			// this.navigationUrl()
-			// console.log(this.navigationUrl())
+			// // console.log(this.navigationUrl())
 		},
 		methods:{
 			DateToString(val){
@@ -65,9 +94,9 @@
 				return DateString
 			},
 			getVal(string){
-				// console.log(string)
+				// // console.log(string)
 				string = "type"+string.replace(string[0],string[0].toUpperCase())
-				// console.log(this.iconList[string])
+				// // console.log(this.iconList[string])
 				return this.iconList[string]
 			}
 		}

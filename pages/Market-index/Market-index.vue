@@ -109,7 +109,7 @@
 				title:"加载中..."
 			})
 			this.loading=true
-			console.log(this.loading)
+			// console.log(this.loading)
 			// this.$forceUpdate()
 			this.loading=false
 			uni.hideLoading()
@@ -117,13 +117,14 @@
 		onLoad(e){
 			let query = JSON.parse(decodeURIComponent(e.query))
 			this.query = query
-			console.log(query)
+			// console.log(query)
 			this.icon=globalConfig.icon
 			uni.hideHomeButton()
+			this.$reload()
 		},
 		methods: {
 			onChange(event) {
-				console.log('event = ', event.detail)
+				// console.log('event = ', event.detail)
 				this.current = event.detail
 				this.getList()
 			},
@@ -133,7 +134,7 @@
 					url:`${globalConfig.dataHost}?id=5557`,
 					method:"GET",
 					success(res) {
-						// console.log("res",res)
+						// // console.log("res",res)
 						that.list = res.data.data.list
 					}
 				})

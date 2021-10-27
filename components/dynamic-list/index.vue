@@ -32,13 +32,6 @@
 					:key="index"
 					@click="handleJumpRoute(item)"
 				  >
-                     <article-item
-						 v-if="getListItemKey() === 'ArticleItem'"
-                         :item="{
-							 ...item,
-							 ...getComponentBindData(item)
-						 }"
-                     />
 					 <self-inspection-record-item
 					 	v-if="getListItemKey() === 'SelfInspectionRecordItem'"
 					 	:item="{
@@ -46,47 +39,13 @@
 							...getComponentBindData(item)
 						}"
 					 />
-					<state-item
-                      :item="{
-						  ...item,
-						  ...getComponentBindData(item)
-					  }"
-					  v-if="getListItemKey() === 'StateItem'"
-					/>
+
 					<record-steps-item 
 					  v-if="getListItemKey() === 'RecordStepsItem'"
 					  :item="{
 						  ...item,
 						  ...getComponentBindData(item)
 					  }"
-					/>
-					<street-user-report-item
-						v-if="getListItemKey() === 'StreetUserReportItem'"
-						:item="{
-							...item,
-							...getComponentBindData(item)
-						}"
-					/>
-					<avatar-state-item
-						v-if="getListItemKey() === 'avatarStateItem'"
-						:item="{
-							...item,
-							...getComponentBindData(item)
-						}"
-					/>
-					<record
-						v-if="getListItemKey() === 'recordItem'"
-						:item="{
-							...item,
-							...getComponentBindData(item)
-						}"
-					/>
-					<message-item
-					v-if="getListItemKey() === 'messageItem'"
-					:item="{
-						...item,
-						...getComponentBindData(item)
-					}"
 					/>
 					<enforcement-state-item
 					v-if="getListItemKey() === 'enforcement-state-item'"
@@ -101,6 +60,7 @@
 						...item,
 						...getComponentBindData(item)
 					}"
+					:options="_get(config,'options',{})"
 					/>
 					<state-to-item
 					 	v-if="getListItemKey() === 'stateToItem'"
@@ -109,13 +69,6 @@
 							...getComponentBindData(item)
 						}"
 					></state-to-item>
-					<avatar-item
-					v-if="getListItemKey() === 'avatarItem'"
-					:item="{
-						...item,
-						...getComponentBindData(item)
-					}"
-					/>
 					<notice-item
 					v-if="getListItemKey() === 'noticeItem'"
 					:item="{
@@ -130,7 +83,14 @@
 							...getComponentBindData(item)
 						}"
 					></to-do-list-item>
-
+					<aqy-item
+						v-if="getListItemKey() === 'aqyItem'"
+						:item="{
+							...item,
+							...getComponentBindData(item)
+						}"
+						:options="_get(config,'options',{})"
+					></aqy-item>
                   </view>
               </view>
             </load-refresh>
@@ -143,19 +103,13 @@
     import qs from 'qs'
 	import loadRefresh from '../load-refresh/load-refresh.vue'
     import msTab from '../ms-tabs/ms-tabs.vue'
-    import ArticleItem from './listItem/ArticleItem.vue'
-    import StateItem from './listItem/state-list/state-list.vue'
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
-	import StreetUserReportItem from './listItem/StreetUserReportItem.vue'
-	import AvatarStateItem from './listItem/AvatarStateList/AvatarStateList.vue'
-	import record from './listItem/record/record.vue'
-	import messageItem from './listItem/messageItem.vue'
 	import enforcementStateItem from './listItem/AvatarStateList/enforcementStateItem.vue'
-	import AvatarItem from './listItem/DefaultAvatarItem.vue'
 	import StateToItem from './listItem/StateToList.vue'
 	import ToDoListItem from './listItem/todoListItem.vue'
 	import noticeItem from './listItem/NoticeItem.vue'
+	import aqyItem from './listItem/aqyItem.vue'
 	import CompanyStateToEnforcement from './listItem/AvatarStateList/companyStateToEnforcement/companyStateToEnforcement.vue'
     import { globalConfig } from '@/config.js'
     
@@ -163,20 +117,14 @@
 		components: {
 			loadRefresh,
 			msTab,
-			ArticleItem,
-			StateItem,
 			SelfInspectionRecordItem,
 			RecordStepsItem,
-			StreetUserReportItem,
-			AvatarStateItem,
-			record,
-			messageItem,
 			enforcementStateItem,
-			AvatarItem,
 			StateToItem,
 			ToDoListItem,
 			CompanyStateToEnforcement,
-			noticeItem
+			noticeItem,
+			aqyItem
 		},
 		props: {
 			config: {
@@ -193,6 +141,13 @@
 			},
 			fileno:{
 				type:String,
+				default(){
+					return {}
+				}
+			},
+			// 外部传入的查询
+			otherSearch:{
+				type:Object,
 				default(){
 					return {}
 				}
@@ -283,7 +238,7 @@
                 const requestData = _.get(this.config, 'request', {})
 								let customData;
 								let fileno;
-								console.log(this.fileno)
+								// console.log(this.fileno)
 								
 								if(_.get(this.config,'request.fileno')==='fileno'){
 									if(this.fileno){
@@ -293,7 +248,7 @@
 												"fileno":fileno
 											}
 										 }
-										 console.log(customData)
+										 // console.log(customData)
 									}
 								}
 
@@ -312,7 +267,7 @@
 								
                 this.pageNoField = _.get(searchData, 'pn', 'pageNo')
                 this.pageSizeField = _.get(searchData, 'pn', 'pageSize')
-                this.listSearch = { ...searchData, ..._.get(this.config, 'request.default', {}),...customData||{} }
+                this.listSearch = { ...searchData, ..._.get(this.config, 'request.default', {}),...customData||{},...this.otherSearch||{} }
                 if (_.get(this.config, 'loadApi')) {
                     this.fetchList({ refresh: true })
                 }
@@ -338,7 +293,7 @@
                         const data = _.get(res, 'data.data')
                         const listField = _.get(this.config, 'response.list', '')
                         const totolField = _.get(this.config, 'response.total', 0)
-                        console.log(data,"data")
+                        // console.log(data,"data")
                         const prevList = _.get(searchData, 'refresh') ? [] : this.list
                         this.list = prevList.concat(listField ? _.get(data, listField, []) : _.get(res, 'list', []))
                         const total = _.get(data, totolField, 0)
@@ -350,7 +305,7 @@
 											const data = _.get(res, 'data.data')
 											const listField = _.get(this.config, 'response.list', '')
 											const totolField = _.get(this.config, 'response.total', 0)
-											console.log(data,"data")
+											// console.log(data,"data")
 											const prevList = _.get(searchData, 'refresh') ? [] : this.list
 											this.list = prevList.concat(listField ? _.get(data, listField, []) : _.get(res, 'list', []))
 											const total = _.get(data, totolField, 0)
@@ -365,7 +320,7 @@
             // 加载更多
             loadMore () {
 							if(!this.unloading){
-							console.log("加载更多")
+							// console.log("加载更多")
 				if (this.isPropsList) {
 					return
 				}
@@ -381,7 +336,7 @@
             // 上拉加载刷新
             refresh () {
 							if(!this.unloading){
-								console.log("刷新")
+								// console.log("刷新")
 				if (this.isPropsList) {
 					return
 				}
@@ -423,7 +378,7 @@
 				    }
 				    routeUrl += '?query=' + encodeURIComponent(JSON.stringify(query))
 				}
-				console.log('routeUrl= ', routeUrl)
+				// console.log('routeUrl= ', routeUrl)
 				// 旧跳转方式
 				uni.navigateTo({
 					url:routeUrl
@@ -431,8 +386,8 @@
 				// 栈溢出,改用redirectTo
 				// uni.redirectTo({
 				// 	url: routeUrl
-				// 	// success:res =>{console.log("跳转成功")},
-				// 	// fail:err =>(console.log("跳转失败",err))
+				// 	// success:res =>{// console.log("跳转成功")},
+				// 	// fail:err =>(// console.log("跳转失败",err))
 				// })
 			}
 		}

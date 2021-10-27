@@ -24,7 +24,7 @@
 			},
 		},
 		onLoad(e) {
-			console.log(e)
+			// console.log(e)
 			this.getCustomValues(e.query)
 			// this.getConfig()
 		},

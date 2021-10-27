@@ -74,7 +74,7 @@
 							Authorization: `Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
 					},
 					complete(value){
-						console.log(value,"value")
+						// console.log(value,"value")
 						if(value.data.code === "00000"){
 							that.formId = value.data.data.form.id
 							that.dataId = value.data.data.formData.id

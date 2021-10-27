@@ -12,7 +12,7 @@
 			<view class="talkIcon search_Icons" style="color: #2C405A;" v-if="config.addIcon" @click="additems()">&#xe7fe;</view>
 		</view>
 		<view :class="'search-list '+searchType" @touchstart="touchStart" @touchend="loadMore">
-			<view v-for="(item,i) in listData" v-if="inputValue===''">
+			<view v-for="(item,i) in listData" v-if="inputValue===''" style="position: relative;">
 				<navigator :url="url[i]">
 					<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
 						:item="item"
@@ -24,8 +24,11 @@
 					></radio-select> -->
 					<!-- 有bug -->
 				</navigator>
+				<view class="EditButton" v-if="config.hasEdit" @click="jump(item.id)" >
+					<image mode="widthFix" style="width: 24px;" :src="icon.setting"></image>
+				</view>
 			</view>
-			<view v-for="(item,i) in searchlist" v-if="inputValue!==''">
+			<view v-for="(item,i) in searchlist" v-if="inputValue!==''" style="position: relative;">
 				<navigator :url="url[i]">
 					<!-- 子项添加处 -->
 				<state-search-item v-if="config.itemModule.name==='stateSearchItem'"
@@ -37,6 +40,9 @@
 					@getName="getName"
 				></radio-select> -->
 				</navigator>
+				<view class="EditButton" v-if="config.hasEdit" @click="jump(item.id)">
+					<image mode="widthFix" style="width: 24px;" :src="icon.setting"></image>
+				</view>
 			</view>
 		</view>
 		<view style="width: auto;color: #ccc;font-size: 12px; font-weight: bolder;margin: 10px;text-align: center;">{{text}}</view>
@@ -70,7 +76,8 @@
 				size:10,
 				touchData:{},
 				total:null,
-				text:"下拉刷新"
+				text:"下拉刷新",
+				icon:null
 			};
 		},
 		onLoad() {
@@ -87,7 +94,9 @@
 						},
 						field:"",
 						itemNavigation:"",
-						id:null
+						id:null,
+						settingUrl:"",
+						hasEdit:false
 					}
 				}
 			},
@@ -100,25 +109,32 @@
 		},
 		
 		created() {
+			this.icon = globalConfig.icon
 			uni.removeStorage({
 			    key: 'selectName',
 			    success: function (res) {
-			        // console.log("清除缓存成功");
+			        // // console.log("清除缓存成功");
 			    }
 			});
-			// console.log(this.config.params)
+			// // console.log(this.config.params)
 			this.getData(this.config.params)
 			this.getAllData({
 				...this.config.params,
 				searchAll:true
 			})
 			
-			// console.log(this.searchlist)
+			// // console.log(this.searchlist)
 		},
 		methods:{
+			jump(id){
+				// console.log(id)
+				uni.navigateTo({
+					url:this.config.settingUrl + "?id=" + id
+				})
+			},
 			getAddress(e){
 				this.address = e
-				 // console.log(this.address)
+				 // // console.log(this.address)
 			},
 			additems(){
 				if(this.config.addUrl){
@@ -130,15 +146,15 @@
 			getName(e){
 				this.name = e
 				let name = this.name
-				// console.log(this.name)
+				// // console.log(this.name)
 				uni.navigateBack({
 					success(e){
-						// console.log(e)
+						// // console.log(e)
 						uni.setStorage({
 							key:"selectName",
 							data:name,
 							success(e) {
-								console.log("保存缓存成功",name)
+								// console.log("保存缓存成功",name)
 							}
 						})
 					},
@@ -155,16 +171,16 @@
 			// 记录滑动
 			touchStart(e){
 				// this.touchData.clientX = e.changeTouches[0].clientX;//X轴滑动
-				// console.log(e)
+				// // console.log(e)
 				this.touchData.clientY = e.changedTouches[0].clientY;//Y轴滑动
 				this.value=this.size
 			},
 			// 加载更多
 			loadMore(e){
 				// 移动
-				// console.log("end",e)
+				// // console.log("end",e)
 				const subY = e.changedTouches[0].clientY - this.touchData.clientY
-				// console.log(subY)
+				// // console.log(subY)
 				if(subY<=-200){
 					uni.showLoading({
 						title:"加载中"
@@ -191,13 +207,13 @@
 			async getData(params){
 					const res = await this.getSearchList(params);
 					let list;
-					// console.log(res)
+					// // console.log(res)
 					list = res.data.records
 					for(var i in list){
-						// console.log(list[i])
+						// // console.log(list[i])
 						this.listData.push(list[i])
 					}
-					// console.log("listData",this.listData)
+					// // console.log("listData",this.listData)
 					this.url = this.getID(this.listData)
 					this.total = res.data.pages
 					// this.size = res.data.records.length
@@ -206,13 +222,13 @@
 			async getAllData(params){
 					const res = await this.getSearchList(params);
 					let list;
-					// console.log(res)
+					// // console.log(res)
 					list = res.data.records
 					for(var i in list){
-						// console.log(list[i])
+						// // console.log(list[i])
 						this.allListData.push(list[i])
 					}
-					// console.log("allListData",this.allListData)
+					// // console.log("allListData",this.allListData)
 					// this.url = this.getID(this.allListData)
 					// this.total = res.data.pages
 					// this.size = res.data.records.length
@@ -220,30 +236,31 @@
 			},
 			getList(){
 				this.searchlist = []
-				// console.log(this.searchlist)
+				// // console.log(this.searchlist)
 				if(this.inputValue!==""){
 					for(let i=0;i<this.allListData.length;i++){
 						let list = this.allListData[i]
 						if(list[this.config.field||'name'].indexOf(this.inputValue)!==-1){
-							// console.log(this.searchlist)
+							// // console.log(this.searchlist)
 							this.searchlist.push(list)
 							this.url=this.getID(this.searchlist)
 							
 						}
 					}
 				}
-				// console.log(this.searchlist)
-				// console.log(this.inputValue)
+				// // console.log(this.searchlist)
+				// // console.log(this.inputValue)
 			},
 			getID(list){
 				let urlList=[];
 				let url = this.config.itemNavigation;
-				// console.log(this.config.itemNavigation)
+				// // console.log(this.config.itemNavigation)
 				for(let j=0;j<list.length;j++){
 					if(list[j].id){
 						url = this.config.itemNavigation + "?id=" + list[j].id
+						
 					}
-					// console.log(url)
+					// // console.log(url)
 					urlList.push(url)
 				}
 				return urlList
@@ -324,5 +341,11 @@
 		height: 300px;
 		margin: 0 auto;
 		background-color: #DCDEE0;
+	}
+	.EditButton{
+		position: absolute;
+		top:5px;
+		right: 5px;
+		z-index: 500;
 	}
 </style>

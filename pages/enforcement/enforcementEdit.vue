@@ -3,6 +3,7 @@
 		<dynamic-page
            :API="api"
 					 :srvFormData="data"
+					 isCompany="true"
 					 v-if="data"
         />
 	</view>
@@ -20,7 +21,7 @@
 		},
 		data() {
 			return {
-				api: globalConfig.formHost + '?id=2004',
+				api: globalConfig.formHost + '?id=68652',
 				data:null,
 				dataApi:`${globalConfig.workflowEP}/admin/companyinfo`,
 				id:"",

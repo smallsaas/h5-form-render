@@ -47,10 +47,10 @@ export default {
             uni.switchTab({
                 url: path,
 				success:res =>{
-					console.log("跳转成功")
+					// console.log("跳转成功")
 				},
 				fail:err =>{
-					console.log("跳转失败", err)
+					// console.log("跳转失败", err)
 					if(err.errMsg === "switchTab:fail can not switch to no-tabBar page"){
 						uni.navigateTo({
 							url: path

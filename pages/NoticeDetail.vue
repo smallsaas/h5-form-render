@@ -20,11 +20,11 @@
 		onLoad(e) {
 			let decode
 			decode = e.query?JSON.parse(decodeURIComponent(e.query)):e
-			console.log(decode)
+			// console.log(decode)
 			this.api=`${globalConfig.formHost}?id=66661`
 			// this.id=decode.id
 			this.getData(decode.id)
-			console.log("进来",this.srvFormData)
+			// console.log("进来",this.srvFormData)
 		},
 		data() {
 			return {
@@ -34,22 +34,22 @@
 		},
 		methods: {
 			Debug(item){
-				// console.log()
+				// // console.log()
 				item = item.replace(/src="/g, 'src="https://images.weserv.nl/?url=')
 				//清除background样式
 				let str = item.split(";")
-				// console.log("STR",str)
+				// // console.log("STR",str)
 				for(var i in str){
-					// console.log("TEST",i)
+					// // console.log("TEST",i)
 					if(str[i].indexOf("background")!==-1){
-						console.log("I",str[i])
+						// console.log("I",str[i])
 						str[i]=null
 					}
 				}
 				str = str.join(";")
 				str = str.replace(/;;/g,';')
 				item = str
-				// console.log(str)
+				// // console.log(str)
 				return item
 			},
 				getData(id){
@@ -65,9 +65,9 @@
 							dataId:id
 						},
 						complete(res) {
-							console.log(res)
+							// console.log(res)
 							that.srvFormData=res.data.data.formData
-							console.log("noticeSrv",that.srvFormData)
+							// console.log("noticeSrv",that.srvFormData)
 						}
 					})
 				}

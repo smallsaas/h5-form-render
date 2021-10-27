@@ -10,6 +10,8 @@
 		   :API="getPageAapi"
 			 :srvFormData="list"
 			 processDefineKey="fg"
+			 hideConfirm="true"
+			 :company="true"
 			 hideLast="true"
 			 :ConfirmConfig="ConfirmConfig"
 		/>
@@ -33,13 +35,13 @@
 			this.list["companyLegalPerson"]=list["personName"]
 			this.list["companyPhone"]=list["personPhone"]
 			
-			console.log("companyInfo",this.list)
+			// console.log("companyInfo",this.list)
 		},
 		onLoad (e){
 			
 		},
 		onUnload(e) {
-			console.log("unload",e)
+			// console.log("unload",e)
 		},
 		data() {
 			return {
@@ -67,19 +69,19 @@
 					method:"GET",
 					success(res) {
 						let data = res.data.data
-						console.log("RES",data)
+						// console.log("RES",data)
 						let moduleData = data.moduleData
-						console.log(moduleData)
+						// console.log(moduleData)
 						let modules = res.data.data.modules
 						let key
 						modules.map((item,i)=>{
 							if(item.type==="confirm"){
 								key = item.key
-								console.log(key)
+								// console.log(key)
 							}
 						})
 						that.ConfirmConfig = _.get(moduleData,key,"")
-						console.log(key,moduleData,that.ConfirmConfig)
+						// console.log(key,moduleData,that.ConfirmConfig)
 					}
 				})
 			},

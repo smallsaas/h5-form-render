@@ -23,6 +23,12 @@ export const getNavList = (params) => {
 	return request('GET', url, params)
 }
 
+export const getFormNo = (params) => {
+	const url = `${globalConfig.workflowEP}/api.flow.examine/genFormNo`
+	return request('POST', url, params)
+}
+
+
 // 获取搜索信息
 export const getSearchALL = (id) => {
 	const url = `${globalConfig.workflowEP}/admin/companyinfo/${id}`

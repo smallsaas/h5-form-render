@@ -47,13 +47,13 @@
 						})
 					}
 				}else{
-					console.log("列表数据异常")
+					// console.log("列表数据异常")
 				}
 				
 			}
 		},
 		mounted(){
-			// console.log('this.item = ', this.item)
+			// // console.log('this.item = ', this.item)
 		}
 	}
 </script>

@@ -8,6 +8,9 @@
 			<view class='createTime'>
 				<span class="Title">发起时间：</span>{{item.createTime||item.startTime}}
 			</view>
+			<view v-if="item.instanceEntityVo.customValues.companyName||item.instanceEntityVo.formData.companyName">
+				<span class="Title">公司名称：</span>{{item.instanceEntityVo.customValues.companyName||item.instanceEntityVo.formData.companyName}}
+			</view>
 		</view>
 	</view>
 	<!-- <button @click="getZc">测试</button> -->
@@ -29,7 +32,7 @@
 		methods:{
 			getVal(string){
 				string = "type"+string.replace(string[0],string[0].toUpperCase())
-				// console.log(this.iconList[string])
+				// // console.log(this.iconList[string])
 				return this.iconList[string]
 			},
 			DateToString(val){
@@ -52,6 +55,7 @@
 			background-color: #eee;
 		}
 		.ToDoBody{
+			font-size: 14px;
 			.taskName{
 				font-size: 14px;
 			}

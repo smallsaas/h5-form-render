@@ -72,7 +72,7 @@
         },
         methods: {
 					test(){
-						console.log(this.list)
+						// console.log(this.list)
 					},
 			_get (data, field, value) {
 				return _.get(data, field, value)

@@ -31,19 +31,19 @@
 		},
 		methods: {
 			isSelect(e){
-				console.log("select!",e)
+				// console.log("select!",e)
 				this.selectId=e
 				this.config.url=this.config.url+"&selectId="+this.selectId
-				console.log("url",this.config.url)
+				// console.log("url",this.config.url)
 			}
 		},
 		onLoad(e) {
 			let decode = JSON.parse(decodeURIComponent(e.query))
-			// console.log("子项",)
+			// // console.log("子项",)
 			this.data.processDefineKey = decode.processDefineKey
 			this.data.taskId = decode.taskId
 			this.config.url="/pages/companyConfirm/companyConfirm?query="+e.query
-			console.log(this.data)
+			// console.log(this.data)
 		},
 		components:{
 			cSelect,cButton

@@ -35,18 +35,18 @@
 			                // 用户信息已授权，获取用户信息
 			                uni.getUserInfo({
 			                    success(res) {
-			                        console.log("授权信息 = ", res);
+			                        // console.log("授权信息 = ", res);
 			                    },
 			                    fail(err) {
-			                        console.log("获取用户信息失败 = ", err)
+			                        // console.log("获取用户信息失败 = ", err)
 			                    }
 			                })
 			            } else if (!res.authSetting['scope.userInfo']) {
-			                console.log("需要点击按钮手动授权")
+			                // console.log("需要点击按钮手动授权")
 			            }
 			        },
 			        fail() {
-			            console.log("获取已授权选项失败")
+			            // console.log("获取已授权选项失败")
 			        }
 			    })
 			},
@@ -57,13 +57,13 @@
 			    uni.getUserInfo({
 			        // 获取信息成功
 			        success(res) {
-			            console.log("wz.getUserInfo = ", res);
+			            // console.log("wz.getUserInfo = ", res);
 						// _this.iv = res.iv
 						// _this.encryptedData = res.encryptedData
 			            // 成功后进行登录,获取code
 			            uni.login({
 			              success (loginRes) {
-			                 console.log("wz.login = ", loginRes);
+			                 // console.log("wz.login = ", loginRes);
 							 // _this.auth = loginRes.code
 			                if (loginRes.code) {
 							  	const data = {
@@ -75,19 +75,19 @@
 							  	}
 							  	_this.onRequest(data)
 			                } else {
-			                  console.log('登录失败！' + loginRes.errMsg)
+			                  // console.log('登录失败！' + loginRes.errMsg)
 			                }
 			              }
 			            })
 			        },
 			        fail() {
-			            console.log("获取用户信息失败");
+			            // console.log("获取用户信息失败");
 			        }
 			    })
 			},
 			// 手机登录时获取手机号码相关信息的函数
 			getPhoneNumber(e) {
-			    console.log(e);
+			    // console.log(e);
 			},
 			onLoginFunc(){
 				
@@ -96,12 +96,12 @@
 				// 获取code
 				uni.login({
 				  success (loginRes) {
-					 console.log("wz.login = ", loginRes);
+					 // console.log("wz.login = ", loginRes);
 					if (loginRes.code) {
 						// 获取用户信息
 						uni.getUserInfo({
 							success(res) {
-								console.log("wz.getUserInfo = ", res);
+								// console.log("wz.getUserInfo = ", res);
 								const data = {
 									from: '2',
 									auth: loginRes.code,
@@ -112,12 +112,12 @@
 								_this.onRequest(data)
 							},
 							fail() {
-								console.log("获取用户信息失败");
+								// console.log("获取用户信息失败");
 							}
 						})
 						
 					} else {
-					  console.log('登录失败！' + loginRes.errMsg)
+					  // console.log('登录失败！' + loginRes.errMsg)
 					}
 				  }
 				})
@@ -135,10 +135,10 @@
 				  method: 'POST',
 				  success(res){
 				      // 请求成功后获取openid和session_key
-				      console.log('登陆成功 = ', res)
+				      // console.log('登陆成功 = ', res)
 				  },
 				  fail(err) {
-				  	console.log('登陆失败 = ', err)
+				  	// console.log('登陆失败 = ', err)
 				  }
 				})
 			}

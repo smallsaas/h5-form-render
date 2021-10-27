@@ -45,7 +45,7 @@
 			initCanvas() {
 				this.showCanvas = true;
 				this.oc = uni.createCanvasContext('canvasid');
-				console.log(this.oc);
+				// console.log(this.oc);
 				//设置画笔样式
 				this.oc.lineWidth = 4;
 				this.oc.lineCap = "round";
@@ -150,7 +150,7 @@
 								// this.saveImgToLocal(resp.tempFilePath);
 							},
 							fail: (response) => {
-								console.log('签名失败 = ', response);
+								// console.log('签名失败 = ', response);
 							}
 						}, this);
 					}
@@ -166,7 +166,7 @@
 					success: async res => {
 						let base64 = wx.arrayBufferToBase64(res.data); //把arraybuffer转成base64
 						toBase64Url = 'data:image/jpeg;base64,' + base64; //不加上这串字符，在页面无法显示
-						console.log(toBase64Url);
+						// console.log(toBase64Url);
 					}
 				});
 			},
@@ -176,7 +176,7 @@
 				uni.saveImageToPhotosAlbum({
 					filePath: url,
 					success: (response) => {
-						console.log('签名保存成功 = ', response);
+						// console.log('签名保存成功 = ', response);
 						uni.showModal({
 							title: '提示',
 							content: '保存成功',

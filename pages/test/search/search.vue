@@ -21,7 +21,7 @@
 				const res = await getSearchPage({id:12311})
 				if (_.get(res, 'code') === 200) {
 					this.list = _.get(res, 'data', {})
-					console.log(this.list)
+					// console.log(this.list)
 				}
 			}
 		}

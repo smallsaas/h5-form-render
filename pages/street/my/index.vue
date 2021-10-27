@@ -75,7 +75,7 @@
 						url: path
 				   }) 
 				}else{
-					console.log('path 不存在 ')
+					// console.log('path 不存在 ')
 				}
 			}
 		},

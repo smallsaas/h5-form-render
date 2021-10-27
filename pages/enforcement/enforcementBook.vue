@@ -11,6 +11,7 @@
 			 :API="api"
 			 :LastKey="processDefineKey"
 		></dynamic-page> -->
+		<button class="showCompany" @click="showCompanyInfo" v-if="companyId">企业详情</button>
 	</view>
 </template>
 
@@ -23,7 +24,7 @@
 	// import dynamicPage from '../../components/dynamic-page/index.vue'
 	export default {
 		onLoad(e) {
-			console.log(e)
+			// console.log(e)
 			this.getPiId(e.query)
 			this.getConfig()
 		},
@@ -32,7 +33,7 @@
 			// dynamicPage
 		},
 		onReady() {
-			console.log(this.config)
+			// console.log(this.config)
 		},
 		data() {
 			return {
@@ -49,6 +50,7 @@
 				},
 				api: globalConfig.formHost + '?id=2002',
 				processDefineKey:{},
+				companyId:null
 			}
 		},
 		methods: {
@@ -56,22 +58,27 @@
 				uni.redirectTo({
 					url:`/pages/print?processInstanceId=${this.piId}`,
 					success(e) {
-						console.log(e)
+						// console.log(e)
 					}
+				})
+			},
+			showCompanyInfo(){
+				uni.navigateTo({
+					url:`/pages/enforcement/enforcementDetails?id=${this.companyId}`
 				})
 			},
 			getPiId(e){
 				let decode = JSON.parse(decodeURIComponent(e))
 				this.piId=decode.piId
 				this.taskId=decode.taskId
-				// console.log(this.taskId)
+				// // console.log(this.taskId)
 				this.data = {
 					"processInstanceId": this.piId
 				}
 			},
 			getConfig(){
-				// console.log(this.data)
-				// console.log(this.method)
+				// // console.log(this.data)
+				// // console.log(this.method)
 				let that = this
 				uni.request({
 					url:this.loadApi,
@@ -79,15 +86,23 @@
 					data:this.data,
 					header:this.header,
 					complete(res) {
-						// console.log(res)
+						// // console.log(res)
 						if(res.data.code === "00000"){
-							// console.log(res)
+							// // console.log(res)
 							let form = res.data.data.form
 							let data = res.data.data.formData
 							that.formData = data
-							// console.log(form)
-							// console.log("enforcementSeq",res.data.data.customValues.fileseq)
+							// // console.log(form)
+							// // console.log("enforcementSeq",res.data.data.customValues.fileseq)
 							if(res.data.data.customValues){
+								if(res.data.data.customValues.companyName){
+									uni.setNavigationBarTitle({
+										title:res.data.data.customValues.companyName
+									})
+								}
+								if(res.data.data.customValues.companyId){
+									that.companyId = res.data.data.customValues.companyId
+								}
 								if(res.data.data.customValues.fileno){
 									that.processDefineKey ={
 										"processDefineKey":res.data.data.processDefineKey,
@@ -116,8 +131,8 @@
 							}
 							let jsonDefine = form.jsonDefine
 							that.config = convert(JSON.parse(Base64.decode(jsonDefine)))
-							// console.log(that.processDefineKey)
-							console.log(that.config)
+							// // console.log(that.processDefineKey)
+							// console.log(that.config)
 						}
 					}
 				})
@@ -130,10 +145,26 @@
 	page{
 		background-color: #EEEEED;
 	}
+	@keyframes show{
+		from{opacity: 0;}
+		to{opacity: 1;}
+	}
 	.got_form_button{
 		width:80%;
 		margin: 5px auto;
 		background-color: #1A5EB5;
 		color: white;
+	}
+	.showCompany{
+		position: fixed;
+		top: 20%;
+		right: 0;
+		background-color: #46AA46;
+		border-top-left-radius: 50px;
+		border-bottom-left-radius: 50px;
+		margin-left: 10px;
+		color: white;
+		font-weight: bolder;
+		animation: show 2s linear 0s forwards;
 	}
 </style>

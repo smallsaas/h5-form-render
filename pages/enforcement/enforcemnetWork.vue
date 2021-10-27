@@ -14,7 +14,7 @@
 			 :userlist="userlist"
 			 hideLast="true"
 			 :ConfirmConfig="ConfirmConfig"
-			 
+			 :custom="custom"
 			 workflow="true"
 			 :customValues="customValues"
 			 :srvFormData="srvFormData"
@@ -28,32 +28,33 @@
 	import dynamicPage from '@/components/dynamic-page/index.vue'
 	import { globalConfig } from '@/config.js'
 	import {Base64} from '@/utils/tools.js'
+	import {getFormNo} from '@/common/api.js'
 	export default {
 		components:{ dynamicPage },
 		// mounted(e) {
 		// 	let page = getCurrentPages()
-		// 	console.log("page",page[page.length-1])
+		// 	// console.log("page",page[page.length-1])
 		// 	page[page.length-1].onLoad()
 		// },
 		onLoad(e){
 			uni.showLoading({
 				title:"加载中"
 			})
-			console.log("e",e)
+			// console.log("e",e)
 			let decode = JSON.parse(decodeURIComponent(e.query))
-			console.log("decode",decode)
-			// console.log(e.id)
-			// console.log(e.key)
+			// console.log("decode",decode)
+			// // console.log(e.id)
+			// // console.log(e.key)
 			this.getPageAapi = globalConfig.formHost + "?id=" + decode.id
 			this.key = decode.key
 			if(e.selectId){
-				// console.log(111111)
+				// // console.log(111111)
 				this.selectId = e.selectId
 				this.getValue(this.selectId)
-				// console.log("有执行到这",this.getPageAapi,this.key)
+				// // console.log("有执行到这",this.getPageAapi,this.key)
 			}
 			if(!this.getPageAapi||!this.key){
-				console.log("加载失败")
+				// console.log("加载失败")
 				return ;
 			}
 		},
@@ -81,6 +82,10 @@
 					companyName:null,
 					companyId:null
 				},
+				custom:{},
+				header:{
+					Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
+				},
 				ConfirmConfig:{}
 			}
 		},
@@ -92,23 +97,23 @@
 					method:"GET",
 					success(res) {
 						let data = res.data.data
-						console.log("RES",data)
+						// console.log("RES",data)
 						let moduleData = data.moduleData
-						console.log(moduleData)
+						// console.log(moduleData)
 						let modules = res.data.data.modules
 						let key
 						modules.map((item,i)=>{
 							if(item.type==="confirm"){
 								key = item.key
-								console.log(key)
+								// console.log(key)
 							}
 						})
 						that.ConfirmConfig = _.get(moduleData,key,"")
-						console.log(key,moduleData,that.ConfirmConfig)
+						// console.log(key,moduleData,that.ConfirmConfig)
 					}
 				})
 			},
-			getValue(id){
+			async getValue(id){
 				uni.showLoading({
 					title:"加载中"
 				})
@@ -118,43 +123,68 @@
 					name:null,
 					userId:null
 				}
+				let FormNo = await getFormNo()
 				let srvFormData={
 					businessLicense:null,
 					companyName:null,
 					companyType:null,
 					companyAddress:null,
 					companyLegalPerson:null,
-					companyPhone:null
+					companyPhone:null,
+					checkOno:null
 				}; 
 				uni.request({
 					url:`${globalConfig.workflowEP}/executive/companyinfo/${id}`,
 					method:"GET",
-					header:{
-						Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
-					},
+					header:this.header,
 					complete(res) {
-						console.log("listRes",res)
+						// console.log("listRes",res)
 						list = res.data.data
-						
-						console.log("list",list)
+						let replaceJson = {
+							businessLicense:"licenceNo",
+							companyAddress:"address",
+							companyId:"id",
+							companyLegalPerson:"legalRepresentative",
+							companyName:"name",
+							companyPhone:"personPhone",
+							companyType:"type",
+							companyTypeEn:"type"
+						}
+						for(var i in list){
+							if(!Array.isArray(list[i])){
+								for(var j in replaceJson){
+									if(i === replaceJson[j]){
+										_this.custom[j] = list[replaceJson[j]]
+									}else{
+										_this.custom[i] = list[i]
+									}
+								}
+							}
+						}
+						// console.log("list",list)
 						srvFormData.businessLicense=list.licenceNo
 						srvFormData.companyName=list.name
 						srvFormData.companyType=list.type
 						srvFormData.companyAddress=list.address
 						srvFormData.companyLegalPerson=list.personName
 						srvFormData.companyPhone=list.personPhone
+						srvFormData.type=list.type
+						srvFormData.checkOno = FormNo.data
 						_this.srvFormData = srvFormData
 						_this.customValues.companyName = list.name
 						_this.customValues.companyId = list.userId
+						
 						userlist.name=list.name
 						userlist.userId=list.userId
 						_this.userlist = userlist
-						// console.log("thisListTo",_this.srvFormData)
-						// console.log("这里的api",_this.getPageAapi)
-						// console.log("这里的key",_this.key)
-						// console.log("这里的List",_this.srvFormData)
+						
+						// // console.log("thisListTo",_this.srvFormData)
+						// // console.log("这里的api",_this.getPageAapi)
+						// // console.log("这里的key",_this.key)
+						// // console.log("这里的List",_this.srvFormData)
 					}
 				})
+				
 			}
 		}
 	}

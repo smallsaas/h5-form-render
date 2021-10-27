@@ -32,28 +32,28 @@
 		components:{ dynamicPage },
 		// mounted(e) {
 		// 	let page = getCurrentPages()
-		// 	console.log("page",page[page.length-1])
+		// 	// console.log("page",page[page.length-1])
 		// 	page[page.length-1].onLoad()
 		// },
 		onLoad(e){
 			uni.showLoading({
 				title:"加载中"
 			})
-			console.log("e",e)
+			// console.log("e",e)
 			let decode = JSON.parse(decodeURIComponent(e.query))
-			console.log("decode",decode)
-			// console.log(e.id)
-			// console.log(e.key)
+			// console.log("decode",decode)
+			// // console.log(e.id)
+			// // console.log(e.key)
 			this.getPageAapi = globalConfig.formHost + "?id=" + decode.id
 			this.key = decode.key
 			if(e.selectId){
-				// console.log(111111)
+				// // console.log(111111)
 				this.selectId = e.selectId
 				this.getValue(this.selectId)
-				// console.log("有执行到这",this.getPageAapi,this.key)
+				// // console.log("有执行到这",this.getPageAapi,this.key)
 			}
 			if(!this.getPageAapi||!this.key){
-				console.log("加载失败")
+				// console.log("加载失败")
 				return ;
 			}
 		},
@@ -92,19 +92,19 @@
 					method:"GET",
 					success(res) {
 						let data = res.data.data
-						console.log("RES",data)
+						// console.log("RES",data)
 						let moduleData = data.moduleData
-						console.log(moduleData)
+						// console.log(moduleData)
 						let modules = res.data.data.modules
 						let key
 						modules.map((item,i)=>{
 							if(item.type==="confirm"){
 								key = item.key
-								console.log(key)
+								// console.log(key)
 							}
 						})
 						that.ConfirmConfig = _.get(moduleData,key,"")
-						console.log(key,moduleData,that.ConfirmConfig)
+						// console.log(key,moduleData,that.ConfirmConfig)
 					}
 				})
 			},
@@ -133,10 +133,10 @@
 						Authorization: `Bearer ${uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''}`,
 					},
 					complete(res) {
-						console.log("listRes",res)
+						// console.log("listRes",res)
 						list = res.data.data
 						
-						console.log("list",list)
+						// console.log("list",list)
 						srvFormData.businessLicense=list.licenceNo
 						srvFormData.companyName=list.name
 						srvFormData.companyType=list.type
@@ -149,10 +149,10 @@
 						userlist.name=list.name
 						userlist.userId=list.userId
 						_this.userlist = userlist
-						// console.log("thisListTo",_this.srvFormData)
-						// console.log("这里的api",_this.getPageAapi)
-						// console.log("这里的key",_this.key)
-						// console.log("这里的List",_this.srvFormData)
+						// // console.log("thisListTo",_this.srvFormData)
+						// // console.log("这里的api",_this.getPageAapi)
+						// // console.log("这里的key",_this.key)
+						// // console.log("这里的List",_this.srvFormData)
 					}
 				})
 			}

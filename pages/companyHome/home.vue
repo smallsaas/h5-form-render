@@ -143,7 +143,7 @@
 		},
 		methods:{
 			onChange(event) {
-				// console.log('event = ', event.detail)
+				// // console.log('event = ', event.detail)
 				this.current = event.detail
 				this.getList()
 			},
@@ -153,7 +153,7 @@
 					url:`${globalConfig.dataHost}?id=5555`,
 					method:"GET",
 					success(res) {
-						// console.log("res",res)
+						// // console.log("res",res)
 						that.list = res.data.data.list
 					}
 				})

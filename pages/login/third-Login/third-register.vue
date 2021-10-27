@@ -20,16 +20,16 @@
 			<!-- <c-lincense @getValue="lincenseValue"></c-lincense> -->
 			<view class="inputBox">
 				<image :src="iconList.inputCompany" class="e-Icon"></image>
-				<input v-model="lincenseNo" type="text" class="input company" placeholder="请输入营业执照号" />
+				<input v-model="lincenseNo" type="text" class="input company" placeholder="请输入企业信用代码" />
 			</view>
 			<view class="inputBox">
-				<image :src="iconList.inputStreet" class="e-Icon"></image>
-				<input v-model="username" type="text" class="input company" placeholder="请输入用户名" />
+				<image :src="iconList.inputPhone" class="e-Icon"></image>
+				<input v-model="username" type="text" class="input company" placeholder="请输入手机号" />
 			</view>
-			<view class="inputBox">
+<!-- 			<view class="inputBox">
 				<image :src="iconList.inputPassword" class="e-Icon"></image>
 				<input v-model="password" type="password" class="input company" placeholder="请输入密码" />
-			</view>
+			</view> -->
 			<button class="loginBtn" @click="register('COMPANY')">绑定</button>
 		</view>
 		<!-- 街镇用户绑定页面 -->
@@ -58,9 +58,9 @@
 	export default {
 		onLoad(e) {
 			this.iconList = globalConfig.icon
-			console.log(this.iconList)
+			// console.log(this.iconList)
 			let query = JSON.parse(decodeURIComponent(e.query))
-			console.log(query)
+			// console.log(query)
 			this.query = query
 			this.type = query.type
 			this.userId = query.userId
@@ -89,13 +89,13 @@
 				}
 			},
 			setTitle(e){
-				// console.log(e)
+				// // console.log(e)
 				uni.setNavigationBarTitle({
 					title:e
 				})
 			},
 			lincenseValue(e){
-				console.log(e)
+				// console.log(e)
 			},
 			register(Type){
 				let that = this;
@@ -116,7 +116,7 @@
 						from:that.query.from,
 						auth:that.query.auth,
 						username:that.username,
-						password:that.password,
+						password:"hdty@2021",
 					}
 				}else if(Type==="STREET"){
 					that.data = {
@@ -137,7 +137,7 @@
 						"content-Type":"application/x-www-form-urlencoded"
 					},
 					complete(data) {
-						// console.log(data.data.code)
+						// // console.log(data.data.code)
 						if(data.data.code===0){
 							// if(data.data.data){
 								uni.showLoading({
@@ -151,7 +151,12 @@
 										uni.hideLoading()
 									},
 									fail(err) {
-										console.log(err)
+										uni.showModal({
+											title:data.data.msg,
+											showCancel:false,
+											confirmColor:"red"
+										})
+										// console.log(err)
 									}
 								})
 							// 	switch(that.type){
@@ -176,7 +181,7 @@
 							// 	// }
 							// }
 						}else{
-							// console.log(data)
+							// // console.log(data)
 							// if(Type==="COMPANY"){
 							// 	uni.showModal({
 							// 		showCancel:false,
@@ -223,7 +228,7 @@
 			height: 240px;
 		}
 		&.company{
-			height: 280px;
+			height: 240px;
 		}
 		&.street{
 			height: 240px;

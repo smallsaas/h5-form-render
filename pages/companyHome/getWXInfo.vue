@@ -36,20 +36,20 @@
                             // 用户信息已授权，获取用户信息
                             uni.getUserInfo({
                                 success(res) {
-                                    console.log("授权信息 = ", res);
+                                    // console.log("授权信息 = ", res);
 																		_this.userInfo.iv=res.iv;
 																		_this.userInfo.encryptedData=res.encryptedData;
                                 },
                                 fail(err) {
-                                    console.log("获取用户信息失败 = ", err)
+                                    // console.log("获取用户信息失败 = ", err)
                                 }
                             })
                         } else if (!res.authSetting['scope.userInfo']) {
-                            console.log("需要点击按钮手动授权")
+                            // console.log("需要点击按钮手动授权")
                         }
                     },
                     fail() {
-                        console.log("获取已授权选项失败")
+                        // console.log("获取已授权选项失败")
                     }
                 })
             },
@@ -60,12 +60,12 @@
                 uni.getUserInfo({
                     // 获取信息成功
                     success(res) {
-                        console.log("获取用户信息",res);
+                        // console.log("获取用户信息",res);
 				
                         // 成功后进行登录,获取code
                         uni.login({
                           success (res) {
-                             console.log(res);
+                             // console.log(res);
                             if (res.code) 
 														{
 															let code = res.code
@@ -74,7 +74,7 @@
 																..._this.userInfo,
 																code:code
 															}
-															console.log(LoginData)
+															// console.log(LoginData)
                               //发起网络请求
                               uni.request({
                                 // 请求路径
@@ -87,24 +87,24 @@
                                 method: 'POST',
                                 success(res){
                                     // 请求成功后获取openid和session_key
-                                    console.log(res)
+                                    // console.log(res)
                                 }
                               })
 															
                             } else {
-                              console.log('登录失败！' + res.errMsg)
+                              // console.log('登录失败！' + res.errMsg)
                             }
                           }
                         })
                     },
                     fail() {
-                        console.log("获取用户信息失败");
+                        // console.log("获取用户信息失败");
                     }
                 })
             },
             // 手机登录时获取手机号码相关信息的函数
             getPhoneNumber(e) {
-                console.log(e);
+                // console.log(e);
             }
         }
     }

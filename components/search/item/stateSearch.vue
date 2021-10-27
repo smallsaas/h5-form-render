@@ -8,11 +8,11 @@
 		<view class="subTitleBox">
 			{{item.address}}
 		</view>
+
 	</view>
 </template>
 
 <script>
-	
 	export default {
 		props:{
 			item:{
@@ -20,13 +20,15 @@
 				default(){
 					return {}
 				}
-			}
+			},
+
 		}
 	}
 </script>
 
 <style lang="less">
 	.stateSearchlist{
+		position: relative;
 		border-bottom: 1px solid #EEE;
 		padding: 10px;
 		>.titleBox{
@@ -59,5 +61,6 @@
 			font-size: 12px;
 		}
 	}
+
 	
 </style>

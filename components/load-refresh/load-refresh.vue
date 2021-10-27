@@ -41,7 +41,8 @@
                 scroll-y 
                 class="list" 
                 :scroll-top="scrollTop" 
-                :style="pagination !== false ? getHeight : ''"
+								@touchstart="listTouchStart"
+								@touchend="listTouchEnd"
                 @scrolltolower="loadMore" 
             >						
 <!-- 				<scroll-view
@@ -110,6 +111,8 @@
 			return {
 				startY: 0,
 				moveY: 0,
+				listStartY:0,
+				listEndY:0,
 				updating: false, // 数据更新状态（true: 更新中）
 				updateType: true, // 数据更新类型（true: 下拉刷新: false: 加载更多）
 				moving: false,
@@ -122,7 +125,7 @@
 		computed: {
 			// 计算组件所占屏幕高度
 			getHeight() {
-				console.log(this.unloading)
+				// console.log(this.unloading)
 				// rpx = px / uni.getSystemInfoSync().windowWidth * 750
 				if (this.fixedHeight) {
 					return `height: ${this.fixedHeight}rpx;`
@@ -157,6 +160,30 @@
 					this.updateType = false
 					this.$emit('loadMore')
 				}
+			},
+			listTouchStart(touch){
+				// console.log(touch,"start")
+				this.listStartY = touch.changedTouches[0].clientY
+			},
+			// 滑动列表动作中
+			listTouchMove(touch){
+				// console.log(touch,"move")
+			},
+			// 胡丹列表动作结束
+			listTouchEnd(touch){
+				if (this.pagination === false) {
+				    return
+				}
+				this.listEndY = touch.changedTouches[0].clientY
+				const { currentPage, totalPages } = this
+				if(this.listStartY-this.listEndY>100){
+				if (!this.updating && currentPage < totalPages) {
+						this.updating = true
+						this.updateType = false
+						this.$emit("loadMore")
+					}
+				}
+				// console.log(touch,"end")
 			},
 			// 回弹效果
 			coverTouchstart(e) {

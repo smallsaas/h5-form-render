@@ -65,16 +65,28 @@
 			        children: [
 			          {
 			            __config__: {
-			              label: '检查时间',
+			              label: '检查开始时间',
 			              tag: 'el-date-picker',
 			              tagIcon: 'date',
 			              layout: 'colFormItem',
 			              required: false,
 			            },
 			            type: 'date',
-			            placeholder: '请选择检查时间',
-			            __vModel__: 'checkTime'
+			            placeholder: '请选择检查开始时间',
+			            __vModel__: 'checkTimeStart'
 			          },
+								{
+								  __config__: {
+								    label: '检查结束时间',
+								    tag: 'el-date-picker',
+								    tagIcon: 'date',
+								    layout: 'colFormItem',
+								    required: false,
+								  },
+								  type: 'date',
+								  placeholder: '请选择检查结束时间',
+								  __vModel__: 'checkTimeEnd'
+								},
 			          {
 			            __config__: {
 			              label: '检查单号',
@@ -84,6 +96,7 @@
 			              required: false,
 			            },
 			            placeholder: '请输入检查单号',
+									disabled: true,
 			            __vModel__: 'checkOno'
 			          },
 			          {
@@ -132,34 +145,280 @@
 			            __vModel__: 'companyName'
 			          },
 			          {
-			            __config__: {
-			              label: '类型',
-			              tag: 'el-select',
-			              tagIcon: 'select',
-			              layout: 'colFormItem',
-			              required: false,
-			            },
-			            placeholder: '请选择类型',
-									__slot__: {
-										options: [{
-												"label": "健身",
-												"value": "BBD"
+									"__config__": {
+										"label": "业务类型",
+										"showLabel": true,
+										"labelWidth": null,
+										"tag": "el-checkbox-group",
+										"tagIcon": "checkbox",
+										"layout": "colFormItem",
+										"span": 8,
+										"regList": [],
+										"changeTag": true,
+										"document": "https://element.eleme.cn/#/zh-CN/component/checkbox",
+										"formId": 108,
+										"renderKey": "1081627530596290"
+									},
+									"__slot__": {
+										"options": [{
+											"label": "健身",
+											"value": "BBD"
 										}, {
-												"label": "游泳",
-												"value": "SW"
+											"label": "游泳",
+											"value": "SW"
 										}, {
-												"label": "攀岩",
-												"value": "RC"
+											"label": "滑雪",
+											"value": "SKI"
 										}, {
-												"label": "滑雪",
-												"value": "SKI"
+											"label": "潜水",
+											"value": "DIV"
 										}, {
-												"label": "滑冰",
-												"value": "SKA"
+											"label": "攀岩",
+											"value": "RC"
+										}, {
+											"label": "滑冰",
+											"value": "SKA"
+										}, {
+											"label": "射箭",
+											"value": "ARC"
+										}, {
+											"label": "田径",
+											"value": "ATH"
+										}, {
+											"label": "羽毛球",
+											"value": "BAD"
+										}, {
+											"label": "皮划艇",
+											"value": "CAN"
+										}, {
+											"label": "棒球",
+											"value": "BASE"
+										}, {
+											"label": "篮球",
+											"value": "BASK"
+										}, {
+											"label": "拳击",
+											"value": "BOX"
+										}, {
+											"label": "自行车",
+											"value": "BIC"
+										}, {
+											"label": "击剑",
+											"value": "FEN"
+										}, {
+											"label": "足球",
+											"value": "FOOT"
+										}, {
+											"label": "手球",
+											"value": "HAND"
+										}, {
+											"label": "马术",
+											"value": "EQU"
+										}, {
+											"label": "曲棍球",
+											"value": "HOC"
+										}, {
+											"label": "柔道",
+											"value": "JUD"
+										}, {
+											"label": "现代五项",
+											"value": "MOD"
+										}, {
+											"label": "体操",
+											"value": "ART"
+										}, {
+											"label": "赛艇",
+											"value": "ROW"
+										}, {
+											"label": "帆船",
+											"value": "SAI"
+										}, {
+											"label": "射击",
+											"value": "SHO"
+										}, {
+											"label": "排球",
+											"value": "VOL"
+										}, {
+											"label": "垒球",
+											"value": "SOFT"
+										}, {
+											"label": "兵乒球",
+											"value": "BPP"
+										}, {
+											"label": "跆拳道",
+											"value": "TAE"
+										}, {
+											"label": "网球",
+											"value": "TEN"
+										}, {
+											"label": "铁人三项",
+											"value": "TRI"
+										}, {
+											"label": "举重",
+											"value": "WEI"
+										}, {
+											"label": "摔跤",
+											"value": "WRE"
+										}, {
+											"label": "冬季两项",
+											"value": "WIB"
+										}, {
+											"label": "冰壶",
+											"value": "CUR"
+										}, {
+											"label": "冰球",
+											"value": "ICH"
+										}, {
+											"label": "滑水",
+											"value": "SUR"
+										}, {
+											"label": "摩托艇",
+											"value": "MOT"
+										}, {
+											"label": "救生",
+											"value": "LIS"
+										}, {
+											"label": "健美操",
+											"value": "AER"
+										}, {
+											"label": "技巧",
+											"value": "SKL"
+										}, {
+											"label": "高尔夫球",
+											"value": "GOLF"
+										}, {
+											"label": "保龄球",
+											"value": "BOWL"
+										}, {
+											"label": "掷球",
+											"value": "THR"
+										}, {
+											"label": "台球",
+											"value": "BIL"
+										}, {
+											"label": "藤球",
+											"value": "SEP"
+										}, {
+											"label": "壁球",
+											"value": "SQU"
+										}, {
+											"label": "橄榄球",
+											"value": "RUG"
+										}, {
+											"label": "软式网球",
+											"value": "LTEN"
+										}, {
+											"label": "热气球",
+											"value": "HAB"
+										}, {
+											"label": "运动飞机",
+											"value": "SPAI"
+										}, {
+											"label": "跳伞",
+											"value": "SKDI"
+										}, {
+											"label": "滑翔",
+											"value": "GLID"
+										}, {
+											"label": "航空模型",
+											"value": "AVMO"
+										}, {
+											"label": "车辆模型",
+											"value": "VEMO"
+										}, {
+											"label": "航海模型",
+											"value": "NAMO"
+										}, {
+											"label": "定向",
+											"value": "DIR"
+										}, {
+											"label": "业余无线电",
+											"value": "AMR"
+										}, {
+											"label": "围棋",
+											"value": "TGOG"
+										}, {
+											"label": "国际象棋",
+											"value": "CHES"
+										}, {
+											"label": "中国象棋",
+											"value": "CCHE"
+										}, {
+											"label": "桥牌",
+											"value": "BRI"
+										}, {
+											"label": "武术",
+											"value": "AMA"
+										}, {
+											"label": "健身气功",
+											"value": "FIQG"
+										}, {
+											"label": "登山",
+											"value": "MOU"
+										}, {
+											"label": "汽车",
+											"value": "AUMO"
+										}, {
+											"label": "摩托车",
+											"value": "MOT"
+										}, {
+											"label": "轮滑",
+											"value": "ROSK"
+										}, {
+											"label": "毽球",
+											"value": "SHUT"
+										}, {
+											"label": "门球",
+											"value": "GATE"
+										}, {
+											"label": "舞龙舞狮",
+											"value": "DLDA"
+										}, {
+											"label": "龙舟",
+											"value": "DRBO"
+										}, {
+											"label": "钓鱼",
+											"value": "FISH"
+										}, {
+											"label": "风筝",
+											"value": "KITE"
+										}, {
+											"label": "信鸽",
+											"value": "CAPI"
+										}, {
+											"label": "体育舞蹈",
+											"value": "SPDA"
+										}, {
+											"label": "健美",
+											"value": "BOBU"
+										}, {
+											"label": "拔河",
+											"value": "TOW"
+										}, {
+											"label": "飞镖",
+											"value": "DART"
+										}, {
+											"label": "电子竞技",
+											"value": "ELSP"
+										}, {
+											"label":"蹦床",
+											"value":"TRA"
+										}, {
+											"label": "瑜伽",
+											"value": "YOG"
 										}]
 									},
-			            __vModel__: 'companyType'
-			          },
+									"placeholder": "请选择业务类型",
+									"style": {
+										"width": "100%"
+									},
+									"clearable": true,
+									"disabled": false,
+									"filterable": false,
+									"multiple": false,
+									readonly:true,
+									"__vModel__": "type"
+								},
 			          {
 			            __config__: {
 			              label: '住所',
@@ -232,6 +491,7 @@
 			              tagIcon: 'textarea',
 			              layout: 'colFormItem',
 			              required: false,
+										defaultValue:"/"
 			            },
 			            placeholder: '请输入检查人意见',
 			            __vModel__: 'checkSuggest'
@@ -326,7 +586,19 @@
 			            },
 			            placeholder: '请输入备注',
 			            __vModel__: 'remark'
-			          }
+			          },
+								{
+									__config__: {
+									  label: '上传附件',
+									  tag: 'c-view-upload',
+									  tagIcon: 'upload',
+									  layout: 'colFormItem',
+									  required: false,
+										defaultValue:"/",
+									},
+									placeholder: '请上传附件',
+									__vModel__: 'attachment'
+								}
 			        ]
 			      }
 			    }
@@ -376,31 +648,31 @@
 				
 			// 	let res = await LoadComplete({"processDefineKey":key,"taskId":taskId})
 			// 	if(res.code==="00000"){
-			// 		// console.log("获取到的数据res",res)
+			// 		// // console.log("获取到的数据res",res)
 			// 		let list = res.data.nodeSettingEntity.formFiledEntityList
-			// 		// console.log("list",list)
+			// 		// // console.log("list",list)
 			// 		for(var i in list){
-			// 			// console.log("name",list[i].name)
+			// 			// // console.log("name",list[i].name)
 			// 			let status = list[i].status
 			// 			let fields = config
-			// 			// console.log("config",config)
+			// 			// // console.log("config",config)
 			// 					let __model__ = fields.__vModel__
 			// 					if(__model__===list[i].name){
 			// 						let __newConfig__ = fields
 			// 						if(status===0){
 			// 							newConfig={...__newConfig__,"readonly":true}
-			// 							// console.log("NewConfig",newConfig)
+			// 							// // console.log("NewConfig",newConfig)
 			// 						}else{
 			// 							newConfig={...__newConfig__,"readonly":false}
 			// 						}
 			// 						newField=newConfig
-			// 						// console.log("NEWFIELD",newField)
+			// 						// // console.log("NEWFIELD",newField)
 			// 						return newField
 			// 			}
 			// 			// if(config.fields)
 			// 		}
 			// 	}
-			// 	// console.log("完成之后的配置",newField)
+			// 	// // console.log("完成之后的配置",newField)
 			// 	return newField
 			// }
 			
