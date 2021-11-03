@@ -44,7 +44,7 @@ wait: 待完成文本
 						</view>
 					</view>
 					<view style="position: relative;width: 90px;" v-if="options.showDelete">
-						<view v-if="item.finishState==='0'" style="color: #FFFFFF;position: absolute;z-index:88888;bottom: 0px;right: 0px;background-color: #EB3941;padding: 5px 10px;" @click="handleDelete">删除</view>
+						<view v-if="item.finishState==='0'" style="color: #FFFFFF;position: absolute;z-index:88888;bottom: 0px;right: 5px;background-color: #EB3941;padding: 5px 10px;" @click="handleDelete">删除</view>
 					</view>
 					<view style="position: relative;width: 90px;" v-if="!options.hideState">
 						<span class="enforcementState rectification" v-if="item.finishState==='0'">{{options.noSuccess||"未完成"}}</span>
