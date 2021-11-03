@@ -23,13 +23,13 @@
                         alignItems: 'center',
                         padding: '10rpx',
 						boxShadow: '0 0 10px 0 #c1c1c1',
-                        backgroundColor: 'rgba('+item.colour+')' || '#333',
+                        background: item.colour||'#333',
                     }"
 				>
 					<button 
                         class="map_customCallout"
                         :style="{
-                            backgroundColor: 'rgba('+item.colour+')' || '#333'
+													background: item.colour||'#333',
                         }"
                     >
                       {{item.title}}
@@ -55,12 +55,12 @@
             </view>
 			<view class="tag_list">
                 <icon-text
-                    v-for="(item, index) in typeList" 
+                    v-for="(item, index) in typeList.slice(0,5)" 
                     :key="index" 
                     :url="item.url" 
                     :title="item.title"
 										:type="item.type"
-                    :imageBg="'rgba('+item.colour+')'||'#333'"
+                    :imageBg="`rgb(${item.colour})` || '#333'"
                     :selectTitle="currentType"
                 	@onClick="handleClick"
                 />
@@ -75,7 +75,6 @@
 	import _ from 'lodash'
 	import { getAddress } from '@/utils/mapTools.js'
 	
-	import { navList, navTypeList } from '../../../assets/mockData.js'
 	
 	const customCallout = {
 		anchorX: 0,
@@ -151,7 +150,7 @@
 		methods: {
             // 获取类别数据
             async fetchTypeList () {
-                const res = await getNavTypeList()
+                const res = await getNavTypeList({pageSize:100})
 								// console.log(res)
                 if (res.code === 200) {
                     this.typeList = _.cloneDeep(_.get(res, 'data.records', []))
@@ -191,19 +190,57 @@
 			},
 			getCustomCalloutBgColor (title) {
 				let color = '#333'
-			    if (this.typeList.some(x => x.type === title)) {
-						// // console.log('typeList',this.typeList)s
-				   const item = this.typeList.find(x => x.type === title)
-					 // console.log("item",item)
-				   color = item.colour
-			    }
+
+					
+					if(title.indexOf("[")!==-1){
+						let firstColor
+						let lastColor
+						if(this.typeList.some(x=>x.type === JSON.parse(title)[0])){
+							let value = this.typeList.find(x => x.type === JSON.parse(title)[0])
+							console.log(value)
+							firstColor = `rgb(${value.colour})`
+						}else{
+							firstColor = "#333"
+						}
+						if(this.typeList.some(x=>x.type === JSON.parse(title)[JSON.parse(title).length-1])){
+							let value = this.typeList.find(x => x.type === JSON.parse(title)[JSON.parse(title).length-1])
+							lastColor = `rgb(${value.colour})`
+						}else{
+							lastColor = "#333"
+						}
+						color = `${firstColor}` //渐变用不了 弃用
+						
+					}else{
+						if (this.typeList.some(x => x.type === title)) {
+							// // console.log('typeList',this.typeList)s
+						 const item = this.typeList.find(x => x.type === title)
+						 // console.log("item",item)
+						 color = `rgb(${item.colour})`
+						}
+					}
+					
+					console.log(color)
 				return color
 			},
 			handleClick (title) {
 				// console.log(this.latitude,'lat')
 				// console.log(this.longitude,'long')
                 this.currentType = title
-                this.markers = this.allmarkers.filter(x => x.type === title)
+								let newMarkers = []
+                this.allmarkers.map((item,i)=>{
+									if(item.type.indexOf("[")!==-1){
+										JSON.parse(item.type).map((marker,m)=>{
+											if(marker === title){
+												newMarkers.push(item)
+											}
+										})
+									}else{
+										if(item.type === title){
+											newMarkers.push(item)
+										}
+									}
+								})
+								this.markers = newMarkers
 				if (this.markers.length > 0) {
 					// for(let i=0;i<this.markers.length;i++){
 						// this.latitude = _.get(this.markers, '['+i+'].latitude')

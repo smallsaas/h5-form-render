@@ -362,7 +362,7 @@
 		background-color: white;
 		top: 0;
 		right: 0;
-		max-height: 600px;
+		max-height: 100vh;
 		z-index: 20000;
 		background-color: #fff;
 		.WindowTitle{
@@ -411,7 +411,7 @@
 		}
 		.listBody{
 			margin-top: 50px;
-			margin-bottom: 50px;
+			padding-bottom: 50px;
 		}
 		.allList{
 			background-color: #FDFDFD;
@@ -445,6 +445,7 @@
 			}
 		}
 		.footer{
+			z-index: 30005;
 			position: fixed;
 			bottom: 0;
 			left: 0;
@@ -453,13 +454,14 @@
 			.button{
 				flex: 1;
 				border-radius: 0;
+				background-color: #FFF;
 				&:hover{
 					opacity: .8;
 				}
 			}
 			.button:last-child{
 				background-color: #1A5EB5;
-				color: white;
+				color: #FFF;
 			}
 		}
 	}

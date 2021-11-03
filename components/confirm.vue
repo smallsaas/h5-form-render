@@ -208,6 +208,12 @@
 				let that = this
 				// console.log("JUMP",this.jumpUrl)
 				// // console.log(data)
+				let allName = uni.getStorageSync("allName")
+				if(allName.length>0&&Array.isArray(allName)){ //初始化表单
+					allName.map((item,i)=>{
+						uni.removeStorageSync(item)
+					})
+				}
 				uni.request({
 					header:header,
 					url:url,

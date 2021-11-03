@@ -79,7 +79,7 @@
 			// 初始化
 			init(){
 				this.icon = globalConfig.icon
-				console.log(this.param)
+				// console.log(this.param,"param")
 				if(this.param.readonly){
 					this.showAdd = false
 					this.isReadOnly = true
@@ -129,7 +129,7 @@
 				uni.showModal({
 					title:"该附件对企业、街镇角色已设为可见状态！",
 					showCancel:false,
-					confirmColor:"red",
+					confirmColor:"#FC1944",
 					confirmText:"我知道了"
 				})
 			},
@@ -142,7 +142,7 @@
 				uni.showModal({
 					title:"该附件对企业、街镇角色已设为不可见状态！",
 					showCancel:false,
-					confirmColor:"red",
+					confirmColor:"#FC1944",
 					confirmText:"我知道了"
 				})
 			},
@@ -234,6 +234,9 @@
 			}
 		},
 		created() {
+			this.init()
+		},
+		mounted() {
 			this.init()
 		}
 	}

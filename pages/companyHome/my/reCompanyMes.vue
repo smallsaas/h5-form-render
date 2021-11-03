@@ -38,7 +38,14 @@
 					complete(res) {
 						// console.log("res",res)
 						if(res.statusCode===200){
-							that.list=res.data.data
+							let list = res.data.data
+							let newList = {}
+							for(var item in list){
+								if(!Array.isArray(list[item])){
+									newList[item] = list[item]
+								}
+							}
+							that.list=newList
 							// console.log(that.list)
 						}
 					}

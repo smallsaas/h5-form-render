@@ -94,7 +94,7 @@
 											content:"您没有绑定，是否前往绑定？",
 											cancelText:"其他角色",
 											confirmText:"立即绑定",
-											confirmColor:"red",
+											confirmColor:"#FC1944",
 											success(modalButton) {
 												let list = {
 													...data,
@@ -136,8 +136,23 @@
 														Authorization:`Bearer ${token}`
 													},
 													success(e) {
-														uni.setStorageSync("companyInfo",e.data.data)
-														globalConfig.companyInfo = uni.getStorageSync("companyInfo")
+														let data;
+														uni.request({
+															url:`${globalConfig.workflowEP}/executive/companyinfo/${e.data.data.id}`,
+															header:{
+																Authorization:`Bearer ${token}`
+															},
+															success(companyInfo){
+																data = {
+																	...e.data.data,
+																	"streetName":companyInfo.data.data.streetName
+																}
+																console.log(data)
+																uni.setStorageSync("companyInfo",data)
+																globalConfig.companyInfo = uni.getStorageSync("companyInfo")
+															}
+														})
+	
 													}
 												})
 											}

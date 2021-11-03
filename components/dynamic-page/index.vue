@@ -11,6 +11,7 @@
 										 outStyle: getComponentStyle(item),
 										 ...customValues
 									}"
+									:name="_get(config,'name','changeForm')"
 									:code="item.code"
 									:jumpUrl="jumpUrl"
 									:taskId="taskId"
@@ -178,9 +179,6 @@
 							:list="getComponentsData(item) ||  _get(config.moduleData, `${item.key}.steps`, [])"
 							:outStyle="getComponentStyle(item)"
 						></steps>
-						<sumbit-state
-						 v-if="_get(item, 'type') === 'sumbitState'"
-						 :state="state"></sumbit-state>
 						 <c-button
 						 	v-if="_get(item, 'type') === 'button'"
 						 	:config = "_get(config.moduleData,item.key,{})"
@@ -218,7 +216,6 @@
 	import search from '../search/search.vue'
 	import cell from '../other/Cell.vue'
 	import steps from '../Steps/Steps.vue'
-	import sumbitState from '../other/SumbitState.vue'
 	import cButton from '../other/C-Button.vue'
 	import confirm from '../confirm.vue'
 	import getWorkFlow from '../GetWorkFlow.vue'
@@ -235,7 +232,6 @@
 			search,
 			cell,
 			steps,
-			sumbitState,
 			cButton,
 			confirm,
 			getWorkFlow,

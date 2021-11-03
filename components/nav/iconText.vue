@@ -2,7 +2,7 @@
     <view class="icon_text_container" @click="handleClick">
         <view 
             :class="selectTitle === title ? 'image_content hover' : 'image_content'"
-            :style="{ backgroundColor: imageBg }"
+            :style="{ background: imageBg }"
         >
             <image :src='url' class="image" />
         </view>
@@ -26,6 +26,9 @@
 			handleClick() {
 				this.$emit('onClick', this.type)
 			}
+		},
+		created() {
+			console.log(this.imageBg,"IMAGEBG")
 		}
     }
 </script>

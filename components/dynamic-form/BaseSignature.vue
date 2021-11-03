@@ -92,7 +92,7 @@
                     	@touchmove="handleTouchmove" 
                         @touchend="handleTouchend"
                     />
-										<view class="Tips">请使用横屏签字</view>
+										<view class="Tips">请使用楷体签字</view>
                     <view class="buttons">
 						<view class="but" @click="handleClear">重绘</view>
 						<view class="but" @click="handleBack">返回</view>
@@ -244,7 +244,7 @@
 						// 	uni.showModal({
 						// 		title:"选择的签章对应的密码错误，请重新输入！",
 						// 		showCancel:false,
-						// 		confirmColor:"red"
+						// 		confirmColor:"#FC1944"
 						// 	})
 						// }
 						uni.request({
@@ -262,7 +262,7 @@
 									uni.showModal({
 										title:res.data.msg,
 										showCancel:false,
-										confirmColor:"red"
+										confirmColor:"#FC1944"
 									})
 								}
 							}
@@ -307,7 +307,7 @@
 								}else{
 									uni.showModal({
 										title:res.data.msg,
-										confirmColor:"red"
+										confirmColor:"#FC1944"
 									})
 								}
 							}
@@ -441,17 +441,17 @@
 												let url = JSON.parse(res.data).data.url
 												that.url = globalConfig.workflowEP+url
 												that.$emit('change',globalConfig.workflowEP+url)
-												if(that.userType === "2"&&!that.hideSelect){
-													uni.showModal({
-														title:"是否保存为常用签章？",
-														success(button) {
-															if(button.confirm){
-																that.showWriteHistory = true
-																that.password = null
-															}
-														}
-													})
-												}
+												// if(that.userType === "2"&&!that.hideSelect){
+												// 	uni.showModal({
+												// 		title:"是否保存为常用签章？",
+												// 		success(button) {
+												// 			if(button.confirm){
+												// 				that.showWriteHistory = true
+												// 				that.password = null
+												// 			}
+												// 		}
+												// 	})
+												// }
 											},
 											fail(e) {
 												// console.log("失败",e)

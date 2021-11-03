@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<c-select @change="isSelect" :param="param" :loadAPI="API"></c-select>
+		<c-select @change="isSelect" @list="isRemove" :param="param" :loadAPI="API"></c-select>
 		<c-button :config="config"></c-button>
 	</view>
 </template>
@@ -25,10 +25,22 @@
 			}
 		},
 		methods: {
+			isRemove(e){
+				let allName = uni.getStorageSync("allName")
+				if(allName.length>0&&Array.isArray(allName)){ //初始化表单
+					allName.map((item,i)=>{
+						if(e.name !== item.companyName){
+							uni.removeStorageSync(item)
+						}
+					})
+				}
+			},
 			isSelect(e){
 				// console.log("select!",e)
+				// let userId = 
 				this.selectId=e
 				this.config.url=this.config.url+"&selectId="+this.selectId
+				
 				// console.log("url",this.config.url)
 			}
 		},

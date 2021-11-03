@@ -6,7 +6,7 @@
 			<view>华为手机使用本地浏览器访问</view>
 			<view>其他品牌手机如果无法访问</view>
 			<view>请使用Edge浏览器访问</view>
-			<view style="margin: 3% 18%;" class="qrbox">
+			<view class="qrbox">
 				<ayQrcode ref="qrcode" :modal="modal_qr" :url="url" @hideQrcode="hideQrcode" :height="200" :width="200" 
 				/>
 			</view>
@@ -34,6 +34,25 @@
 		components: {
 			ayQrcode,
 
+		},
+		onShareAppMessage(res) {
+			var that = this
+			return {
+				title:"执法表单打印",
+				path:"/pages/print?processInstanceId="+that.pId,
+				success(res){
+					uni.showToast({
+						title:"转发成功",
+						icon:"success"
+					})
+				},
+				fail(err){
+					uni.showToast({
+						title:"转发失败",
+						icon:"error"
+					})
+				}
+			}
 		},
 		methods: {
 			// 展示二维码
@@ -95,6 +114,9 @@
 			}
 		},
 		onLoad(e){
+			uni.setNavigationBarTitle({
+				title:"打印页"
+			})
 			this.pId = e.processInstanceId
 			if(this.pId){
 				this.getWindowUrl()
@@ -129,15 +151,16 @@
     margin: 20px auto;
 	}
 	.qrbox{
-		margin: 3% 18%;
-		width: 220px;
-		height: 220px;
-		display: flex;
-		/* top: 50%; */
-		/* left: 50%; */
-		/* box-shadow: 0 0 2px black; */
-		overflow: hidden;
-		position: relative;
-		left: 8vw;
+    /* margin: 3% 18%; */
+    justify-content: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    /* overflow: hidden; */
+    height: 220px;
+    /* vertical-align: center; */
+    /* line-height: 220px; */
+    align-items: center;
+    position: relative;
 	}
 </style>

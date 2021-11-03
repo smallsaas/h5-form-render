@@ -2,14 +2,14 @@
 	<view class="ToDoListItem">
 		<image :src="getVal(item.processDefineKey)" mode="aspectFit" v-if="item.processDefineKey" style="margin:auto 15px;min-width:40px;min-height: 40px;width: 40px;height: 50px;"></image>
 		<view class="ToDoBody">
+			<view v-if="item.instanceEntityVo.customValues.companyName||item.instanceEntityVo.formData.companyName">
+				<span class="Title">企业名称：</span>{{item.instanceEntityVo.customValues.companyName||item.instanceEntityVo.formData.companyName}}
+			</view>
 			<view class='taskName'>
 				<span class="Title">工作名称：</span>{{item.instanceEntityVo.workName}}
 			</view>
-			<view class='createTime'>
-				<span class="Title">发起时间：</span>{{item.createTime||item.startTime}}
-			</view>
-			<view v-if="item.instanceEntityVo.customValues.companyName||item.instanceEntityVo.formData.companyName">
-				<span class="Title">公司名称：</span>{{item.instanceEntityVo.customValues.companyName||item.instanceEntityVo.formData.companyName}}
+			<view class='createTime' v-if="item.instanceEntityVo.customValues.streetName">
+				<span class="Title">街道名称：</span>{{item.instanceEntityVo.customValues.streetName}}
 			</view>
 		</view>
 	</view>
@@ -22,7 +22,8 @@
 		created() {
 		},
 		props:{
-			item: Object
+			item: Object,
+			options:Object
 		},
 		data(){
 			return {
@@ -40,7 +41,7 @@
 				let DateJson = Date.split("-")
 				let DateString = DateJson[1]+DateJson[2]
 				return DateString
-			},
+			}
 		}
 	}
 </script>
@@ -48,6 +49,7 @@
 <style lang="less">
 	.ToDoListItem{
 		height: 100px;
+		position: relative;
 		display: flex;
 		align-items: center;
 		border-bottom: 1px solid #eee;

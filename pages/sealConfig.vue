@@ -79,6 +79,9 @@
 			}
 		},
 		created() {
+			uni.setNavigationBarTitle({
+				title:"印章管理"
+			})
 			this.userInfo = uni.getStorageSync(globalConfig.userInfo)
 			this.userId = this.userInfo.userId
 			this.header = {
@@ -199,7 +202,7 @@
 						}else{
 							uni.showModal({
 								title:res.data.msg,
-								confirmColor:"red"
+								confirmColor:"#FC1944"
 							})
 						}
 					}
@@ -233,7 +236,7 @@
 					url:this.api+`?name=${item.name}&url=${item.url}&password=${item.password}`,
 					header:this.header,
 					method:"POST",
-					success() {
+					complete() {
 						that.showAdd = false
 						that.$reload()
 						uni.showToast({
@@ -244,11 +247,12 @@
 			},
 			// 删除印章
 			deleteUserSeal(id){
+				let that = this
 				uni.request({
 					url:this.api+"/"+id,
 					header:this.header,
 					method:"DELETE",
-					success() {
+					complete() {
 						that.$reload()
 						uni.showToast({
 							title:"删除成功",

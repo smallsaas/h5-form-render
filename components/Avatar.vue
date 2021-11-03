@@ -13,6 +13,12 @@
 				<view class="row"><span class="title">公司名称:</span>{{companyList.name||'-'}}</view>
 				<view class="row"><span class="title">企业信用代码:</span>{{companyList.licenceNo||'-'}}</view>
 			</view>
+			<image :src="icon.qrcode" @click="changeQrCode" v-if="theme==='company'" mode="aspectFit" class="qr_icon"></image>
+			<view v-if="theme==='company'" v-show="isShowQrCode" class="qrcode_box">
+				<ayQrcode ref="qrcode" :modal="modal_qr" :url="url" @hideQrcode="hideQrcode" :height="200" :width="200"
+				/>
+				<text style="text-align: center;font-weight: bolder;">长按二维码保存</text>
+			</view>
 			<image :src="icon.notice" @click="getNotice()" mode="aspectFit" class="notice"></image>
 		</view>
 		<view class="AvatarCard" v-if="theme==='street'" style="flex-direction: column;align-items: center;">
@@ -31,6 +37,7 @@
 <script>
 	import {globalConfig} from '@/config.js'
 	import card from './other/Card.vue'
+	import ayQrcode from "@/components/ay-qrcode/ay-qrcode.vue"
 	export default {
 		name:"Avatar",
 		data() {
@@ -38,10 +45,14 @@
 				icon:{},
 				list:{},
 				companyList:{},
-				code:''
+				code:'',
+				modal_qr: false,
+				url:null,
+				isShowQrCode:false
 			};
 		},
 		components:{
+			ayQrcode,
 			card
 		},
 		props:{
@@ -55,10 +66,38 @@
 			if(this.theme==="company"){
 				// console.log(this.companyList)
 				this.companyList = globalConfig.companyInfo
+				this.getQrUrl()
 				// console.log("list",this.list)
 			}
 		},
 		methods:{
+			// 二维码操作
+			// 展示二维码
+			showQrcode() {
+				let _this = this;
+				this.modal_qr = true;
+				// uni.showLoading()
+				setTimeout(function() {
+					// uni.hideLoading()
+					_this.$refs.qrcode.crtQrCode()
+				}, 50)
+			},
+			changeQrCode(){
+				this.isShowQrCode = !this.isShowQrCode
+			},
+			//传入组件的方法
+			hideQrcode() {
+				this.modal_qr = false;
+			},
+			// 二维码地址
+			getQrUrl(){
+				this.url = `https://api.mock.smallsaas.cn/test/invQrCode/${this.companyList.licenceNo}/Mes`
+				console.log(this.url)
+				if(this.url){
+					this.showQrcode();//一加载生成二维码
+				}
+			},
+			
 			getNotice(){
 				uni.navigateTo({
 					url:"/pages/notice"
@@ -211,5 +250,27 @@
 		.row{
 			line-height: 30px;
 		}
+	}
+	.qr_icon{
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		width: 25px;
+		height: 25px;
+	}
+	.qrcode_box{
+		position: absolute;
+		top: 40px;
+		right: 40px;
+		width: 220px;
+		height: 240px;
+		background-color: white;
+		display: flex;
+		flex-direction: column;
+		font-size: 16px;
+		justify-content: center;
+		align-items: center;
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px #aaa;
 	}
 </style>

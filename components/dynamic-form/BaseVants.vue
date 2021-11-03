@@ -161,6 +161,7 @@
 							 :loadAPI="_get(item,'loadApi','')"
 							 :data="_get(item,'data')"
 							 :method="_get(item,'method')"
+							 :options="item.options"
 							 @change="(e) => handleSetValue(e, fields[index])"
 										 @list="(e)=>handleList(e)"
 			 ></c-select>
@@ -313,6 +314,7 @@
         methods: {
            getBaseParam (item) {
 						 let config;
+						 // console.log(this.fields,"表单数据")
 							// this.form[item.__vModel__]
 							let latitude = this.form["latitude"]
 							let longitude = this.form["longitude"]

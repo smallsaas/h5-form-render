@@ -20,8 +20,8 @@
 			<view class="listBody" style="background-color: white;">
 				<view v-for="(item,i) in list" class="allList" :key="i">
 					<view @click="hide(i),isCheck(i)" class="SelectList" >
-						<view class="title">{{item.name}}</view>
-						<view class="subtitle">{{item.address}}</view>
+						<view class="title">{{item[options.nameField]||item.name}}</view>
+						<view class="subtitle">{{item[options.addressField]||item.address}}</view>
 						<view class="radio">
 							<radio color="#1A5EB5" :checked="radioSelect===i"></radio>
 						</view>
@@ -205,8 +205,10 @@
 				this.show = true
 			},
 			hide(i){
-				this.content = this.list[i].name
-				this.$emit("change",this.list[i].id)
+				let list = this.list[i]
+				this.content = this.options?list[this.options.nameField]:this.list[i].name
+				let change = this.options?list[this.options.changeField]:this.list[i].id
+				this.$emit("change",change)
 				this.$emit("list",this.list[i])
 			},
 			isCheck(i){
@@ -234,6 +236,7 @@
 					return `${globalConfig.workflowEP}/api.flow.examine/queryNextExamineUser`
 				}
 			},
+			options:Object,
 			data:null,
 			method:null,
 			param: {
@@ -320,7 +323,7 @@
 		background-color: white;
 		top: 0;
 		right: 0;
-		max-height: 600px;
+		max-height: 100vh;
 		z-index: 20000;
 		background-color: #fff;
 		.WindowTitle{
@@ -370,7 +373,7 @@
 		}
 		.listBody{
 			margin-top: 50px;
-			margin-bottom: 50px;
+			padding-bottom: 50px;
 		}
 		.allList{
 			background-color: #FDFDFD;
@@ -404,6 +407,7 @@
 			}
 		}
 		.footer{
+			z-index: 30005;
 			position: fixed;
 			bottom: 0;
 			left: 0;

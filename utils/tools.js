@@ -206,7 +206,7 @@ export function login(){
 				uni.showModal({
 					title:"登录失败",
 					showCancel:false,
-					confirmColor:"red",
+					confirmColor:"#FC1944",
 					success() {
 						uni.navigateBack({
 							delta:10
@@ -225,6 +225,7 @@ export function getUserProfile(){
 	let rawData;
 	let userProfile;
 	let profile = cache("profile")
+	let that = this
 	if(profile!=null&&profile.iv!=null){
 		userProfile = profile
 		console.log(profile)
@@ -233,10 +234,15 @@ export function getUserProfile(){
 			title:"申请",
 			content:"正在请求您的个人信息",
 			success(User) {
+				uni.showLoading({
+					title:"正在请求中",
+					mask:true
+				})
 				if(User.confirm){
 					uni.getUserProfile({
 						desc:"获取您的昵称、头像、地区及性别",
 						success(userProfile) {
+							uni.hideLoading()
 							console.log(userProfile)
 							iv = userProfile.iv	
 							encryptedData = userProfile.encryptedData
@@ -257,22 +263,21 @@ export function getUserProfile(){
 							}
 							// userProfile = newProfile
 							cache("profile",newProfile,5*60)//设置缓存为五分钟
-							uni.navigateBack({
-								delta:10,
-								success(){
-									uni.showToast({
-										icon:"success",
-										title:"请重新选择角色",
-										duration:5000
-									})
-								}
-							})
+							that.$reload()
 						}
 					})
+				}else{
+					uni.hideLoading()
 				}
 			}
 		})
 		userProfile = cache("profile")
+		if(userProfile!=null&&userProfile.iv!=null){
+			uni.showToast({
+				title:"授权超时！"
+			})
+			return getUserProfile()
+		}
 	}
 	return userProfile
 }

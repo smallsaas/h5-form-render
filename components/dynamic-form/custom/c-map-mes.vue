@@ -9,6 +9,7 @@
 					:markers="markers"
 					:show-location="true"
 					:style="{width:'200px',height:'100px','z-index':zIndex,'background-color':'white'}"
+					@click="handleToMap"
 				/>
 		</view>
 
@@ -162,7 +163,7 @@
 			}
 			let defaultValue = {
 				latitude:0,
-				
+				longitude:0,
 				id:1,
 				scale:5,
 				iconPath:this.icon.MapCompany,
@@ -170,14 +171,29 @@
 				height:"50px",
 				title:"公司所在地"
 			}
-			uni.createMapContext("mapMes",this).moveToLocation({
-				longitude:this.param.value.longitude,
-				latitude:this.param.value.latitude
-			})
+			if(this.param.value){
+				uni.createMapContext("mapMes",this).moveToLocation({
+					longitude:this.param.value.longitude,
+					latitude:this.param.value.latitude
+				})
+			}else{
+				uni.createMapContext("mapMes",this).moveToLocation({
+					longitude:this.longitude,
+					latitude:this.latitude
+				})
+			}
+
 			this.markers.push(this.value)
 
 		},
 		methods: {
+			handleToMap(){
+				uni.openLocation({
+					longitude:this.param.value.longitude,
+					latitude:this.param.value.latitude,
+					name:"公司所在地"
+				})
+			},
 			Bigsize(){ 
 				this.width=uni.getSystemInfoSync().windowWidth+'px',
 				this.height=uni.getSystemInfoSync().windowHeight+'px',
@@ -214,7 +230,7 @@
 				uni.showModal({
 					title:"是否确定选择该地点为公司地址？",
 					confirmText:"确定",
-					confirmColor:"red",
+					confirmColor:"#FC1944",
 					success(button) {
 						// console.log(button)
 						if(button.confirm){

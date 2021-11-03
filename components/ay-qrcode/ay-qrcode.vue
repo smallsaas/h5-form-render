@@ -90,10 +90,10 @@
 				var width = parseInt(that.h_w_img);
 				var style = '';
 				if (height > 0) {
-					style = `height:${height*2}rpx;`;
+					style = `height:${height}px;`;
 				}
 				if (width > 0) {
-					style += `width:${width*2}rpx;z-index: 2;`;
+					style += `width:${width}px;z-index: 2;`;
 				}
 			
 				return style;
@@ -146,8 +146,8 @@
 				var height = parseInt(that.height);
 				var width = parseInt(that.width);
 				var style = '';
-				var height = height*2+20 ;
-				var width = width*2+20 ;
+				var height = height ;
+				var width = width ;
 				
 				//#ifndef MP
 				var add = that.add_num ;
@@ -157,10 +157,10 @@
 				// #endif
 				
 				if (height > 0) {
-					style = `height:${height}rpx;`;
+					style = `height:${height}px;`;
 				}
 				if (width > 0) {
-					style += `width:${width}rpx;`;
+					style += `width:${width}px;`;
 				}
 				
 				return style;

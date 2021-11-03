@@ -30,7 +30,10 @@
 				<image :src="iconList.inputPassword" class="e-Icon"></image>
 				<input v-model="password" type="password" class="input company" placeholder="请输入密码" />
 			</view> -->
-			<button class="loginBtn" @click="register('COMPANY')">绑定</button>
+			<view style="display: flex;background-color: white;" class="loginBtn">
+				<button @click="returnQy" style="background-color: #1A5EB5;color: white;">去企业备案库登记信息</button>
+				<button @click="register('COMPANY')" style="background-color: #1A5EB5;color: white; flex: 1; margin-left: 10px;">绑定</button>
+			</view>
 		</view>
 		<!-- 街镇用户绑定页面 -->
 		<view class="LoginBox street" v-else-if="type === '3'">
@@ -65,6 +68,7 @@
 			this.type = query.type
 			this.userId = query.userId
 			this.getTitle(this.type)
+			this.lincenseNo = this.$cache("YyzzCode")
 		},
 		data() {
 			return {
@@ -87,6 +91,16 @@
 					case "4":this.setTitle("企业用户绑定");break;
 					case "3":this.setTitle("街镇用户绑定");break;
 				}
+			},
+			returnQy(){
+				uni.navigateBack({
+					delta:10,
+					success(){
+						uni.navigateTo({
+							url:"/pages/login/addCompany"
+						})
+					}
+				})
 			},
 			setTitle(e){
 				// // console.log(e)
@@ -154,7 +168,7 @@
 										uni.showModal({
 											title:data.data.msg,
 											showCancel:false,
-											confirmColor:"red"
+											confirmColor:"#FC1944"
 										})
 										// console.log(err)
 									}
@@ -249,6 +263,7 @@
 			background-color: #1A5EB5;
 			color: white;
 			width: 90%;
+			flex: 1;
 			position: absolute;
 			bottom: 0px;
 			left: 50%;

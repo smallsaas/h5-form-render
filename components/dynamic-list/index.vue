@@ -61,6 +61,7 @@
 						...getComponentBindData(item)
 					}"
 					:options="_get(config,'options',{})"
+					@delete="handleDelete"
 					/>
 					<state-to-item
 					 	v-if="getListItemKey() === 'stateToItem'"
@@ -82,6 +83,7 @@
 							...item,
 							...getComponentBindData(item)
 						}"
+						:options="config.options"
 					></to-do-list-item>
 					<aqy-item
 						v-if="getListItemKey() === 'aqyItem'"
@@ -164,6 +166,9 @@
                 listSearch: {}, // 列表查询参数
                 pageNoField: '',  // 页数配置的字段名
                 pageSizeField: '', // size配置的字段名
+								isStop:false ,//是否停止自动刷新
+								Time:null,
+								isDelete:false
 								
 			}
 		},
@@ -196,11 +201,20 @@
 		 // 外部传入数据源
 		 if (_.get(this.config, 'loadApi')) {
 		    this.updateData()
+				this.Time = setInterval(()=>{
+					if(!this.isStop){
+						this.fetchList({ refresh: true })
+					}
+				},5000)
+				console.log(this.Time)
 		 } else {
 			 if (this.isPropsList) {
 				this.list = _.cloneDeep(this.config.list)
 			 }
 		 }
+		},
+		beforeDestroy(){
+			clearInterval(this.Time)
 		},
 		methods: {
 			_has (item = {}, str) {
@@ -219,7 +233,9 @@
 			  const keyData = _.get(this.config,'itemModule',{})
               return _.get(keyData, 'name', '')
             },
-            
+            handleDelete(e){
+							this.isDelete = e
+						},
             // 切换tab
             handleSelectTab (e, item) {
                 this.tabActive = e
@@ -275,10 +291,10 @@
             
             // 获取列表信息
             fetchList (searchData = {}) {
-              uni.showLoading({
-                  title: "loading...",
-                  mask: true
-              })
+              // uni.showLoading({
+              //     title: "loading...",
+              //     mask: true
+              // })
               uni.request({
                   url: _.get(this.config, 'loadApi'),
                   method: _.get(this.config,'method','GET'),
@@ -288,7 +304,7 @@
                       token: uni.getStorageSync(`${globalConfig.tokenStorageKey}`) || ''
                   },
                   complete: (res) => {
-                     uni.hideLoading()
+                     // uni.hideLoading()
                      if (['000000', 200].includes(_.get(res, 'data.code'))) {
                         const data = _.get(res, 'data.data')
                         const listField = _.get(this.config, 'response.list', '')
@@ -324,6 +340,7 @@
 				if (this.isPropsList) {
 					return
 				}
+				this.isStop = true
                 this.listSearch = {
                     ...this.listSearch,
                     [this.pageNoField]: this.listSearch[this.pageNoField] + 1
@@ -362,6 +379,9 @@
 			
 			// 统一跳转路由
 			handleJumpRoute (item) {
+				if(this.isDelete){
+					return
+				}
 				if (!_.get(this.config, 'itemNavigation')) {
 					return
 				}

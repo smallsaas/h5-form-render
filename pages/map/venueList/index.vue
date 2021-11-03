@@ -1,12 +1,18 @@
 <template>
 	<view class="venue_list_container">
-        <view class="tab_list" v-if="typeList.length > 0">
+<!--        <view class="tab_list" v-if="typeList.length > 0">
             <ms-tabs 
                 :list="typeList" 
                 v-model="tabActive"
                 @selected="handleSelectTab"
             />
-        </view>
+        </view> -->
+				<view style="background-color: #fff;padding: 10px 15px;">
+					<view class="search_list_box">
+						<image :src="icon.navSearch" style="width: 16px;height: 16px;position: absolute;top: 7px;left: 14px;" mode="aspectFit"></image>
+						<input v-model="search" @input="fetchSearchList"/>
+					</view>
+				</view>
 		<load-refresh
             ref="loadRefresh"
             :isRefresh="false"
@@ -24,12 +30,11 @@
 				v-for="(item, index) in list" 
 				:key='index' 
 				class="list_item"
-                @click.stop="handleToMap(item)"
 			>
-				<img
+<!-- 				<img
 					:src="(item.houseOwershipImages.toString()===''?undefined:item.houseOwershipImages) || '../../../static/images/empty.png'"
 					class="image"
-				/>
+				/> -->
 				<view class="message_content">
 					<view class="title_status">
 						<text class="title">{{item.name}}</text>
@@ -43,14 +48,32 @@
                             {{item.status}}
                         </view> -->
 					</view>
-					<view class="address">
+					<view class="message_content_box">
+						<view style="flex: 1;">
+							<view v-if="item.address">所在位置:{{item.address}}</view>
+							<view v-if="item.streetName">所在街道:{{item.streetName}}</view>
+							<view v-if="item.realOpAddress">真实地址:{{item.realOpAddress}}</view>
+							<view v-if="item.personPhone">联系电话:{{item.personPhone}}</view>
+						</view>
+						<view style="display: flex;">
+							<view class="message_button" v-if="item.personPhone">
+								<image :src="icon.phone" class="message_button_image" mode="aspectFit" @click="handleCallPhone(item.personPhone)"></image>
+								<text>电话</text>
+							</view>
+							<view class="message_button" v-if="item.latitude&&item.longitude">
+								<image :src="icon.go" class="message_button_image map" mode="aspectFit" @click="handleToMap(item)"></image>
+								<text>到这去</text>
+							</view>
+						</view>
+					</view>
+<!-- 					<view class="address">
                         <image src="@/static/icons/nav/address.svg" class="address_icon" />
                         <view class="address_text">{{item.address}}</view>
                     </view>
 					<view class="phone">
                         <image src="@/static/icons/nav/phone.svg" class="phone_icon"/>
                         <view class="phone_text" @click.stop="handleCallPhone(item.personPhone)">{{item.personPhone}}</view>
-                    </view>
+                    </view> -->
 				</view>
 			</view>
 		  </view>
@@ -64,8 +87,7 @@
 	import { getNavList, getNavTypeList } from '@/common/api.js'
     import msTab from '../../../components/ms-tabs/ms-tabs.vue'
 	import { getAddress } from '@/utils/mapTools.js'
-    
-    import { navList, navTypeList } from '../../../assets/mockData.js'
+    import {globalConfig} from '@/config.js'
     
 	export default {
 		components: {
@@ -78,14 +100,19 @@
 				listTotalPages: 10,
 				list: [],
 				listPages:2,
-                typeList: [],
-                tabActive: 0,
-                currentType: '全部'  // 当前所选类别
+				typeList: [],
+				tabActive: 0,
+				currentType: '全部'  ,// 当前所选类别
+				search:"",
+				icon:{}
 			}
 		},
 		onLoad() {            
             this.fetchTypeList()
 			this.fetchList()
+		},
+		created() {
+			this.icon = globalConfig.icon
 		},
 		methods: {
             getStatusColor (title) {
@@ -106,14 +133,40 @@
                     this.typeList = [...list]
                 }
             },
+						async fetchSearchList(data){
+							uni.showLoading({ title: 'loading...', mask:true })
+											// // console.log(this.currentType)
+											// if(this.search===""){
+											// 	this.search = null
+											// }
+											let searchList = this.search?{
+												name:this.search
+											}:{}
+							const res = await getNavList({ 
+							            size: this.listTotalPages, 
+							            current: 1,
+							            ...this.currentType===undefined?{}:this.currentType !== '全部' ? { type: this.currentType } : {},
+													...searchList
+							         })
+							        uni.hideLoading()		
+							this.list = [..._.get(res, 'data.records', [])]
+							this.listCurrentPage = 1+1
+							// this.listTotalPages = this.listTotalPages
+							this.listPages = _.get(res, 'data.pages', 1)
+							        this.$refs.loadRefresh.completed()
+						},
             
 			async fetchList (data) {
                 uni.showLoading({ title: 'loading...', mask:true })
 								// // console.log(this.currentType)
+								let searchList = this.search?{
+									name:this.search
+								}:{}
 				const res = await getNavList({ 
                     size: this.listTotalPages, 
                     current: this.listCurrentPage,
                     ...this.currentType===undefined?{}:this.currentType !== '全部' ? { type: this.currentType } : {},
+										...searchList
                  })
                 uni.hideLoading()		
 				this.list = this.list.concat([..._.get(res, 'data.records', [])])
@@ -192,6 +245,26 @@
 			font-family: Microsoft YaHei;
         }
 	}
+	.message_content_box{
+		display: flex;
+		
+	}
+	.search_list_box{
+    /* margin: 10px 10px; */
+    width: auto;
+    height: 30px;
+    background: #D9D9D9;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+		position: relative;
+		&>input{
+			margin: 0 auto;
+			width: 80%;
+			height: 30px;
+			font-size: 14px;
+			color: #333;
+		}
+	}
 	.list_content {
 		background-color: #fff;
 		.list_item {
@@ -219,7 +292,7 @@
                     	font-size: 32rpx;
                     	font-weight: bold;
                     	margin-right: 10rpx;
-                        max-width: 70%;
+                        max-width: 100%;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         // display: box;
@@ -266,6 +339,28 @@
                         display: inline-block;
                     }
                 }
+			}
+		}
+		.message_button{
+			width: 40px;
+			margin: 10px 5px;
+			font-size: 10px;
+			text-align: center;
+			.message_button_image{
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				border: 1px solid #637082;
+				padding: 5px;
+				&>text{
+					font-size: 14px;
+				}
+			}
+			.phone{
+				
+			}
+			.map{
+					background-color: #637082;
 			}
 		}
         .list_item:active {

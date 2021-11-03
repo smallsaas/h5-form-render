@@ -61,65 +61,6 @@
 			      __config__: {
 			        layout: 'rowFormItem',
 			        tagIcon: 'row',
-			        componentName: '基础信息',
-			        children: [
-			          {
-			            __config__: {
-			              label: '检查开始时间',
-			              tag: 'el-date-picker',
-			              tagIcon: 'date',
-			              layout: 'colFormItem',
-			              required: false,
-			            },
-			            type: 'date',
-			            placeholder: '请选择检查开始时间',
-			            __vModel__: 'checkTimeStart'
-			          },
-								{
-								  __config__: {
-								    label: '检查结束时间',
-								    tag: 'el-date-picker',
-								    tagIcon: 'date',
-								    layout: 'colFormItem',
-								    required: false,
-								  },
-								  type: 'date',
-								  placeholder: '请选择检查结束时间',
-								  __vModel__: 'checkTimeEnd'
-								},
-			          {
-			            __config__: {
-			              label: '检查单号',
-			              tag: 'el-input',
-			              tagIcon: 'input',
-			              layout: 'colFormItem',
-			              required: false,
-			            },
-			            placeholder: '请输入检查单号',
-									disabled: true,
-			            __vModel__: 'checkOno'
-			          },
-			          {
-			            __config__: {
-			              label: '检查地点',
-			              tag: 'el-input',
-			              tagIcon: 'input',
-			              layout: 'colFormItem',
-			              required: false,
-			            },
-			            placeholder: '请输入检查地点',
-			            __vModel__: 'checkAddress'
-			          },
-			        ]
-			      }
-			    },
-			    {
-			      type: 'default',
-			      justify: 'start',
-			      align: 'top',
-			      __config__: {
-			        layout: 'rowFormItem',
-			        tagIcon: 'row',
 			        componentName: '检查对象',
 			        children: [
 			          {
@@ -455,6 +396,65 @@
 			        ]
 			      }
 			    },
+					{
+					  type: 'default',
+					  justify: 'start',
+					  align: 'top',
+					  __config__: {
+					    layout: 'rowFormItem',
+					    tagIcon: 'row',
+					    componentName: '基础信息',
+					    children: [
+					      {
+					        __config__: {
+					          label: '检查开始时间',
+					          tag: 'el-date-picker',
+					          tagIcon: 'datetime',
+					          layout: 'colFormItem',
+					          required: false,
+					        },
+					        type: 'date',
+					        placeholder: '请选择检查开始时间',
+					        __vModel__: 'checkTimeStart'
+					      },
+								{
+								  __config__: {
+								    label: '检查结束时间',
+								    tag: 'el-date-picker',
+								    tagIcon: 'datetime',
+								    layout: 'colFormItem',
+								    required: false,
+								  },
+								  type: 'date',
+								  placeholder: '请选择检查结束时间',
+								  __vModel__: 'checkTimeEnd'
+								},
+					      {
+					        __config__: {
+					          label: '检查单号',
+					          tag: 'el-input',
+					          tagIcon: 'input',
+					          layout: 'colFormItem',
+					          required: false,
+					        },
+					        placeholder: '请输入检查单号',
+									disabled: true,
+					        __vModel__: 'checkOno'
+					      },
+					      {
+					        __config__: {
+					          label: '检查地点',
+					          tag: 'el-input',
+					          tagIcon: 'input',
+					          layout: 'colFormItem',
+					          required: false,
+					        },
+					        placeholder: '请输入检查地点',
+					        __vModel__: 'checkAddress'
+					      },
+					    ]
+					  }
+					},
 			    checkItems,
 			    {
 			      type: 'default',

@@ -5,8 +5,17 @@
 		import {Base64} from '@/utils/tools.js'
 	export default {
 		onLaunch: async function() {
-						this.$wxlogin()
-						this.$userProfile()
+						await this.$wxlogin()
+						await this.$userProfile()
+						let allName = uni.getStorageSync("allName")
+						if(allName.length>0&&Array.isArray(allName)){ //初始化表单
+							allName.map((item,i)=>{
+								uni.removeStorageSync(item)
+							})
+						}
+						uni.removeStorageSync("userType") //清除用户类型
+						uni.removeStorageSync("YyzzCode") //清除营业执照code
+						uni.removeStorageSync("changeForm") //清除表单缓存
             // console.log('App Launch')
 						const res = await getGolobalConfig()
 						if (_.get(res, 'code') === 200) {

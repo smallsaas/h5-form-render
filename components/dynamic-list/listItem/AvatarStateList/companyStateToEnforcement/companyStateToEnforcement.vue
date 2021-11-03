@@ -36,12 +36,15 @@ wait: 待完成文本
 					</view>
 					<view class="content">
 						<view class="titleBox">
-							<view class="time" v-if="item.actApplyTime&&!options.hideTime"><span class="content-title">{{options.timeText||"开始时间"}}:</span>{{item[options.timeField]||item.actApplyTime}}</view>
-							<view class="object" v-if="item.actApplyUserName&&!options.hideUser"><span class="content-title">{{options.userText||"执法人员"}}:</span>{{item[options.userField]||item.actApplyUserName}}</view>
-							<view class="company" v-if="item.actCurrDualUserName&&!options.hideNext"><span class="content-title">{{options.nextText||"下一步办理人"}}:</span>{{item[options.nextField]||item.actCurrDualUserName}}</view>
+							<view class="time" v-if="item.actApplyTime&&!options.hideTime"><span class="content-title">{{options.timeText||"开始时间"}}:</span>{{_get(item,options.timeField)||item.actApplyTime}}</view>
+							<view class="object" v-if="item.actApplyUserName&&!options.hideUser"><span class="content-title">{{options.userText||"执法人员"}}:</span>{{_get(item,options.userField)||item.actApplyUserName}}</view>
+							<view class="company" v-if="item.actCurrDualUserName&&!options.hideNext"><span class="content-title">{{options.nextText||"下一步办理人"}}:</span>{{_get(item,options.nextField)||item.actCurrDualUserName}}</view>
 							<!-- <view class="department" v-if="item.department"><span class="content-title">执法科室:</span>{{item.department}}</view> -->
 							<!-- <view class="remarks" v-if="item.formName&&!hideForm"><span class="content-title">{{optons.formText||"表单名"}}:</span>{{item[options.formField]||item.formName}}</view> -->
 						</view>
+					</view>
+					<view style="position: relative;width: 90px;" v-if="options.showDelete">
+						<view v-if="item.finishState==='0'" style="color: #FFFFFF;position: absolute;z-index:88888;bottom: 0px;right: 0px;background-color: #EB3941;padding: 5px 10px;" @click="handleDelete">删除</view>
 					</view>
 					<view style="position: relative;width: 90px;" v-if="!options.hideState">
 						<span class="enforcementState rectification" v-if="item.finishState==='0'">{{options.noSuccess||"未完成"}}</span>
@@ -60,6 +63,7 @@ wait: 待完成文本
 
 <script>
 	import qs from 'qs'
+	import _ from 'lodash'
 	import {globalConfig} from '@/config.js'
 	export default {
 		name:"companyStateToEnforcement",
@@ -87,6 +91,9 @@ wait: 待完成文本
 			// // console.log(this.navigationUrl())
 		},
 		methods:{
+			_get(data,field){
+				return _.get(data,field)
+			},
 			DateToString(val){
 				let Date = val.split(" ")[0]
 				let DateJson = Date.split("-")
@@ -98,6 +105,48 @@ wait: 待完成文本
 				string = "type"+string.replace(string[0],string[0].toUpperCase())
 				// // console.log(this.iconList[string])
 				return this.iconList[string]
+			},
+			handleDelete(){
+				this.$emit("delete",true)
+				let data = {
+				  "processInstanceId":this.item.piId, 
+					"delReason":"删除",
+					"history": false
+				}
+				let that = this
+				uni.showModal({
+					title:"您确定要删除该流程吗？",
+					confirmColor:"#FF0000",
+					success(button) {
+						if(button.confirm){
+							uni.request({
+								url:`${globalConfig.workflowEP}/api.flow.examine/deleteProcessInstance`,
+								method:"POST",
+								data:data,
+								header:{
+									Authorization:`Bearer ${uni.getStorageSync(globalConfig.tokenStorageKey)}`
+								},
+								success(res) {
+									that.$emit("delete",false)
+									if(res.data.code === "00000"){
+										that.$reload()
+										uni.showToast({
+											title:"删除成功",
+											icon:"success"
+										})
+									}else{
+										uni.showToast({
+											title:"删除失败",
+											icon:"error"
+										})
+									}
+								}
+							})
+						}else{
+							that.$emit("delete",false)
+						}
+					}
+				})
 			}
 		}
 	}

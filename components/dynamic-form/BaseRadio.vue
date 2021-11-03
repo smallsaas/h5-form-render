@@ -12,25 +12,38 @@
           label-class="van_field_label"
         >
           <template slot="input">
-						<!-- <view v-if="param.title">{{param.title}}</view> -->
-            <van-radio-group
-              direction="horizontal"
-              :readonly="param.readonly"
-              :disabled="param.disabled"
-              :value="param.value"
-              @change="handleChange"
-            >
-                 <view v-if="param.options && param.options.length > 0" class="radio_options">
-                     <van-radio
-                       v-for="(item, index) in param.options"
-                       :key="index"
-                       :name="item.value"
-                       style="margin: 10rpx 30rpx 10rpx 0"
-                       label-class="radio_options_label"
-                     >{{item.label}}
-                     </van-radio>
-                 </view>
-            </van-radio-group>
+						<view>
+							<!-- <view v-if="param.title">{{param.title}}</view> -->
+							<van-radio-group
+							  direction="horizontal"
+							  :readonly="param.readonly"
+							  :disabled="param.disabled"
+							  :value="param.value"
+							  @change="handleChange"
+							>
+							     <view v-if="param.options && param.options.length > 0" class="radio_options">
+										 <van-radio
+										 v-if="!isReadOnly"
+											 v-for="(item, index) in param.options"
+											 :key="index"
+											 :name="item.value"
+											 style="margin: 10rpx 30rpx 10rpx 0"
+											 label-class="radio_options_label"
+										 >{{item.label}}
+										 </van-radio>
+											 <van-radio
+											 v-if="isReadOnly"
+											   v-for="(item, index) in param.options"
+											   :key="index"
+											   :name="item.value"
+												 disabled
+											   style="margin: 10rpx 30rpx 10rpx 0"
+											   label-class="radio_options_label"
+											 >{{item.label}}
+											 </van-radio>
+							     </view>
+							</van-radio-group>
+						</view>
           </template>
         </van-field>
     </view>
@@ -54,11 +67,27 @@
                 }
             }
         },
+				data(){
+					return {
+						isReadOnly:false
+					}
+				},
         methods: {
             handleChange (e) {
                this.$emit("change", e.detail)
-            }
-        }
+            },
+						readonly(){
+							console.log(this.param.readonly)
+							if(this.param.readonly){
+								this.isReadOnly = true
+							}else if(this.param.disabled){
+								this.isReadOnly = true
+							}
+						}
+        },
+				mounted() {
+					this.readonly()
+				}
     }
 </script>
 

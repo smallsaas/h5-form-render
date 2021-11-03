@@ -50,7 +50,7 @@
 			return {
 				showPicker: false,
 				time:'0',
-				date:'0000-00-00'
+				date:'0000/00/00'
 			}
 		},
 		created() {
@@ -88,11 +88,11 @@
 					H = H < 10 ? "0" + H : H;
 					let time;
 					if(_.get(this.param,"tagIcon")==='datetime'){
-						time = y + "-" + m + "-" + d + " " + H + ":" + mm
+						time = y + "/" + m + "/" + d + " " + H + ":" + mm
 					}else if(_.get(this.param,"tagIcon"==='year-month')){
-						time = y + "-" + m
+						time = y + "/" + m
 					}else{
-						time = y + "-" + m + "-" + d
+						time = y + "/" + m + "/" + d
 					}
 					// // console.log()
 					return time;

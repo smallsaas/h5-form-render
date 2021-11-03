@@ -1,5 +1,13 @@
 <template>
 	<view>
+		<image :src="icon.qrcode" @click="changeQrCode" mode="aspectFit" class="qr_icon"></image>
+			<view style="position: fixed;bottom: 0px;right: 0px;z-index: 10000;">
+				<view class="qrcode_box" v-show="isShowQrCode">
+					<ayQrcode ref="qrcode" :modal="modal_qr" :url="qr_url" @hideQrcode="hideQrcode" :height="190" :width="190"
+					/>
+					<text style="text-align: center;font-weight: bolder;">长按二维码保存</text>
+				</view>
+			</view>
 		<dynamic-page
            :API="api"
 					 :srvFormData="data"
@@ -35,6 +43,7 @@
 					:otherSearch="aqyOtherSearch"
 					listName="执业人员登记记录"
 				></dynamic-page>
+
 <!-- 		<view class="CompanyView_buttonGroup">
 			<button class="CompanyView_button zc" @click="handleZC">
 				自查记录</button>
@@ -69,12 +78,16 @@
 				pageData:{
 					
 				},
+				query:null,
 				zcOtherSearch:{},
 				fgOtherSearch:{},
 				zfOtherSearch:{},
 				zgOtherSearch:{},
 				cfOtherSearch:{},
-				aqyOtherSearch:{}
+				aqyOtherSearch:{},
+				modal_qr: false,
+				qr_url:null,
+				isShowQrCode:false
 			}
 		},
 		onLoad(e) {
@@ -84,6 +97,8 @@
 			uni.showLoading({
 				title:"加载中"
 			})
+			this.query = JSON.parse(decodeURIComponent(e.query))
+			console.log(this.query,"query")
 			// console.log(e.id)
 			this.getValue(e.id)
 			// this.pageData["id"]=e.id
@@ -125,6 +140,7 @@
 					"VALUE":e.id
 				}]
 			}
+			this.getQrUrl()
 			// this.data = Modeldata
 			// // console.log("md",Modeldata)
 			// // console.log("this",this.data)
@@ -134,6 +150,34 @@
 			this.icon = globalConfig.icon
 		},
 		methods:{
+			// 二维码操作
+			// 展示二维码
+			showQrcode() {
+				let _this = this;
+				this.modal_qr = true;
+				// uni.showLoading()
+				setTimeout(function() {
+					// uni.hideLoading()
+					_this.$refs.qrcode.crtQrCode()
+				}, 50)
+			},
+			changeQrCode(){
+				this.isShowQrCode = !this.isShowQrCode
+			},
+			//传入组件的方法
+			hideQrcode() {
+				this.modal_qr = false;
+			},
+			// 二维码地址
+			getQrUrl(){
+				this.qr_url = `https://api.mock.smallsaas.cn/test/invQrCode/${this.query.licenceNo}/Mes`
+				console.log(this.qr_url)
+				if(this.qr_url){
+					this.showQrcode();//一加载生成二维码
+				}
+			},
+			
+			
 			// 跳转自查记录
 			// handleZC(){
 			// 	this.pageData["code"] = "zc"
@@ -210,5 +254,29 @@
 				height: 16px;
 			}
 		}
+	}
+	.qr_icon{
+		position: fixed;
+		bottom: 10px;
+		right: 10px;
+		width: 25px;
+		height: 25px;
+		z-index: 10000;
+	}
+	
+	.qrcode_box{
+		position: absolute;
+		bottom: 40px;
+		right: 40px;
+		width: 220px;
+		height: 240px;
+		background-color: white;
+		display: flex;
+		flex-direction: column;
+		font-size: 16px;
+		justify-content: center;
+		align-items: center;
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px #aaa;
 	}
 </style>

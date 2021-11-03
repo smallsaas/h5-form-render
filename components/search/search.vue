@@ -256,8 +256,9 @@
 				let url = this.config.itemNavigation;
 				// // console.log(this.config.itemNavigation)
 				for(let j=0;j<list.length;j++){
+					let query = encodeURIComponent(JSON.stringify(list[j]))
 					if(list[j].id){
-						url = this.config.itemNavigation + "?id=" + list[j].id
+						url = this.config.itemNavigation + "?id=" + list[j].id +"&query=" + query
 						
 					}
 					// // console.log(url)
@@ -346,6 +347,6 @@
 		position: absolute;
 		top:5px;
 		right: 5px;
-		z-index: 500;
+		// z-index: 500;
 	}
 </style>

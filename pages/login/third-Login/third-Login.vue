@@ -17,6 +17,11 @@
 			}
 		},
 		methods: {
+			// scan(){
+			// 	uni.navigateTo({
+			// 		url:`/pages/scan`
+			// 	})
+			// },
 			// jumpOld(){
 			// 	uni.reLaunch({
 			// 		url:"/pages/login/login"
@@ -53,6 +58,7 @@
 		// 	this.getUser()
 		// },
 		created() {
+			globalConfig.icon = uni.getStorageSync("iconList")
 			// uni.clearStorage("loginData")
 			// this.getUser()
 		},

@@ -9,7 +9,7 @@
 								@getValue="lincenseValue"
 							></c-lincense>
                 <base-vants 
-                    v-if="_get(item, '__config__.layout') === 'colFormItem'"
+                    v-if="_get(item, '__config__.layout') === 'colFormItem'&&getExpect(item)"
                     :fields="[{...item}]"
                     :form="form"
 										:Details="Details"
@@ -43,7 +43,7 @@
 												@getValue="lincenseValue"
 											></c-lincense>
                         <base-vants
-                            v-if="_get(k, '__config__.layout') === 'colFormItem'"
+                            v-if="_get(k, '__config__.layout') === 'colFormItem'&&getExpect(item)"
                             :fields="[{...k}]"
                             :form="form"
 														:Details="Details"
@@ -186,6 +186,9 @@
 					confirm
         },
 		props: {
+			name:{// 表单缓存名
+				type:String
+			},
 			config: {
                 type: Object,
                 default: function () {
@@ -362,9 +365,12 @@
                this.fetchDefaultFormConfig()
 							 this.skeletonLoading = false
             }
+						console.log(this.name,"name")
+						let lastform = uni.getStorageSync(this.name)
+						this.form = lastform
 			// 外部传入的数据源
 			if (Object.keys(this.srvFormData).length > 0) {
-                this.form = { ...this.srvFormData }
+                this.form = { ...this.form, ...this.srvFormData }
 				return
 			}
             this.fetchFormData()
@@ -373,11 +379,32 @@
             _get (item, str, defauleValue = '') {
               return _.get(item, str, defauleValue)
             },
+						// 过滤字段
+						getExpect(item){
+							let status
+							let expect = item.__expect__
+							// console.log(expect,this.form)
+							if(expect){
+								// console.log(this.form[expect.field])
+								if(expect.value == this.form[expect.field]){
+									// console.log("进来")
+									status = true
+								}else{
+									status = false
+								}
+							}else{
+								status = true
+							}
+							// console.log(status)
+							return status
+						},
 						async getKeyFormConfig(){
 							let conf = this.config
-							let Conf_RES = await LoadComplete({"processDefineKey":this.processDefineKey,"taskId":this.taskId})
+							let type = uni.getStorageSync("userType")
+							let Conf_RES = await LoadComplete({"processDefineKey":this.processDefineKey,"taskId":this.taskId,"type":type})
 							if(Conf_RES.code==="00000"){
 								let list = Conf_RES.data.nodeSettingEntity.formFiledEntityList
+								console.log(list)
 								for(var i in list){
 									let isEditable = list[i].isEditable
 									// // console.log("CONF",conf)
@@ -392,6 +419,7 @@
 												for(var b in __children__){
 													// // console.log("STATUS",status)
 													if(isEditable===0||isEditable==="0"){
+														// console.log("更换了")
 														if(conf.fields[a].__config__.children[b].__vModel__===list[i].name){
 															conf.fields[a].__config__.children[b].readonly = true
 															this.formConfig = conf
@@ -408,10 +436,11 @@
 												}
 											}else{
 													if(isEditable===0||isEditable==="0"){
+														// console.log("更换了")
 														if(conf.fields[a].__vModel__===list[i].name){
 															conf.fields[a].readonly = true
 															this.formConfig = conf
-															// // console.log("thatCodeData",this.formConfig)
+															// console.log("thatCodeData",this.formConfig)
 														}
 													}else{
 														if(conf.fields[a].__vModel__===list[i].name){
@@ -616,12 +645,30 @@
 							this.form["latitude"]=e.latitude
 							this.form["longitude"]=e.longitude
 							// // console.log("srvData",this.srvFormData)
+							let allName = uni.getStorageSync("allName")
+							if(allName.length>0&&Array.isArray(allName)){
+								allName.push(this.name)
+							}else{
+								allName = []
+								allName.push(this.name)
+							}
+							uni.setStorageSync("allName",allName)
+							uni.setStorageSync(this.name,this.form)
 						},
 						handleStreet(e){
 							// console.log("选择街道的e",e)
 							this.form["streetId"]=e.id
 							this.form["streetName"]=e.name
 							// console.log("form",this.form)
+							let allName = uni.getStorageSync("allName")
+							if(allName.length>0&&Array.isArray(allName)){
+								allName.push(this.name)
+							}else{
+								allName = []
+								allName.push(this.name)
+							}
+							uni.setStorageSync("allName",allName)
+							uni.setStorageSync(this.name,this.form)
 						},
             // 改变值时
             handleChange (e, item) {
@@ -651,9 +698,19 @@
               }
               this.fields = [...checkRequired(this.fields)]
 							this.getFormData()
+							let allName = uni.getStorageSync("allName")
+							if(allName.length>0&&Array.isArray(allName)){
+								allName.push(this.name)
+							}else{
+								allName = []
+								allName.push(this.name)
+							}
+							uni.setStorageSync("allName",allName)
+							uni.setStorageSync(this.name,this.form)
             },
 						handleUser(e){
 							this.userlist=e
+							
 						},
 						
             // 清空时
@@ -790,6 +847,11 @@
                 if (!isPass) {
                     return
                 }
+								
+								let allName = uni.getStorageSync("allName")
+								allName = allName.splice(this.name,1)
+								uni.setStorageSync("allName",allName)
+								uni.removeStorageSync(this.name)
                 let submitData = {
                     ...this.formInfo,
                     ..._.get(this.srvFormData, 'id') ? { id: this.srvFormData.id } : {},
@@ -830,7 +892,9 @@
 										"companyAddress":globalConfig.companyInfo.address,
 										"companyLegalPerson":globalConfig.companyInfo.legalRepresentative||globalConfig.companyInfo.personName,
 										"companyPhone":globalConfig.companyInfo.personPhone,
-										"businessLicense":globalConfig.companyInfo.licenceNo
+										"businessLicense":globalConfig.companyInfo.licenceNo,
+										"selfType":this.form["selfType"],
+										"reportStatus":this.form["reportStatus"]
 									}
 								}
 
@@ -1003,7 +1067,10 @@
 						//营业执照提交
 						YyzzRequest(data){
 							const url = `${globalConfig.workflowEP}/admin/companyinfo`
+							let UserType = uni.getStorageSync("userType")
 							uni.showLoading({title:'正在识别中...'})
+							
+							this.$cache("YyzzCode",data["licenceNo"],2*60)//营业执照号码保存两分钟
 							uni.request({
 							    url: url,
 							    method:'POST',
@@ -1023,11 +1090,28 @@
 																					 let page = getCurrentPages().pop();  //跳转页面成功之后
 																					 if (!page) return;  
 																					 page.onLoad(); //如果页面存在，则重新刷新页面
-																					 uni.showModal({
-																					     title:'提交成功！请前往企业用户入口录入统一信用代码进行绑定',
-																							 showCancel:false,
-																							 confirmColor:"red",
-																					 })
+																					 console.log(UserType)
+																					 if(!UserType){
+																						 uni.showModal({
+																						     title:'提交成功！请前往企业用户入口录入统一信用代码进行绑定',
+																								 // showCancel:false,
+																								 confirmColor:"#FC1944",
+																								 cancelText:"返回",
+																								 confirmText:"立即绑定",
+																								 success(modal){
+																									 if(modal.confirm){
+																										 uni.navigateTo({
+																											 url:'/pages/login/third-Login/IsLogin?id=4'
+																										 })
+																									 }
+																								 }
+																						 })
+																					 }else{
+																						 uni.showToast({
+																							 title:"企业增加成功"
+																						 })
+																					 }
+
 																			},
 																			fail:(a)=>{
 																				// // console.log(a)
@@ -1039,11 +1123,27 @@
 																			let page = getCurrentPages().pop();  //跳转页面成功之后
 																			if (!page) return;  
 																			page.onLoad(); //如果页面存在，则重新刷新页面
-																			uni.showModal({
-																				title:'提交成功！请前往企业用户入口录入统一信用代码进行绑定',
-																				showCancel:false,
-																				confirmColor:"red",
-																			})
+																			console.log(UserType)
+																			 if(!UserType){
+																				 uni.showModal({
+																						 title:'提交成功！请前往企业用户入口录入统一信用代码进行绑定',
+																						 // showCancel:false,
+																						 confirmColor:"#FC1944",
+																						 cancelText:"返回",
+																						 confirmText:"立即绑定",
+																						 success(modal){
+																							 if(modal.confirm){
+																								 uni.navigateTo({
+																									 url:'/pages/login/third-Login/IsLogin?id=4'
+																								 })
+																							 }
+																						 }
+																				 })
+																			 }else{
+																				 uni.showToast({
+																					 title:"企业增加成功"
+																				 })
+																			 }
 																		},
 																		delta:10
 																	})

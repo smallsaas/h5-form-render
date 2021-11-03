@@ -62,7 +62,7 @@
         },
         methods: {
             handleChange (e) {
-               this.$emit("change", e.detail)
+               this.$emit("change", JSON.stringify(e.detail))
             },
 						returnValue(value){
 							let newValue

@@ -75,7 +75,7 @@
 				mode="aspectFit"
 				style="width: 44rpx; height: 44rpx;"
 			  />
-			  政策推送
+			  公告
 			</van-tabbar-item>
 			<van-tabbar-item>
 			  <image
