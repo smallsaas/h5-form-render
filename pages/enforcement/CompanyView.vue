@@ -170,7 +170,7 @@
 			},
 			// 二维码地址
 			getQrUrl(){
-				this.qr_url = `https://api.mock.smallsaas.cn/test/invQrCode/${this.query.licenceNo}/Mes`
+				this.qr_url = `${globalConfig.workflowEP}/api.webapp/invQrCode/${this.query.licenceNo}/Mes`
 				console.log(this.qr_url)
 				if(this.qr_url){
 					this.showQrcode();//一加载生成二维码

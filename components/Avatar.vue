@@ -91,7 +91,7 @@
 			},
 			// 二维码地址
 			getQrUrl(){
-				this.url = `https://api.mock.smallsaas.cn/test/invQrCode/${this.companyList.licenceNo}/Mes`
+				this.url = `${globalConfig.workflowEP}/api.webapp/invQrCode/${this.companyList.licenceNo}/Mes`
 				console.log(this.url)
 				if(this.url){
 					this.showQrcode();//一加载生成二维码

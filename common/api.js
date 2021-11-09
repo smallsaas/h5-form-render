@@ -9,7 +9,7 @@ export const getSearchPage = (params)=>{
 
 export const LoadComplete = (params) =>{
 	// const url = `${globalConfig.workflowEP}/api.flow.examine/toComplete`
-	const url = `${globalConfig.testEP}/test/canWrite`
+	const url = `${globalConfig.workflowEP}/api.webapp/canWrite`
 	return request('POST', url, params)
 }
 

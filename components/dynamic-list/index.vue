@@ -47,13 +47,6 @@
 						  ...getComponentBindData(item)
 					  }"
 					/>
-					<enforcement-state-item
-					v-if="getListItemKey() === 'enforcement-state-item'"
-					:item="{
-						...item,
-						...getComponentBindData(item)
-					}"
-					/>
 					<companyStateToEnforcement
 					v-if="getListItemKey() === 'company-state-to-enforcement'"
 					:item="{
@@ -107,7 +100,6 @@
     import msTab from '../ms-tabs/ms-tabs.vue'
 	import SelfInspectionRecordItem from './listItem/SelfInspectionRecordItem.vue'
 	import RecordStepsItem from './listItem/RecordStepsItem.vue'
-	import enforcementStateItem from './listItem/AvatarStateList/enforcementStateItem.vue'
 	import StateToItem from './listItem/StateToList.vue'
 	import ToDoListItem from './listItem/todoListItem.vue'
 	import noticeItem from './listItem/NoticeItem.vue'
@@ -121,7 +113,6 @@
 			msTab,
 			SelfInspectionRecordItem,
 			RecordStepsItem,
-			enforcementStateItem,
 			StateToItem,
 			ToDoListItem,
 			CompanyStateToEnforcement,
