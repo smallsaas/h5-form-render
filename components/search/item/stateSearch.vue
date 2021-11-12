@@ -2,6 +2,7 @@
 	<view class="stateSearchlist">
 		<view class="titleBox">
 			<span class="title">{{item.name}}</span>
+			<span class="state-high" v-if="isHigh(item.type)">高危</span>
 			<span class="state state-example" v-if="item.state.example.status">检查 {{item.state.example.number}}</span>
 			<span class="state state-self" v-if="item.state.self.status">自查 {{item.state.self.number}}</span>
 		</view>
@@ -22,6 +23,22 @@
 				}
 			},
 
+		},
+		methods:{
+			//是否高危
+			isHigh(type){
+				let that = this
+				let typeGroup = JSON.parse(type)
+				let high;
+				let highGroup = ["游泳","滑雪","潜水","攀岩"]
+				typeGroup.map((item,i)=>{
+						let company = that.$whatCompany(item)
+						if(highGroup.indexOf(company)!==-1){
+							high = true
+						}
+				})
+				return high
+			}
 		}
 	}
 </script>
@@ -47,7 +64,19 @@
 				padding: 1px 4px;
 				&:hover{
 					background-color: #B7CEE5;
-					color: white;
+					color: #fff;
+				}
+			}
+			>.state-high{
+				border: 1px solid #FF6034;
+				color: #FF6034;
+				margin-right: 5px;
+				margin-left: 10px;
+				font-size: 8px;
+				padding: 2px 4px;
+				&:hover{
+					background-color: #FF6034;
+					color: #fff;
 				}
 			}
 			>.state-example{
