@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-// ��ȡȫ������
+// 
 const globalConfigStorage = uni.getStorageSync('globalConfigStorage')
 // 获取图标库
 const iconList = uni.getStorageSync('iconList')
