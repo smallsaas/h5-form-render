@@ -112,7 +112,7 @@
 											}
 										})
 									}else{
-										uni.setStorageSync("userType",type)
+										uni.setStorageSync("userType",type) //2:执法  3: 街道  4: 企业
 										if(res.data.encryptedData){
 											let token;
 											let nickName;
