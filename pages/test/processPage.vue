@@ -21,7 +21,7 @@
 		data() {
 			return {
 				// getPageAapi: 'https://api.mock.smallsaas.cn/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
-				getPageAapi: 'https://api.uat.smallsaas.cn/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
+				getPageAapi: 'https://zf.smallsaas.cn/api/u/workflow/process/code?id=e84ffab7c2ed22f86fffd99d62b1fd5d',
 				// getPageAapi: globalConfig.formHost + '?id=800',
 			}
 		},

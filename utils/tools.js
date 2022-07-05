@@ -192,7 +192,7 @@ export async function LoginDefault(){
 export function login(){
 	let auth;
 	let authCache = cache("auth")
-	console.log(authCache,"cache_auth")
+	console.log(authCache, "===== cache_auth")
 	if(authCache!=null&&authCache!=undefined&&authCache!=""){
 		auth = authCache
 		console.log(auth)
@@ -200,6 +200,7 @@ export function login(){
 		uni.login({
 			success(res) {
 				auth = res.code
+	console.log(auth, "===== auth")
 				cache("auth",auth,5*60)//设置登录许可为5*60
 			},
 			fail(){

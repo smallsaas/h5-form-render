@@ -483,7 +483,7 @@
 					form = _.get(res.data,"form",{}),
 					jsonDefineBase64 = _.get(form,"jsonDefine","")
 					jsonDefine = Base64.decode(jsonDefineBase64)
-					// // console.log("jsonDefine",jsonDefine)
+					// console.log("jsonDefine ===========",jsonDefine)
 					json = JSON.parse(jsonDefine)
 					uni.setNavigationBarTitle({
 						title:form.name

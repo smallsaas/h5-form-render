@@ -17,6 +17,8 @@
               :readonly="param.readonly"
               :disabled="param.disabled"
               :checked="param.value"
+			  :activeValue="param.activeValue"
+			  :inactiveValue="param.inactiveValue"
               @change="handleChange"
             />
           </template>
@@ -44,9 +46,13 @@
         },
         methods: {
             handleChange (e) {
+				console.log(e.detail, '============ e.detail')
                this.$emit("change", e.detail)
             }
-        }
+        },
+		mounted() {
+			console.log(this.param, '============ param')
+		}
     }
 </script>
 

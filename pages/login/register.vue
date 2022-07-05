@@ -53,7 +53,7 @@
 				type:"",
 				enforcementNumber:null,
 				lincenseNo:null,
-				api:"https://api.uat.smallsaas.cn/api/u/bind",
+				api:"https://zf.smallsaas.cn/api/u/bind",
 				methods:"POST",
 				data:{},
 				iconList:{},

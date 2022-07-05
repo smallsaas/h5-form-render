@@ -16,11 +16,11 @@ const token = uni.getStorageSync('token')
 //   formHost: _.get(globalConfigStorage, 'formEP', 'https://api.mock.smallsaas.cn/form'),
 //   dataHost: _.get(globalConfigStorage, 'dataEP', 'https://api.mock.smallsaas.cn/data'),
 //   endpoint: _.get(globalConfigStorage, 'endpoint', 'https://api.cloud.smallsaas.cn'),
-//   workflowEP: _.get(globalConfigStorage, 'workflowEP', 'https://api.uat.smallsaas.cn'),
+//   workflowEP: _.get(globalConfigStorage, 'workflowEP', 'https://zf.smallsaas.cn'),
 //   authEP: _.get(globalConfigStorage, 'authEP', 'https://api.uaas.smallsaas.cn'),
-//   // uatEP: _.get(globalConfigStorage, 'workflowEP', 'https://api.uat.smallsaas.cn'),
-//   designEP:  _.get(globalConfigStorage, 'designEP', 'https://api.uat.smallsaas.cn'),
-//   extraEP: _.get(globalConfigStorage, 'extraEP', 'https://api.uat.smallsaas.cn'),
+//   // uatEP: _.get(globalConfigStorage, 'workflowEP', 'https://zf.smallsaas.cn'),
+//   designEP:  _.get(globalConfigStorage, 'designEP', 'https://zf.smallsaas.cn'),
+//   extraEP: _.get(globalConfigStorage, 'extraEP', 'https://zf.smallsaas.cn'),
 //   tokenStorageKey: 'token',//token��
 //   tencenMapKey: 'HGPBZ-E2IRR-ELTWC-WTE4W-I7MBE-P4FBU' ,// 获取地址sdk key
 // 	// 执法token
@@ -38,7 +38,7 @@ export const globalConfig = {
   endpoint: _.get(globalConfigStorage, 'endpoint', 'https://ai.hdqmjs.com'),
   workflowEP: _.get(globalConfigStorage, 'workflowEP', 'https://ai.hdqmjs.com'),
   authEP: _.get(globalConfigStorage, 'authEP', 'https://ai.hdqmjs.com'),
-  // uatEP: _.get(globalConfigStorage, 'workflowEP', 'https://api.uat.smallsaas.cn'),
+  // uatEP: _.get(globalConfigStorage, 'workflowEP', 'https://zf.smallsaas.cn'),
   designEP:  _.get(globalConfigStorage, 'designEP', 'https://ai.hdqmjs.com'),
 	loginEP: _.get(globalConfigStorage, 'loginEP', 'https://ai.hdqmjs.com'),
   extraEP: _.get(globalConfigStorage, 'extraEP', 'https://ai.hdqmjs.com'),

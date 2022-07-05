@@ -73,7 +73,7 @@
 			// 测试用解除绑定模块
 			remove(){
 				uni.request({
-					url:"https://api.uat.smallsaas.cn/api/u/bind/unbind",
+					url:"https://zf.smallsaas.cn/api/u/bind/unbind",
 					method:"POST",
 					data:{
 						"type":"EXECUTOR",
@@ -92,7 +92,7 @@
 			},
 			removeQ(){
 				uni.request({
-					url:"https://api.uat.smallsaas.cn/api/u/bind/unbind",
+					url:"https://zf.smallsaas.cn/api/u/bind/unbind",
 					method:"POST",
 					data:{
 						"type":"COMPANY",
@@ -111,7 +111,7 @@
 			},
 			removeS(){
 				uni.request({
-					url:"https://api.uat.smallsaas.cn/api/u/bind/unbind",
+					url:"https://zf.smallsaas.cn/api/u/bind/unbind",
 					method:"POST",
 					data:{
 						"type":"STREET",
@@ -149,7 +149,7 @@
 			register(){
 				uni.request({
 					  // 请求路径
-					  url: 'https://api.uat.smallsaas.cn/auth/appuser/register',
+					  url: 'https://zf.smallsaas.cn/auth/appuser/register',
 					  data: this.registerData,
 					  header: {
 						'content-type': 'application/x-www-form-urlencoded'
@@ -177,7 +177,7 @@
 			getToken(){
 				uni.request({
 				  // 请求路径
-				  url: 'https://api.uat.smallsaas.cn/auth/oauth/form',
+				  url: 'https://zf.smallsaas.cn/auth/oauth/form',
 				  data: this.LoginData,
 				  header: {
 					'content-type': 'application/x-www-form-urlencoded'

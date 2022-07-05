@@ -78,7 +78,7 @@
                               //发起网络请求
                               uni.request({
                                 // 请求路径
-                                url: 'https://api.uat.smallsaas.cn/auth/oauth/token',
+                                url: 'https://zf.smallsaas.cn/auth/oauth/token',
                                 // 请求参数code
 																header:{
 																	'content-type': 'application/x-www-form-urlencoded',

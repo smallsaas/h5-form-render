@@ -404,7 +404,9 @@
 									..._.has(item, 'maxlength') ? { maxlength: item.maxlength } : {},
 									..._.has(item, 'prefix-icon') ? { 'left-icon': item['prefix-icon'] } : {},
 									..._.has(item, 'suffix-icon') ? { 'right-icon': item['suffix-icon'] } : {},
-									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {}
+									..._.has(item, 'show-word-limit') ? { 'show-word-limit': item['show-word-limit'] } : {},
+									..._.has(item, 'active-value') ? { 'activeValue': item['active-value'] } : {},
+									..._.has(item, 'inactive-value') ? { 'inactiveValue': item['inactive-value'] } : {}
 							 }
 							}
 							// // console.log("传到里面的配置",config)

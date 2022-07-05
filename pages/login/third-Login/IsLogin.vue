@@ -372,8 +372,8 @@
 						// 				           uni.request({
 						// 				             // 请求路径
 						// 				             url: `${globalConfig.loginEP}/auth/oauth/token`,//第三方登录
-						// 				             // url: 'https://api.uat.smallsaas.cn/oauth/token',//第三方登录
-						// 				 						// url:"https://api.uat.smallsaas.cn/api/u/bind/login",//登录
+						// 				             // url: 'https://zf.smallsaas.cn/oauth/token',//第三方登录
+						// 				 						// url:"https://zf.smallsaas.cn/api/u/bind/login",//登录
 						// 				             // 请求参数code
 						// 				 						header:{
 						// 				 							'content-type': 'application/x-www-form-urlencoded',
