@@ -46,7 +46,7 @@
 						  
 						  titleField: 'userName',  // 显示名称
 						  valueField: 'id', // 取值处
-						  "listUrl": "https://api.mock.smallsaas.cn/data?id=1001",
+						  "listUrl": "https://api.mock.smallsaas.cn/mock?id=1001",
 						  "__vModel__": "account1"
 						},
 						{
