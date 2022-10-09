@@ -1,7 +1,7 @@
 
 <template>
   <view class="Card-Layout">
-    <view class="Card-Layout-Content" @click="con()" :style="{'background':Style===undefined?'':Style.fill,
+    <view class="Card-Layout-Content" :style="{'background':Style===undefined?'':Style.fill,
 			'padding':Style===undefined?'':Style.padding,
 			'margin':Style===undefined?'':Style.margin,
 			'border':Style===undefined?'':Style.stroke===undefined?'':Style.stroke.lineWidth+' '+Style.stroke.color+' solid',

@@ -849,7 +849,7 @@
 					}
 				})
 				// 工作流自定义数据接口
-
+				
 				let custom;
 				if (!this.company) {
 					custom = {
@@ -1281,9 +1281,9 @@
 			// 组件内默认提交
 			handleSubmitRequest(data) {
 				const url = _.get(this.formConfig, 'saveApi') || SUNMIT_API
-				console.log("formConfig == ", this.formConfig)
-				console.log(" url == ", url)
-				return
+				// console.log("formConfig == ", this.formConfig)
+				// console.log(" url == ", url)
+				// return
 				let allData = data
 				if (this.code) {
 					allData = {
